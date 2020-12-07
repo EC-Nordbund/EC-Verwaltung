@@ -8,7 +8,7 @@
     "serve": "vue-cli-service build --watch --name ecForm --target lib ./src/main.ts"
   },
   "dependencies": {
-    "core-js": "2",
+    "core-js": "3",
     "material-design-icons-iconfont": "^5.0.1",
     "roboto-fontface": "*",
     "vee-validate": "^2.2.12",
