@@ -14,21 +14,21 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
-// @ts-ignore
-import { VToolbar, VSpacer, VBtn, VIcon, VDialog, VApp, VCard, VCardTitle, VCardText, VCardActions } from 'vuetify/lib';
+// // @ts-ignore
+// import { VToolbar, VSpacer, VBtn, VIcon, VDialog, VApp, VCard, VCardTitle, VCardText, VCardActions } from 'vuetify/lib';
 
 @Component({
-  components: {
-    VSpacer,
-    VBtn,
-    VDialog,
-    VToolbar,
-    VApp,
-    VCard,
-    VCardTitle,
-    VCardText,
-    VCardActions,
-  },
+  // components: {
+  //   VSpacer,
+  //   VBtn,
+  //   VDialog,
+  //   VToolbar,
+  //   VApp,
+  //   VCard,
+  //   VCardTitle,
+  //   VCardText,
+  //   VCardActions,
+  // },
 })
 export default class EcRootIndexAKIndex extends Vue {
   @Prop()

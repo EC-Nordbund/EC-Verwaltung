@@ -6,7 +6,7 @@ import selector from './wrapper/wrap.vue';
 import VeeValidate, { Validator } from 'vee-validate';
 // @ts-ignore
 import de from 'vee-validate/dist/locale/de';
-import 'vuetify/src/stylus/app.styl';
+// import 'vuetify/src/stylus/app.styl';
 Vue.use(VeeValidate);
 Validator.localize('de', de);
 
@@ -37,7 +37,7 @@ Vue.component('formular-dialog', dialog);
 Vue.component('ec-form-anmeldung', anmeldung);
 Vue.component('formular-selector', selector);
 
-let a:any= {}
+let a: any = {}
 
 context.keys().forEach((key) => {
   Vue.component('form_' + key.split('/')[1].split('.')[0], context(key).default || context(key));

@@ -16,16 +16,16 @@
 import { Component, Vue, Mixins } from 'vue-property-decorator';
 import abstractField from '../abstract';
 
-// @ts-ignore
-import { VForm, VStepper, VStepperStep, VBtn } from 'vuetify/lib';
+// // @ts-ignore
+// import { VForm, VStepper, VStepperStep, VBtn } from 'vuetify/lib';
 
 @Component({
-  components: {
-    VForm,
-    VStepper,
-    VStepperStep,
-    VBtn,
-  },
+  // components: {
+  //   VForm,
+  //   VStepper,
+  //   VStepperStep,
+  //   VBtn,
+  // },
 })
 export default class FormStepper extends Mixins(abstractField) {
   public currStep: number = 0;
