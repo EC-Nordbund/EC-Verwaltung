@@ -42,17 +42,17 @@
 <script lang="ts">
 import { Component, Vue, Mixins, Watch } from 'vue-property-decorator';
 import abstractField from '../abstract';
-// @ts-ignore
-import { VSpacer, VBtn, VDialog, VDatePicker, VTextField } from 'vuetify/lib';
+// // @ts-ignore
+// import { VSpacer, VBtn, VDialog, VDatePicker, VTextField } from 'vuetify/lib';
 
 @Component({
-  components: {
-    VSpacer,
-    VBtn,
-    VDialog,
-    VDatePicker,
-    VTextField,
-  },
+  // components: {
+  //   VSpacer,
+  //   VBtn,
+  //   VDialog,
+  //   VDatePicker,
+  //   VTextField,
+  // },
 })
 export default class FormInput extends Mixins(abstractField) {
   public modal = false;
