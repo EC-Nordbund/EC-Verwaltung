@@ -5,7 +5,7 @@ import VuetifyDialog from 'vuetify-dialog';
 import auth from '@/plugins/auth';
 import router from '@/router';
 import '@/import';
-import '@/assets/ecForm.umd.min.js';
+import '@/forms/main';
 import '@/assets/style.css';
 import '@/config/form';
 import '@/plugins/apollo';
@@ -25,7 +25,7 @@ Vue.config.productionTip = false;
 
 auth(router, createVue);
 
-Vue.prototype.$empty = () => {};
+Vue.prototype.$empty = () => { };
 
 function createVue() {
   return new Vue({

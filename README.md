@@ -1,45 +1,40 @@
-# EC-Verwaltungs-App
+# app5
 
-> Unsere Software besteht aus mehreren Teilen, deren Zusammenspiel hier erklärt werden soll. 
+## Coole Dinge die man in unserem Code finden kann
 
-## Form Generator
+### 1. Vuetify
+Wir nutzen Vuetify als Component Frameworks, was uns 90% der Arbeit abnimmt.
 
-Wir haben einen eignen Formgenerator entwickelt. Dieser basiert auf Vuetify und wird in die anderen Projekte eingebunden.
-### Basis
-* Vuetify
-* Vue
-* Vee-Validate
+### 2. Electron
+Wir nutzen Electron als Framework damit wir eine Desktop App schreiben können.
 
-## Anmeldung
+### 3. Imports
+Wir machen die meisten unserer Importe dynamisch. In der datei `import.ts` findet man den entsprechenden Code.
+Dabei werden verschiedene Dinge Importiert
 
-Hier soll die Anmeldung für den EC-Nordbund erstellt werden. Dabei gibt es den Generator der Anmeldung für die Verschieden Zwecke und Ziel ist eine js Datei, die eingebnden werden kann die Vue, Vuetify, unsern Form generator enthält. Dabei wird als Ziel eine Funktion in das Window Objekt hinzugefügt, die mit einigen Parametern aufgerufen werden kann und die Anmeldung automatisch einbindet.
+#### 3.1 Lib
+Alle Components die wir mehrfach nutzen schreiben wir im lib Ordner. Diese werden automatisch importiert und in Vue eingebunden.
 
-### Basis
-* Form Generator
-* Vuetify
-* Vue
-* Vee-Validate
+#### 3.2 Util
+Alle Utils die wir so brauchen landen in diesem Ordner und sind später unter $util abrucfbar
 
-## API
-Wir nutzen GraphQL als API Framework dabei nutzen wir verschiedene Tools
-### Basis
-* GraphQL Server
-* Eigenes Auth System
+### 4. Router
+Unter Pages findet man unsere Route. Die Strucktur scheint dabei sehr komplex zu sein. Allerdings werden die Routes automatisch ausgelesen und in die Tree strucktur gebracht. s. `router.ts`
 
-## APP
-Wir nutzen verschiedene Packete etc. um uns das ganze zu vereinfachen. Wir haben ein automatischen Route generator der Anhand der Ordnerstrucktur die Routes generiert. Wir versuchen eher mehr Dateien zu erstellen als lange Dateien und wir wollen eher html als js.
+### 5. API verbindung
+Wir haben auf grundlage von Socket.io eine eigene API Schnittstelle entwickelt. Dadurch können wir Daten besser Cachen und wir haben einen besseren Zugrif auf den Datenfluss. - Dies ist noch in Arbeit. Und evtl. nicht zu finden.
 
-### Basis
-* Form Generator
-* Vuetify
-* Vue
-* Vee-Validate
+### 6. Forms
+Wir haben einen Formulargenerator geschrieben. Dieser ist im Ordner `form` zu finden.
 
-## Docs, Help
-Wir nutzen Vuepress um eine Dokumentation und eine Hilfeseite zu generieren. Nicht sehr spektakulär aber ganz interessant. Einige Docs seiten werden zur Buildzeit generiert.
-### Basis
-* Vuepress
+### 7. Anschrit
+Wir haben ein eigenes Anschrits Formular geschrieben, das nach eingabe der PLZ nur noch die entsprechenden Orte zu lässt.
 
-## DB
-Aktuell nutzen wir MYSQL was wir aber durch NEO4J ersetzen wollen.
+### 8. Report generator
+Wir nutzen einen Report generator um Word Dokumente zu generieren. Dies ist sehr cool.
 
+## Sachen die man hier nicht findet
+
+### 1. Code-Splitting
+
+Man könnte via Code-Splitting einiges an Ladetzeit sparen / verteilen. Dies ist für unsere Zwecke aber nicht nötig.
