@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 // @ts-ignore
 import * as excel from 'xlsx-template';
-import { ApolloClient } from 'apollo-boost';
+import { ApolloClient } from '@apollo/client/core';
 
 export async function generate(
   veranstaltungsID: number,
