@@ -98,7 +98,7 @@ export default class EcRootIndex extends Vue {
           )
         }
       `,
-      variables: {...this.value,  akID: this.$route.params.id, authToken: this.$authToken()}
+      variables: {...this.value,  akID: parseInt(this.$route.params.id), authToken: this.$authToken()}
     }).then(() => {
       this.$notifikation('Neuer Eintrag im AK', `Du hast erfolgreich einen neuen Eintrag im AK angelegt`);
       this.$emit('reload');

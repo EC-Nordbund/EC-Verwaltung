@@ -206,7 +206,7 @@ export default class EcRootIndex extends Vue {
                         mergePersons(authToken: $authToken, personID_richtig: $richtig, personID_falsch: $falsch)
                       }
                     `,
-                    variables: {falsch: res.falsch, authToken: this.$authToken(), richtig: this.$route.params.id}
+                    variables: {falsch: res.falsch, authToken: this.$authToken(), richtig: parseInt(this.$route.params.id)}
                   })
                     .then(() => {
                       this.$notifikation('Personen gemergt', `Du hast erfolgreich die Personen zusammengeführt.`);
@@ -246,7 +246,7 @@ export default class EcRootIndex extends Vue {
                 `,
                 variables: {
                   authToken: this.$authToken(),
-                  personID: this.$route.params.id,
+                  personID: parseInt(this.$route.params.id),
                   email: mail
                 }
               })
@@ -310,7 +310,7 @@ export default class EcRootIndex extends Vue {
                       )
                     }
                   `,
-                  variables: {...data,  personID: this.$route.params.id, authToken: this.$authToken()}
+                  variables: {...data,  personID: parseInt(this.$route.params.id), authToken: this.$authToken()}
                 }).then(() => {
                   this.$notifikation('Neues FZ eingetragen', `Du hast erfolgreich ein neues FZ eingetragen.`);
                   self.loadData();
@@ -360,7 +360,7 @@ export default class EcRootIndex extends Vue {
                   `,
                   variables: {
                     ...data,
-                    personID: this.$route.params.id,
+                    personID: parseInt(this.$route.params.id),
                     authToken: this.$authToken()
                   }
                 })
@@ -558,7 +558,7 @@ export default class EcRootIndex extends Vue {
       `,
       variables: {
         authToken: this.$authToken(),
-        personID: this.$route.params.id
+        personID: parseInt(this.$route.params.id)
       },
       fetchPolicy: 'no-cache'
     }).then((res: any) => {
