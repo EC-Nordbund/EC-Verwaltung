@@ -1,0 +1,33 @@
+{
+  "name": "@ec-nordbund/mono-app",
+  "version": "0.0.0",
+  "description": "EC-Verwaltungs Application",
+  "keywords": [],
+  "homepage": "https://ec-nordbund.de",
+  "bugs": {
+    "url": "https://github.com/ecnordbund/ec-verwaltungs-app/issues"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": {
+    "name": "EC-Nordbund",
+    "email": "info@ec-nordbund.de",
+    "url": "https://ec-nordbund.de"
+  },
+  "contributors": [
+    {
+      "name": "Sebastian Krüger"
+    },
+    {
+      "name": "Tobias Krause"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecnordbund/ec-verwaltungs-app"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}
