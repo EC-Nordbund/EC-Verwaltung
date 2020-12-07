@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient } from '@apollo/client/core';
 import filterUtil from '@/util/filter.util';
 import reportUtil from '@/util/report.util';
 import iconUtil from '@/util/icon.util';
