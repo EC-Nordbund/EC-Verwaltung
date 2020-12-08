@@ -9846,10 +9846,10 @@ xlsx-template-ex@^0.2.9:
     lodash "^4.17.15"
     moment "^2.24.0"
 
-xlsx-template@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/xlsx-template/-/xlsx-template-0.5.0.tgz#48a240d954458c983a1b5c2ea518b67b328a6fdf"
-  integrity sha512-cheO/QcS+j3yTYgARTczqjH9HKM3pKXobooE2gGztfcBvRKz1Q/lxtmcuwmR50J+HaheQZHLH2IDcjAVpt1V7w==
+xlsx-template@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/xlsx-template/-/xlsx-template-1.3.0.tgz#88c3ed24eef87fb162453ff96aa3ab4103de09bb"
+  integrity sha512-oYxv6oGqYiJRvOM0dgF1JZ1w4s1BjpZjk9Vc+YG8NsRqHw9p8NhbV4nqftOBtu8FZpdsaPgv0ZK7yONNsi2AtA==
   dependencies:
     elementtree "0.1.6"
     jszip "^2.6.1"
