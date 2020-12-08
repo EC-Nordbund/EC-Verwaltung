@@ -10,7 +10,7 @@ export async function generate(
   apolloClient: ApolloClient<any>,
   wlistFilter: (wlist: number) => boolean
 ) {
-  const url = `https://verwaltung.tmp.ec-nordbund.de/templates/${template}.xlsx`;
+  const url = `https://verwaltung.ec-nordbund.de/templates/${template}.xlsx`;
   const templateData = await fetch(url).then((v) => v.arrayBuffer());
   const instance = new excel(templateData);
 
@@ -143,7 +143,7 @@ export async function generate(
 }
 
 export async function getTemplates() {
-  return await fetch('https://verwaltung.tmp.ec-nordbund.de/templates/list.json').then((res) => res.json());
+  return await fetch('https://verwaltung.ec-nordbund.de/templates/list.json').then((res) => res.json());
 }
 
 export function saveByteArray(reportName: string, byte: ArrayBuffer, word: boolean = false) {

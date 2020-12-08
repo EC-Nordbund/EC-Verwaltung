@@ -5,7 +5,7 @@ import Vue from 'vue';
 // Instantiate required constructor fields
 const cache = new InMemoryCache();
 const link = createHttpLink({
-  uri: 'https://api.tmp.ec-nordbund.de/graphql',
+  uri: 'https://api.ec-nordbund.de/graphql',
 });
 
 Vue.prototype.$gql = gql;
