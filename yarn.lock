@@ -9436,11 +9436,6 @@ void-elements@^3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=
 
-vue-asyncable@^0.2.0:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/vue-asyncable/-/vue-asyncable-0.2.1.tgz#3c7524289db0a03c8c158e3adfe20c918aa93cac"
-  integrity sha512-Qd0YcKkxq12pXBhiXMlRLDFmES/1keYhhjozYh7w4XsDxE2z+MGE/1p8rBKQtd6YpoLyUPrxhZwToyHgjo9fgg==
-
 vue-class-component@^7.2.6:
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
@@ -9521,20 +9516,10 @@ vue@^2.6.12:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
-vuedl@^0.3.3:
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/vuedl/-/vuedl-0.3.10.tgz#2c273635db47c36f51f52c054ef51bb813a35aeb"
-  integrity sha512-1coyFy2w3zHwBS8YWnE7Dyz4F8DgjXRekhyuvS+3UL3E3NBzMPqlI0Dpu51+J9fRDrGODkCnFuw8D7GRGK1gNA==
-  dependencies:
-    vue-asyncable "^0.2.0"
-
-vuetify-dialog@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/vuetify-dialog/-/vuetify-dialog-0.3.8.tgz#06563049ecdf43b6d8e8a6cb25042858766de610"
-  integrity sha512-Ab6hi729oeqFmCQgjsC69XUYYRirhNpawiA7fil2UcxxS0UAJ9i0U5HRlpdHRBEovlYU/yVZv7yuD22At+JnSw==
-  dependencies:
-    vue-asyncable "^0.2.0"
-    vuedl "^0.3.3"
+vuetify-dialog@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/vuetify-dialog/-/vuetify-dialog-2.0.12.tgz#6b233e09f16e892a99dc786165b82ffdb26391a0"
+  integrity sha512-QHQa3mtO1MyY+8jCNfElk0svrtSoVRcvlw5xlsC9p17XH1lhSdOXqfIBd6dRssvk+0yW/fHFED7DXuGMTxzylg==
 
 vuetify-loader@^1.6.0:
   version "1.6.0"
