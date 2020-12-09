@@ -44,7 +44,7 @@ v-card-text(style='overflow: auto')
       v-list-tile-action
         v-icon person
       v-list-tile-content
-        v-list-tile-title {{ data.radfahren ? "Rad fahren, " : "" }} {{ data.klettern ? "Klettern, " : "" }} {{ data.bootfahren ? "Boot fahren, " : "" }} {{ data.schwimmen > 0 ? "Schwimmen" : "" }}
+        v-list-tile-title {{ data.radfahren ? "Rad fahren, " : "" }} {{ data.klettern ? "Klettern, " : "" }} {{ data.bootfahren ? "Boot fahren, " : "" }} {{ data.schwimmen > 0 ? "Schwimmen, " : "" }} {{fahrgemeinschaften ? "Fahrgemeinschaften" : ""}}
         v-list-tile-sub-title Erlaubnisse
     v-list-tile(v-if='data.schwimmen > 0')
       v-list-tile-action
