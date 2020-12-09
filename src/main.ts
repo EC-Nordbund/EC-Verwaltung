@@ -13,6 +13,8 @@ import '@/plugins/notify';
 import '@/plugins/telefonFilter';
 import '@/plugins/vuetify';
 
+import '@/plugins/sw'
+
 Component.registerHooks([
   'beforeRouteEnter',
   'beforeRouteLeave',
