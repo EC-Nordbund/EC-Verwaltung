@@ -9,7 +9,6 @@ declare module 'vue/types/vue' {
     $authToken: () => string;
     $apolloClient: ApolloClient<any>;
     $login: (username: string, password: string) => Promise<never>;
-    $logout: () => void;
     $util: {
       filter: typeof filterUtil,
       report: typeof reportUtil,
@@ -21,5 +20,6 @@ declare module 'vue/types/vue' {
     $setInactiveHandler: (cb: () => void) => void;
     $empty: () => void;
     $ecForm: any;
+    $logoutIn: () => Promise<number>
   }
 }

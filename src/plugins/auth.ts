@@ -1,46 +1,48 @@
 import Vue from 'vue';
-import * as save from 'js-cookie';
 import gql from 'graphql-tag';
 
 
 export default (router: any, createVue: any) => {
   const auth = {
     authToken: '',
-    logout: new Date()
+    logout: -1
   };
-
-  let handler = () => {};
-
-  Vue.prototype.$setInactiveHandler = (cb: () => void) => {
-    handler = cb;
-  };
-
-  setInterval(() => {
-    const cookiedate = parseInt(save.get('logoutTime') || '0', 10);
-
-    if (auth.logout.getTime() !== cookiedate) {
-      auth.logout = new Date(cookiedate);
-    }
-    if (auth.logout.getTime() < (new Date()).getTime() || cookiedate === 0) {
-      handler();
-    }
-  }, 10000);
 
   Vue.prototype.$authToken = () => {
-    auth.logout = new Date(new Date().getTime() + 30 * 60000);
-    save.set('logoutTime', auth.logout.getTime().toString());
     return auth.authToken;
   };
 
-  Vue.prototype.$setAuthToken = (authToken: string) => {
-    auth.logout = new Date(new Date().getTime() + 30 * 60000);
+  Vue.prototype.$setAuthToken = (authToken: string, setTime = true) => {
     auth.authToken = authToken;
-    save.set('authToken', authToken, {expires: 1});
-    save.set('logoutTime', auth.logout.getTime().toString());
+    if (!setTime) {
+      return
+    }
+    return fetch('https://api.ec-nordbund.de/time').then(v => v.json()).then(v => v.time).then(v => v + 12 * 60 * 60 * 1000).then(time => {
+      localStorage.set('logoutTime', time.toString())
+      localStorage.set('authToken', authToken, { expires: 1 });
+      auth.logout = time
+    })
   };
 
+  window.addEventListener('storage', (ev) => {
+    if (ev.storageArea !== localStorage) return
 
-  const at = save.get('authToken');
+    if (localStorage.getItem('authToken') !== auth.authToken && localStorage.getItem('authToken') !== null) {
+      auth.authToken = localStorage.getItem('authToken')!
+      auth.logout = parseInt(localStorage.getItem('logoutTime')!)
+    }
+  })
+
+  Vue.prototype.$logoutIn = async () => {
+    if (auth.logout === -1) {
+      return null
+    }
+
+    return auth.logout - (await fetch('https://api.ec-nordbund.de/time').then(v => v.json()).then(v => v.time))
+  }
+
+
+  const at = localStorage.getItem('authToken');
 
   if (at) {
     Vue.prototype.$apolloClient.query({
@@ -56,8 +58,9 @@ export default (router: any, createVue: any) => {
       }
     }).then(() => {
       Vue.prototype.$setAuthToken(at);
+      auth.logout = parseInt(localStorage.getItem('logoutTime')!)
     }).catch(() => {
-      save.remove('authToken');
+      localStorage.remove('authToken');
     }).then(() => {
       createVue();
     });
