@@ -148,7 +148,8 @@ v-app(app, :dark='dark')
           v-white,
           :disabled='!valid || loading',
           @click='logIn'
-        ) LogIn
+        ) Verlängern
+        v-btn(v-accent-bg v-white @click="logout") Abmelden
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -177,6 +178,10 @@ export default class EcRootIndex extends Vue {
     'T. Krause + S. Krüger'
   ]);
   private loginDialog = false;
+
+  private logout() {
+    this.$logout()
+  }
 
   private data: any = {
     person: { vorname: {}, nachname: {} },

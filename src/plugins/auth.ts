@@ -31,6 +31,10 @@ export default (router: VueRouter, createVue: any) => {
     if (localStorage.getItem('authToken') !== auth.authToken && localStorage.getItem('authToken') !== null) {
       auth.authToken = localStorage.getItem('authToken')!
       auth.logout = parseInt(localStorage.getItem('logoutTime')!)
+
+      if (auth.authToken === '') {
+        router.push('/login')
+      }
     }
   })
 
@@ -48,6 +52,14 @@ export default (router: VueRouter, createVue: any) => {
     }
 
     return time
+  }
+
+  Vue.prototype.$logout = () => {
+    auth.authToken = ''
+    auth.logout = -1
+    localStorage.setItem('logoutTime', '-1')
+    localStorage.setItem('authToken', '')
+    router.push('/login')
   }
 
 
