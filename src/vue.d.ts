@@ -21,5 +21,6 @@ declare module 'vue/types/vue' {
     $empty: () => void;
     $ecForm: any;
     $logoutIn: () => Promise<number>
+    $logout: () => void
   }
 }
