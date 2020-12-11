@@ -85,8 +85,3 @@ export default class EcNAME extends Vue {
   }
 }
 </script>
-<style>
-  .isOld {
-    background-color: rgba(128, 128, 128, 0.5);
-  }
-</style>
