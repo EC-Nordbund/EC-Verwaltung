@@ -94,6 +94,7 @@ export default class EcRootLogin extends Vue {
           path = 'home';
         }
         save.set('username', this.data.username, { expires: 7 });
+        localStorage.setItem('username', this.data.username);
         await this.$setAuthToken(res.data.logIn);
         this.$router.push(path as string);
         this.loading = false;

@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import gql from 'graphql-tag';
+import VueRouter from 'vue-router';
 
 
-export default (router: any, createVue: any) => {
+export default (router: VueRouter, createVue: any) => {
   const auth = {
     authToken: '',
     logout: -1
@@ -18,8 +19,8 @@ export default (router: any, createVue: any) => {
       return
     }
     return fetch('https://api.ec-nordbund.de/time').then(v => v.json()).then(v => v.time).then(v => v + 12 * 60 * 60 * 1000).then(time => {
-      localStorage.set('logoutTime', time.toString())
-      localStorage.set('authToken', authToken, { expires: 1 });
+      localStorage.setItem('logoutTime', time.toString())
+      localStorage.setItem('authToken', authToken);
       auth.logout = time
     })
   };
@@ -38,7 +39,15 @@ export default (router: any, createVue: any) => {
       return null
     }
 
-    return auth.logout - (await fetch('https://api.ec-nordbund.de/time').then(v => v.json()).then(v => v.time))
+    const time = auth.logout - (await fetch('https://api.ec-nordbund.de/time').then(v => v.json()).then(v => v.time))
+
+    if (time < 0) {
+      auth.authToken = ''
+      auth.logout = -1
+      router.push('/login')
+    }
+
+    return time
   }
 
 

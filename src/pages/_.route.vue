@@ -19,7 +19,8 @@ v-app(app, :dark='dark')
     div(style='padding-right: 20px') 
     v-btn(icon, v-white, @click='toggleDark')
       v-icon invert_colors
-    span {{ alive }} min
+    v-btn(icon, v-white, @click='loginDialog = true')
+      span {{ alive }} min
     //- v-btn(icon v-white @click="logout")
     //-   v-icon exit_to_app
 
@@ -113,6 +114,41 @@ v-app(app, :dark='dark')
       v-icon(slot='divider', v-white) keyboard_arrow_right
       template(slot='item', slot-scope='props')
         span.disabled(v-white) {{ props.item.text }}
+  v-dialog(v-model='loginDialog', width='350px')
+    v-card
+      v-card-title
+        h1(v-font) Anmeldung verlängern
+      v-card-text
+        v-form(v-model='valid')
+          v-tooltip(
+            :value='isCapsOn',
+            :disabled='!isCapsOn',
+            bottom,
+            color='info'
+          )
+            v-text-field(
+              slot='activator',
+              label='Passwort',
+              v-model='password',
+              required,
+              :autofocus='data.username !== ""',
+              :color='isCapsOn && !$route.query.error ? "info" : undefined',
+              :append-outer-icon='isCapsOn ? "keyboard_capslock" : undefined',
+              :append-icon='showPasword ? "visibility_off" : "visibility"',
+              @click:append='() => (showPasword = !showPasword)',
+              :type='showPasword ? "text" : "password"',
+              @keyup.enter='logIn',
+              :rules='[(v) => (!!v ? true : "Ein Password muss angegeben werden!")]'
+            )
+            span Die Feststelltaste ist aktiviert
+      v-card-actions
+        v-spacer
+        v-btn(
+          v-accent-bg,
+          v-white,
+          :disabled='!valid || loading',
+          @click='logIn'
+        ) LogIn
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -131,7 +167,7 @@ export default class EcRootIndex extends Vue {
     );
   }
   public static meta = {};
-
+  private password = '';
   private dark = save.get('dark') === 'x';
   private drawer = null;
   private version = pack.version || 'Fehler';
@@ -140,6 +176,7 @@ export default class EcRootIndex extends Vue {
     'EC-Nordbund',
     'T. Krause + S. Krüger'
   ]);
+  private loginDialog = false;
 
   private data: any = {
     person: { vorname: {}, nachname: {} },
@@ -152,6 +189,45 @@ export default class EcRootIndex extends Vue {
     save.set('dark', this.dark ? 'x' : '');
   }
 
+  private loading = false;
+
+  public logIn() {
+    this.loading = true;
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($username: String!, $password: String!) {
+            logIn(version: "3.0.0", username: $username, password: $password)
+          }
+        `,
+        variables: {
+          password: this.password,
+          username: localStorage.getItem('username')
+        }
+      })
+      .then(async (res: any) => {
+        // let path = this.$route.query.next || '/home';
+        // if (this.$route.query.next === '/404?prev=%2F') {
+        //   path = 'home';
+        // }
+        // save.set('username', this.data.username, { expires: 7 });
+        // localStorage.setItem('username', this.data.username);
+        await this.$setAuthToken(res.data.logIn);
+        // this.$router.push(path as string);
+        this.loading = false;
+        this.updateAlive();
+        this.password = ''
+        this.loginDialog = false;
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Anmelden fehlgeschlagen!'
+        });
+        this.loading = false;
+      });
+  }
+
   private breadMap(arr: string[]) {
     return arr.map((el) => ({ text: el, disabled: true }));
   }
@@ -159,7 +235,21 @@ export default class EcRootIndex extends Vue {
   private alive: number = -1;
 
   private timer: null | NodeJS.Timeout = null;
+  private isCapsOn = false;
+  private valid = false;
+  private showPasword = false;
 
+  public checkCaps(ev: KeyboardEvent) {
+    const key = ev.key;
+    if (key.length === 1) {
+      this.isCapsOn =
+        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey;
+    } else {
+      if (key === 'CapsLock') {
+        this.isCapsOn = !this.isCapsOn;
+      }
+    }
+  }
   private created() {
     if (!this.$authToken()) {
       this.$router.push({
@@ -195,13 +285,20 @@ export default class EcRootIndex extends Vue {
         });
     }
 
-    this.timer = setInterval(async () => {
-      const num = await this.$logoutIn();
+    this.timer = setInterval(this.updateAlive, 30 * 1000);
+    this.updateAlive();
+  }
 
-      const mins = Math.trunc(num / 1000 / 60);
+  private async updateAlive() {
+    const num = await this.$logoutIn();
 
-      this.alive = mins;
-    }, 30 * 1000);
+    const mins = Math.trunc(num / 1000 / 60);
+
+    this.alive = mins;
+
+    if (this.alive < 15) {
+      this.loginDialog = true;
+    }
   }
 
   private beforeDestroy() {
