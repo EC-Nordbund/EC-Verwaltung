@@ -9,16 +9,28 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
         v-list-tile(@click='all')
           v-list-tile-title Alle (jeweils mit und ohne Warteliste)
         v-divider
-        v-list-tile(v-for='item in tnListen', @click='g(item.name, (v) => v == 0)')
+        v-list-tile(
+          v-for='item in tnListen',
+          @click='g(item.name, (v) => v == 0)'
+        )
           v-list-tile-title {{ item.label }}
         v-divider
-        v-list-tile(v-for='item in tnListen', @click='g(item.name, (v) => v >= 0)')
+        v-list-tile(
+          v-for='item in tnListen',
+          @click='g(item.name, (v) => v >= 0)'
+        )
           v-list-tile-title {{ item.label }} mit Warteliste
         v-divider
-        v-list-tile(v-for='item in tnListen', @click='g(item.name, (v) => v > 0)')
+        v-list-tile(
+          v-for='item in tnListen',
+          @click='g(item.name, (v) => v > 0)'
+        )
           v-list-tile-title {{ item.label }} nur Warteliste
         v-divider
-        v-list-tile(v-for='item in tnListen', @click='g(item.name, (v) => v < 0)')
+        v-list-tile(
+          v-for='item in tnListen',
+          @click='g(item.name, (v) => v < 0)'
+        )
           v-list-tile-title {{ item.label }} nur Abgemeldete
 </template>
 <script lang="ts">
@@ -30,7 +42,69 @@ import gql from 'graphql-tag';
 export default class EcRootIndex extends Vue {
   private get config() {
     return {
-      sheet: [],
+      sheet: [
+        {
+          icon: 'mail',
+          id: 'veranstaltung_create_tokens',
+          label: 'Mitarbeiteranmeldungstoken erzeugen',
+          click: async () => {
+            const res = await fetch(
+              'https://api.ec-nordbund.de/api-v4/anmeldetoken',
+              {
+                method: 'POST',
+                headers: {
+                  authorization: this.$authToken(),
+                  'content-type': 'application/json'
+                },
+                body: JSON.stringify({ id: parseInt(this.$route.params.id) })
+              }
+            );
+
+            const d = (await res.json()).data.map(
+              (v: string) =>
+                `https://www.ec-nordbund.de/mitarbeiter/anmeldung/${v}`
+            );
+
+            const createMailText = (url: string) => `Moin,
+Damit du im EC System für die Veranstaltung eingtragen bist, möchte ich dich bitten dich unter dem folgenden Link anzumelden:
+
+${url}
+
+Solltest du ein (neues) erweitertes Führungszeugnis benötigen erhältst den benötigten Antrag direkt nach der Anmeldung per Mail.
+
+Gruß
+Thomas Seeger
+`;
+
+            window.navigator.clipboard.writeText(`Moin,
+Du bist Freizeitleiter. Bitte leite folgende Mail an die entsprechenden Mitarbeiter weiter:
+
+Normale Mitarbeiter: 
+
+${createMailText(d[0])}
+
+Küchen Mitarbeiter: 
+
+${createMailText(d[1])}
+
+Küchenleitung: 
+
+${createMailText(d[2])}
+
+
+Bitte melde dich selber über diesen Link an: 
+${d[4]} 
+(über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
+
+Alle anderen Veranstaltungsleiter bitte über diesen Link: 
+${d[3]}
+
+Hinweis die Links funktionieren nur bis zu begin der Veranstaltung order 100 Tage (je nachdem was früher passiert)
+
+            `);
+          }
+        }
+      ],
       nav: [
         {
           icon: 'home',
