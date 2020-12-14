@@ -62,7 +62,7 @@ export default class EcRootIndex extends Vue {
 
             const d = (await res.json()).data.map(
               (v: string) =>
-                `https://www.ec-nordbund.de/mitarbeiter/anmeldung/${v}`
+                `https://www.ec-nordbund.de/anmeldung/mitarbeiter/${v}`
             );
 
             const createMailText = (url: string) => `Moin,
@@ -102,6 +102,7 @@ ${d[3]}
 Hinweis die Links funktionieren nur bis zu begin der Veranstaltung order 100 Tage (je nachdem was früher passiert)
 
             `);
+            alert('Mail-Text in Zwischenablage kopiert.');
           }
         }
       ],
