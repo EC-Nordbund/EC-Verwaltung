@@ -508,6 +508,7 @@ export default class EcRootIndex extends Vue {
               erzeugt {
                 german
               }
+              erzeugt_durch
             }
             # datumDesLetztenFZ {
             #   german
