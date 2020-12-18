@@ -11,7 +11,8 @@ const cacheExtensions = [
   '.css',
   '.json',
   '.docx',
-  '.xlsx'
+  '.xlsx',
+  '.webmanifest'
 ]
 
 const files = []

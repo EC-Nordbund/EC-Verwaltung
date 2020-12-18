@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import VuetifyDialog from 'vuetify-dialog';
@@ -12,7 +11,6 @@ import '@/plugins/apollo';
 import '@/plugins/notify';
 import '@/plugins/telefonFilter';
 import '@/plugins/vuetify';
-
 import '@/plugins/sw'
 
 Component.registerHooks([
