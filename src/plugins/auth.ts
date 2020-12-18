@@ -81,7 +81,7 @@ export default (router: VueRouter, createVue: any) => {
       Vue.prototype.$setAuthToken(at);
       auth.logout = parseInt(localStorage.getItem('logoutTime')!)
     }).catch(() => {
-      localStorage.remove('authToken');
+      localStorage.removeItem('authToken');
     }).then(() => {
       createVue();
     });

@@ -60,15 +60,19 @@ export default class EcRootIndex extends Vue {
               }
             );
 
-            const d = (await res.json()).data.map(
-              (v: string) =>
-                `https://www.ec-nordbund.de/anmeldung/mitarbeiter/${v}`
-            );
+            const d = (await res.json()).data;
 
-            const createMailText = (url: string) => `Moin,
+            const createMailText = (code: string) => `Moin,
 Damit du im EC System für die Veranstaltung eingtragen bist, möchte ich dich bitten dich unter dem folgenden Link anzumelden:
 
-${url}
+https://www.ec-nordbund.de/anmeldung/mitarbeiter/${code}
+
+Oder gehe auf https://www.ec-nordbund.de/anmeldung/mitarbeiter und füge den Code
+
+${code}
+
+ein.
+
 
 Solltest du ein (neues) erweitertes Führungszeugnis benötigen erhältst den benötigten Antrag direkt nach der Anmeldung per Mail.
 
@@ -77,7 +81,18 @@ Thomas Seeger
 `;
 
             window.navigator.clipboard.writeText(`Moin,
-Du bist Freizeitleiter. Bitte leite folgende Mail an die entsprechenden Mitarbeiter weiter:
+Du bist Freizeitleiter. 
+
+Hinweis: die Links funktionieren nur bis zu begin der Veranstaltung oder 100 Tage
+
+Bitte melde dich selber über diesen Link an: 
+${d[4]} 
+(über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
+
+Alle anderen Veranstaltungsleiter bitte über diesen Link: 
+${d[3]}
+
+Desweiteren sende folgende E-Mail weiter an deine Mitarbeiter (bitte sende nur den Link an die Personen die ihn auch benötigen):
 
 Normale Mitarbeiter: 
 
@@ -91,15 +106,6 @@ Küchenleitung:
 
 ${createMailText(d[2])}
 
-
-Bitte melde dich selber über diesen Link an: 
-${d[4]} 
-(über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
-
-Alle anderen Veranstaltungsleiter bitte über diesen Link: 
-${d[3]}
-
-Hinweis die Links funktionieren nur bis zu begin der Veranstaltung order 100 Tage (je nachdem was früher passiert)
 
             `);
             alert('Mail-Text in Zwischenablage kopiert.');
