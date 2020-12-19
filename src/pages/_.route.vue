@@ -149,7 +149,7 @@ v-app(app, :dark='dark')
           :disabled='!valid || loading',
           @click='logIn'
         ) Verlängern
-        v-btn(v-accent-bg v-white @click="logout") Abmelden
+        v-btn(v-accent-bg, v-white, @click='logout') Abmelden
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -180,12 +180,11 @@ export default class EcRootIndex extends Vue {
   private loginDialog = false;
 
   private logout() {
-    this.$logout()
+    this.$logout();
   }
 
   private data: any = {
     person: { vorname: {}, nachname: {} },
-    userGroup: {},
     ablaufDatum: {}
   };
 
@@ -221,7 +220,7 @@ export default class EcRootIndex extends Vue {
         // this.$router.push(path as string);
         this.loading = false;
         this.updateAlive();
-        this.password = ''
+        this.password = '';
         this.loginDialog = false;
       })
       .catch((err: any) => {
@@ -268,9 +267,6 @@ export default class EcRootIndex extends Vue {
             query($authToken: String!) {
               getMyUserData(authToken: $authToken) {
                 userName
-                userGroup {
-                  bezeichnung
-                }
                 person {
                   vorname
                   nachname

@@ -83,7 +83,7 @@ export default class EcRootLogin extends Vue {
       .mutate({
         mutation: gql`
           mutation($username: String!, $password: String!) {
-            logIn(version: "3.0.0", username: $username, password: $password)
+            logIn(version: "3.1.0", username: $username, password: $password)
           }
         `,
         variables: this.data
