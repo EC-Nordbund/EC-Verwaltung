@@ -79,15 +79,18 @@ export default class EcRootLogin extends Vue {
 
   public logIn() {
     this.loading = true;
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation($username: String!, $password: String!) {
-            logIn(version: "3.1.0", username: $username, password: $password)
-          }
-        `,
-        variables: this.data
+
+    fetch('https://api.ec-nordbund.de/v6/login', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        version: '3.2.0',
+        ...this.data
       })
+    })
+      .then((res) => res.json())
       .then(async (res: any) => {
         let path = this.$route.query.next || '/home';
         if (this.$route.query.next === '/404?prev=%2F') {
@@ -95,7 +98,7 @@ export default class EcRootLogin extends Vue {
         }
         save.set('username', this.data.username, { expires: 7 });
         localStorage.setItem('username', this.data.username);
-        await this.$setAuthToken(res.data.logIn);
+        await this.$setAuthToken(res.authToken);
         this.$router.push(path as string);
         this.loading = false;
       })

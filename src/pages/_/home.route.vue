@@ -8,6 +8,11 @@ ec-wrapper(title='Home')
     li Offline / Datenspaar Modus (Da will ich [Sebastian] mich mal genauer mit beschäftigen da mich dort die Technologien interessiert)
     li Verbesserte API (Ort wo die Daten geladen werden) dort finden regelmäßige Änderungen statt.
   h1 Änderungen
+  h3 Version 3.2.0
+  ul
+    li Weitere Änderungen am Login
+    li Tests bei der Personen Liste (wird jetzt effizienter geladen)
+    li Suche mit Datum ist jetzt einfacher (suche ich nach 23.11.1997 in den Personen finde ich mich :D geht auch mit 23.11.97).
   h3 Version 3.1.0
   ul
     li Kleine Änderungen

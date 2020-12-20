@@ -11,22 +11,23 @@ export default function filterGenerator(suche: string) {
 function filterData(item: any, suche: string): boolean {
   return suche
     .toLowerCase()
+    .replace(/\.|\-/g, " ")
     .split(' ')
     .map((suchePart: string) => filterPart(item, suchePart))
     .reduce((a, b) => a && b, true);
 }
 
 function filterPart(item: any, suche: string): boolean {
-    if (!suche) {
-      return true;
-    }
-    if (typeof item === 'string') {
-      return item.toLowerCase().includes(suche);
-    } else if (typeof item === 'number' || typeof item === 'boolean') {
-      return item.toString().toLowerCase().includes(suche);
-    } else if (item) {
-      return Object.keys(item).map((key) => filterPart(item[key], suche)).reduce((a, b) => a || b, false);
-    } else {
-      return false;
-    }
+  if (!suche) {
+    return true;
   }
+  if (typeof item === 'string') {
+    return item.toLowerCase().includes(suche);
+  } else if (typeof item === 'number' || typeof item === 'boolean') {
+    return item.toString().toLowerCase().includes(suche);
+  } else if (item) {
+    return Object.keys(item).map((key) => filterPart(item[key], suche)).reduce((a, b) => a || b, false);
+  } else {
+    return false;
+  }
+}
