@@ -1171,7 +1171,7 @@ __metadata:
     vuetify-dialog: ^0.3.8
     vuetify-loader: ^1.6.0
     webpack-bundle-analyzer: ^4.3.0
-    xlsx-template: 0
+    xlsx-template: 1
     xlsx-template-ex: ^0.2.9
     zxcvbn: ^4.4.2
   languageName: unknown
@@ -11585,13 +11585,13 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"xlsx-template@npm:0":
-  version: 0.5.0
-  resolution: "xlsx-template@npm:0.5.0"
+"xlsx-template@npm:1":
+  version: 1.3.0
+  resolution: "xlsx-template@npm:1.3.0"
   dependencies:
     elementtree: 0.1.6
     jszip: ^2.6.1
-  checksum: 679ac99bd418d7d11be470d9689fb23416360ddd9016b3067a9059f6dec9c2e3b7adb6c014441b6a7706a104c06b1a649c626354c9391f62e4335fcda47d6bb8
+  checksum: 7201ca75ae667e1bc88da17cf841235d03210cddd7fa2e4f4fb6fbc4ccbb9965792ed127d9acd4d7a19dca22f604a1773273e2eea88cb5f4129a3f60085e7133
   languageName: node
   linkType: hard
 

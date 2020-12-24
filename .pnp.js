@@ -80,7 +80,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vuetify-dialog", "virtual:e60c0c5018e08e72050c06714433aa348b65401d6ad2620bf5dbb7c67e809462228608c855745cfa14f8f96f8bb74ee15f55fe71cb1bf8433da04cb8197c7457#npm:0.3.8"],
             ["vuetify-loader", "virtual:e60c0c5018e08e72050c06714433aa348b65401d6ad2620bf5dbb7c67e809462228608c855745cfa14f8f96f8bb74ee15f55fe71cb1bf8433da04cb8197c7457#npm:1.6.0"],
             ["webpack-bundle-analyzer", "npm:4.3.0"],
-            ["xlsx-template", "npm:0.5.0"],
+            ["xlsx-template", "npm:1.3.0"],
             ["xlsx-template-ex", "npm:0.2.9"],
             ["zxcvbn", "npm:4.4.2"]
           ],
@@ -1518,7 +1518,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vuetify-dialog", "virtual:e60c0c5018e08e72050c06714433aa348b65401d6ad2620bf5dbb7c67e809462228608c855745cfa14f8f96f8bb74ee15f55fe71cb1bf8433da04cb8197c7457#npm:0.3.8"],
             ["vuetify-loader", "virtual:e60c0c5018e08e72050c06714433aa348b65401d6ad2620bf5dbb7c67e809462228608c855745cfa14f8f96f8bb74ee15f55fe71cb1bf8433da04cb8197c7457#npm:1.6.0"],
             ["webpack-bundle-analyzer", "npm:4.3.0"],
-            ["xlsx-template", "npm:0.5.0"],
+            ["xlsx-template", "npm:1.3.0"],
             ["xlsx-template-ex", "npm:0.2.9"],
             ["zxcvbn", "npm:4.4.2"]
           ],
@@ -3294,7 +3294,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["core-js", [
         ["npm:2.6.12", {
-          "packageLocation": "./.yarn/unplugged/core-js-npm-2.6.12-0b93d77d31/node_modules/core-js/",
+          "packageLocation": "./.yarn/cache/core-js-npm-2.6.12-0b93d77d31-b865823ce9.zip/node_modules/core-js/",
           "packageDependencies": [
             ["core-js", "npm:2.6.12"]
           ],
@@ -4322,7 +4322,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["ejs", [
         ["npm:2.7.4", {
-          "packageLocation": "./.yarn/unplugged/ejs-npm-2.7.4-879ed38a4e/node_modules/ejs/",
+          "packageLocation": "./.yarn/cache/ejs-npm-2.7.4-879ed38a4e-f066d9a932.zip/node_modules/ejs/",
           "packageDependencies": [
             ["ejs", "npm:2.7.4"]
           ],
@@ -13494,10 +13494,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["xlsx-template", [
-        ["npm:0.5.0", {
-          "packageLocation": "./.yarn/cache/xlsx-template-npm-0.5.0-8977b8814d-679ac99bd4.zip/node_modules/xlsx-template/",
+        ["npm:1.3.0", {
+          "packageLocation": "./.yarn/cache/xlsx-template-npm-1.3.0-6a40d13544-7201ca75ae.zip/node_modules/xlsx-template/",
           "packageDependencies": [
-            ["xlsx-template", "npm:0.5.0"],
+            ["xlsx-template", "npm:1.3.0"],
             ["elementtree", "npm:0.1.6"],
             ["jszip", "npm:2.6.1"]
           ],
@@ -13625,7 +13625,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["yorkie", [
         ["npm:2.0.0", {
-          "packageLocation": "./.yarn/unplugged/yorkie-npm-2.0.0-90a2c44491/node_modules/yorkie/",
+          "packageLocation": "./.yarn/cache/yorkie-npm-2.0.0-90a2c44491-b232051577.zip/node_modules/yorkie/",
           "packageDependencies": [
             ["yorkie", "npm:2.0.0"],
             ["execa", "npm:0.8.0"],
