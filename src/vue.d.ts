@@ -20,7 +20,7 @@ declare module 'vue/types/vue' {
     $setInactiveHandler: (cb: () => void) => void;
     $empty: () => void;
     $ecForm: any;
-    $logoutIn: () => Promise<number>
-    $logout: () => void
+    $logoutIn: () => Promise<number>;
+    $logout: () => void;
   }
 }

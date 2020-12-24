@@ -8,6 +8,9 @@ ec-wrapper(title='Home')
     li Offline / Datenspaar Modus (Da will ich [Sebastian] mich mal genauer mit beschäftigen da mich dort die Technologien interessiert)
     li Verbesserte API (Ort wo die Daten geladen werden) dort finden regelmäßige Änderungen statt.
   h1 Änderungen
+  h3 Version 3.3.0
+  ul
+    li Oben rechts ist ein neuer Button (Glocke) hinzugekommen dieser ist nur für mich aktuell zum testen. Erklärungen folgen später.
   h3 Version 3.2.0
   ul
     li Weitere Änderungen am Login

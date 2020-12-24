@@ -7,14 +7,14 @@ export default {
       type: 'password',
       label: 'Aktuelles Passwort',
       rule: 'required',
-      required: true,
+      required: true
     },
     {
       name: 'newPassword',
       type: 'password',
       label: 'Neues Passwort',
       rule: 'required|min:8|has_lower|has_upper|has_digit',
-      required: true,
-    },
-  ],  
+      required: true
+    }
+  ]
 };

@@ -3,5 +3,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   // configureWebpack: {
   //   plugins: [new BundleAnalyzerPlugin()]
-  // }
+  // },
+  chainWebpack: config => {
+    config.optimization.delete('splitChunks')
+  }
 }

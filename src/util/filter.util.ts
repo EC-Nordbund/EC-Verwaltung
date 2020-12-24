@@ -11,7 +11,7 @@ export default function filterGenerator(suche: string) {
 function filterData(item: any, suche: string): boolean {
   return suche
     .toLowerCase()
-    .replace(/\.|\-/g, " ")
+    .replace(/\.|\-/g, ' ')
     .split(' ')
     .map((suchePart: string) => filterPart(item, suchePart))
     .reduce((a, b) => a && b, true);

@@ -49,6 +49,7 @@ v-app(app, :dark='dark')
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { errorHandler } from '../helpers';
 // import * as settings from 'electron-settings'
 import gql from 'graphql-tag';
 import * as save from 'js-cookie';
@@ -90,6 +91,7 @@ export default class EcRootLogin extends Vue {
         ...this.data
       })
     })
+      .then(errorHandler)
       .then((res) => res.json())
       .then(async (res: any) => {
         let path = this.$route.query.next || '/home';

@@ -18,14 +18,13 @@ export default class FormRoot extends Vue {
   public tag!: any;
 
   @Prop({
-    required: true,
+    required: true
   })
   public cancel!: any;
 
   @Prop({
-    required: true,
+    required: true
   })
   public save!: any;
 }
-
 </script>

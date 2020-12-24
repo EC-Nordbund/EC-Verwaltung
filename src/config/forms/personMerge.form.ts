@@ -6,16 +6,16 @@ export default (self: any) => {
     },
     schema: [
       {
-        name: 'falsch',
-        type: 'autocomplete',
-        rule: 'required',
+        'name': 'falsch',
+        'type': 'autocomplete',
+        'rule': 'required',
         'prepend-icon': 'person',
-        items: self
+        'items': self
           .allePersonen
           .filter((pers: any) => pers.personID !== parseInt(self.$route.params.id))
           .map((pers: any) => ({ value: pers.personID, text: pers.vorname + ' ' + pers.nachname + ' (' + pers.gebDat.german + ')' })),
-        label: 'Falsche Person'
+        'label': 'Falsche Person'
       }
     ]
-  }
-}
+  };
+};

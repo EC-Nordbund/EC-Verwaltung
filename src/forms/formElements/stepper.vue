@@ -45,7 +45,7 @@ export default class FormStepper extends Mixins(abstractField) {
     10: false
   };
 
-  public clickBtn(cb: undefined|((currStep: number, valid: boolean, cancel: () => void, save: () => void, self: this, set:any ) => void | number) ) {
+  public clickBtn(cb: undefined|((currStep: number, valid: boolean, cancel: () => void, save: () => void, self: this, set: any ) => void | number) ) {
     // await this.$validator.validateAll()
     if (cb) {
       const val = cb(this.currStep, this.valid[this.currStep], this.cancel, this.save, this, Vue.set);

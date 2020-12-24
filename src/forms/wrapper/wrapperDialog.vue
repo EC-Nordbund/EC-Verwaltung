@@ -18,7 +18,7 @@ v-dialog(v-model="visible", max-width="400px", v-bind="$attrs")
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 // // @ts-ignore
 // import { VSpacer, VBtn, VDialog, VApp, VCard, VCardTitle, VCardText, VCardActions } from 'vuetify/lib';

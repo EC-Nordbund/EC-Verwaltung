@@ -107,7 +107,7 @@ export default class EcRootIndexAnmeldungenIdIndexSonstiges extends Vue {
   }
 
   public h(v: any, r = false) {
-    let res: any[] = [];
+    const res: any[] = [];
 
     Object.keys(v).forEach((key) => {
       if (typeof v[key] === 'object') {

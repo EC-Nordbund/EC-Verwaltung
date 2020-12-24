@@ -37,7 +37,7 @@ Vue.component('formular-dialog', dialog);
 Vue.component('ec-form-anmeldung', anmeldung);
 Vue.component('formular-selector', selector);
 
-let a: any = {}
+const a: any = {};
 
 context.keys().forEach((key) => {
   Vue.component('form_' + key.split('/')[1].split('.')[0], context(key).default || context(key));

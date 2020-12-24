@@ -16,18 +16,18 @@ export default class formularSelector extends Vue {
     title: '',
     initVal: {},
     schema: []
-  }
+  };
 
   @Watch('name', {immediate: true})
-  onNameChange() {
+  public onNameChange() {
     const c = this.$ecForm[this.name];
-    if(typeof (c) === 'function') {
-      this.config = c(this.self)
+    if (typeof (c) === 'function') {
+      this.config = c(this.self);
     } else {
-      this.config = c
+      this.config = c;
     }
   }
-  
+
 
   public show(...args: any[]) {
     return (this.$refs.form as any).show(...args);

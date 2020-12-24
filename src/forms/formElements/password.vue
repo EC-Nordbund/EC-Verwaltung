@@ -30,11 +30,6 @@ export default class FormInput extends Mixins(abstractField) {
   private passwordVisible = false;
   private isCapsOn = false;
 
-  private togglePasswordVisibility() {
-    this.passwordVisible = !this.passwordVisible;
-    this.schema.typ = this.passwordVisible ? 'text' : 'password';
-  }
-
   public checkCaps(ev: KeyboardEvent) {
     const key = ev.key;
     if (key.length === 1) {
@@ -53,6 +48,11 @@ export default class FormInput extends Mixins(abstractField) {
 
   public destroyed() {
     window.removeEventListener('keyup', this.checkCaps);
+  }
+
+  private togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+    this.schema.typ = this.passwordVisible ? 'text' : 'password';
   }
 }
 </script>

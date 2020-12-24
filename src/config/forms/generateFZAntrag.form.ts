@@ -8,9 +8,9 @@ export default (self: any) => ({
       name: 'mail',
       type: 'autocomplete',
       label: 'E-Mail',
-      rule: "required",
+      rule: 'required',
       required: true,
       items: self.data.emails.map((v: any) => v.eMail)
     }
   ]
-})
+});

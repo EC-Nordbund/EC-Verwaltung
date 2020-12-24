@@ -17,6 +17,8 @@ v-app(app, :dark='dark')
     v-spacer
     ec-lesezeichen-show
     div(style='padding-right: 20px') 
+    v-btn(icon, v-white, @click='subscribe')
+      v-icon add_alert
     v-btn(icon, v-white, @click='toggleDark')
       v-icon invert_colors
     v-btn(icon, v-white, @click='loginDialog = true')
@@ -156,6 +158,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import pack from '@/plugins/package';
 import gql from 'graphql-tag';
 import * as save from 'js-cookie';
+import { subscribe } from '../plugins/sw';
 // ()
 @Component({})
 export default class EcRootIndex extends Vue {
@@ -178,22 +181,21 @@ export default class EcRootIndex extends Vue {
     'T. Krause + S. Krüger'
   ]);
   private loginDialog = false;
-
-  private logout() {
-    this.$logout();
-  }
+  private subscribe = subscribe;
 
   private data: any = {
     person: { vorname: {}, nachname: {} },
     ablaufDatum: {}
   };
 
-  private toggleDark() {
-    this.dark = !this.dark;
-    save.set('dark', this.dark ? 'x' : '');
-  }
-
   private loading = false;
+
+  private alive: number = -1;
+
+  private timer: null | NodeJS.Timeout = null;
+  private isCapsOn = false;
+  private valid = false;
+  private showPasword = false;
 
   public logIn() {
     this.loading = true;
@@ -232,17 +234,6 @@ export default class EcRootIndex extends Vue {
       });
   }
 
-  private breadMap(arr: string[]) {
-    return arr.map((el) => ({ text: el, disabled: true }));
-  }
-
-  private alive: number = -1;
-
-  private timer: null | NodeJS.Timeout = null;
-  private isCapsOn = false;
-  private valid = false;
-  private showPasword = false;
-
   public checkCaps(ev: KeyboardEvent) {
     const key = ev.key;
     if (key.length === 1) {
@@ -253,6 +244,19 @@ export default class EcRootIndex extends Vue {
         this.isCapsOn = !this.isCapsOn;
       }
     }
+  }
+
+  private logout() {
+    this.$logout();
+  }
+
+  private toggleDark() {
+    this.dark = !this.dark;
+    save.set('dark', this.dark ? 'x' : '');
+  }
+
+  private breadMap(arr: string[]) {
+    return arr.map((el) => ({ text: el, disabled: true }));
   }
   private created() {
     if (!this.$authToken()) {
@@ -303,7 +307,7 @@ export default class EcRootIndex extends Vue {
   }
 
   private beforeDestroy() {
-    if (!this.timer) return;
+    if (!this.timer) { return; }
     clearInterval(this.timer);
   }
 }

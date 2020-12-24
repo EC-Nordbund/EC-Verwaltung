@@ -17,51 +17,17 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import gql from 'graphql-tag';
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
 
   private get mergePersonConfig() {
-    return this.$ecForm['personMerge'](this)
+    return this.$ecForm.personMerge(this);
   }
 
   private get fzAntragConfig() {
-    return this.$ecForm['generateFZAntrag'](this)
+    return this.$ecForm.generateFZAntrag(this);
   }
 
   private get fzAddConfig() {
-    return this.$ecForm['addFZ'](this)
-  }
-  
-
-  public allePersonen = []
-
-  private loadPersons() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken: String!) {
-          personen(authToken: $authToken) {
-            personID,
-            vorname,
-            nachname,
-            gebDat {
-              german
-              input
-            }
-          }
-        }
-      `,
-      variables: {
-        authToken: this.$authToken()
-      }
-    })
-      .then((res) => {
-        this.allePersonen = res.data.personen;
-      })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Laden fehlgeschlagen!'
-        });
-      });
+    return this.$ecForm.addFZ(this);
   }
 
   private get config() {
@@ -198,8 +164,8 @@ export default class EcRootIndex extends Vue {
             const self = this;
             (this.$refs.mergePerson as any)
               .show()
-                .then((res:{falsch:number})=>{
-                  console.log(res)
+                .then((res: {falsch: number}) => {
+                  console.log(res);
                   this.$apolloClient.mutate({
                     mutation: gql`
                       mutation($authToken: String!, $richtig: Int!, $falsch: Int!) {
@@ -219,7 +185,7 @@ export default class EcRootIndex extends Vue {
                       });
                     });
                 })
-                .catch(this.$empty)
+                .catch(this.$empty);
           }
         },
         {
@@ -229,7 +195,7 @@ export default class EcRootIndex extends Vue {
           click: () => {
             const self = this;
 
-            const generate = (mail:string) => {
+            const generate = (mail: string) => {
               this.$apolloClient.mutate({
                 mutation: gql`
                   mutation(
@@ -263,7 +229,7 @@ export default class EcRootIndex extends Vue {
                     title: 'Speichern fehlgeschlagen!'
                   });
                 });
-            }
+            };
 
             switch (this.data.emails.length) {
               case 0:
@@ -275,8 +241,8 @@ export default class EcRootIndex extends Vue {
               default:
                 (this.$refs.fzAntrag as any)
                   .show()
-                  .then((data: {mail: string})=>generate(data.mail))
-                  .catch(this.$empty)
+                  .then((data: {mail: string}) => generate(data.mail))
+                  .catch(this.$empty);
                 break;
             }
           }
@@ -289,7 +255,7 @@ export default class EcRootIndex extends Vue {
             const self = this;
             (this.$refs.addFZ as any)
               .show()
-              .then((data:{gesehenVon:number, fzVon:string, gesehenAm: string, kommentrar: string})=>{
+              .then((data: {gesehenVon: number, fzVon: string, gesehenAm: string, kommentrar: string}) => {
                 this.$apolloClient.mutate({
                   mutation:  gql`
                     mutation(
@@ -321,7 +287,7 @@ export default class EcRootIndex extends Vue {
                   });
                 });
               })
-              .catch(this.$empty)
+              .catch(this.$empty);
           }
         },
         {
@@ -420,6 +386,10 @@ export default class EcRootIndex extends Vue {
       subTitle: 'Person'
     };
   }
+  public static meta = {};
+
+
+  public allePersonen = [];
 
   public data: any = {
     gebDat: {},
@@ -430,6 +400,36 @@ export default class EcRootIndex extends Vue {
     fzAntraege: [],
     ak: []
   };
+
+  private loadPersons() {
+    this.$apolloClient.query({
+      query: gql`
+        query($authToken: String!) {
+          personen(authToken: $authToken) {
+            personID,
+            vorname,
+            nachname,
+            gebDat {
+              german
+              input
+            }
+          }
+        }
+      `,
+      variables: {
+        authToken: this.$authToken()
+      }
+    })
+      .then((res) => {
+        this.allePersonen = res.data.personen;
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Laden fehlgeschlagen!'
+        });
+      });
+  }
 
   private loadData() {
     this.$apolloClient.query({

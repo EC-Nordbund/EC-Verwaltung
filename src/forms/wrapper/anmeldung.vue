@@ -44,13 +44,13 @@ export default class EcRootIndexAKIndex extends Vue {
   private visible = false;
   private value: any = {};
 
-  private save() {    
-    this.$emit('save', this.value);
+  @Watch('initVal', {immediate: true})
+  public onInitValChange() {
+    this.value = this.initval;
   }
 
-  @Watch('initVal', {immediate: true})
-  onInitValChange() {
-    this.value = this.initval;
+  private save() {
+    this.$emit('save', this.value);
   }
 }
 </script>

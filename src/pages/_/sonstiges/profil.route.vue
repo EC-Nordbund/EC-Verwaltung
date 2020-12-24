@@ -55,7 +55,7 @@ export default class EcRootIndex extends Vue {
           newPassword: data.newPassword
         }
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.passwordWechseln) {
           this.$notifikation('Passwort erfolgreich geändert', '');
         } else {

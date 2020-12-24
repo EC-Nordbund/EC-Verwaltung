@@ -53,7 +53,7 @@ export default class EcRootIndex extends Vue {
               {
                 method: 'POST',
                 headers: {
-                  authorization: this.$authToken(),
+                  'authorization': this.$authToken(),
                   'content-type': 'application/json'
                 },
                 body: JSON.stringify({ id: parseInt(this.$route.params.id) })
@@ -81,28 +81,28 @@ Thomas Seeger
 `;
 
             window.navigator.clipboard.writeText(`Moin,
-Du bist Freizeitleiter. 
+Du bist Freizeitleiter.
 
 Hinweis: die Links funktionieren nur bis zu begin der Veranstaltung oder 100 Tage
 
-Bitte melde dich selber über diesen Link an: 
-${d[4]} 
+Bitte melde dich selber über diesen Link an:
+${d[4]}
 (über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
 
-Alle anderen Veranstaltungsleiter bitte über diesen Link: 
+Alle anderen Veranstaltungsleiter bitte über diesen Link:
 ${d[3]}
 
 Desweiteren sende folgende E-Mail weiter an deine Mitarbeiter (bitte sende nur den Link an die Personen die ihn auch benötigen):
 
-Normale Mitarbeiter: 
+Normale Mitarbeiter:
 
 ${createMailText(d[0])}
 
-Küchen Mitarbeiter: 
+Küchen Mitarbeiter:
 
 ${createMailText(d[1])}
 
-Küchenleitung: 
+Küchenleitung:
 
 ${createMailText(d[2])}
 

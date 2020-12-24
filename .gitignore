@@ -26,3 +26,11 @@ yarn-error.log*
 /dist_electron
 
 /lib/*.html
+
+
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

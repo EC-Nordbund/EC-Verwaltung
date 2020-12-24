@@ -8,16 +8,16 @@ export default (self: any) => ({
   },
   schema: [
     {
-      name: 'gesehenVon',
-      type: 'autocomplete',
-      rule: 'required',
+      'name': 'gesehenVon',
+      'type': 'autocomplete',
+      'rule': 'required',
       'prepend-icon': 'person',
-      items: self
+      'items': self
         .allePersonen
         .filter((pers: any) => pers.personID !== parseInt(self.$route.params.id))
         .map((pers: any) => ({ value: pers.personID, text: pers.vorname + ' ' + pers.nachname + ' (' + pers.gebDat.german + ')' })),
-      label: 'Gesehen von',
-      required: true
+      'label': 'Gesehen von',
+      'required': true
     },
     {
       name: 'fzVon',
@@ -41,4 +41,4 @@ export default (self: any) => ({
       required: true
     }
   ]
-})
+});
