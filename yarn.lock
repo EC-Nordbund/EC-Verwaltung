@@ -1137,7 +1137,7 @@ __metadata:
     "@types/webpack-env": ^1.16.0
     "@vue/cli-plugin-typescript": ^4.5.9
     "@vue/cli-service": ^4.5.9
-    autoprefixer: 9
+    autoprefixer: 10
     buffer: ^6.0.3
     copy-to-clipboard: ^3.3.1
     deepmerge: ^4.2.2
@@ -1448,7 +1448,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:9, autoprefixer@npm:^9.8.6":
+"autoprefixer@npm:10":
+  version: 10.1.0
+  resolution: "autoprefixer@npm:10.1.0"
+  dependencies:
+    browserslist: ^4.15.0
+    caniuse-lite: ^1.0.30001165
+    colorette: ^1.2.1
+    fraction.js: ^4.0.12
+    normalize-range: ^0.1.2
+    postcss-value-parser: ^4.1.0
+  peerDependencies:
+    postcss: ^8.1.0
+  bin:
+    autoprefixer: bin/autoprefixer
+  checksum: a0d9ccd6059f024e5fda4334019c5306b4a15a3fa2067bf5aea8eafe00fc1e79e0bc1d563998abdb3de6131a0718de80e8506534c404b21aefec75d2a56f966f
+  languageName: node
+  linkType: hard
+
+"autoprefixer@npm:^9.8.6":
   version: 9.8.6
   resolution: "autoprefixer@npm:9.8.6"
   dependencies:
@@ -1815,7 +1833,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.0.0, browserslist@npm:^4.12.0":
+"browserslist@npm:^4.0.0, browserslist@npm:^4.12.0, browserslist@npm:^4.15.0":
   version: 4.16.0
   resolution: "browserslist@npm:4.16.0"
   dependencies:
@@ -4399,6 +4417,13 @@ __metadata:
   version: 0.1.2
   resolution: "forwarded@npm:0.1.2"
   checksum: 568d862ad1c514813fc62dc1bd58b8669b16d4ee2e634a6fc71f4849df798883ab94e63d8e1b35a17af51b2b39ca869e672c7310efe42fc7b9bad43a80b5ff87
+  languageName: node
+  linkType: hard
+
+"fraction.js@npm:^4.0.12":
+  version: 4.0.13
+  resolution: "fraction.js@npm:4.0.13"
+  checksum: 1e9ec132b09f17f3e41aa53508197901277f11896f6adc0b51a4b38511e6236813a471488c319221f4fadf7c854be9566a4924215623b460364591d80e1791c3
   languageName: node
   linkType: hard
 
