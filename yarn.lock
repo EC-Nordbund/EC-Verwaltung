@@ -1149,7 +1149,7 @@ __metadata:
     lint-staged: ^10.5.3
     material-design-icons-iconfont: ^6.1.0
     node-sass: ^5.0.0
-    postcss: 7
+    postcss: 8
     register-service-worker: ^1.7.2
     roboto-fontface: "*"
     sass-loader: ^10.1.0
@@ -7000,6 +7000,15 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.20":
+  version: 3.1.20
+  resolution: "nanoid@npm:3.1.20"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 4788d36edcfec7bb32ddf33ed8f1f46df2867f70e9b1993bb131f7677e04ead2b621e5d614d2736308be18db1d54208d8ab207b4586bd5b052f71fb9d4c0ebea
+  languageName: node
+  linkType: hard
+
 "nanomatch@npm:^1.2.9":
   version: 1.2.13
   resolution: "nanomatch@npm:1.2.13"
@@ -8336,7 +8345,18 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:7, postcss@npm:^7.0.0, postcss@npm:^7.0.1, postcss@npm:^7.0.14, postcss@npm:^7.0.27, postcss@npm:^7.0.32, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
+"postcss@npm:8":
+  version: 8.2.1
+  resolution: "postcss@npm:8.2.1"
+  dependencies:
+    colorette: ^1.2.1
+    nanoid: ^3.1.20
+    source-map: ^0.6.1
+  checksum: aa7ba3d80a4d8e25bc1a3f61461d7f6b60d361fb1301465d0eb973c5f38b347ad0842b02b8cc8801ede46559391d7c640c7313301a829ef9ca77e34be7230854
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^7.0.0, postcss@npm:^7.0.1, postcss@npm:^7.0.14, postcss@npm:^7.0.27, postcss@npm:^7.0.32, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
   version: 7.0.35
   resolution: "postcss@npm:7.0.35"
   dependencies:
