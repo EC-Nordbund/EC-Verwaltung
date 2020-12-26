@@ -54,7 +54,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import gql from 'graphql-tag';
-import { genReport } from '@/report';
+import { genReport } from '../report';
 
 @Component({})
 export default class EcRootIndex extends Vue {

@@ -10,7 +10,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import gql from 'graphql-tag';
 
-import { genReport, existsReport } from '@/report';
+import { genReport, existsReport } from '../../../../report';
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndex extends Vue {

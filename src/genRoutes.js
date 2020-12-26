@@ -1,11 +1,13 @@
 const dirTree = require("directory-tree");
-const tree = dirTree("./pages");
+const tree = dirTree("./src/pages");
+
+// console.log(tree, dirTree)
 
 let counter = 0
 let imp = ''
 function cmp(path) {
   counter++
-  imp += `import cmp${counter} from '@/${path.replace(/\\|\//g, '/')}'\n`
+  imp += `import cmp${counter} from './${path.replace(/\\|\//g, '/')}'\n`
   return `cmp${counter}`
 }
 

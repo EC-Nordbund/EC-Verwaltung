@@ -35,7 +35,7 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { generate, getTemplates } from '@/tnList';
+import { generate, getTemplates } from '../../../../tnList';
 import gql from 'graphql-tag';
 
 @Component({})

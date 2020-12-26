@@ -1,4 +1,4 @@
-import { genReport } from '@/report';
+import { genReport } from '../report';
 import Vue from 'vue';
 import { DocumentNode } from 'graphql';
 

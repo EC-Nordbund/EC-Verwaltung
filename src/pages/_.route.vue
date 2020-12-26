@@ -8,7 +8,7 @@ v-app(app, :dark='dark')
     //-   v-icon redo
     v-spacer
     v-avatar(size='60px', style='margin-right: 10px')
-      img(src='@/assets/ec-logo-without-bg-64.png')
+      img(src='../assets/ec-logo-without-bg-64.png')
     span(
       v-white,
       v-font,
@@ -155,7 +155,7 @@ v-app(app, :dark='dark')
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import pack from '@/plugins/package';
+import pack from '../plugins/package';
 import gql from 'graphql-tag';
 import * as save from 'js-cookie';
 import { subscribe } from '../plugins/sw';
@@ -307,7 +307,9 @@ export default class EcRootIndex extends Vue {
   }
 
   private beforeDestroy() {
-    if (!this.timer) { return; }
+    if (!this.timer) {
+      return;
+    }
     clearInterval(this.timer);
   }
 }

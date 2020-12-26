@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import VuetifyDialog from 'vuetify-dialog';
-import auth from '@/plugins/auth';
-import router from '@/router';
-import '@/import';
-import '@/forms/main';
-import '@/assets/style.css';
-import '@/config/form';
-import '@/plugins/apollo';
-import '@/plugins/notify';
-import '@/plugins/telefonFilter';
-import '@/plugins/vuetify';
-import '@/plugins/sw';
+import auth from './plugins/auth';
+import router from './router';
+import './import';
+import './forms/main';
+import './assets/style.css';
+import './config/form';
+import './plugins/apollo';
+import './plugins/notify';
+import './plugins/telefonFilter';
+import './plugins/vuetify';
+import './plugins/sw';
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -25,7 +25,7 @@ Vue.config.productionTip = false;
 
 auth(router, createVue);
 
-Vue.prototype.$empty = () => { };
+Vue.prototype.$empty = () => {};
 
 function createVue() {
   return new Vue({
