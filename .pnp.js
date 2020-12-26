@@ -55,7 +55,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cssnano", "npm:4.1.10"],
             ["deepmerge", "npm:4.2.2"],
             ["directory-tree", "npm:2.2.5"],
-            ["docx-templates", "npm:3.1.1"],
             ["esbuild", "npm:0.8.26"],
             ["graphql", "npm:15.4.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
@@ -88,7 +87,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vue-template-compiler", "npm:2.6.12"],
             ["vuetify", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.5.24"],
             ["vuetify-dialog", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.8"],
-            ["xlsx-template", "npm:0.5.0"],
             ["xlsx-template-ex", "npm:0.2.9"],
             ["zxcvbn", "npm:4.4.2"]
           ],
@@ -214,7 +212,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cssnano", "npm:4.1.10"],
             ["deepmerge", "npm:4.2.2"],
             ["directory-tree", "npm:2.2.5"],
-            ["docx-templates", "npm:3.1.1"],
             ["esbuild", "npm:0.8.26"],
             ["graphql", "npm:15.4.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
@@ -247,7 +244,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vue-template-compiler", "npm:2.6.12"],
             ["vuetify", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.5.24"],
             ["vuetify-dialog", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.8"],
-            ["xlsx-template", "npm:0.5.0"],
             ["xlsx-template-ex", "npm:0.2.9"],
             ["zxcvbn", "npm:4.4.2"]
           ],
@@ -2551,20 +2547,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["docx-templates", [
-        ["npm:3.1.1", {
-          "packageLocation": "./.yarn/cache/docx-templates-npm-3.1.1-8126f1a076-c476a6a9e9.zip/node_modules/docx-templates/",
-          "packageDependencies": [
-            ["docx-templates", "npm:3.1.1"],
-            ["babel-runtime", "npm:6.26.0"],
-            ["fs-extra", "npm:3.0.1"],
-            ["jszip", "npm:3.5.0"],
-            ["sax", "npm:1.2.4"],
-            ["timm", "npm:1.7.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["dom-serializer", [
         ["npm:0.2.2", {
           "packageLocation": "./.yarn/cache/dom-serializer-npm-0.2.2-2e24969c0e-598e05e71b.zip/node_modules/dom-serializer/",
@@ -2639,16 +2621,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.3.633-7d9467177b-986784f90d.zip/node_modules/electron-to-chromium/",
           "packageDependencies": [
             ["electron-to-chromium", "npm:1.3.633"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["elementtree", [
-        ["npm:0.1.6", {
-          "packageLocation": "./.yarn/cache/elementtree-npm-0.1.6-cc06cec6a3-14f4b1cc80.zip/node_modules/elementtree/",
-          "packageDependencies": [
-            ["elementtree", "npm:0.1.6"],
-            ["sax", "npm:0.3.5"]
           ],
           "linkType": "HARD",
         }]
@@ -3075,18 +3047,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/fs-constants-npm-1.0.0-59576b2177-b8382395f5.zip/node_modules/fs-constants/",
           "packageDependencies": [
             ["fs-constants", "npm:1.0.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["fs-extra", [
-        ["npm:3.0.1", {
-          "packageLocation": "./.yarn/cache/fs-extra-npm-3.0.1-9417aaf7f9-89d26c54f2.zip/node_modules/fs-extra/",
-          "packageDependencies": [
-            ["fs-extra", "npm:3.0.1"],
-            ["graceful-fs", "npm:4.2.4"],
-            ["jsonfile", "npm:3.0.1"],
-            ["universalify", "npm:0.1.2"]
           ],
           "linkType": "HARD",
         }]
@@ -4158,16 +4118,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["jsonfile", [
-        ["npm:3.0.1", {
-          "packageLocation": "./.yarn/cache/jsonfile-npm-3.0.1-77649e47c9-65eab8507d.zip/node_modules/jsonfile/",
-          "packageDependencies": [
-            ["jsonfile", "npm:3.0.1"],
-            ["graceful-fs", "npm:4.2.4"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["jsprim", [
         ["npm:1.4.1", {
           "packageLocation": "./.yarn/cache/jsprim-npm-1.4.1-948d2c9ec3-ee0177b7ef.zip/node_modules/jsprim/",
@@ -4193,14 +4143,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["jszip", [
-        ["npm:2.6.1", {
-          "packageLocation": "./.yarn/cache/jszip-npm-2.6.1-eeffa2b611-0139952bb7.zip/node_modules/jszip/",
-          "packageDependencies": [
-            ["jszip", "npm:2.6.1"],
-            ["pako", "npm:1.0.11"]
-          ],
-          "linkType": "HARD",
-        }],
         ["npm:3.5.0", {
           "packageLocation": "./.yarn/cache/jszip-npm-3.5.0-60d9e550e7-6b5e86e710.zip/node_modules/jszip/",
           "packageDependencies": [
@@ -7446,13 +7388,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["sax", [
-        ["npm:0.3.5", {
-          "packageLocation": "./.yarn/cache/sax-npm-0.3.5-6aa05fe26d-ec3373bda0.zip/node_modules/sax/",
-          "packageDependencies": [
-            ["sax", "npm:0.3.5"]
-          ],
-          "linkType": "HARD",
-        }],
         ["npm:1.2.4", {
           "packageLocation": "./.yarn/cache/sax-npm-1.2.4-178f05f12f-9d7668d691.zip/node_modules/sax/",
           "packageDependencies": [
@@ -8494,15 +8429,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["universalify", [
-        ["npm:0.1.2", {
-          "packageLocation": "./.yarn/cache/universalify-npm-0.1.2-9b22d31d2d-420fc65473.zip/node_modules/universalify/",
-          "packageDependencies": [
-            ["universalify", "npm:0.1.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["unquote", [
         ["npm:1.1.1", {
           "packageLocation": "./.yarn/cache/unquote-npm-1.1.1-11903c1689-468981e454.zip/node_modules/unquote/",
@@ -8919,17 +8845,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/wrappy-npm-1.0.2-916de4d4b3-519fcda0fc.zip/node_modules/wrappy/",
           "packageDependencies": [
             ["wrappy", "npm:1.0.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["xlsx-template", [
-        ["npm:0.5.0", {
-          "packageLocation": "./.yarn/cache/xlsx-template-npm-0.5.0-8977b8814d-679ac99bd4.zip/node_modules/xlsx-template/",
-          "packageDependencies": [
-            ["xlsx-template", "npm:0.5.0"],
-            ["elementtree", "npm:0.1.6"],
-            ["jszip", "npm:2.6.1"]
           ],
           "linkType": "HARD",
         }]

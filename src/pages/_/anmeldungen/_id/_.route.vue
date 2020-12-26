@@ -1,24 +1,37 @@
 <template lang="pug">
-  ec-wrapper(hasSheet hasDial hasNav hasXBtn hasReload hasRouterView v-bind="config" @getData="getData")
-    router-view(:data="data" @reload="$emit('reload')")
-    template(#dialogs)
-      formular-selector(name="abmelden" ref="abmelden")
-      formular-selector(name="editBemerkungen" ref="editBemerkungen")
-      ec-anmeldung-kontakt(:data="data" ref="formKontakt" @reload="$emit('reload')")
+ec-wrapper(
+  hasSheet,
+  hasDial,
+  hasNav,
+  hasXBtn,
+  hasReload,
+  hasRouterView,
+  v-bind='config',
+  @getData='getData'
+)
+  router-view(:data='data', @reload='$emit("reload")')
+  template(#dialogs)
+    formular-selector(name='abmelden', ref='abmelden')
+    formular-selector(name='editBemerkungen', ref='editBemerkungen')
+    ec-anmeldung-kontakt(
+      :data='data',
+      ref='formKontakt',
+      @reload='$emit("reload")'
+    )
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import gql from 'graphql-tag';
 
-import { genReport, existsReport } from '../../../../report';
+// import { genReport, existsReport } from '../../../../report';
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndex extends Vue {
   public static meta = {};
 
   private data: any = {
-    person: {gebDat: {}},
-    veranstaltung: {begin: {}, ende: {}},
+    person: { gebDat: {} },
+    veranstaltung: { begin: {}, ende: {} },
     adresse: {},
     email: {},
     telefon: {},
@@ -35,64 +48,74 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           id: 'anmel_rep_bestbrief',
           icon: 'markunread_mailbox',
           label: 'Bestätigungsbrief generieren und Drucken',
-          disabled: !this.best || this.data.abmeldeZeitpunkt !== null || this.data.wartelistenPlatz !== 0,
+          disabled:
+            !this.best ||
+            this.data.abmeldeZeitpunkt !== null ||
+            this.data.wartelistenPlatz !== 0,
           click: () => {
             if (this.data.bestaetigungsBrief !== null) {
               if (
-                !confirm(`Brief wurde ${
-                  this.data.bestaetigungsBrief.german
-                } bereits generiert. Erneut generieren?`)
+                !confirm(
+                  `Brief wurde ${this.data.bestaetigungsBrief.german} bereits generiert. Erneut generieren?`
+                )
               ) {
                 return;
               }
             }
-            genReport(
-              `best-brief-${this.data.veranstaltung.veranstaltungsID}`,
-              this.data,
-              `bestaetigungsbrief-${this.$route.params.id}.docx`
-            ).then((r) => {
-              this.$apolloClient.mutate({
-                mutation: gql`
-                  mutation($anmeldeID: String!, $authToken: String!) {
-                    anmeldungBestaetigungsbrief(anmeldeID: $anmeldeID, authToken: $authToken)
-                  }
-                `,
-                variables: {
-                  authToken: this.$authToken(),
-                  anmeldeID: this.$route.params.id
-                }
-              });
-            });
+            // genReport(
+            //   `best-brief-${this.data.veranstaltung.veranstaltungsID}`,
+            //   this.data,
+            //   `bestaetigungsbrief-${this.$route.params.id}.docx`
+            // ).then((r) => {
+            //   this.$apolloClient.mutate({
+            //     mutation: gql`
+            //       mutation($anmeldeID: String!, $authToken: String!) {
+            //         anmeldungBestaetigungsbrief(anmeldeID: $anmeldeID, authToken: $authToken)
+            //       }
+            //     `,
+            //     variables: {
+            //       authToken: this.$authToken(),
+            //       anmeldeID: this.$route.params.id
+            //     }
+            //   });
+            // });
           }
         },
         {
           id: 'anmel_rep_infobrief',
           icon: 'markunread_mailbox',
           label: 'Infobrief generieren und Drucken',
-          disabled: !this.info || this.data.abmeldeZeitpunkt !== null || this.data.wartelistenPlatz !== 0,
+          disabled:
+            !this.info ||
+            this.data.abmeldeZeitpunkt !== null ||
+            this.data.wartelistenPlatz !== 0,
           click: () => {
             if (this.data.infoBrief !== null) {
-              if (!confirm(`Brief wurde ${this.data.infoBrief.german} bereits generiert. Erneut generieren?`)) {
+              if (
+                !confirm(
+                  `Brief wurde ${this.data.infoBrief.german} bereits generiert. Erneut generieren?`
+                )
+              ) {
                 return;
               }
             }
-            genReport(
-              `info-brief-${this.data.veranstaltung.veranstaltungsID}`,
-              this.data,
-              `infobrief-${this.$route.params.id}.docx`
-            ).then((r) => {
-              this.$apolloClient.mutate({
-                mutation: gql`
-                  mutation($anmeldeID: String!, $authToken: String!) {
-                    anmeldunginfobrief(anmeldeID: $anmeldeID, authToken: $authToken)
-                  }
-                `,
-                variables: {
-                  authToken: this.$authToken(),
-                  anmeldeID: this.$route.params.id
-                }
-              });
-            });
+            // genReport(
+            //   `info-brief-${this.data.veranstaltung.veranstaltungsID}`,
+            //   this.data,
+            //   `infobrief-${this.$route.params.id}.docx`
+            // ).then((r) => {
+            //   this.$apolloClient.mutate({
+            //     mutation: gql`
+            //       mutation($anmeldeID: String!, $authToken: String!) {
+            //         anmeldunginfobrief(anmeldeID: $anmeldeID, authToken: $authToken)
+            //       }
+            //     `,
+            //     variables: {
+            //       authToken: this.$authToken(),
+            //       anmeldeID: this.$route.params.id
+            //     }
+            //   });
+            // });
           }
         },
         {
@@ -104,41 +127,49 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
             const self = this;
             (this.$refs.abmelden as any)
               .show()
-              .then((data: {weg: string, kommentar: string, gebuehr: string}) => {
-                this.$apolloClient.mutate({
-                  mutation: gql`
-                    mutation(
-                      $anmeldeID: String!,
-                      $weg: String!,
-                      $gebuehr: Int!,
-                      $kommentar: String!,
-                      $authToken: String!
-                    ) {
-                      abmelden(
-                        anmeldeID: $anmeldeID,
-                        weg: $weg,
-                        gebuehr: $gebuehr,
-                        kommentar: $kommentar,
-                        authToken: $authToken
-                      )
-                    }
-                  `,
-                  variables: {
-                    ...data,
-                    gebuehr: parseInt(data.gebuehr),
-                    anmeldeID: this.$route.params.id,
-                    authToken: this.$authToken()
-                  }
-                }).then(() => {
-                  this.$notifikation('Erfolgreich Abgemeldet', `Du hast erfolgreich die Person abgemeldet.`);
-                  self.getData();
-                }).catch((err) => {
-                  this.$dialog.error({
-                    text: err.message,
-                    title: 'Speichern fehlgeschlagen!'
-                  });
-                });
-              })
+              .then(
+                (data: { weg: string; kommentar: string; gebuehr: string }) => {
+                  this.$apolloClient
+                    .mutate({
+                      mutation: gql`
+                        mutation(
+                          $anmeldeID: String!
+                          $weg: String!
+                          $gebuehr: Int!
+                          $kommentar: String!
+                          $authToken: String!
+                        ) {
+                          abmelden(
+                            anmeldeID: $anmeldeID
+                            weg: $weg
+                            gebuehr: $gebuehr
+                            kommentar: $kommentar
+                            authToken: $authToken
+                          )
+                        }
+                      `,
+                      variables: {
+                        ...data,
+                        gebuehr: parseInt(data.gebuehr),
+                        anmeldeID: this.$route.params.id,
+                        authToken: this.$authToken()
+                      }
+                    })
+                    .then(() => {
+                      this.$notifikation(
+                        'Erfolgreich Abgemeldet',
+                        `Du hast erfolgreich die Person abgemeldet.`
+                      );
+                      self.getData();
+                    })
+                    .catch((err) => {
+                      this.$dialog.error({
+                        text: err.message,
+                        title: 'Speichern fehlgeschlagen!'
+                      });
+                    });
+                }
+              )
               .catch(this.$empty);
           }
         },
@@ -151,30 +182,38 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
             (this.$refs.editBemerkungen as any)
               .show()
               .then((data: any) => {
-                this.$apolloClient.mutate({
-                  mutation: gql`
-                    mutation(
-                      $authToken: String!
-                      $anmeldeID: String!
-                      $vegetarisch: Boolean!
-                      $gesundheitsinformationen: String!
-                      $bemerkungen: String!
-                      $lebensmittelAllergien: String!
-                    ) {
-                      anmeldungBesonderheiten(
-                        authToken: $authToken
-                        anmeldeID: $anmeldeID
-                        vegetarisch: $vegetarisch
-                        gesundheitsinformationen: $gesundheitsinformationen
-                        bemerkungen: $bemerkungen
-                        lebensmittelAllergien: $lebensmittelAllergien
-                      )
+                this.$apolloClient
+                  .mutate({
+                    mutation: gql`
+                      mutation(
+                        $authToken: String!
+                        $anmeldeID: String!
+                        $vegetarisch: Boolean!
+                        $gesundheitsinformationen: String!
+                        $bemerkungen: String!
+                        $lebensmittelAllergien: String!
+                      ) {
+                        anmeldungBesonderheiten(
+                          authToken: $authToken
+                          anmeldeID: $anmeldeID
+                          vegetarisch: $vegetarisch
+                          gesundheitsinformationen: $gesundheitsinformationen
+                          bemerkungen: $bemerkungen
+                          lebensmittelAllergien: $lebensmittelAllergien
+                        )
+                      }
+                    `,
+                    variables: {
+                      ...data,
+                      anmeldeID: this.$route.params.id,
+                      authToken: this.$authToken()
                     }
-                  `,
-                  variables: {...data,  anmeldeID: this.$route.params.id, authToken: this.$authToken()}
-                })
+                  })
                   .then(() => {
-                    this.$notifikation('Bemerkungen editieren', `Du hast erfolgreich die Bemerkungen geändert.`);
+                    this.$notifikation(
+                      'Bemerkungen editieren',
+                      `Du hast erfolgreich die Bemerkungen geändert.`
+                    );
                     self.getData();
                   })
                   .catch((err: any) => {
@@ -208,14 +247,8 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
             ) {
               this.$apolloClient.mutate({
                 mutation: gql`
-                  mutation(
-                    $anmeldeID: String!
-                    $authToken: String!
-                  ) {
-                    nachruecken(
-                      anmeldeID: $anmeldeID
-                      authToken: $authToken
-                    )
+                  mutation($anmeldeID: String!, $authToken: String!) {
+                    nachruecken(anmeldeID: $anmeldeID, authToken: $authToken)
                   }
                 `,
                 variables: {
@@ -244,114 +277,110 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           to: `/anmeldungen/${this.$route.params.id}/sonstiges`
         }
       ],
-      title: `${
-        (this.data.person || {}).vorname
-      } ${
+      title: `${(this.data.person || {}).vorname} ${
         (this.data.person || {}).nachname
-      } - ${
-        (this.data.veranstaltung || {}).bezeichnung
-      }`,
+      } - ${(this.data.veranstaltung || {}).bezeichnung}`,
       subTitle: 'Anmeldung'
     };
   }
 
   private getData() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken: String!, $anmeldeID: String!) {
-          anmeldung(
-            authToken: $authToken
-            anmeldeID: $anmeldeID
-          ) {
-            anmeldeID
-            person {
-              personID
-              vorname
-              nachname
-              gebDat {
+    this.$apolloClient
+      .query({
+        query: gql`
+          query($authToken: String!, $anmeldeID: String!) {
+            anmeldung(authToken: $authToken, anmeldeID: $anmeldeID) {
+              anmeldeID
+              person {
+                personID
+                vorname
+                nachname
+                gebDat {
+                  german
+                }
+                geschlecht
+              }
+              veranstaltung {
+                veranstaltungsID
+                bezeichnung
+                begin {
+                  input
+                  german
+                  year
+                }
+                ende {
+                  input
+                  german
+                }
+              }
+              position
+              adresse {
+                adressID
+                strasse
+                plz
+                ort
+              }
+              email {
+                eMailID
+                eMail
+              }
+              telefon {
+                telefonID
+                telefon
+              }
+              wartelistenPlatz
+              bisherBezahlt
+              anmeldeZeitpunkt {
                 german
               }
-              geschlecht
-            }
-            veranstaltung {
-              veranstaltungsID
-              bezeichnung
-              begin {
-                input
-                german
-                year
-              }
-              ende {
-                input
+              abmeldeZeitpunkt {
                 german
               }
+              abmeldeGebuehr
+              wegDerAbmeldung
+              rueckbezahlt
+              kommentarAbmeldung
+              vegetarisch
+              lebensmittelAllergien
+              gesundheitsinformationen
+              bemerkungen
+              radfahren
+              fahrgemeinschaften
+              klettern
+              sichEntfernen
+              bootFahren
+              schwimmen
+              DSGVO_einverstaendnis {
+                german
+              }
+              bestaetigungsBrief {
+                german
+              }
+              infoBrief {
+                german
+              }
+              extra_json
             }
-            position
-            adresse {
-              adressID
-              strasse
-              plz
-              ort
-            }
-            email {
-              eMailID
-              eMail
-            }
-            telefon {
-              telefonID
-              telefon
-            }
-            wartelistenPlatz
-            bisherBezahlt
-            anmeldeZeitpunkt {
-              german
-            }
-            abmeldeZeitpunkt {
-              german
-            }
-            abmeldeGebuehr
-            wegDerAbmeldung
-            rueckbezahlt
-            kommentarAbmeldung
-            vegetarisch
-            lebensmittelAllergien
-            gesundheitsinformationen
-            bemerkungen
-            radfahren
-            fahrgemeinschaften
-            klettern
-            sichEntfernen
-            bootFahren
-            schwimmen
-            DSGVO_einverstaendnis {
-              german
-            }
-            bestaetigungsBrief {
-              german
-            }
-            infoBrief {
-              german
-            }
-            extra_json
           }
-        }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        anmeldeID: this.$route.params.id
-      },
-      fetchPolicy: 'no-cache'
-    }).then(async (res: any) => {
-      this.data = res.data.anmeldung;
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          anmeldeID: this.$route.params.id
+        },
+        fetchPolicy: 'no-cache'
+      })
+      .then(async (res: any) => {
+        this.data = res.data.anmeldung;
 
-      this.best = await existsReport(`best-brief-${this.data.veranstaltung.veranstaltungsID}`);
-      this.info = await existsReport(`info-brief-${this.data.veranstaltung.veranstaltungsID}`);
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Laden fehlgeschlagen!'
+        // this.best = await existsReport(`best-brief-${this.data.veranstaltung.veranstaltungsID}`);
+        // this.info = await existsReport(`info-brief-${this.data.veranstaltung.veranstaltungsID}`);
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Laden fehlgeschlagen!'
+        });
       });
-    });
   }
 
   private async created() {

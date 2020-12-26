@@ -6,7 +6,8 @@ import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
 import json from "@rollup/plugin-json";
-
+import replace from '@rollup/plugin-replace';
+// process.env.NODE_ENV
 // PostCSS plugins
 import simplevars from 'postcss-simple-vars';
 import nested from 'postcss-nested';
@@ -16,7 +17,7 @@ import cssnano from 'cssnano';
 export default {
   input: 'src/main.ts',
   output: {
-    file: 'dist/bundle.js',
+    file: 'public/bundle.js',
     format: 'iife'
   },
   plugins: [
@@ -36,13 +37,17 @@ export default {
         }
       }
     }),
+    replace({
+      // alternatively, one could pass process.env.NODE_ENV or 'development` to stringify
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     commonjs(),
     resolve({
       jsnext: true,
       main: true,
       browser: true,
     }),
-    terser(),
+    // terser(),
     postcss({
       plugins: [
         simplevars(),

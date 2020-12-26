@@ -35,7 +35,6 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { generate, getTemplates } from '../../../../tnList';
 import gql from 'graphql-tag';
 
 @Component({})
@@ -53,7 +52,7 @@ export default class EcRootIndex extends Vue {
               {
                 method: 'POST',
                 headers: {
-                  'authorization': this.$authToken(),
+                  authorization: this.$authToken(),
                   'content-type': 'application/json'
                 },
                 body: JSON.stringify({ id: parseInt(this.$route.params.id) })
@@ -143,23 +142,23 @@ ${createMailText(d[2])}
   };
 
   private tnListen: any = [];
-  private genList = generate;
+  // private genList = generate;
 
-  private all() {
-    this.tnListen.forEach((el: { name: string; label: string }) => {
-      this.g(el.name, (v) => v === 0);
-      this.g(el.name, (v) => v >= 0);
-    });
-  }
+  // private all() {
+  //   this.tnListen.forEach((el: { name: string; label: string }) => {
+  //     this.g(el.name, (v) => v === 0);
+  //     this.g(el.name, (v) => v >= 0);
+  //   });
+  // }
 
   private g(name: string, wList: (v: number) => boolean) {
-    this.genList(
-      parseInt(this.$route.params.id, 10),
-      name,
-      this.$authToken(),
-      this.$apolloClient,
-      wList
-    );
+    // this.genList(
+    //   parseInt(this.$route.params.id, 10),
+    //   name,
+    //   this.$authToken(),
+    //   this.$apolloClient,
+    //   wList
+    // );
   }
 
   private sheetClick(item: { id: string }) {
@@ -261,9 +260,9 @@ ${createMailText(d[2])}
 
   private created() {
     this.loadData();
-    getTemplates().then((res) => {
-      this.tnListen = res;
-    });
+    // getTemplates().then((res) => {
+    //   this.tnListen = res;
+    // });
   }
 }
 </script>
