@@ -2,7 +2,6 @@ import Vue from 'vue';
 import gql from 'graphql-tag';
 import VueRouter from 'vue-router';
 
-
 export default (router: VueRouter, createVue: any) => {
   const auth = {
     authToken: '',
@@ -18,17 +17,26 @@ export default (router: VueRouter, createVue: any) => {
     if (!setTime) {
       return;
     }
-    return fetch('https://api.ec-nordbund.de/time').then((v) => v.json()).then((v) => v.time).then((v) => v + 12 * 60 * 60 * 1000).then((time) => {
-      localStorage.setItem('logoutTime', time.toString());
-      localStorage.setItem('authToken', authToken);
-      auth.logout = time;
-    });
+    return fetch('https://api.ec-nordbund.de/time')
+      .then((v) => v.json())
+      .then((v) => v.time)
+      .then((v) => v + 12 * 60 * 60 * 1000)
+      .then((time) => {
+        localStorage.setItem('logoutTime', time.toString());
+        localStorage.setItem('authToken', authToken);
+        auth.logout = time;
+      });
   };
 
   window.addEventListener('storage', (ev) => {
-    if (ev.storageArea !== localStorage) { return; }
+    if (ev.storageArea !== localStorage) {
+      return;
+    }
 
-    if (localStorage.getItem('authToken') !== auth.authToken && localStorage.getItem('authToken') !== null) {
+    if (
+      localStorage.getItem('authToken') !== auth.authToken &&
+      localStorage.getItem('authToken') !== null
+    ) {
       auth.authToken = localStorage.getItem('authToken')!;
       auth.logout = parseInt(localStorage.getItem('logoutTime')!);
 
@@ -43,7 +51,11 @@ export default (router: VueRouter, createVue: any) => {
       return null;
     }
 
-    const time = auth.logout - (await fetch('https://api.ec-nordbund.de/time').then((v) => v.json()).then((v) => v.time));
+    const time =
+      auth.logout -
+      (await fetch('https://api.ec-nordbund.de/time')
+        .then((v) => v.json())
+        .then((v) => v.time));
 
     if (time < 0) {
       auth.authToken = '';
@@ -62,29 +74,31 @@ export default (router: VueRouter, createVue: any) => {
     router.push('/login');
   };
 
-
   const at = localStorage.getItem('authToken');
 
   if (at) {
-    Vue.prototype.$apolloClient.query({
-      query: gql`
-        query($at:String!) {
-          person(personID: 0, authToken: $at) {
-            personID
+    Vue.prototype.$apolloClient
+      .query({
+        query: gql`
+          query($at: String!) {
+            person(personID: 0, authToken: $at) {
+              personID
+            }
           }
+        `,
+        variables: {
+          at
         }
-      `,
-      variables: {
-        at
-      }
-    }).then(() => {
-      Vue.prototype.$setAuthToken(at);
-      auth.logout = parseInt(localStorage.getItem('logoutTime')!);
-    }).catch(() => {
-      localStorage.removeItem('authToken');
-    }).then(() => {
-      createVue();
-    });
+      })
+      .then(() => {
+        Vue.prototype.$setAuthToken(at);
+        auth.logout = parseInt(localStorage.getItem('logoutTime')!);
+        createVue();
+      })
+      .catch(() => {
+        localStorage.removeItem('authToken');
+        createVue();
+      });
   } else {
     createVue();
   }

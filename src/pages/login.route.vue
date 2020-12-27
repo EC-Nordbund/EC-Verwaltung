@@ -16,27 +16,27 @@ v-app(app, :dark='dark')
               :autofocus='data.username === ""',
               :rules='[(v) => (!!v ? true : "Ein Benutzername muss angegeben werden!")]'
             )
-            v-tooltip(
-              :value='isCapsOn',
-              :disabled='!isCapsOn',
-              bottom,
-              color='info'
+            //- v-tooltip(
+            //-   :value='isCapsOn',
+            //-   :disabled='!isCapsOn',
+            //-   bottom,
+            //-   color='info'
+            //- )
+            v-text-field(
+              #activator,
+              label='Passwort',
+              v-model='data.password',
+              required,
+              :autofocus='data.username !== ""',
+              :color='isCapsOn && !$route.query.error ? "info" : undefined',
+              :append-outer-icon='isCapsOn ? "keyboard_capslock" : undefined',
+              :append-icon='showPasword ? "visibility_off" : "visibility"',
+              @click:append='() => (showPasword = !showPasword)',
+              :type='showPasword ? "text" : "password"',
+              @keyup.enter='logIn',
+              :rules='[(v) => (!!v ? true : "Ein Password muss angegeben werden!")]'
             )
-              v-text-field(
-                slot='activator',
-                label='Passwort',
-                v-model='data.password',
-                required,
-                :autofocus='data.username !== ""',
-                :color='isCapsOn && !$route.query.error ? "info" : undefined',
-                :append-outer-icon='isCapsOn ? "keyboard_capslock" : undefined',
-                :append-icon='showPasword ? "visibility_off" : "visibility"',
-                @click:append='() => (showPasword = !showPasword)',
-                :type='showPasword ? "text" : "password"',
-                @keyup.enter='logIn',
-                :rules='[(v) => (!!v ? true : "Ein Password muss angegeben werden!")]'
-              )
-              span Die Feststelltaste ist aktiviert
+              //- span Die Feststelltaste ist aktiviert
         v-card-actions
           v-spacer
           v-btn(
