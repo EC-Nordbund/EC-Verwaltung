@@ -1,0 +1,13 @@
+{
+  "name": "@ec/loading",
+  "private": true,
+  "devDependencies": {
+    "@rollup/plugin-image": "^2.0.6",
+    "cssnano": "^4.1.10",
+    "esbuild": "^0.8.26",
+    "postcss-url": "^10.1.1",
+    "rollup-plugin-esbuild": "^2.6.1",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
