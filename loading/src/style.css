@@ -88,7 +88,7 @@ body {
 }
 
 .text {
-  font-family: 'ec-font';
+  font-family: 'sans-serif';
   text-align: center;
   padding: 4px;
 }
@@ -126,9 +126,4 @@ h3 {
   100% {
     text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;
   }
-}
-
-@font-face {
-  font-family: 'ec-font';
-  src: url('../../src/assets/EC-Nordbund.otf') format('opentype');
 }

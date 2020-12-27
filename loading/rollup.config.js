@@ -9,7 +9,7 @@ import cssnano from 'cssnano';
 export default {
   input: 'src/main.ts',
   output: {
-    file: 'dist/loading.js',
+    file: 'public/loading.js',
     format: 'es'
   },
   plugins: [
