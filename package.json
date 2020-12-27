@@ -74,10 +74,5 @@
   },
   "browserslist": [
     "> 1.2%"
-  ],
-  "dependenciesMeta": {
-    "rollup-plugin-postcss@4.0.0": {
-      "unplugged": true
-    }
-  }
+  ]
 }

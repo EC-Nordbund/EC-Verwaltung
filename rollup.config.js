@@ -83,7 +83,7 @@ export default {
         watch: 'public'
       })
     ] : [
-        // terser()
+        terser()
       ])
   ]
 }

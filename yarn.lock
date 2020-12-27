@@ -142,9 +142,6 @@ __metadata:
     vuetify-dialog: ^0.3.8
     xlsx-template-ex: ^0.2.9
     zxcvbn: ^4.4.2
-  dependenciesMeta:
-    rollup-plugin-postcss@4.0.0:
-      unplugged: true
   languageName: unknown
   linkType: soft
 
