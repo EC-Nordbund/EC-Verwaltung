@@ -1,0 +1,7 @@
+{
+  "name": "@ec/types",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
