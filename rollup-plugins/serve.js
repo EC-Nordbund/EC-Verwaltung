@@ -1,30 +1,31 @@
-import { createServer } from "http-server";
-import WebSocket from "ws";
+import { createServer } from 'http-server'
+import WebSocket from 'ws'
 import chokidar from 'chokidar'
 
-let first = true;
+let first = true
+
 export default () => {
   return {
     name: 'serve',
     generateBundle() {
       if (first) {
-        first = false;
+        first = false
 
         const httpServer = createServer({
           cache: -1
-        }).listen(8080);
+        }).listen(8080)
         const wsServer = new WebSocket.Server({
           port: 8081
         })
 
-        let sockets = [];
-        wsServer.on('connection', socket => {
-          sockets.push(socket);
+        let sockets = []
+        wsServer.on('connection', (socket) => {
+          sockets.push(socket)
 
           socket.on('close', () => {
-            sockets = sockets.filter(s => s !== socket);
-          });
-        });
+            sockets = sockets.filter((s) => s !== socket)
+          })
+        })
 
         let to = null
 
@@ -38,12 +39,11 @@ export default () => {
 
             console.log(`[SERVE] Change Detected - Reload`)
 
-            sockets.forEach(socket => socket.send('_'))
+            sockets.forEach((socket) => socket.send('_'))
           }, 500)
         }
 
         chokidar.watch('./public').on('all', () => reload())
-
       }
     },
     banner() {

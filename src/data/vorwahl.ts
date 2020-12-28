@@ -1,4 +1,4 @@
-window.$vorwahlen = {
+export default {
   1: {
     5: {
       1: { 1: {}, 2: {}, 4: {}, 5: {}, 6: {}, 7: {} },

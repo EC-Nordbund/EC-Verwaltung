@@ -21,10 +21,3 @@ declare module 'vue/types/vue' {
     $logout: () => void
   }
 }
-
-import { Route } from 'vue-router'
-
-declare module 'routes:*' {
-  const routes: Route[]
-  export default routes
-}

@@ -1,9 +1,10 @@
+import vorwahlen from '../data/vorwahl'
 import Vue from 'vue'
 Vue.filter('telefon', (value) => {
   let numOnly = value.replace(/\D/g, '')
   let ret = ''
   let found = false
-  let find = window.$vorwahlen
+  let find = vorwahlen
   if (numOnly.substr(0, 4) === '0049') {
     numOnly = '0' + numOnly.substr(4)
   }

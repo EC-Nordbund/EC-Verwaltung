@@ -36,20 +36,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
+import { Component, Mixins } from 'vue-property-decorator'
 import abstractField from '../abstract'
-// // @ts-ignore
-// import { VAutocomplete, VTextField } from 'vuetify/lib';
+import plzs from "../../data/plzs";
 
-@Component({
-  // components: {
-  //   VAutocomplete,
-  //   VTextField,
-  // },
-})
+@Component({})
 export default class FormInput extends Mixins(abstractField) {
-  public map: any = (window as any).$plz
-  public plz = Object.keys((window as any).$plz)
+  public map: any = plzs
+  public plz = Object.keys(plzs)
 
   public plzChange($event: string) {
     if (this.map[$event].length === 1) {

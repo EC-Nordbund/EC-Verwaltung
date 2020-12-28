@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import sw from 'sw:./serviceWorker'
+import sw from 'sw:../serviceWorker/serviceWorker'
 sw()
 onUpdate((doUpdate) => {
-  if (
-    window.confirm('Eine neue Version ist verf\xFCgbar willst du sie laden?')
-  ) {
+  if (window.confirm('Eine neue Version ist verfügbar willst du sie laden?')) {
     doUpdate()
   }
 })

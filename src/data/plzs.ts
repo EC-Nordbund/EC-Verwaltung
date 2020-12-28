@@ -1,4 +1,4 @@
-window.$plz = {
+export default {
   10115: ['Berlin'],
   10117: ['Berlin'],
   10119: ['Berlin'],

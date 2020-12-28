@@ -1,16 +1,21 @@
-const VERSION = '<VERSION>'
-const ASSETS: Array<string> = []
+import resourceList from 'resource-list:'
+import { version } from '../../package.json'
+const VERSION = version
 
-// ServiceWorkerGlobalScope & WindowOrWorkerGlobalScope
-const _self: any = self as any
+const _self: ServiceWorkerGlobalScope & typeof globalThis = self as any
 
 const CACHE_NAME = `CACHE_${VERSION}`
 
 _self.addEventListener('install', (ev) => {
+  const resourcesToCache = resourceList.filter(
+    (item) => item !== 'sw.js' && !item.includes('manifest')
+  )
+  const toCache = ['/', ...resourcesToCache]
+
   ev.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME)
-      await cache.addAll(ASSETS)
+      await cache.addAll(toCache)
     })()
   )
 })
@@ -54,7 +59,7 @@ _self.addEventListener('message', (ev) => {
 
 _self.addEventListener('push', (ev) => {
   const content = ev.data!.json()
-  console.log(ev, content)
+
   _self.registration.showNotification(content.title, {
     body: content.body,
     icon: '/img/ec-logo-512.361ca3c3.png'
