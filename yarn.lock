@@ -88,7 +88,6 @@ __metadata:
   dependencies:
     "@apollo/client": ^3.3.6
     "@rollup/plugin-commonjs": ^17.0.0
-    "@rollup/plugin-eslint": ^8.0.1
     "@rollup/plugin-node-resolve": ^11.0.1
     "@rollup/pluginutils": ^4.1.0
     "@types/chokidar": ^2.1.3
@@ -212,18 +211,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-eslint@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@rollup/plugin-eslint@npm:8.0.1"
-  dependencies:
-    "@rollup/pluginutils": ^4.0.0
-    eslint: ^7.12.0
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0
-  checksum: 2ea170a654ecbed7d0cab7d6e6235a139396eac6e289ba470ac6dfc341faa98b9395faf7558f2a01e4b2d615d9e0d7d8d98260c5f3bf08b2a587469c08e3e959
-  languageName: node
-  linkType: hard
-
 "@rollup/plugin-node-resolve@npm:^11.0.1":
   version: 11.0.1
   resolution: "@rollup/plugin-node-resolve@npm:11.0.1"
@@ -253,7 +240,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^4.0.0, @rollup/pluginutils@npm:^4.1.0":
+"@rollup/pluginutils@npm:^4.1.0":
   version: 4.1.0
   resolution: "@rollup/pluginutils@npm:4.1.0"
   dependencies:
@@ -2078,7 +2065,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^7.12.0, eslint@npm:^7.16.0":
+"eslint@npm:^7.16.0":
   version: 7.16.0
   resolution: "eslint@npm:7.16.0"
   dependencies:

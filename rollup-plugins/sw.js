@@ -17,14 +17,13 @@ export default ({ path } = { path: 'sw.js' }) => ({
         fileName: path
       })
 
-      return `
-        export default () => {
-          if ('serviceWorker' in navigator) {
-            return navigator.serviceWorker.register(${JSON.stringify(path)});
-          }
-          return null
-        }
-      `
+      return `export default () => {
+  if ('serviceWorker' in navigator) {
+    return navigator.serviceWorker.register(${JSON.stringify(path).replace(/\"/g, "'")})
+  }
+  return null
+}
+`
     }
   }
 })

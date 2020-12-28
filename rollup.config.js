@@ -1,4 +1,3 @@
-import eslint from '@rollup/plugin-eslint'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import postcss from 'rollup-plugin-postcss'
@@ -61,9 +60,6 @@ export default {
         ...(process.env.NODE_ENV !== 'production' ? [] : [cssnano()])
       ],
       extract: true
-    }),
-    eslint({
-      throwOnError: true
     }),
     ...(process.env.NODE_ENV !== 'production' ? [serve()] : [terser()])
   ]
