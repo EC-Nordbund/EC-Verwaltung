@@ -1,23 +1,7 @@
-const dirTree = require("directory-tree");
-const tree = dirTree("./src/pages");
+import { join } from "path";
+import dirTree from "directory-tree"
 
-// console.log(tree, dirTree)
-
-let counter = 0
-let imp = ''
-function cmp(path) {
-  counter++
-  imp += `import cmp${counter} from './${path.replace(/\\|\//g, '/')}'\n`
-  return `cmp${counter}`
-}
-
-let val = 'export default ' + JSON.stringify(handleFolder(tree.children)).split('"/|').join('').split('|/"').join('').split('\\\\').join('/')
-
-const fs = require('fs')
-
-fs.writeFileSync('./gen_routes.js', imp + val)
-
-
+const routeProto = 'routes:'
 
 function handleFolder(folder) {
   let ret = folder.map(v => {
@@ -80,3 +64,32 @@ function handleFolder(folder) {
 
   return ret
 }
+
+let counter = 0
+let imp = ''
+function cmp(path) {
+  counter++
+  imp += `import cmp${counter} from '${path.replace(/\\|\//g, '/')}'\n`
+  return `cmp${counter}`
+}
+
+export default () => ({
+  name: 'route-generator',
+  resolveId(id, importer) {
+    if (id.startsWith(routeProto)) {
+      const parts = importer.split(/\\|\//)
+      const path = join(parts.slice(0, parts.length - 1).join('/'), id.slice(routeProto.length))
+
+      return routeProto + path
+    }
+  },
+  load(id) {
+    if (id.startsWith(routeProto)) {
+      const tree = dirTree(id.slice(routeProto.length));
+
+      let val = 'export default ' + JSON.stringify(handleFolder(tree.children)).split('"/|').join('').split('|/"').join('').split('\\\\').join('/')
+
+      return imp + val
+    }
+  }
+})

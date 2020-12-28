@@ -8,6 +8,7 @@ import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
 import json from "@rollup/plugin-json";
+import routes from "./rollup-plugins/routes";
 import replace from '@rollup/plugin-replace';
 import analyze from 'rollup-plugin-analyzer'
 
@@ -52,6 +53,7 @@ export default {
       main: true,
       browser: true,
     }),
+    routes(),
     // terser(),
     postcss({
       plugins: [
