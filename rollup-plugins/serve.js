@@ -10,7 +10,9 @@ export default () => {
       if (first) {
         first = false;
 
-        const httpServer = createServer().listen(8080);
+        const httpServer = createServer({
+          cache: -1
+        }).listen(8080);
         const wsServer = new WebSocket.Server({
           port: 8081
         })
