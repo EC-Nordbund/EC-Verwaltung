@@ -50,8 +50,6 @@ v-app(app, :dark='dark')
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { errorHandler } from '../helpers'
-// import * as settings from 'electron-settings'
-import gql from 'graphql-tag'
 import * as save from 'js-cookie'
 
 @Component({})

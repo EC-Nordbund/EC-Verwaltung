@@ -33,7 +33,7 @@ async function onUpdate(updateReadyCB) {
   if (!navigator.serviceWorker.controller) {
     return
   }
-  navigator.serviceWorker.addEventListener('controllerchange', (ev) => {
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
     location.reload()
   })
   const updateFactory = (sw2) => () => sw2.postMessage({ msg: 'update-sw' })

@@ -74,7 +74,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import gql from 'graphql-tag'
 import copy from 'copy-to-clipboard'
 

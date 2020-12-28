@@ -9,7 +9,6 @@ declare module 'vue/types/vue' {
     $login: (username: string, password: string) => Promise<never>
     $util: {
       filter: typeof filterUtil
-      report: typeof reportUtil
       icon: typeof iconUtil
       lesezeichen: typeof lesezeichenUtil
     }
