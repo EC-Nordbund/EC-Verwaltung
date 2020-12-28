@@ -5,8 +5,8 @@ import * as lesezeichen from './util/lesezeichen.util'
 const m = [cookie, filter, icon, lesezeichen]
 import Vue from 'vue'
 import './lib/import'
-const tmpUtil = {}
-m.forEach((util) => {
+const tmpUtil: any = {}
+m.forEach((util: any) => {
   tmpUtil[util.name || util.default.name] = util.default || {}
 })
 Vue.prototype.$util = tmpUtil
