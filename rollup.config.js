@@ -15,6 +15,7 @@ import routes from './rollup-plugins/routes'
 import sw from './rollup-plugins/sw'
 import replace from './rollup-plugins/replace'
 import json from './rollup-plugins/json'
+import rList from './rollup-plugins/resource-list'
 
 export default {
   input: './src/main.ts',
@@ -26,6 +27,7 @@ export default {
     sw({
       path: 'sw.js'
     }),
+    rList(),
     json(),
     image(),
     esbuild({
