@@ -1,7 +1,7 @@
 import { ApolloClient } from '@apollo/client/core'
-import filterUtil from '@/util/filter.util'
-import iconUtil from '@/util/icon.util'
-import lesezeichenUtil from '@/util/lesezeichen.util'
+import filterUtil from './util/filter.util'
+import iconUtil from './util/icon.util'
+import lesezeichenUtil from './util/lesezeichen.util'
 declare module 'vue/types/vue' {
   interface Vue {
     $authToken: () => string
@@ -20,4 +20,11 @@ declare module 'vue/types/vue' {
     $logoutIn: () => Promise<number>
     $logout: () => void
   }
+}
+
+import { Route } from 'vue-router'
+
+declare module 'routes:*' {
+  const routes: Route[]
+  export default routes
 }

@@ -1,7 +1,8 @@
 const VERSION = '<VERSION>'
 const ASSETS: Array<string> = []
 
-const _self: ServiceWorkerGlobalScope & WindowOrWorkerGlobalScope = self as any
+// ServiceWorkerGlobalScope & WindowOrWorkerGlobalScope
+const _self: any = self as any
 
 const CACHE_NAME = `CACHE_${VERSION}`
 
