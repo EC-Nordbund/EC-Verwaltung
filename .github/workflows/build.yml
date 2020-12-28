@@ -21,12 +21,11 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Lint
-        run: yarn lint
-        env:
-          CI: true
-
       - name: Build
         run: yarn build
-        env:
-          CI: true
+      
+      - name: Lint
+        run: yarn lint
+
+      - name: Types
+        run: yarn types
