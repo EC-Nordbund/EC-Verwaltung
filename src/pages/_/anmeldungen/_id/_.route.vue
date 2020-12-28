@@ -124,7 +124,6 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           label: 'Person abmelden',
           disabled: this.data.wartelistenPlatz === -1,
           click: () => {
-            const self = this
             ;(this.$refs.abmelden as any)
               .show()
               .then(
@@ -160,7 +159,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                         'Erfolgreich Abgemeldet',
                         `Du hast erfolgreich die Person abgemeldet.`
                       )
-                      self.getData()
+                      this.getData()
                     })
                     .catch((err) => {
                       this.$dialog.error({
@@ -178,7 +177,6 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           icon: 'edit',
           label: 'Bemerkungen editieren',
           click: () => {
-            const self = this
             ;(this.$refs.editBemerkungen as any)
               .show()
               .then((data: any) => {
@@ -214,7 +212,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                       'Bemerkungen editieren',
                       `Du hast erfolgreich die Bemerkungen geändert.`
                     )
-                    self.getData()
+                    this.getData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({

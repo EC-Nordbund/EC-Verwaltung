@@ -1,16 +1,24 @@
 <template lang="pug">
-  ec-wrapper(hasXBtn hasNav hasSheet hasHeader hasDial v-bind="config" hasReload @reload="loadData")
-    router-view(:data="data" @reload="loadData")
-    template(#dialogs)
-      //- ec-fz-antrag(ref="fzAntrag" :data="data" @reload="loadData")
-      formular-dialog(v-bind="fzAntragConfig" ref="fzAntrag")
-      formular-dialog(v-bind="fzAddConfig" ref="addFZ")
-      formular-dialog(v-bind="mergePersonConfig" ref="mergePerson")
-      formular-selector(name="addMail" ref="addMail")
-      formular-selector(name="addTelefon" ref="addTelefon")
-      formular-selector(name="addAdresse" ref="addAdresse")
-      formular-selector(name="personStamm" ref="editStamm")
-     
+ec-wrapper(
+  hasXBtn,
+  hasNav,
+  hasSheet,
+  hasHeader,
+  hasDial,
+  v-bind='config',
+  hasReload,
+  @reload='loadData'
+)
+  router-view(:data='data', @reload='loadData')
+  template(#dialogs)
+    //- ec-fz-antrag(ref="fzAntrag" :data="data" @reload="loadData")
+    formular-dialog(v-bind='fzAntragConfig', ref='fzAntrag')
+    formular-dialog(v-bind='fzAddConfig', ref='addFZ')
+    formular-dialog(v-bind='mergePersonConfig', ref='mergePerson')
+    formular-selector(name='addMail', ref='addMail')
+    formular-selector(name='addTelefon', ref='addTelefon')
+    formular-selector(name='addAdresse', ref='addAdresse')
+    formular-selector(name='personStamm', ref='editStamm')
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
@@ -37,7 +45,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_adresse',
           label: 'Adresse hinzufügen',
           click: () => {
-            const self = this
             ;(this.$refs.addAdresse as any)
               .show()
               .then(
@@ -74,7 +81,7 @@ export default class EcRootIndex extends Vue {
                         'Neue Adresse',
                         `Adresse erfolgreich hinzugefügt`
                       )
-                      self.loadData()
+                      this.loadData()
                     })
                     .catch((err: any) => {
                       this.$dialog.error({
@@ -92,7 +99,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_email',
           label: 'Email hinzufügen',
           click: () => {
-            const self = this
             ;(this.$refs.addMail as any)
               .show()
               .then((data: { email: string }) => {
@@ -122,7 +128,7 @@ export default class EcRootIndex extends Vue {
                       'Neue Email',
                       `Email erfolgreich hinzugefügt`
                     )
-                    self.loadData()
+                    this.loadData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
@@ -139,7 +145,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_telefon',
           label: 'Telefon hinzufügen',
           click: () => {
-            const self = this
             ;(this.$refs.addTelefon as any)
               .show()
               .then((data: { telefon: string }) => {
@@ -169,7 +174,7 @@ export default class EcRootIndex extends Vue {
                       'Neue Telefonnummer',
                       `Telefonnummer erfolgreich hinzugefügt`
                     )
-                    self.loadData()
+                    this.loadData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
@@ -186,7 +191,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_merge',
           label: 'Person mergen',
           click: () => {
-            const self = this
             ;(this.$refs.mergePerson as any)
               .show()
               .then((res: { falsch: number }) => {
@@ -217,7 +221,7 @@ export default class EcRootIndex extends Vue {
                       'Personen gemergt',
                       `Du hast erfolgreich die Personen zusammengeführt.`
                     )
-                    self.loadData()
+                    this.loadData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
@@ -234,8 +238,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_create_fz_antrag',
           label: 'FZ-Antrag generieren',
           click: () => {
-            const self = this
-
             const generate = (mail: string) => {
               this.$apolloClient
                 .mutate({
@@ -263,7 +265,7 @@ export default class EcRootIndex extends Vue {
                     'Erfolgreich Generiert',
                     `Du hast erfolgreich den Antrag generiert. An fz@ec-nordbund.de wurde eine Kopie gesendet!`
                   )
-                  self.loadData()
+                  this.loadData()
                 })
                 .catch((err) => {
                   this.$dialog.error({
@@ -294,7 +296,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_fz',
           label: 'FZ Eintragen',
           click: () => {
-            const self = this
             ;(this.$refs.addFZ as any)
               .show()
               .then(
@@ -336,7 +337,7 @@ export default class EcRootIndex extends Vue {
                         'Neues FZ eingetragen',
                         `Du hast erfolgreich ein neues FZ eingetragen.`
                       )
-                      self.loadData()
+                      this.loadData()
                     })
                     .catch((err: any) => {
                       this.$dialog.error({
@@ -354,7 +355,6 @@ export default class EcRootIndex extends Vue {
           id: 'pers_edit_stamm',
           label: 'Stammdaten editieren',
           click: () => {
-            const self = this
             ;(this.$refs.editStamm as any)
               .show({
                 vorname: this.data.vorname,
@@ -401,7 +401,7 @@ export default class EcRootIndex extends Vue {
                         'Stammdaten editiert',
                         `Du hast erfolgreich die Person editiert.`
                       )
-                      self.loadData()
+                      this.loadData()
                     })
                     .catch((err: any) => {
                       this.$dialog.error({

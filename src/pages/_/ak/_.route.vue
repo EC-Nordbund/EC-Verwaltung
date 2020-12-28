@@ -1,22 +1,29 @@
 <template lang="pug">
-  ec-wrapper(hasSheet hasHeader hasDial v-bind="config" hasReload @reload="loadData")
-    template(#header)
-      div(style="padding: 2px 10px")
-        ec-search(label="AK suchen" @suche="suche = $event")
-    v-list(two-line)
-      v-list-tile(
-        v-for="item in data.filter($util.filter(suche))" 
-        :key="item.akID" 
-        @click="$router.push({path: `/ak/${item.akID}`, query: {prev: $route.fullPath}})"
-      )
-        v-list-tile-action
-          v-icon group
-        v-list-tile-content
-          v-list-tile-title {{item.bezeichnung}}
-          v-list-tile-sub-title ID: {{item.akID}}
-    template(#dialogs)
-      //- ec-add-ak(ref="addAK")
-      formular-selector(name="addAK" ref="addAK")
+ec-wrapper(
+  hasSheet,
+  hasHeader,
+  hasDial,
+  v-bind='config',
+  hasReload,
+  @reload='loadData'
+)
+  template(#header)
+    div(style='padding: 2px 10px')
+      ec-search(label='AK suchen', @suche='suche = $event')
+  v-list(two-line)
+    v-list-tile(
+      v-for='item in data.filter($util.filter(suche))',
+      :key='item.akID',
+      @click='$router.push({ path: `/ak/${item.akID}`, query: { prev: $route.fullPath } })'
+    )
+      v-list-tile-action
+        v-icon group
+      v-list-tile-content
+        v-list-tile-title {{ item.bezeichnung }}
+        v-list-tile-sub-title ID: {{ item.akID }}
+  template(#dialogs)
+    //- ec-add-ak(ref="addAK")
+    formular-selector(name='addAK', ref='addAK')
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
@@ -49,7 +56,6 @@ export default class EcRootIndexAKIndex extends Vue {
         icon: 'group_add',
         label: 'AK-Hinzufügen',
         click: () => {
-          const self = this
           ;(this.$refs.addAK as any)
             .show()
             .then((data: { bezeichnung: string }) => {
@@ -70,7 +76,7 @@ export default class EcRootIndexAKIndex extends Vue {
                     'Neuer AK',
                     `Du hast erfolgreich einen AK mit dem Namen "${data.bezeichnung}" angelegt`
                   )
-                  self.$router.push({
+                  this.$router.push({
                     path: `/ak/${res.data.addAK}`,
                     query: { prev: this.$route.fullPath }
                   })

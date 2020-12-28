@@ -59,7 +59,6 @@ export default class EcRootIndex extends Vue {
         icon: 'person_add',
         label: 'Person hinzufügen',
         click: () => {
-          const self = this
           ;(this.$refs.addPerson as any)
             .show()
             .then(
@@ -99,7 +98,7 @@ export default class EcRootIndex extends Vue {
                       'Neue Person',
                       `Du hast erfolgreich eine neue Person angelegt`
                     )
-                    self.$router.push({
+                    this.$router.push({
                       path: `/personen/${res.data.addPerson}/home`,
                       query: { prev: this.$route.fullPath }
                     })
