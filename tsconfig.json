@@ -11,9 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
+    "types": [],
     "paths": {
       "@/*": [
         "src/*"
@@ -23,7 +21,9 @@
       "esnext",
       "dom",
       "dom.iterable",
-      "scripthost"
+      "scripthost",
+      "WebWorker",
+      "WebWorker.ImportScripts"
     ]
   },
   "include": [
@@ -31,7 +31,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx", "public/plzs.ts"
+    "tests/**/*.tsx"
   ],
   "exclude": [
     "node_modules",

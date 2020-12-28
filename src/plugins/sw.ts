@@ -1,8 +1,8 @@
 import Vue from 'vue';
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}
+import sw from 'sw:./serviceWorker';
+
+sw()
 
 onUpdate((doUpdate) => {
   if (window.confirm('Eine neue Version ist verfügbar willst du sie laden?')) {
@@ -24,7 +24,7 @@ export async function subscribe() {
   await fetch(`https://api.ec-nordbund.de/v6/subscribe`, {
     method: 'POST',
     headers: {
-      'authorization': Vue.prototype.$authToken(),
+      authorization: Vue.prototype.$authToken(),
       'content-type': 'application/json'
     },
     body: JSON.stringify({ subscription })
