@@ -20,14 +20,14 @@ ec-wrapper(
     )
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 
 // import { genReport, existsReport } from '../../../../report';
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   private data: any = {
     person: { gebDat: {} },
@@ -37,9 +37,9 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
     telefon: {},
     anmeldeZeitpunkt: {},
     DSGVO_einverstaendnis: {}
-  };
-  private best = false;
-  private info = false;
+  }
+  private best = false
+  private info = false
 
   private get config() {
     return {
@@ -59,7 +59,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                   `Brief wurde ${this.data.bestaetigungsBrief.german} bereits generiert. Erneut generieren?`
                 )
               ) {
-                return;
+                return
               }
             }
             // genReport(
@@ -96,7 +96,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                   `Brief wurde ${this.data.infoBrief.german} bereits generiert. Erneut generieren?`
                 )
               ) {
-                return;
+                return
               }
             }
             // genReport(
@@ -124,8 +124,8 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           label: 'Person abmelden',
           disabled: this.data.wartelistenPlatz === -1,
           click: () => {
-            const self = this;
-            (this.$refs.abmelden as any)
+            const self = this
+            ;(this.$refs.abmelden as any)
               .show()
               .then(
                 (data: { weg: string; kommentar: string; gebuehr: string }) => {
@@ -159,18 +159,18 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                       this.$notifikation(
                         'Erfolgreich Abgemeldet',
                         `Du hast erfolgreich die Person abgemeldet.`
-                      );
-                      self.getData();
+                      )
+                      self.getData()
                     })
                     .catch((err) => {
                       this.$dialog.error({
                         text: err.message,
                         title: 'Speichern fehlgeschlagen!'
-                      });
-                    });
+                      })
+                    })
                 }
               )
-              .catch(this.$empty);
+              .catch(this.$empty)
           }
         },
         {
@@ -178,8 +178,8 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           icon: 'edit',
           label: 'Bemerkungen editieren',
           click: () => {
-            const self = this;
-            (this.$refs.editBemerkungen as any)
+            const self = this
+            ;(this.$refs.editBemerkungen as any)
               .show()
               .then((data: any) => {
                 this.$apolloClient
@@ -213,17 +213,17 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                     this.$notifikation(
                       'Bemerkungen editieren',
                       `Du hast erfolgreich die Bemerkungen geändert.`
-                    );
-                    self.getData();
+                    )
+                    self.getData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
                       text: err.message,
                       title: 'Speichern fehlgeschlagen!'
-                    });
-                  });
+                    })
+                  })
               })
-              .catch(this.$empty);
+              .catch(this.$empty)
           }
         },
         {
@@ -231,7 +231,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           icon: 'contact_mail',
           label: 'Kontaktdaten editieren',
           click: () => {
-            (this.$refs.formKontakt as any).show();
+            ;(this.$refs.formKontakt as any).show()
           }
         },
         {
@@ -255,7 +255,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                   anmeldeID: this.$route.params.id,
                   authToken: this.$authToken()
                 }
-              });
+              })
             }
           }
         }
@@ -281,7 +281,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
         (this.data.person || {}).nachname
       } - ${(this.data.veranstaltung || {}).bezeichnung}`,
       subTitle: 'Anmeldung'
-    };
+    }
   }
 
   private getData() {
@@ -370,7 +370,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
         fetchPolicy: 'no-cache'
       })
       .then(async (res: any) => {
-        this.data = res.data.anmeldung;
+        this.data = res.data.anmeldung
 
         // this.best = await existsReport(`best-brief-${this.data.veranstaltung.veranstaltungsID}`);
         // this.info = await existsReport(`info-brief-${this.data.veranstaltung.veranstaltungsID}`);
@@ -379,12 +379,12 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
         this.$dialog.error({
           text: err.message,
           title: 'Laden fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 
   private async created() {
-    this.getData();
+    this.getData()
   }
 }
 </script>

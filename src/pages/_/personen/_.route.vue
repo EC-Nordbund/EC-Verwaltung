@@ -40,17 +40,17 @@ ec-wrapper(
     formular-selector(name='addPerson', ref='addPerson')
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
 
-  public suche = '';
+  public suche = ''
 
-  public rowCount = 0;
-  private data: any = [];
+  public rowCount = 0
+  private data: any = []
 
   private config = {
     sheet: [
@@ -59,15 +59,15 @@ export default class EcRootIndex extends Vue {
         icon: 'person_add',
         label: 'Person hinzufügen',
         click: () => {
-          const self = this;
-          (this.$refs.addPerson as any)
+          const self = this
+          ;(this.$refs.addPerson as any)
             .show()
             .then(
               (data: {
-                vorname: string;
-                nachname: string;
-                gebDat: string;
-                geschlecht: string;
+                vorname: string
+                nachname: string
+                gebDat: string
+                geschlecht: string
               }) => {
                 this.$apolloClient
                   .mutate({
@@ -98,27 +98,27 @@ export default class EcRootIndex extends Vue {
                     this.$notifikation(
                       'Neue Person',
                       `Du hast erfolgreich eine neue Person angelegt`
-                    );
+                    )
                     self.$router.push({
                       path: `/personen/${res.data.addPerson}/home`,
                       query: { prev: this.$route.fullPath }
-                    });
+                    })
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
                       text: err.message,
                       title: 'Speichern fehlgeschlagen!'
-                    });
-                  });
+                    })
+                  })
               }
             )
-            .catch(this.$empty);
+            .catch(this.$empty)
         }
       }
     ],
     title: 'Personen',
     subTitle: 'Liste'
-  };
+  }
 
   private loadData() {
     fetch('https://api.ec-nordbund.de/v6/personen', {
@@ -126,25 +126,25 @@ export default class EcRootIndex extends Vue {
     })
       .then((res) => res.json())
       .then((data: any) => {
-        this.data = data.personen;
+        this.data = data.personen
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Laden fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 
   private created() {
-    this.loadData();
-    this.getCount();
+    this.loadData()
+    this.getCount()
   }
 
   private getCount() {
     const tableHeight =
-      window.innerHeight - 64 - 80 - 72 - 32 - 56 - 36 - 50 - 5;
-    this.rowCount = Math.floor(tableHeight / 50);
+      window.innerHeight - 64 - 80 - 72 - 32 - 56 - 36 - 50 - 5
+    this.rowCount = Math.floor(tableHeight / 50)
   }
 }
 </script>

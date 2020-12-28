@@ -40,58 +40,58 @@
             
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class EcWrapper extends Vue {
-  public h = window.innerHeight - 110 + 'px';
-  public showNav = false;
-  public sheetOpen = false;
-  public timer: any;
+  public h = window.innerHeight - 110 + 'px'
+  public showNav = false
+  public sheetOpen = false
+  public timer: any
 
-  @Prop({type: Boolean, default: false})
-  public hasXBtn!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasXBtn!: boolean
 
-  @Prop({type: Boolean, default: false})
-  public hasDial!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasDial!: boolean
 
-  @Prop({type: Boolean, default: false})
-  public hasReload!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasReload!: boolean
 
-  @Prop({type: Boolean, default: false})
-  public hasSheet!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasSheet!: boolean
 
-  @Prop({type: Boolean, default: false})
-  public hasNav!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasNav!: boolean
 
-  @Prop({type: Boolean, default: false})
-  public hasHeader!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasHeader!: boolean
 
-  @Prop({type: Boolean, default: false})
-  public hasRouterView!: boolean;
+  @Prop({ type: Boolean, default: false })
+  public hasRouterView!: boolean
 
-  @Prop({type: String, required: false, default: 'Loading...'})
-  public title!: string;
+  @Prop({ type: String, required: false, default: 'Loading...' })
+  public title!: string
 
-  @Prop({type: String, required: false})
-  public subTitle!: string;
+  @Prop({ type: String, required: false })
+  public subTitle!: string
 
-  @Prop({type: Array, required: false})
-  public sheet!: any[];
+  @Prop({ type: Array, required: false })
+  public sheet!: any[]
 
-  @Prop({type: Array, required: false})
-  public nav!: any[];
+  @Prop({ type: Array, required: false })
+  public nav!: any[]
 
   public openNav() {
-    this.showNav = true;
-    clearTimeout(this.timer);
+    this.showNav = true
+    clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      this.showNav = false;
-    }, 2000);
+      this.showNav = false
+    }, 2000)
   }
 
   public created() {
-    this.openNav();
+    this.openNav()
   }
 }
 </script>

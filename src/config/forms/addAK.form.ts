@@ -1,6 +1,6 @@
 export default {
   title: 'Neuen AK anlegen',
-  initval: {bezeichnung: ''},
+  initval: { bezeichnung: '' },
   schema: [
     {
       name: 'bezeichnung',
@@ -11,4 +11,4 @@ export default {
       counter: 50
     }
   ]
-};
+}

@@ -5,12 +5,12 @@
       formular-selector(name="changePassword" ref="changePassword")  
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   private config = {
     title: 'Profil',
@@ -20,19 +20,19 @@ export default class EcRootIndex extends Vue {
         icon: 'vpn_key',
         label: 'Password ändern',
         click: () => {
-          (this.$refs.changePassword as any)
+          ;(this.$refs.changePassword as any)
             .show()
             .then(this.changePassword)
-            .catch(this.$empty);
+            .catch(this.$empty)
         }
       }
     ]
-  };
+  }
 
   private changePassword(data: {
-    oldPassword: string;
-    newPassword: string;
-    confirmPassword: string;
+    oldPassword: string
+    newPassword: string
+    confirmPassword: string
   }) {
     this.$apolloClient
       .mutate({
@@ -57,9 +57,9 @@ export default class EcRootIndex extends Vue {
       })
       .then((res) => {
         if (res.data.passwordWechseln) {
-          this.$notifikation('Passwort erfolgreich geändert', '');
+          this.$notifikation('Passwort erfolgreich geändert', '')
         } else {
-          (this.$refs.changePassword as any)
+          ;(this.$refs.changePassword as any)
             .show(data, [
               {
                 type: 'alert',
@@ -67,15 +67,15 @@ export default class EcRootIndex extends Vue {
                 color: 'error'
               }
             ])
-            .then(this.changePassword);
+            .then(this.changePassword)
         }
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Speichern fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 }
 </script>

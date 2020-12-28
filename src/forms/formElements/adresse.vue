@@ -36,8 +36,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator';
-import abstractField from '../abstract';
+import { Component, Vue, Mixins } from 'vue-property-decorator'
+import abstractField from '../abstract'
 // // @ts-ignore
 // import { VAutocomplete, VTextField } from 'vuetify/lib';
 
@@ -48,14 +48,22 @@ import abstractField from '../abstract';
   // },
 })
 export default class FormInput extends Mixins(abstractField) {
-  public map: any = (window as any).$plz;
-  public plz = Object.keys((window as any).$plz);
+  public map: any = (window as any).$plz
+  public plz = Object.keys((window as any).$plz)
 
   public plzChange($event: string) {
     if (this.map[$event].length === 1) {
-      this.changeValue({ort: this.map[$event][0], plz: $event, strasse: this.value.strasse});
+      this.changeValue({
+        ort: this.map[$event][0],
+        plz: $event,
+        strasse: this.value.strasse
+      })
     } else {
-      this.changeValue({ort: undefined, plz: $event, strasse: this.value.strasse});
+      this.changeValue({
+        ort: undefined,
+        plz: $event,
+        strasse: this.value.strasse
+      })
     }
   }
 }
@@ -64,17 +72,16 @@ export default class FormInput extends Mixins(abstractField) {
 .strasse {
   grid-area: s;
 }
-.plz{
+.plz {
   grid-area: p;
 }
-.ort{
+.ort {
   grid-area: o;
 }
 .adresse {
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-gap: 10px;
-  grid-template-areas: "s s" "p o"
+  grid-template-areas: 's s' 'p o';
 }
 </style>
-

@@ -1,41 +1,27 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify';
-// import de from 'vuetify/src/locale/de';
-import { theme } from '../config/theme';
-
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import { theme as theme2 } from '../config/theme'
 Vue.use(Vuetify, {
-  theme,
+  theme: theme2,
   iconfont: 'md'
-  // lang: {
-  //   locales: { de },
-  //   current: 'de'
-  // }
-});
-
-// v-font directive
+})
 Vue.directive('font', {
-  bind: (el: HTMLElement) => {
-    el.style.fontFamily = 'ec-font';
+  bind: (el) => {
+    el.style.fontFamily = 'ec-font'
   }
-});
-
-for (const key in theme) {
-  if (theme.hasOwnProperty(key)) {
-    // get Element
-    const element: string = (theme as { [name: string]: string })[key];
-
-    // Color
+})
+for (const key in theme2) {
+  if (theme2.hasOwnProperty(key)) {
+    const element = theme2[key]
     Vue.directive(key, {
-      bind: (el: HTMLElement) => {
-        el.style.color = element;
+      bind: (el) => {
+        el.style.color = element
       }
-    });
-
-    // BackgroundColor
+    })
     Vue.directive(`${key}-bg`, {
-      bind: (el: HTMLElement) => {
-        el.style.backgroundColor = element;
+      bind: (el) => {
+        el.style.backgroundColor = element
       }
-    });
+    })
   }
 }

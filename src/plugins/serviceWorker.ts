@@ -1,61 +1,61 @@
-const VERSION = '<VERSION>';
-const ASSETS: Array<string> = [];
+const VERSION = '<VERSION>'
+const ASSETS: Array<string> = []
 
-const _self: ServiceWorkerGlobalScope & WindowOrWorkerGlobalScope = self as any;
+const _self: ServiceWorkerGlobalScope & WindowOrWorkerGlobalScope = self as any
 
-const CACHE_NAME = `CACHE_${VERSION}`;
+const CACHE_NAME = `CACHE_${VERSION}`
 
 _self.addEventListener('install', (ev) => {
   ev.waitUntil(
     (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.addAll(ASSETS);
+      const cache = await caches.open(CACHE_NAME)
+      await cache.addAll(ASSETS)
     })()
-  );
-});
+  )
+})
 _self.addEventListener('activate', (ev) => {
   ev.waitUntil(
     (async () => {
-      const keys = await caches.keys();
+      const keys = await caches.keys()
 
       await Promise.all(
         keys.map(async (key) => {
           if (key === CACHE_NAME) {
-            return true;
+            return true
           }
-          return caches.delete(key);
+          return caches.delete(key)
         })
-      );
+      )
     })()
-  );
-});
+  )
+})
 _self.addEventListener('fetch', (ev) => {
   if (!ev.request.url.startsWith('https://verwaltung')) {
-    return;
+    return
   }
 
   ev.respondWith(
     (async () => {
-      const cache = await caches.match(ev.request);
+      const cache = await caches.match(ev.request)
       if (cache) {
-        return cache;
+        return cache
       }
 
-      return fetch(ev.request);
+      return fetch(ev.request)
     })()
-  );
-});
+  )
+})
 _self.addEventListener('message', (ev) => {
   if (ev.data && ev.data.msg === 'update-sw') {
-    _self.skipWaiting();
+    _self.skipWaiting()
   }
-});
+})
 
 _self.addEventListener('push', (ev) => {
-  const content = ev.data!.json();
-  console.log(ev, content);
+  const content = ev.data!.json()
+  console.log(ev, content)
   _self.registration.showNotification(content.title, {
     body: content.body,
     icon: '/img/ec-logo-512.361ca3c3.png'
-  });
-});
+  })
+})

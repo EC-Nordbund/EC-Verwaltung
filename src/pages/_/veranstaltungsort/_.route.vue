@@ -12,12 +12,12 @@
           v-list-tile-sub-title {{item.plz}} {{item.ort}} | {{item.land}}
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 
 @Component({})
 export default class EcRootIndexVeranstaltungsortIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
   private config = {
     sheet: [
       {
@@ -28,65 +28,71 @@ export default class EcRootIndexVeranstaltungsortIndex extends Vue {
       }
     ],
     title: 'Veranstaltungsorte'
-  };
-
-  private suche = '';
-  private data: any = [];
-
-  private sheetClick(item: {id: string}) {alert(item.id); }
-
-  private loadData() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken: String!) {
-          vorte(authToken: $authToken) {
-            vOrtID
-            bezeichnung
-            plz
-            ort
-            land
-          }
-        }
-      `,
-      variables: {
-        authToken: this.$authToken()
-      }
-    }).then((res: any) => {
-      this.data = res.data.vorte;
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Laden fehlgeschlagen!'
-      });
-    });
   }
 
+  private suche = ''
+  private data: any = []
+
+  private sheetClick(item: { id: string }) {
+    alert(item.id)
+  }
+
+  private loadData() {
+    this.$apolloClient
+      .query({
+        query: gql`
+          query($authToken: String!) {
+            vorte(authToken: $authToken) {
+              vOrtID
+              bezeichnung
+              plz
+              ort
+              land
+            }
+          }
+        `,
+        variables: {
+          authToken: this.$authToken()
+        }
+      })
+      .then((res: any) => {
+        this.data = res.data.vorte
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Laden fehlgeschlagen!'
+        })
+      })
+  }
 
   private filterData(item: any): boolean {
     return this.suche
       .toLowerCase()
       .split(' ')
       .map((suche: string) => this.filterPart(item, suche))
-      .reduce((a, b) => a && b, true);
+      .reduce((a, b) => a && b, true)
   }
 
   private filterPart(item: any, suche: string): boolean {
     if (!suche) {
-      return true;
+      return true
     }
     if (typeof item === 'string') {
-      return item.toLowerCase().includes(suche);
+      return item.toLowerCase().includes(suche)
     } else if (typeof item === 'number' || typeof item === 'boolean') {
-      return item.toString().toLowerCase().includes(suche);
+      return item.toString().toLowerCase().includes(suche)
     } else if (item) {
-      return Object.keys(item).map((key) => this.filterPart(item[key], suche)).reduce((a, b) => a || b, false);
+      return Object.keys(item)
+        .map((key) => this.filterPart(item[key], suche))
+        .reduce((a, b) => a || b, false)
     } else {
-      return false;
+      return false
     }
   }
 
   private created() {
-    this.loadData();
+    this.loadData()
   }
 }
 </script>

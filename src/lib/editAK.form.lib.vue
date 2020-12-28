@@ -38,45 +38,45 @@ v-dialog(v-model='visible', max-width='400px', persistend)
       v-btn(color='primary', :disabled='!valid', @click='addPersonSave') Speichern
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 // import { genReport } from '../report';
 
 @Component({})
 export default class EcRootIndex extends Vue {
   @Prop({ default: [] })
-  private data!: any;
+  private data!: any
 
-  private personenData = [];
+  private personenData = []
 
-  private visible = false;
-  private valid = false;
-  private value: any = {};
-  private type: 'add' | 'edit' | 'delete' | '' = '';
+  private visible = false
+  private valid = false
+  private value: any = {}
+  private type: 'add' | 'edit' | 'delete' | '' = ''
 
-  private allPersonen: any = [];
+  private allPersonen: any = []
 
-  private stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter'];
+  private stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter']
 
   public edit(type: 'add' | 'edit' | 'delete') {
-    this.type = type;
-    this.value = {};
+    this.type = type
+    this.value = {}
 
     if (type === 'delete') {
       this.value = {
         status: 0
-      };
+      }
     }
 
     if (type === 'add' && this.allPersonen) {
-      this.getPersonen();
+      this.getPersonen()
     }
 
-    this.visible = true;
+    this.visible = true
   }
 
   private addPersonSave() {
-    this.visible = false;
+    this.visible = false
 
     this.$apolloClient
       .mutate({
@@ -107,15 +107,15 @@ export default class EcRootIndex extends Vue {
         this.$notifikation(
           'Neuer Eintrag im AK',
           `Du hast erfolgreich einen neuen Eintrag im AK angelegt`
-        );
-        this.$emit('reload');
+        )
+        this.$emit('reload')
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Speichern fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 
   private getPersonen() {
@@ -139,14 +139,14 @@ export default class EcRootIndex extends Vue {
         }
       })
       .then((res) => {
-        this.allPersonen = res.data.personen;
+        this.allPersonen = res.data.personen
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Laden fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 }
 </script>

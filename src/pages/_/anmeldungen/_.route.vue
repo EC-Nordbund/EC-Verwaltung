@@ -27,18 +27,17 @@
           td {{props.item.veranstaltung.bezeichnung}} ({{props.item.veranstaltung.begin.german}} - {{props.item.veranstaltung.ende.german}})
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 @Component({})
 export default class EcRootIndexAnmeldungenIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
 
-  public rowCount = 0;
+  public rowCount = 0
 
-  private data: any = [];
+  private data: any = []
 
-  private suche = '';
-
+  private suche = ''
 
   private config = {
     sheet: [
@@ -50,59 +49,65 @@ export default class EcRootIndexAnmeldungenIndex extends Vue {
       }
     ],
     title: 'Anmeldungen'
-  };
+  }
 
   private loadData() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken:String!) {
-          anmeldungen(authToken:$authToken) {
-            anmeldeID
-            person {
-              personID
-              vorname
-              nachname
-              gebDat {
-                german
+    this.$apolloClient
+      .query({
+        query: gql`
+          query($authToken: String!) {
+            anmeldungen(authToken: $authToken) {
+              anmeldeID
+              person {
+                personID
+                vorname
+                nachname
+                gebDat {
+                  german
+                }
               }
-            }
-            veranstaltung {
-              veranstaltungsID
-              bezeichnung
-              begin {
-                german
-              }
-              ende {
-                german
+              veranstaltung {
+                veranstaltungsID
+                bezeichnung
+                begin {
+                  german
+                }
+                ende {
+                  german
+                }
               }
             }
           }
-        }
-      `,
-      variables: {
-        authToken: this.$authToken()
-      },
-      fetchPolicy: 'no-cache'
-    }).then((res: any) => {
-      this.data = res.data.anmeldungen;
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Laden fehlgeschlagen!'
-      });
-    });
+        `,
+        variables: {
+          authToken: this.$authToken()
+        },
+        fetchPolicy: 'no-cache'
+      })
+      .then((res: any) => {
+        this.data = res.data.anmeldungen
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Laden fehlgeschlagen!'
+        })
+      })
   }
 
-  private sheetClick(item: {id: string}) {alert(item.id); }
+  private sheetClick(item: { id: string }) {
+    alert(item.id)
+  }
 
   private created() {
-    this.loadData();
-    this.getCount();
+    this.loadData()
+    this.getCount()
   }
 
   private getCount() {
-    const tableHeight = window.innerHeight - 64 - 80 - 72 - 32 - 56 - 36 - 50 - 5;
-    this.rowCount = Math.floor(tableHeight / 50);
+    const tableHeight =
+      window.innerHeight - 64 - 80 - 72 - 32 - 56 - 36 - 50 - 5
+    this.rowCount = Math.floor(tableHeight / 50)
   }
 }
 </script>

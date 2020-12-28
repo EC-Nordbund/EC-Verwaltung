@@ -92,11 +92,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   private rollen = [
     'Teilnehmer',
@@ -105,9 +105,9 @@ export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
     'Küchenleitung',
     'Leitung',
     'Hauptleitung'
-  ];
+  ]
 
-  @Prop({default: {person: {}}})
-  private data!: any;
+  @Prop({ default: { person: {} } })
+  private data!: any
 }
 </script>

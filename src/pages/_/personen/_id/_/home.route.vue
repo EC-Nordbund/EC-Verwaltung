@@ -74,150 +74,186 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
-import gql from 'graphql-tag';
-import copy from 'copy-to-clipboard';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import gql from 'graphql-tag'
+import copy from 'copy-to-clipboard'
 
 @Component({})
 export default class EcNAME extends Vue {
-  public static meta = {};
+  public static meta = {}
   @Prop()
-  private data!: any;
-  private location = window.location;
+  private data!: any
+  private location = window.location
 
-  private copy = copy;
+  private copy = copy
 
   public showAdresse(adresse: any) {
-    alert('Hier kommt noch eine Karte hin.');
+    alert('Hier kommt noch eine Karte hin.')
   }
   public mergeAdresse(adressID: number) {
-    (this.$refs.mergeAdresse as any).show(adressID);
+    ;(this.$refs.mergeAdresse as any).show(adressID)
   }
   public deleteAdresse(adressID: number) {
-    this.$apolloClient.mutate({
-      mutation: gql`
-        mutation($adressID: Int!, $authToken: String!) {
-          markAdressAsOld(adressID: $adressID, authToken: $authToken)
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($adressID: Int!, $authToken: String!) {
+            markAdressAsOld(adressID: $adressID, authToken: $authToken)
+          }
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          adressID
         }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        adressID
-      }
-    }).then((res: any) => {
-      this.$notifikation('Als Alt makiert', `Erfolgreich als veraltet makiert`);
-      this.$emit('reload');
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Speichern fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.$notifikation(
+          'Als Alt makiert',
+          `Erfolgreich als veraltet makiert`
+        )
+        this.$emit('reload')
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Speichern fehlgeschlagen!'
+        })
+      })
   }
   public deleteEmail(emailID: number) {
-    this.$apolloClient.mutate({
-      mutation: gql`
-        mutation($emailID: Int!, $authToken: String!) {
-          markEmailAsOld(emailID: $emailID, authToken: $authToken)
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($emailID: Int!, $authToken: String!) {
+            markEmailAsOld(emailID: $emailID, authToken: $authToken)
+          }
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          emailID
         }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        emailID
-      }
-    }).then((res: any) => {
-      this.$notifikation('Als Alt makiert', `Erfolgreich als veraltet makiert`);
-      this.$emit('reload');
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Speichern fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.$notifikation(
+          'Als Alt makiert',
+          `Erfolgreich als veraltet makiert`
+        )
+        this.$emit('reload')
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Speichern fehlgeschlagen!'
+        })
+      })
   }
   public deleteTelefon(telefonID: number) {
-    this.$apolloClient.mutate({
-      mutation: gql`
-        mutation($telefonID: Int!, $authToken: String!) {
-          markTelefonAsOld(telefonID: $telefonID, authToken: $authToken)
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($telefonID: Int!, $authToken: String!) {
+            markTelefonAsOld(telefonID: $telefonID, authToken: $authToken)
+          }
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          telefonID
         }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        telefonID
-      }
-    }).then((res: any) => {
-      this.$notifikation('Als Alt makiert', `Erfolgreich als veraltet makiert`);
-      this.$emit('reload');
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Speichern fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.$notifikation(
+          'Als Alt makiert',
+          `Erfolgreich als veraltet makiert`
+        )
+        this.$emit('reload')
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Speichern fehlgeschlagen!'
+        })
+      })
   }
   public useAdresse(adressID: number) {
-    this.$apolloClient.mutate({
-      mutation: gql`
-        mutation($adressID: Int!, $authToken: String!) {
-          useAdresse(adressID: $adressID, authToken: $authToken)
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($adressID: Int!, $authToken: String!) {
+            useAdresse(adressID: $adressID, authToken: $authToken)
+          }
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          adressID
         }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        adressID
-      }
-    }).then((res: any) => {
-      this.$notifikation('Als Aktuell Makiert', `Erfolgreich als aktuell makiert`);
-      this.$emit('reload');
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Speichern fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.$notifikation(
+          'Als Aktuell Makiert',
+          `Erfolgreich als aktuell makiert`
+        )
+        this.$emit('reload')
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Speichern fehlgeschlagen!'
+        })
+      })
   }
   public useEmail(emailID: number) {
-    this.$apolloClient.mutate({
-      mutation: gql`
-        mutation($emailID: Int!, $authToken: String!) {
-          useEmail(emailID: $emailID, authToken: $authToken)
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($emailID: Int!, $authToken: String!) {
+            useEmail(emailID: $emailID, authToken: $authToken)
+          }
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          emailID
         }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        emailID
-      }
-    }).then((res: any) => {
-      this.$notifikation('Als Aktuell Makiert', `Erfolgreich als aktuell makiert`);
-      this.$emit('reload');
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Speichern fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.$notifikation(
+          'Als Aktuell Makiert',
+          `Erfolgreich als aktuell makiert`
+        )
+        this.$emit('reload')
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Speichern fehlgeschlagen!'
+        })
+      })
   }
   public useTelefon(telefonID: number) {
-    this.$apolloClient.mutate({
-      mutation: gql`
-        mutation($telefonID: Int!, $authToken: String!) {
-          useTelefon(telefonID: $telefonID, authToken: $authToken)
+    this.$apolloClient
+      .mutate({
+        mutation: gql`
+          mutation($telefonID: Int!, $authToken: String!) {
+            useTelefon(telefonID: $telefonID, authToken: $authToken)
+          }
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          telefonID
         }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        telefonID
-      }
-    }).then((res: any) => {
-      this.$notifikation('Als Aktuell Makiert', `Erfolgreich als aktuell makiert`);
-      this.$emit('reload');
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Speichern fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.$notifikation(
+          'Als Aktuell Makiert',
+          `Erfolgreich als aktuell makiert`
+        )
+        this.$emit('reload')
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Speichern fehlgeschlagen!'
+        })
+      })
   }
 }
 </script>

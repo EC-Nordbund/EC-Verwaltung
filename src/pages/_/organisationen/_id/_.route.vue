@@ -3,15 +3,14 @@
     router-view
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   private config = {
-    sheet: [
-    ],
+    sheet: [],
     nav: [
       {
         icon: 'home',
@@ -31,8 +30,10 @@ export default class EcRootIndex extends Vue {
     ],
     title: 'ANMELDUNGNAME',
     subTitle: 'Organisation'
-  };
+  }
 
-  private sheetClick(item: {id: string}) {alert(item.id); }
+  private sheetClick(item: { id: string }) {
+    alert(item.id)
+  }
 }
 </script>

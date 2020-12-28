@@ -52,13 +52,13 @@ v-card-text(style='overflow: auto')
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
 
 @Component({})
 export default class EcNAME extends Vue {
-  public static meta = {};
+  public static meta = {}
   @Prop()
-  private data!: any;
+  private data!: any
 
   private rollen = [
     'Teilnehmer',
@@ -67,15 +67,15 @@ export default class EcNAME extends Vue {
     'Küchenleitung',
     'Leitung',
     'Hauptleitung'
-  ];
+  ]
 
   public getTitle(wplatz: number) {
     if (wplatz === 0) {
-      return 'Angemeldet';
+      return 'Angemeldet'
     } else if (wplatz === -1) {
-      return 'Abgemeldet';
+      return 'Abgemeldet'
     } else {
-      return `Auf Wartelistenplatz ${wplatz}`;
+      return `Auf Wartelistenplatz ${wplatz}`
     }
   }
 }

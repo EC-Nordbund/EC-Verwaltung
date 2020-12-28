@@ -13,21 +13,20 @@
      
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 @Component({})
 export default class EcRootIndex extends Vue {
-
   private get mergePersonConfig() {
-    return this.$ecForm.personMerge(this);
+    return this.$ecForm.personMerge(this)
   }
 
   private get fzAntragConfig() {
-    return this.$ecForm.generateFZAntrag(this);
+    return this.$ecForm.generateFZAntrag(this)
   }
 
   private get fzAddConfig() {
-    return this.$ecForm.addFZ(this);
+    return this.$ecForm.addFZ(this)
   }
 
   private get config() {
@@ -38,44 +37,54 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_adresse',
           label: 'Adresse hinzufügen',
           click: () => {
-            const self = this;
-            (this.$refs.addAdresse as any)
+            const self = this
+            ;(this.$refs.addAdresse as any)
               .show()
-              .then((data: {adresse: {strasse: string, plz: string, ort: string}}) => {
-                this.$apolloClient.mutate({
-                  mutation: gql`
-                    mutation(
-                      $authToken: String!,
-                      $personID: Int!,
-                      $strasse: String!,
-                      $plz: String!,
-                      $ort: String!
-                    ) {
-                      addAdresse(
-                        personID: $personID,
-                        strasse: $strasse,
-                        plz: $plz,
-                        ort: $ort,
-                        authToken: $authToken
+              .then(
+                (data: {
+                  adresse: { strasse: string; plz: string; ort: string }
+                }) => {
+                  this.$apolloClient
+                    .mutate({
+                      mutation: gql`
+                        mutation(
+                          $authToken: String!
+                          $personID: Int!
+                          $strasse: String!
+                          $plz: String!
+                          $ort: String!
+                        ) {
+                          addAdresse(
+                            personID: $personID
+                            strasse: $strasse
+                            plz: $plz
+                            ort: $ort
+                            authToken: $authToken
+                          )
+                        }
+                      `,
+                      variables: {
+                        ...data.adresse,
+                        authToken: this.$authToken(),
+                        personID: this.data.personID
+                      }
+                    })
+                    .then((res: any) => {
+                      this.$notifikation(
+                        'Neue Adresse',
+                        `Adresse erfolgreich hinzugefügt`
                       )
-                    }
-                  `,
-                  variables: {
-                    ...data.adresse,
-                    authToken: this.$authToken(),
-                    personID: this.data.personID
-                  }
-                }).then((res: any) => {
-                  this.$notifikation('Neue Adresse', `Adresse erfolgreich hinzugefügt`);
-                  self.loadData();
-                }).catch((err: any) => {
-                  this.$dialog.error({
-                    text: err.message,
-                    title: 'Speichern fehlgeschlagen!'
-                  });
-                });
-              })
-              .catch(this.$empty);
+                      self.loadData()
+                    })
+                    .catch((err: any) => {
+                      this.$dialog.error({
+                        text: err.message,
+                        title: 'Speichern fehlgeschlagen!'
+                      })
+                    })
+                }
+              )
+              .catch(this.$empty)
           }
         },
         {
@@ -83,34 +92,46 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_email',
           label: 'Email hinzufügen',
           click: () => {
-            const self = this;
-            (this.$refs.addMail as any)
+            const self = this
+            ;(this.$refs.addMail as any)
               .show()
-              .then((data: {email: string}) => {
-                this.$apolloClient.mutate({
-                  mutation: gql`
-                    mutation($authToken: String!, $personID: Int!, $email: String!) {
-                      addEmail(personID: $personID, email: $email, authToken: $authToken)
+              .then((data: { email: string }) => {
+                this.$apolloClient
+                  .mutate({
+                    mutation: gql`
+                      mutation(
+                        $authToken: String!
+                        $personID: Int!
+                        $email: String!
+                      ) {
+                        addEmail(
+                          personID: $personID
+                          email: $email
+                          authToken: $authToken
+                        )
+                      }
+                    `,
+                    variables: {
+                      email: data.email,
+                      authToken: this.$authToken(),
+                      personID: this.data.personID
                     }
-                  `,
-                  variables: {
-                    email: data.email,
-                    authToken: this.$authToken(),
-                    personID: this.data.personID
-                  }
-                })
+                  })
                   .then((res: any) => {
-                    this.$notifikation('Neue Email', `Email erfolgreich hinzugefügt`);
-                    self.loadData();
+                    this.$notifikation(
+                      'Neue Email',
+                      `Email erfolgreich hinzugefügt`
+                    )
+                    self.loadData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
                       text: err.message,
                       title: 'Speichern fehlgeschlagen!'
-                    });
-                  });
+                    })
+                  })
               })
-              .catch(this.$empty);
+              .catch(this.$empty)
           }
         },
         {
@@ -118,42 +139,46 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_telefon',
           label: 'Telefon hinzufügen',
           click: () => {
-            const self = this;
-            (this.$refs.addTelefon as any)
+            const self = this
+            ;(this.$refs.addTelefon as any)
               .show()
-              .then((data: {telefon: string}) => {
-                this.$apolloClient.mutate({
-                  mutation: gql`
-                    mutation(
-                      $authToken: String!,
-                      $personID: Int!,
-                      $telefon: String!
-                    ) {
-                      addTelefon(
-                        personID: $personID,
-                        telefon: $telefon,
-                        authToken: $authToken
-                      )
+              .then((data: { telefon: string }) => {
+                this.$apolloClient
+                  .mutate({
+                    mutation: gql`
+                      mutation(
+                        $authToken: String!
+                        $personID: Int!
+                        $telefon: String!
+                      ) {
+                        addTelefon(
+                          personID: $personID
+                          telefon: $telefon
+                          authToken: $authToken
+                        )
+                      }
+                    `,
+                    variables: {
+                      telefon: data.telefon,
+                      authToken: this.$authToken(),
+                      personID: this.data.personID
                     }
-                  `,
-                  variables: {
-                    telefon: data.telefon,
-                    authToken: this.$authToken(),
-                    personID: this.data.personID
-                  }
-                })
+                  })
                   .then((res: any) => {
-                    this.$notifikation('Neue Telefonnummer', `Telefonnummer erfolgreich hinzugefügt`);
-                    self.loadData();
+                    this.$notifikation(
+                      'Neue Telefonnummer',
+                      `Telefonnummer erfolgreich hinzugefügt`
+                    )
+                    self.loadData()
                   })
                   .catch((err: any) => {
                     this.$dialog.error({
                       text: err.message,
                       title: 'Speichern fehlgeschlagen!'
-                    });
-                  });
+                    })
+                  })
               })
-              .catch(this.$empty);
+              .catch(this.$empty)
           }
         },
         {
@@ -161,31 +186,47 @@ export default class EcRootIndex extends Vue {
           id: 'pers_merge',
           label: 'Person mergen',
           click: () => {
-            const self = this;
-            (this.$refs.mergePerson as any)
+            const self = this
+            ;(this.$refs.mergePerson as any)
               .show()
-                .then((res: {falsch: number}) => {
-                  console.log(res);
-                  this.$apolloClient.mutate({
+              .then((res: { falsch: number }) => {
+                console.log(res)
+                this.$apolloClient
+                  .mutate({
                     mutation: gql`
-                      mutation($authToken: String!, $richtig: Int!, $falsch: Int!) {
-                        mergePersons(authToken: $authToken, personID_richtig: $richtig, personID_falsch: $falsch)
+                      mutation(
+                        $authToken: String!
+                        $richtig: Int!
+                        $falsch: Int!
+                      ) {
+                        mergePersons(
+                          authToken: $authToken
+                          personID_richtig: $richtig
+                          personID_falsch: $falsch
+                        )
                       }
                     `,
-                    variables: {falsch: res.falsch, authToken: this.$authToken(), richtig: parseInt(this.$route.params.id)}
+                    variables: {
+                      falsch: res.falsch,
+                      authToken: this.$authToken(),
+                      richtig: parseInt(this.$route.params.id)
+                    }
                   })
-                    .then(() => {
-                      this.$notifikation('Personen gemergt', `Du hast erfolgreich die Personen zusammengeführt.`);
-                      self.loadData();
+                  .then(() => {
+                    this.$notifikation(
+                      'Personen gemergt',
+                      `Du hast erfolgreich die Personen zusammengeführt.`
+                    )
+                    self.loadData()
+                  })
+                  .catch((err: any) => {
+                    this.$dialog.error({
+                      text: err.message,
+                      title: 'Speichern fehlgeschlagen!'
                     })
-                    .catch((err: any) => {
-                      this.$dialog.error({
-                        text: err.message,
-                        title: 'Speichern fehlgeschlagen!'
-                      });
-                    });
-                })
-                .catch(this.$empty);
+                  })
+              })
+              .catch(this.$empty)
           }
         },
         {
@@ -193,57 +234,58 @@ export default class EcRootIndex extends Vue {
           id: 'pers_create_fz_antrag',
           label: 'FZ-Antrag generieren',
           click: () => {
-            const self = this;
+            const self = this
 
             const generate = (mail: string) => {
-              this.$apolloClient.mutate({
-                mutation: gql`
-                  mutation(
-                    $personID: Int!
-                    $authToken: String!
-                    $email: String!
-                  ) {
-                    addFZAntrag(
-                      personID: $personID
-                      authToken: $authToken
-                      email: $email
-                    )
+              this.$apolloClient
+                .mutate({
+                  mutation: gql`
+                    mutation(
+                      $personID: Int!
+                      $authToken: String!
+                      $email: String!
+                    ) {
+                      addFZAntrag(
+                        personID: $personID
+                        authToken: $authToken
+                        email: $email
+                      )
+                    }
+                  `,
+                  variables: {
+                    authToken: this.$authToken(),
+                    personID: parseInt(this.$route.params.id),
+                    email: mail
                   }
-                `,
-                variables: {
-                  authToken: this.$authToken(),
-                  personID: parseInt(this.$route.params.id),
-                  email: mail
-                }
-              })
+                })
                 .then(() => {
                   this.$notifikation(
                     'Erfolgreich Generiert',
                     `Du hast erfolgreich den Antrag generiert. An fz@ec-nordbund.de wurde eine Kopie gesendet!`
-                  );
-                  self.loadData();
+                  )
+                  self.loadData()
                 })
                 .catch((err) => {
                   this.$dialog.error({
                     text: err.message,
                     title: 'Speichern fehlgeschlagen!'
-                  });
-                });
-            };
+                  })
+                })
+            }
 
             switch (this.data.emails.length) {
               case 0:
-                alert('Du musste eine Mail erst eintragen!');
-                break;
+                alert('Du musste eine Mail erst eintragen!')
+                break
               case 1:
-                generate(this.data.emails[0].eMail);
-                break;
+                generate(this.data.emails[0].eMail)
+                break
               default:
-                (this.$refs.fzAntrag as any)
+                ;(this.$refs.fzAntrag as any)
                   .show()
-                  .then((data: {mail: string}) => generate(data.mail))
-                  .catch(this.$empty);
-                break;
+                  .then((data: { mail: string }) => generate(data.mail))
+                  .catch(this.$empty)
+                break
             }
           }
         },
@@ -252,42 +294,59 @@ export default class EcRootIndex extends Vue {
           id: 'pers_add_fz',
           label: 'FZ Eintragen',
           click: () => {
-            const self = this;
-            (this.$refs.addFZ as any)
+            const self = this
+            ;(this.$refs.addFZ as any)
               .show()
-              .then((data: {gesehenVon: number, fzVon: string, gesehenAm: string, kommentrar: string}) => {
-                this.$apolloClient.mutate({
-                  mutation:  gql`
-                    mutation(
-                      $personID: Int!
-                      $authToken: String!
-                      $gesehenAm: String!
-                      $gesehenVon: Int!
-                      $kommentar: String!
-                      $fzVon: String!
-                    ) {
-                      addFZ(
-                        personID: $personID
-                        authToken: $authToken
-                        gesehenAm: $gesehenAm
-                        gesehenVon: $gesehenVon
-                        kommentar: $kommentar
-                        fzVon: $fzVon
+              .then(
+                (data: {
+                  gesehenVon: number
+                  fzVon: string
+                  gesehenAm: string
+                  kommentrar: string
+                }) => {
+                  this.$apolloClient
+                    .mutate({
+                      mutation: gql`
+                        mutation(
+                          $personID: Int!
+                          $authToken: String!
+                          $gesehenAm: String!
+                          $gesehenVon: Int!
+                          $kommentar: String!
+                          $fzVon: String!
+                        ) {
+                          addFZ(
+                            personID: $personID
+                            authToken: $authToken
+                            gesehenAm: $gesehenAm
+                            gesehenVon: $gesehenVon
+                            kommentar: $kommentar
+                            fzVon: $fzVon
+                          )
+                        }
+                      `,
+                      variables: {
+                        ...data,
+                        personID: parseInt(this.$route.params.id),
+                        authToken: this.$authToken()
+                      }
+                    })
+                    .then(() => {
+                      this.$notifikation(
+                        'Neues FZ eingetragen',
+                        `Du hast erfolgreich ein neues FZ eingetragen.`
                       )
-                    }
-                  `,
-                  variables: {...data,  personID: parseInt(this.$route.params.id), authToken: this.$authToken()}
-                }).then(() => {
-                  this.$notifikation('Neues FZ eingetragen', `Du hast erfolgreich ein neues FZ eingetragen.`);
-                  self.loadData();
-                }).catch((err: any) => {
-                  this.$dialog.error({
-                    text: err.message,
-                    title: 'Speichern fehlgeschlagen!'
-                  });
-                });
-              })
-              .catch(this.$empty);
+                      self.loadData()
+                    })
+                    .catch((err: any) => {
+                      this.$dialog.error({
+                        text: err.message,
+                        title: 'Speichern fehlgeschlagen!'
+                      })
+                    })
+                }
+              )
+              .catch(this.$empty)
           }
         },
         {
@@ -295,53 +354,64 @@ export default class EcRootIndex extends Vue {
           id: 'pers_edit_stamm',
           label: 'Stammdaten editieren',
           click: () => {
-            const self = this;
-            (this.$refs.editStamm as any)
+            const self = this
+            ;(this.$refs.editStamm as any)
               .show({
                 vorname: this.data.vorname,
                 nachname: this.data.nachname,
                 gebDat: this.data.gebDat.input,
                 geschlecht: this.data.geschlecht
               })
-              .then((data: {vorname: string, nachname: string, gebDat: string, geschlecht: string}) => {
-                this.$apolloClient.mutate({
-                  mutation: gql`
-                    mutation(
-                      $vorname: String!,
-                      $nachname: String!,
-                      $gebDat: String!,
-                      $geschlecht: String!,
-                      $authToken: String!,
-                      $personID: Int!
-                    ) {
-                      editPersonStamm(
-                        vorname: $vorname,
-                        nachname: $nachname,
-                        gebDat: $gebDat,
-                        geschlecht: $geschlecht,
-                        authToken: $authToken,
-                        personID: $personID
+              .then(
+                (data: {
+                  vorname: string
+                  nachname: string
+                  gebDat: string
+                  geschlecht: string
+                }) => {
+                  this.$apolloClient
+                    .mutate({
+                      mutation: gql`
+                        mutation(
+                          $vorname: String!
+                          $nachname: String!
+                          $gebDat: String!
+                          $geschlecht: String!
+                          $authToken: String!
+                          $personID: Int!
+                        ) {
+                          editPersonStamm(
+                            vorname: $vorname
+                            nachname: $nachname
+                            gebDat: $gebDat
+                            geschlecht: $geschlecht
+                            authToken: $authToken
+                            personID: $personID
+                          )
+                        }
+                      `,
+                      variables: {
+                        ...data,
+                        personID: parseInt(this.$route.params.id),
+                        authToken: this.$authToken()
+                      }
+                    })
+                    .then((res: any) => {
+                      this.$notifikation(
+                        'Stammdaten editiert',
+                        `Du hast erfolgreich die Person editiert.`
                       )
-                    }
-                  `,
-                  variables: {
-                    ...data,
-                    personID: parseInt(this.$route.params.id),
-                    authToken: this.$authToken()
-                  }
-                })
-                  .then((res: any) => {
-                    this.$notifikation('Stammdaten editiert', `Du hast erfolgreich die Person editiert.`);
-                    self.loadData();
-                  })
-                  .catch((err: any) => {
-                    this.$dialog.error({
-                      text: err.message,
-                      title: 'Speichern fehlgeschlagen!'
-                    });
-                  });
-              })
-              .catch(this.$empty);
+                      self.loadData()
+                    })
+                    .catch((err: any) => {
+                      this.$dialog.error({
+                        text: err.message,
+                        title: 'Speichern fehlgeschlagen!'
+                      })
+                    })
+                }
+              )
+              .catch(this.$empty)
           }
         },
         {
@@ -349,20 +419,26 @@ export default class EcRootIndex extends Vue {
           icon: 'local_offer',
           id: 'pers_edit_kategor',
           label: 'Kategorien editieren',
-          click: () => {alert('Comming later...'); }
+          click: () => {
+            alert('Comming later...')
+          }
         },
         {
           icon: 'extension',
           id: 'pers_edit_sonstiges',
           label: 'Sonstiges editieren',
-          click: () => {alert('Comming Soon...'); }
+          click: () => {
+            alert('Comming Soon...')
+          }
         },
         {
           disabled: true,
           icon: 'assignment',
           id: 'pers_report',
           label: 'Report erzeugen',
-          click: () => {alert('Kommt nach Bedarf...'); }
+          click: () => {
+            alert('Kommt nach Bedarf...')
+          }
         }
       ],
       nav: [
@@ -384,12 +460,11 @@ export default class EcRootIndex extends Vue {
       ],
       title: `${this.data.vorname} ${this.data.nachname} (${this.data.gebDat.german})`,
       subTitle: 'Person'
-    };
+    }
   }
-  public static meta = {};
+  public static meta = {}
 
-
-  public allePersonen = [];
+  public allePersonen = []
 
   public data: any = {
     gebDat: {},
@@ -399,182 +474,186 @@ export default class EcRootIndex extends Vue {
     fzs: [],
     fzAntraege: [],
     ak: []
-  };
+  }
 
   private loadPersons() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken: String!) {
-          personen(authToken: $authToken) {
-            personID,
-            vorname,
-            nachname,
-            gebDat {
-              german
-              input
+    this.$apolloClient
+      .query({
+        query: gql`
+          query($authToken: String!) {
+            personen(authToken: $authToken) {
+              personID
+              vorname
+              nachname
+              gebDat {
+                german
+                input
+              }
             }
           }
+        `,
+        variables: {
+          authToken: this.$authToken()
         }
-      `,
-      variables: {
-        authToken: this.$authToken()
-      }
-    })
+      })
       .then((res) => {
-        this.allePersonen = res.data.personen;
+        this.allePersonen = res.data.personen
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Laden fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 
   private loadData() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken: String!, $personID: Int!) {
-          person(personID: $personID, authToken: $authToken) {
-            personID
-            vorname
-            nachname
-            gebDat {
-              german
-              input
-            }
-            geschlecht
-            alter(wann: null)
-            Notizen
-            adressen {
-              adressID
-              strasse
-              plz
-              ort
-              isOld
-              lastUsed {
-                german
-              }
-            }
-            emails {
-              eMailID
-              eMail
-              isOld
-              lastUsed {
-                german
-              }
-            }
-            telefone {
-              telefonID
-              telefon
-              isOld
-              lastUsed {
-                german
-              }
-            }
-            anmeldungen {
-              anmeldeID
-              position
-              veranstaltung {
-                bezeichnung
-                begin {
-                  german
-                }
-                ende {
-                  german
-                }
-              }
-            }
-            fzs {
-              fzID
-              gesehenAm {
-                german
-              }
-              fzVon {
-                german
-              }
-              kommentar
-              gesehenVon {
-                personID
-                vorname
-                nachname
-                gebDat {
-                  german
-                }
-              }
-            }
-            fzAntraege {
-              fzAntragID
-              erzeugt {
-                german
-              }
-              erzeugt_durch
-            }
-            # datumDesLetztenFZ {
-            #   german
-            # }
-            # hatFZ(wann: null)
-            ecKreis {
-              ecKreisID
-              bezeichnung
-              website
-            }
-            ecMitglied
-            juleica {
-              juleicanummer
-              gueltig_bis {
+    this.$apolloClient
+      .query({
+        query: gql`
+          query($authToken: String!, $personID: Int!) {
+            person(personID: $personID, authToken: $authToken) {
+              personID
+              vorname
+              nachname
+              gebDat {
                 german
                 input
               }
-            }
-            tags {
-              tag {
-                tagID
-                bezeichnung
+              geschlecht
+              alter(wann: null)
+              Notizen
+              adressen {
+                adressID
+                strasse
+                plz
+                ort
+                isOld
+                lastUsed {
+                  german
+                }
               }
-              notiz
-            }
-            ak {
-              ak {
-                akID
-                bezeichnung
+              emails {
+                eMailID
+                eMail
+                isOld
+                lastUsed {
+                  german
+                }
               }
-              currentStatus
-              # allUpdates {
-              #   akPersonID
-              #   date {
-              #     german
-              #   }
-              #   neuerStatus
+              telefone {
+                telefonID
+                telefon
+                isOld
+                lastUsed {
+                  german
+                }
+              }
+              anmeldungen {
+                anmeldeID
+                position
+                veranstaltung {
+                  bezeichnung
+                  begin {
+                    german
+                  }
+                  ende {
+                    german
+                  }
+                }
+              }
+              fzs {
+                fzID
+                gesehenAm {
+                  german
+                }
+                fzVon {
+                  german
+                }
+                kommentar
+                gesehenVon {
+                  personID
+                  vorname
+                  nachname
+                  gebDat {
+                    german
+                  }
+                }
+              }
+              fzAntraege {
+                fzAntragID
+                erzeugt {
+                  german
+                }
+                erzeugt_durch
+              }
+              # datumDesLetztenFZ {
+              #   german
               # }
-            }
-            erstellt {
-              german
-            }
-            letzteAenderung {
-              german
+              # hatFZ(wann: null)
+              ecKreis {
+                ecKreisID
+                bezeichnung
+                website
+              }
+              ecMitglied
+              juleica {
+                juleicanummer
+                gueltig_bis {
+                  german
+                  input
+                }
+              }
+              tags {
+                tag {
+                  tagID
+                  bezeichnung
+                }
+                notiz
+              }
+              ak {
+                ak {
+                  akID
+                  bezeichnung
+                }
+                currentStatus
+                # allUpdates {
+                #   akPersonID
+                #   date {
+                #     german
+                #   }
+                #   neuerStatus
+                # }
+              }
+              erstellt {
+                german
+              }
+              letzteAenderung {
+                german
+              }
             }
           }
-        }
-      `,
-      variables: {
-        authToken: this.$authToken(),
-        personID: parseInt(this.$route.params.id)
-      },
-      fetchPolicy: 'no-cache'
-    }).then((res: any) => {
-      this.data = res.data.person;
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Laden fehlgeschlagen!'
-      });
-    });
+        `,
+        variables: {
+          authToken: this.$authToken(),
+          personID: parseInt(this.$route.params.id)
+        },
+        fetchPolicy: 'no-cache'
+      })
+      .then((res: any) => {
+        this.data = res.data.person
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Laden fehlgeschlagen!'
+        })
+      })
   }
 
   private created() {
-    this.loadData();
-    this.loadPersons();
+    this.loadData()
+    this.loadPersons()
   }
 }
 </script>

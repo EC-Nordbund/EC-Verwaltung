@@ -13,4 +13,4 @@ export default (self: any) => ({
       items: self.data.emails.map((v: any) => v.eMail)
     }
   ]
-});
+})

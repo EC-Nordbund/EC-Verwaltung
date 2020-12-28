@@ -18,7 +18,7 @@ v-dialog(v-model="visible", max-width="400px", v-bind="$attrs")
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 // // @ts-ignore
 // import { VSpacer, VBtn, VDialog, VApp, VCard, VCardTitle, VCardText, VCardActions } from 'vuetify/lib';
@@ -37,17 +37,17 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 })
 export default class EcRootIndexAKIndex extends Vue {
   @Prop()
-  private title!: string;
+  private title!: string
 
   @Prop()
-  private schema!: any;
+  private schema!: any
 
   @Prop()
-  private initval!: any;
+  private initval!: any
 
-  private valid = false;
-  private visible = false;
-  private value: any = {};
+  private valid = false
+  private visible = false
+  private value: any = {}
 
   public show(initval = this.initval, addToSchemaTop = []) {
     addToSchemaTop.forEach((field) => {
@@ -57,29 +57,29 @@ export default class EcRootIndexAKIndex extends Vue {
           (f: any) => JSON.stringify(f) !== JSON.stringify(field)
         )
       ) {
-        this.schema.unshift(field);
+        this.schema.unshift(field)
       }
-    });
+    })
 
     return new Promise((res, rej) => {
-      this.res = res;
-      this.rej = rej;
-      this.value = initval;
-      this.visible = true;
-    });
+      this.res = res
+      this.rej = rej
+      this.value = initval
+      this.visible = true
+    })
   }
 
-  private res = (val: any) => {};
-  private rej = () => {};
+  private res = (val: any) => {}
+  private rej = () => {}
 
   private save() {
-    this.visible = false;
-    this.res(this.value);
+    this.visible = false
+    this.res(this.value)
   }
 
   private cancel() {
-    this.visible = false;
-    this.rej();
+    this.visible = false
+    this.rej()
   }
 }
 </script>

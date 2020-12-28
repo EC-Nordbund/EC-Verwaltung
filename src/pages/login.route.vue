@@ -48,38 +48,38 @@ v-app(app, :dark='dark')
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { errorHandler } from '../helpers';
+import { Component, Vue } from 'vue-property-decorator'
+import { errorHandler } from '../helpers'
 // import * as settings from 'electron-settings'
-import gql from 'graphql-tag';
-import * as save from 'js-cookie';
+import gql from 'graphql-tag'
+import * as save from 'js-cookie'
 
 @Component({})
 export default class EcRootLogin extends Vue {
-  private dark = save.get('dark') === 'x';
-  private isCapsOn = false;
-  private valid = false;
-  private loading = false;
+  private dark = save.get('dark') === 'x'
+  private isCapsOn = false
+  private valid = false
+  private loading = false
   private data = {
     username: (save.get('username') as string) || '',
     password: ''
-  };
-  private showPasword = false;
+  }
+  private showPasword = false
 
   public checkCaps(ev: KeyboardEvent) {
-    const key = ev.key;
+    const key = ev.key
     if (key.length === 1) {
       this.isCapsOn =
-        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey;
+        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
     } else {
       if (key === 'CapsLock') {
-        this.isCapsOn = !this.isCapsOn;
+        this.isCapsOn = !this.isCapsOn
       }
     }
   }
 
   public logIn() {
-    this.loading = true;
+    this.loading = true
 
     fetch('https://api.ec-nordbund.de/v6/login', {
       method: 'POST',
@@ -94,37 +94,37 @@ export default class EcRootLogin extends Vue {
       .then(errorHandler)
       .then((res) => res.json())
       .then(async (res: any) => {
-        let path = this.$route.query.next || '/home';
+        let path = this.$route.query.next || '/home'
         if (this.$route.query.next === '/404?prev=%2F') {
-          path = 'home';
+          path = 'home'
         }
-        save.set('username', this.data.username, { expires: 7 });
-        localStorage.setItem('username', this.data.username);
-        await this.$setAuthToken(res.authToken);
-        this.$router.push(path as string);
-        this.loading = false;
+        save.set('username', this.data.username, { expires: 7 })
+        localStorage.setItem('username', this.data.username)
+        await this.$setAuthToken(res.authToken)
+        this.$router.push(path as string)
+        this.loading = false
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Anmelden fehlgeschlagen!'
-        });
-        this.loading = false;
-      });
+        })
+        this.loading = false
+      })
   }
 
   public created() {
-    window.addEventListener('keyup', this.checkCaps);
+    window.addEventListener('keyup', this.checkCaps)
     if (this.$authToken()) {
-      let path = this.$route.query.next || '/home';
+      let path = this.$route.query.next || '/home'
       if (this.$route.query.next === '/404?prev=%2F') {
-        path = 'home';
+        path = 'home'
       }
-      this.$router.push(path as string);
+      this.$router.push(path as string)
     }
   }
   public destroyed() {
-    window.removeEventListener('keyup', this.checkCaps);
+    window.removeEventListener('keyup', this.checkCaps)
   }
 }
 </script>

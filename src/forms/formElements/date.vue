@@ -40,8 +40,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins, Watch } from 'vue-property-decorator';
-import abstractField from '../abstract';
+import { Component, Vue, Mixins, Watch } from 'vue-property-decorator'
+import abstractField from '../abstract'
 // // @ts-ignore
 // import { VSpacer, VBtn, VDialog, VDatePicker, VTextField } from 'vuetify/lib';
 
@@ -55,17 +55,17 @@ import abstractField from '../abstract';
   // },
 })
 export default class FormInput extends Mixins(abstractField) {
-  public modal = false;
-  public date = '';
+  public modal = false
+  public date = ''
 
   @Watch('value')
   public onValueChange() {
-    this.date = this.value;
+    this.date = this.value
   }
 
   @Watch('date')
-  public onDateChange( ) {
-    this.changeValue(this.date);
+  public onDateChange() {
+    this.changeValue(this.date)
   }
 }
 </script>

@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
 
 @Component({})
 export default class EcRootIndexVeranstaltungsortIdIndexVeranstaltungen extends Vue {
-  public static meta = {};
+  public static meta = {}
 }
 </script>

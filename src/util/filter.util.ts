@@ -1,7 +1,7 @@
-export const name = 'filter';
+export const name = 'filter'
 
 export default function filterGenerator(suche: string) {
-  return (item: any) => filterData(item, suche);
+  return (item: any) => filterData(item, suche)
 }
 
 // export function filter (items:Array<any>, suche:string) {
@@ -14,20 +14,22 @@ function filterData(item: any, suche: string): boolean {
     .replace(/\.|\-/g, ' ')
     .split(' ')
     .map((suchePart: string) => filterPart(item, suchePart))
-    .reduce((a, b) => a && b, true);
+    .reduce((a, b) => a && b, true)
 }
 
 function filterPart(item: any, suche: string): boolean {
   if (!suche) {
-    return true;
+    return true
   }
   if (typeof item === 'string') {
-    return item.toLowerCase().includes(suche);
+    return item.toLowerCase().includes(suche)
   } else if (typeof item === 'number' || typeof item === 'boolean') {
-    return item.toString().toLowerCase().includes(suche);
+    return item.toString().toLowerCase().includes(suche)
   } else if (item) {
-    return Object.keys(item).map((key) => filterPart(item[key], suche)).reduce((a, b) => a || b, false);
+    return Object.keys(item)
+      .map((key) => filterPart(item[key], suche))
+      .reduce((a, b) => a || b, false)
   } else {
-    return false;
+    return false
   }
 }
