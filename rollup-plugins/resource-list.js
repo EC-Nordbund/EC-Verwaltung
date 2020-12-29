@@ -1,11 +1,9 @@
-/**
- * @author GoogleChromeLabs\proxx
- */
+import definePlugin from './helper'
 
 const resourceListMarker = "___REPLACE_THIS_WITH_RESOURCE_LIST_LATER";
 
 export default function resourceList() {
-  return {
+  return definePlugin({
     name: "dependencygraph",
     resolveId(id) {
       if (id !== "resource-list:") {
@@ -29,5 +27,5 @@ export default function resourceList() {
         item.code = item.code.replace(resourceListMarker, resourceListJSON);
       }
     }
-  };
+  })
 }

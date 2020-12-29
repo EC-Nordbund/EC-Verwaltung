@@ -1,7 +1,8 @@
+import definePlugin from './helper'
 import { readFileSync } from "fs";
 
 export default () => {
-  return {
+  return definePlugin({
     name: 'image-loader',
     load(id) {
       const endungen = ['png', 'webp', 'jpg', 'jpeg'];
@@ -22,5 +23,5 @@ export default () => {
         return `export default import.meta.ROLLUP_FILE_URL_${em}`;
       }
     }
-  };
+  })
 }

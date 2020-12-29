@@ -1,11 +1,12 @@
 import { createServer } from 'http-server'
 import WebSocket from 'ws'
 import chokidar from 'chokidar'
+import definePlugin from './helper'
 
 let first = true
 
 export default () => {
-  return {
+  return definePlugin({
     name: 'serve',
     generateBundle() {
       if (first) {
@@ -49,5 +50,5 @@ export default () => {
     banner() {
       return `(new WebSocket('ws://localhost:8081')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};`
     }
-  }
+  })
 }

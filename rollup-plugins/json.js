@@ -1,11 +1,12 @@
 import { createFilter, dataToEsm } from '@rollup/pluginutils';
+import definePlugin from './helper'
 import { parse } from "json5";
 
 export default function json(options = {}) {
   const filter = createFilter(options.include, options.exclude);
   const indent = 'indent' in options ? options.indent : '\t';
 
-  return {
+  return definePlugin({
     name: 'json',
 
     transform(json, id) {
@@ -29,5 +30,5 @@ export default function json(options = {}) {
         return null;
       }
     }
-  };
+  })
 }

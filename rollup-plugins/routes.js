@@ -1,5 +1,6 @@
 import { join } from "path";
 import dirTree from "directory-tree"
+import definePlugin from './helper'
 
 const routeProto = 'routes:'
 
@@ -73,23 +74,25 @@ function cmp(path) {
   return `cmp${counter}`
 }
 
-export default () => ({
-  name: 'route-generator',
-  resolveId(id, importer) {
-    if (id.startsWith(routeProto)) {
-      const parts = importer.split(/\\|\//)
-      const path = join(parts.slice(0, parts.length - 1).join('/'), id.slice(routeProto.length))
+export default () => {
+  return definePlugin({
+    name: 'route-generator',
+    resolveId(id, importer) {
+      if (id.startsWith(routeProto)) {
+        const parts = importer.split(/\\|\//)
+        const path = join(parts.slice(0, parts.length - 1).join('/'), id.slice(routeProto.length))
 
-      return routeProto + path
+        return routeProto + path
+      }
+    },
+    load(id) {
+      if (id.startsWith(routeProto)) {
+        const tree = dirTree(id.slice(routeProto.length));
+
+        let val = 'export default ' + JSON.stringify(handleFolder(tree.children)).split('"/|').join('').split('|/"').join('').split('\\\\').join('/')
+
+        return imp + val
+      }
     }
-  },
-  load(id) {
-    if (id.startsWith(routeProto)) {
-      const tree = dirTree(id.slice(routeProto.length));
-
-      let val = 'export default ' + JSON.stringify(handleFolder(tree.children)).split('"/|').join('').split('|/"').join('').split('\\\\').join('/')
-
-      return imp + val
-    }
-  }
-})
+  })
+}
