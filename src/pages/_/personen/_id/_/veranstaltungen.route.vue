@@ -21,8 +21,6 @@ export default class EcNAME extends Vue {
   @Prop()
   private data!: any;
 
-  private copy = copy;
-
   private rollen = [
     'Teilnehmer',
     'Mitarbeiter',
