@@ -93,7 +93,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
-import copy from 'copy-to-clipboard';
+import copy from 'copy-to-clipboard'
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {

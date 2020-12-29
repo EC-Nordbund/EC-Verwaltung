@@ -38,7 +38,7 @@
 <script lang="ts">
 import { Component, Mixins } from 'vue-property-decorator'
 import abstractField from '../abstract'
-import plzs from "../../data/plzs";
+import plzs from '../../data/plzs'
 
 @Component({})
 export default class FormInput extends Mixins(abstractField) {
