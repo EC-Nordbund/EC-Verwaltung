@@ -31,7 +31,8 @@ export default {
     json(),
     image(),
     esbuild({
-      target: 'es2017'
+      target: 'es2017',
+      tsconfig: './base-tsconfig.json'
     }),
     vue({
       css: true,
