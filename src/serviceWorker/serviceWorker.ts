@@ -1,6 +1,5 @@
 import resourceList from 'resource-list:'
-import { version } from '../../package.json'
-const VERSION = version
+const VERSION = '4.0.0'
 
 const _self: ServiceWorkerGlobalScope & typeof globalThis = self as any
 

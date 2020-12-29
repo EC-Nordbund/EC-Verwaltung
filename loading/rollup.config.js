@@ -3,7 +3,6 @@ import { terser } from 'rollup-plugin-terser'
 import url from 'postcss-url';
 import cssnano from 'cssnano';
 
-
 export default {
   input: 'src/main.ts',
   output: {

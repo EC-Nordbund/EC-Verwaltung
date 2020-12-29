@@ -15,5 +15,10 @@
     // Sollen aktiviert (auf 1 gesetzt) werdem - sind aber so viele Probleme die dort gefixt werden müssen.
     "@typescript-eslint/no-unused-vars": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0
-  }
+  },
+  "ignorePatterns": [
+    "**/rollup.config.js",
+    "rollup-plugins/*.js",
+    "rollup-plugins/*.js"
+  ]
 }
