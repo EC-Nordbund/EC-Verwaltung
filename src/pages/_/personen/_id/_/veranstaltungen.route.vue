@@ -8,7 +8,7 @@
             v-icon event
           v-list-tile-content
             v-list-tile-title {{anmeldung.veranstaltung.bezeichnung}} | ({{anmeldung.veranstaltung.begin.german}} - {{anmeldung.veranstaltung.ende.german}})
-            v-list-tile-sub-title Rolle: {{rollen[anmeldung.position-1]}} | AnmeldeID: {{anmeldung.anmeldeID}}
+            v-list-tile-sub-title(class="ec-selectable") Rolle: {{rollen[anmeldung.position-1]}} | AnmeldeID: {{anmeldung.anmeldeID}}
         
 </template>
 
