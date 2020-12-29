@@ -1,7 +1,7 @@
 const swProto = 'sw:'
 
 export default ({ path } = { path: 'sw.js' }) => ({
-  name: 'route-generator',
+  name: 'service-worker',
   async resolveId(id, importer) {
     if (id.startsWith(swProto)) {
       const resolve = await this.resolve(id.slice(swProto.length), importer)
@@ -18,12 +18,11 @@ export default ({ path } = { path: 'sw.js' }) => ({
       })
 
       return `export default () => {
-  if ('serviceWorker' in navigator) {
-    return navigator.serviceWorker.register(${JSON.stringify(path).replace(/\"/g, "'")})
-  }
-  return null
-}
-`
+        if ('serviceWorker' in navigator) {
+          return navigator.serviceWorker.register(${JSON.stringify(path).replace(/\"/g, "'")})
+        }
+        return null
+      }`
     }
   }
 })
