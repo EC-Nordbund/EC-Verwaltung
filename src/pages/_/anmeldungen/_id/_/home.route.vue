@@ -1,7 +1,7 @@
 <template lang="pug">
   v-card-text(style="overflow: auto;")
     v-list(two-line)
-      v-list-tile
+      v-list-tile(@click="copy(data.anmeldeID)")
         v-list-tile-action
           v-icon person
         v-list-tile-content
@@ -93,10 +93,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import copy from 'copy-to-clipboard';
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
   public static meta = {}
+
+  private copy = copy
 
   private rollen = [
     'Teilnehmer',
