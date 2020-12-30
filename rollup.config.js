@@ -16,6 +16,7 @@ import sw from './rollup-plugins/sw'
 import replace from './rollup-plugins/replace'
 import json from './rollup-plugins/json'
 import rList from './rollup-plugins/resource-list'
+import icons from "./rollup-plugins/icons";
 
 export default {
   input: './src/main.ts',
@@ -24,6 +25,7 @@ export default {
     format: 'es'
   },
   plugins: [
+    icons(),
     sw({
       path: 'sw.js'
     }),

@@ -6,7 +6,7 @@ v-app(app, :dark='dark')
         v-card-title
           h1(v-font, v-primary) Login
           v-spacer
-          img(width='80px', src='../assets/ec-logo-512.png')
+          img(width='80px', src='../icons/ec-logo-512.png')
         v-card-text
           v-form(v-model='valid')
             v-text-field(
