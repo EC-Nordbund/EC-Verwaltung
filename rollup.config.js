@@ -21,11 +21,10 @@ import icons from "./rollup-plugins/icons";
 export default {
   input: './src/main.ts',
   output: {
-    dir: 'public',
+    dir: 'dist',
     format: 'es'
   },
   plugins: [
-    icons(),
     sw({
       path: 'sw.js'
     }),
@@ -66,6 +65,7 @@ export default {
       ],
       extract: true
     }),
+    icons(),
     ...(process.env.NODE_ENV !== 'production' ? [serve()] : [terser()])
   ]
 }

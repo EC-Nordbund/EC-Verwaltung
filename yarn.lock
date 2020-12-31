@@ -95,6 +95,7 @@ __metadata:
     "@types/js-cookie": ^2.2.6
     "@types/json5": ^0.0.30
     "@types/node": ^14.14.16
+    "@types/pug": ^2.0.4
     "@types/ws": ^7.4.0
     "@typescript-eslint/eslint-plugin": ^4.11.1
     "@typescript-eslint/parser": ^4.11.1
@@ -330,6 +331,13 @@ __metadata:
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
   checksum: 4a8f720afac47b474d3f2eece312340e72bc31bc9561cda37b596ce2ed218c0099765d302625bb67d659a8452a1f93d514f4863c11c7ebaf65430428687dc426
+  languageName: node
+  linkType: hard
+
+"@types/pug@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@types/pug@npm:2.0.4"
+  checksum: f4470eb1884afd1c4659ee1dcc6d838a06ecd959e33a4d911488b4e0edebea6bf97b0964a93383df50a381f85c36e5e737891db5757defdfd2e1c4a279e7dc2b
   languageName: node
   linkType: hard
 

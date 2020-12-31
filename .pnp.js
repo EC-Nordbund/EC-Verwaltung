@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/js-cookie", "npm:2.2.6"],
             ["@types/json5", "npm:0.0.30"],
             ["@types/node", "npm:14.14.16"],
+            ["@types/pug", "npm:2.0.4"],
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.11.1"],
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.11.1"],
@@ -202,6 +203,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/js-cookie", "npm:2.2.6"],
             ["@types/json5", "npm:0.0.30"],
             ["@types/node", "npm:14.14.16"],
+            ["@types/pug", "npm:2.0.4"],
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.11.1"],
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.11.1"],
@@ -534,6 +536,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-parse-json-npm-4.0.0-298522afa6-4a8f720afa.zip/node_modules/@types/parse-json/",
           "packageDependencies": [
             ["@types/parse-json", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/pug", [
+        ["npm:2.0.4", {
+          "packageLocation": "./.yarn/cache/@types-pug-npm-2.0.4-a232f44f32-f4470eb188.zip/node_modules/@types/pug/",
+          "packageDependencies": [
+            ["@types/pug", "npm:2.0.4"]
           ],
           "linkType": "HARD",
         }]

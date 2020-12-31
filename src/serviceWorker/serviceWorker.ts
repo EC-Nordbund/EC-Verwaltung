@@ -1,4 +1,5 @@
 import resourceList from 'resource-list:'
+import icon from '../icons/ec-logo-512.png'
 const VERSION = '4.0.0'
 
 const _self: ServiceWorkerGlobalScope & typeof globalThis = self as any
@@ -35,7 +36,10 @@ _self.addEventListener('activate', (ev) => {
   )
 })
 _self.addEventListener('fetch', (ev) => {
-  if (!ev.request.url.startsWith('https://verwaltung')) {
+  if (
+    !ev.request.url.startsWith('https://verwaltung') &&
+    !ev.request.url.startsWith('http://localhost')
+  ) {
     return
   }
 
@@ -61,6 +65,6 @@ _self.addEventListener('push', (ev) => {
 
   _self.registration.showNotification(content.title, {
     body: content.body,
-    icon: '/img/ec-logo-512.361ca3c3.png'
+    icon: icon
   })
 })

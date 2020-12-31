@@ -2,8 +2,14 @@ declare module 'sw:*' {
   const sw: () => Promise<ServiceWorkerRegistration>
   export default sw
 }
+type filename = string
 
 declare module 'resource-list:' {
-  const value: string[]
+  const value: filename[]
+  export default value
+}
+
+declare module '*.png' {
+  const value: filename
   export default value
 }
