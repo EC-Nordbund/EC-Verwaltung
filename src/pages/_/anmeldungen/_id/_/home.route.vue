@@ -92,12 +92,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
-import copy from 'copy-to-clipboard';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import copy from 'copy-to-clipboard'
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   private copy = copy
 
@@ -108,9 +108,9 @@ export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
     'Küchenleitung',
     'Leitung',
     'Hauptleitung'
-  ];
+  ]
 
-  @Prop({default: {person: {}}})
-  private data!: any;
+  @Prop({ default: { person: {} } })
+  private data!: any
 }
 </script>

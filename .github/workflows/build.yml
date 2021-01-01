@@ -23,5 +23,9 @@ jobs:
 
       - name: Build
         run: yarn build
-        env:
-          CI: true
+      
+      - name: Lint
+        run: yarn lint
+
+      - name: Types
+        run: yarn types

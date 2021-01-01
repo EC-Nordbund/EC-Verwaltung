@@ -8,7 +8,7 @@ v-app(app, :dark='dark')
     //-   v-icon redo
     v-spacer
     v-avatar(size='60px', style='margin-right: 10px')
-      img(src='@/assets/ec-logo-without-bg-64.png')
+      img(src='../assets/ec-logo-without-bg-64.png')
     span(
       v-white,
       v-font,
@@ -154,11 +154,11 @@ v-app(app, :dark='dark')
         v-btn(v-accent-bg, v-white, @click='logout') Abmelden
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import pack from '@/plugins/package';
-import gql from 'graphql-tag';
-import * as save from 'js-cookie';
-import { subscribe } from '../plugins/sw';
+import { Component, Vue } from 'vue-property-decorator'
+import pack from '../plugins/package'
+import gql from 'graphql-tag'
+import * as save from 'js-cookie'
+import { subscribe } from '../plugins/sw'
 // ()
 @Component({})
 export default class EcRootIndex extends Vue {
@@ -168,37 +168,37 @@ export default class EcRootIndex extends Vue {
         .split('/')
         .slice(1)
         .map((v) => v[0].toUpperCase() + v.slice(1))
-    );
+    )
   }
-  public static meta = {};
-  private password = '';
-  private dark = save.get('dark') === 'x';
-  private drawer = null;
-  private version = pack.version || 'Fehler';
+  public static meta = {}
+  private password = ''
+  private dark = save.get('dark') === 'x'
+  private drawer = null
+  private version = pack.version || 'Fehler'
   private breadcrumbs = this.breadMap([
     `© 2017 - ${new Date().getFullYear()}`,
     'EC-Nordbund',
     'T. Krause + S. Krüger'
-  ]);
-  private loginDialog = false;
-  private subscribe = subscribe;
+  ])
+  private loginDialog = false
+  private subscribe = subscribe
 
   private data: any = {
     person: { vorname: {}, nachname: {} },
     ablaufDatum: {}
-  };
+  }
 
-  private loading = false;
+  private loading = false
 
-  private alive: number = -1;
+  private alive = -1
 
-  private timer: null | NodeJS.Timeout = null;
-  private isCapsOn = false;
-  private valid = false;
-  private showPasword = false;
+  private timer: null | NodeJS.Timeout = null
+  private isCapsOn = false
+  private valid = false
+  private showPasword = false
 
   public logIn() {
-    this.loading = true;
+    this.loading = true
     this.$apolloClient
       .mutate({
         mutation: gql`
@@ -218,52 +218,52 @@ export default class EcRootIndex extends Vue {
         // }
         // save.set('username', this.data.username, { expires: 7 });
         // localStorage.setItem('username', this.data.username);
-        await this.$setAuthToken(res.data.logIn);
+        await this.$setAuthToken(res.data.logIn)
         // this.$router.push(path as string);
-        this.loading = false;
-        this.updateAlive();
-        this.password = '';
-        this.loginDialog = false;
+        this.loading = false
+        this.updateAlive()
+        this.password = ''
+        this.loginDialog = false
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Anmelden fehlgeschlagen!'
-        });
-        this.loading = false;
-      });
+        })
+        this.loading = false
+      })
   }
 
   public checkCaps(ev: KeyboardEvent) {
-    const key = ev.key;
+    const key = ev.key
     if (key.length === 1) {
       this.isCapsOn =
-        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey;
+        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
     } else {
       if (key === 'CapsLock') {
-        this.isCapsOn = !this.isCapsOn;
+        this.isCapsOn = !this.isCapsOn
       }
     }
   }
 
   private logout() {
-    this.$logout();
+    this.$logout()
   }
 
   private toggleDark() {
-    this.dark = !this.dark;
-    save.set('dark', this.dark ? 'x' : '');
+    this.dark = !this.dark
+    save.set('dark', this.dark ? 'x' : '')
   }
 
   private breadMap(arr: string[]) {
-    return arr.map((el) => ({ text: el, disabled: true }));
+    return arr.map((el) => ({ text: el, disabled: true }))
   }
   private created() {
     if (!this.$authToken()) {
       this.$router.push({
         path: '/login',
         query: { next: this.$route.fullPath }
-      });
+      })
     } else {
       this.$apolloClient
         .query({
@@ -286,29 +286,31 @@ export default class EcRootIndex extends Vue {
           }
         })
         .then((res) => {
-          this.data = res.data.getMyUserData;
-        });
+          this.data = res.data.getMyUserData
+        })
     }
 
-    this.timer = setInterval(this.updateAlive, 30 * 1000);
-    this.updateAlive();
+    this.timer = setInterval(this.updateAlive, 30 * 1000)
+    this.updateAlive()
   }
 
   private async updateAlive() {
-    const num = await this.$logoutIn();
+    const num = await this.$logoutIn()
 
-    const mins = Math.trunc(num / 1000 / 60);
+    const mins = Math.trunc(num / 1000 / 60)
 
-    this.alive = mins;
+    this.alive = mins
 
     if (this.alive < 15) {
-      this.loginDialog = true;
+      this.loginDialog = true
     }
   }
 
   private beforeDestroy() {
-    if (!this.timer) { return; }
-    clearInterval(this.timer);
+    if (!this.timer) {
+      return
+    }
+    clearInterval(this.timer)
   }
 }
 </script>

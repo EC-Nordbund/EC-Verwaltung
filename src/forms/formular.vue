@@ -1,30 +1,39 @@
-<template lang="pug">
-  component(:is="tag||'div'")
-    component(v-for="field in schema" :is="'form_' + field.type" :schema="field" :value="value[field.name]" @input="value[field.name] = $event" :save="save" :cancel="cancel")
+<template>
+  <component :is="tag || 'div'">
+    <component
+      :is="'form_' + field.type"
+      v-for="(field, i) in schema"
+      :key="`${i}-form`"
+      :schema="field"
+      :value="value[field.name]"
+      :save="save"
+      :cancel="cancel"
+      @input="value[field.name] = $event"
+    />
+  </component>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import {CreateElement} from 'vue';
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class FormRoot extends Vue {
   @Prop()
-  public value!: any;
+  public value!: any
 
   @Prop()
-  public schema!: any;
+  public schema!: any
 
   @Prop()
-  public tag!: any;
+  public tag!: any
 
   @Prop({
     required: true
   })
-  public cancel!: any;
+  public cancel!: any
 
   @Prop({
     required: true
   })
-  public save!: any;
+  public save!: any
 }
 </script>

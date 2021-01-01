@@ -1,40 +1,19 @@
 {
+  "extends": "./base-tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
     "lib": [
       "esnext",
       "dom",
-      "dom.iterable",
-      "scripthost"
+      "dom.iterable"
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx", "public/plzs.ts"
+    "./src/**/*.ts",
+    "./src/shims.d.ts",
+    "./src/vue.d.ts",
+    "./src/shim-vue.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.json"
+    "./src/serviceWorker/**/*.ts"
   ]
 }

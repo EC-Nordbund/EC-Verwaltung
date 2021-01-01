@@ -69,19 +69,19 @@ v-card-text
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
 
 @Component({})
 export default class EcNAME extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   @Prop({ default: { person: {} } })
-  private data!: any;
+  private data!: any
 
-  private stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter'];
+  private stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter']
 
   public showAll(value: string) {
-    this.$dialog.notify.info(value);
+    this.$dialog.notify.info(value)
   }
 }
 </script>

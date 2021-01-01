@@ -34,9 +34,8 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
           v-list-tile-title {{ item.label }} nur Abgemeldete
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import { generate, getTemplates } from '@/tnList';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 
 @Component({})
 export default class EcRootIndex extends Vue {
@@ -53,14 +52,14 @@ export default class EcRootIndex extends Vue {
               {
                 method: 'POST',
                 headers: {
-                  'authorization': this.$authToken(),
+                  authorization: this.$authToken(),
                   'content-type': 'application/json'
                 },
                 body: JSON.stringify({ id: parseInt(this.$route.params.id) })
               }
-            );
+            )
 
-            const d = (await res.json()).data;
+            const d = (await res.json()).data
 
             const createMailText = (code: string) => `Moin,
 Damit du im EC System für die Veranstaltung eingtragen bist, möchte ich dich bitten dich unter dem folgenden Link anzumelden:
@@ -78,7 +77,7 @@ Solltest du ein (neues) erweitertes Führungszeugnis benötigen erhältst den be
 
 Gruß
 Thomas Seeger
-`;
+`
 
             window.navigator.clipboard.writeText(`Moin,
 Du bist Freizeitleiter.
@@ -107,8 +106,8 @@ Küchenleitung:
 ${createMailText(d[2])}
 
 
-            `);
-            alert('Mail-Text in Zwischenablage kopiert.');
+            `)
+            alert('Mail-Text in Zwischenablage kopiert.')
           }
         }
       ],
@@ -131,39 +130,39 @@ ${createMailText(d[2])}
       ],
       title: `${this.data.bezeichnung} (${this.data.begin.german} - ${this.data.ende.german})`,
       subTitle: 'Veranstaltung'
-    };
+    }
   }
-  public static meta = {};
+  public static meta = {}
 
   public data: any = {
     anmeldungen: [],
     begin: {},
     ende: {},
     veranstaltungsort: {}
-  };
-
-  private tnListen: any = [];
-  private genList = generate;
-
-  private all() {
-    this.tnListen.forEach((el: { name: string; label: string }) => {
-      this.g(el.name, (v) => v === 0);
-      this.g(el.name, (v) => v >= 0);
-    });
   }
 
+  private tnListen: any = []
+  // private genList = generate;
+
+  // private all() {
+  //   this.tnListen.forEach((el: { name: string; label: string }) => {
+  //     this.g(el.name, (v) => v === 0);
+  //     this.g(el.name, (v) => v >= 0);
+  //   });
+  // }
+
   private g(name: string, wList: (v: number) => boolean) {
-    this.genList(
-      parseInt(this.$route.params.id, 10),
-      name,
-      this.$authToken(),
-      this.$apolloClient,
-      wList
-    );
+    // this.genList(
+    //   parseInt(this.$route.params.id, 10),
+    //   name,
+    //   this.$authToken(),
+    //   this.$apolloClient,
+    //   wList
+    // );
   }
 
   private sheetClick(item: { id: string }) {
-    alert(item.id);
+    alert(item.id)
   }
 
   private loadData() {
@@ -249,21 +248,21 @@ ${createMailText(d[2])}
         fetchPolicy: 'no-cache'
       })
       .then((res: any) => {
-        this.data = res.data.veranstaltung;
+        this.data = res.data.veranstaltung
       })
       .catch((err: any) => {
         this.$dialog.error({
           text: err.message,
           title: 'Laden fehlgeschlagen!'
-        });
-      });
+        })
+      })
   }
 
   private created() {
-    this.loadData();
-    getTemplates().then((res) => {
-      this.tnListen = res;
-    });
+    this.loadData()
+    // getTemplates().then((res) => {
+    //   this.tnListen = res;
+    // });
   }
 }
 </script>

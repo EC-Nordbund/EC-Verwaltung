@@ -87,42 +87,42 @@ v-card-text(style='overflow: auto')
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndexSonstiges extends Vue {
-  public static meta = {};
+  public static meta = {}
 
   @Prop({ default: { person: {} } })
-  private data!: any;
+  private data!: any
 
   private schwimmStufen = [
     'Nichtschwimmer',
     'Mittelmäßiger Schwimmer',
     'Guter Schwimmer'
-  ];
+  ]
 
   public showAll(keyName: string) {
-    this.$dialog.notify.info(this.data[keyName] || 'N/A');
+    this.$dialog.notify.info(this.data[keyName] || 'N/A')
   }
 
   public h(v: any, r = false) {
-    const res: any[] = [];
+    const res: any[] = []
 
     Object.keys(v).forEach((key) => {
       if (typeof v[key] === 'object') {
         res.push({
           name: key + ':',
           children: this.h(v[key])
-        });
+        })
       } else {
         res.push({
           name: key + ': ' + v[key]
-        });
+        })
       }
-    });
+    })
 
-    return res;
+    return res
   }
 }
 </script>

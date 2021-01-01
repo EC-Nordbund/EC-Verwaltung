@@ -55,13 +55,13 @@
       | Sende dabei die Daten nur an eine E-Mail Adresse die auch in unserer Kartei vorkommt.
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
   private config = {
     title: 'Datenschutzerklärung'
-  };
+  }
 }
 </script>

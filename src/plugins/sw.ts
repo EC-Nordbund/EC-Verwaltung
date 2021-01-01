@@ -1,77 +1,58 @@
-import Vue from 'vue';
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}
-
+import Vue from 'vue'
+import sw from 'sw:../serviceWorker/serviceWorker'
+sw()
 onUpdate((doUpdate) => {
   if (window.confirm('Eine neue Version ist verfügbar willst du sie laden?')) {
-    doUpdate();
+    doUpdate()
   }
-});
-
+})
 export async function subscribe() {
-  const sw = await navigator.serviceWorker.ready;
-
-  const subscription: PushSubscription =
-    (await sw.pushManager.getSubscription()) ||
-    (await sw.pushManager.subscribe({
+  const sw2 = await navigator.serviceWorker.ready
+  const subscription =
+    (await sw2.pushManager.getSubscription()) ||
+    (await sw2.pushManager.subscribe({
       applicationServerKey:
         'BIQomXQQe3hm61uhQrGJX5izbSZOjuAtXCdX1D7AYvR9IZVr9xExPrzJdzRDe8tnW4LmoxRoFfXxySL3wCPKr9Q',
       userVisibleOnly: true
-    }));
-
+    }))
   await fetch(`https://api.ec-nordbund.de/v6/subscribe`, {
     method: 'POST',
     headers: {
-      'authorization': Vue.prototype.$authToken(),
+      authorization: Vue.prototype.$authToken(),
       'content-type': 'application/json'
     },
     body: JSON.stringify({ subscription })
-  });
+  })
 }
-
-(window as any).sub = subscribe;
-
-async function onUpdate(updateReadyCB: (doUpdate: () => void) => void) {
+async function onUpdate(updateReadyCB) {
   if (!navigator.serviceWorker) {
-    return;
+    return
   }
-
   if (!navigator.serviceWorker.controller) {
-    return;
+    return
   }
-
-  navigator.serviceWorker.addEventListener('controllerchange', (ev) => {
-    location.reload();
-  });
-
-  const updateFactory = (sw: ServiceWorker) => () =>
-    sw.postMessage({ msg: 'update-sw' });
-
-  const registration = (await navigator.serviceWorker.getRegistration())!;
-
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    location.reload()
+  })
+  const updateFactory = (sw2) => () => sw2.postMessage({ msg: 'update-sw' })
+  const registration = await navigator.serviceWorker.getRegistration()
   if (registration.waiting) {
-    updateReadyCB(updateFactory(registration.waiting));
-    return;
+    updateReadyCB(updateFactory(registration.waiting))
+    return
   }
-
   if (registration.installing) {
-    updateReadyCB(updateFactory(registration.installing));
-    return;
+    updateReadyCB(updateFactory(registration.installing))
+    return
   }
-
-  registration.addEventListener('updatefound', (ev) => {
-    const sw = registration.installing;
-
-    if (!sw) {
-      return;
+  registration.addEventListener('updatefound', () => {
+    const sw2 = registration.installing
+    if (!sw2) {
+      return
     }
-
-    sw.addEventListener('statechange', (ev) => {
-      if (sw.state === 'installed') {
-        updateReadyCB(updateFactory(sw));
+    sw2.addEventListener('statechange', () => {
+      if (sw2.state === 'installed') {
+        updateReadyCB(updateFactory(sw2))
       }
-    });
-  });
+    })
+  })
 }

@@ -12,14 +12,14 @@
           v-list-tile-sub-title {{item.begin.german}} - {{item.ende.german}}
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import gql from 'graphql-tag';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import gql from 'graphql-tag'
 
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
 
-  private suche = '';
+  private suche = ''
 
   private config = {
     sheet: [
@@ -31,41 +31,44 @@ export default class EcRootIndex extends Vue {
       }
     ],
     title: 'Veranstaltungen'
-  };
+  }
 
-  private data: any = [];
+  private data: any = []
 
   private loadData() {
-    this.$apolloClient.query({
-      query: gql`
-        query($authToken: String!) {
-          veranstaltungen(authToken: $authToken) {
-            veranstaltungsID
-            bezeichnung
-            begin {
-              german
-            }
-            ende {
-              german
+    this.$apolloClient
+      .query({
+        query: gql`
+          query($authToken: String!) {
+            veranstaltungen(authToken: $authToken) {
+              veranstaltungsID
+              bezeichnung
+              begin {
+                german
+              }
+              ende {
+                german
+              }
             }
           }
+        `,
+        variables: {
+          authToken: this.$authToken()
         }
-      `,
-      variables: {
-        authToken: this.$authToken()
-      }
-    }).then((res: any) => {
-      this.data = res.data.veranstaltungen;
-    }).catch((err: any) => {
-      this.$dialog.error({
-        text: err.message,
-        title: 'Laden fehlgeschlagen!'
-      });
-    });
+      })
+      .then((res: any) => {
+        this.data = res.data.veranstaltungen
+      })
+      .catch((err: any) => {
+        this.$dialog.error({
+          text: err.message,
+          title: 'Laden fehlgeschlagen!'
+        })
+      })
   }
 
   private created() {
-    this.loadData();
+    this.loadData()
   }
 
   private filterData(item: any): boolean {
@@ -73,24 +76,28 @@ export default class EcRootIndex extends Vue {
       .toLowerCase()
       .split(' ')
       .map((suche: string) => this.filterPart(item, suche))
-      .reduce((a, b) => a && b, true);
+      .reduce((a, b) => a && b, true)
   }
 
   private filterPart(item: any, suche: string): boolean {
     if (!suche) {
-      return true;
+      return true
     }
     if (typeof item === 'string') {
-      return item.toLowerCase().includes(suche);
+      return item.toLowerCase().includes(suche)
     } else if (typeof item === 'number' || typeof item === 'boolean') {
-      return item.toString().toLowerCase().includes(suche);
+      return item.toString().toLowerCase().includes(suche)
     } else if (item) {
-      return Object.keys(item).map((key) => this.filterPart(item[key], suche)).reduce((a, b) => a || b, false);
+      return Object.keys(item)
+        .map((key) => this.filterPart(item[key], suche))
+        .reduce((a, b) => a || b, false)
     } else {
-      return false;
+      return false
     }
   }
 
-  private sheetClick(item: {id: string}) {alert(item.id); }
+  private sheetClick(item: { id: string }) {
+    alert(item.id)
+  }
 }
 </script>

@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator';
-import abstractField from '../abstract';
+import { Component, Vue, Mixins } from 'vue-property-decorator'
+import abstractField from '../abstract'
 
 // // @ts-ignore
 // import { VForm, VStepper, VStepperStep, VBtn } from 'vuetify/lib';
@@ -28,8 +28,8 @@ import abstractField from '../abstract';
   // },
 })
 export default class FormStepper extends Mixins(abstractField) {
-  public currStep: number = 0;
-  public valid: any = {};
+  public currStep = 0
+  public valid: any = {}
 
   public error: any = {
     0: false,
@@ -43,14 +43,32 @@ export default class FormStepper extends Mixins(abstractField) {
     8: false,
     9: false,
     10: false
-  };
+  }
 
-  public clickBtn(cb: undefined|((currStep: number, valid: boolean, cancel: () => void, save: () => void, self: this, set: any ) => void | number) ) {
+  public clickBtn(
+    cb:
+      | undefined
+      | ((
+          currStep: number,
+          valid: boolean,
+          cancel: () => void,
+          save: () => void,
+          self: this,
+          set: any
+        ) => void | number)
+  ) {
     // await this.$validator.validateAll()
     if (cb) {
-      const val = cb(this.currStep, this.valid[this.currStep], this.cancel, this.save, this, Vue.set);
+      const val = cb(
+        this.currStep,
+        this.valid[this.currStep],
+        this.cancel,
+        this.save,
+        this,
+        Vue.set
+      )
       if (val) {
-        this.currStep = val;
+        this.currStep = val
       }
     }
   }

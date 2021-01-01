@@ -1,12 +1,12 @@
 <template lang="pug">
-  v-card-text EmptyComponent
+v-card-text EmptyComponent
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class EcRootIndexVeranstaltungsortIdIndexHome extends Vue {
-  public static meta = {};
+  public static meta = {}
 }
 </script>

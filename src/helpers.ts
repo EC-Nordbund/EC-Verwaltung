@@ -1,6 +1,6 @@
 export const errorHandler = async (res: Response) => {
   if (res.status !== 200) {
-    throw await res.text();
+    throw await res.text()
   }
-  return res;
-};
+  return res
+}

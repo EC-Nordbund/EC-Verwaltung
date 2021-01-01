@@ -12,4 +12,4 @@ export default {
       counter: 50
     }
   ]
-};
+}

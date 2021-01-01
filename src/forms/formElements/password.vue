@@ -22,37 +22,37 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator';
-import abstractField from '../abstract';
+import { Component, Vue, Mixins } from 'vue-property-decorator'
+import abstractField from '../abstract'
 
 @Component({})
 export default class FormInput extends Mixins(abstractField) {
-  private passwordVisible = false;
-  private isCapsOn = false;
+  private passwordVisible = false
+  private isCapsOn = false
 
   public checkCaps(ev: KeyboardEvent) {
-    const key = ev.key;
+    const key = ev.key
     if (key.length === 1) {
       this.isCapsOn =
-        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey;
+        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
     } else {
       if (key === 'CapsLock') {
-        this.isCapsOn = !this.isCapsOn;
+        this.isCapsOn = !this.isCapsOn
       }
     }
   }
 
   public created() {
-    window.addEventListener('keyup', this.checkCaps);
+    window.addEventListener('keyup', this.checkCaps)
   }
 
   public destroyed() {
-    window.removeEventListener('keyup', this.checkCaps);
+    window.removeEventListener('keyup', this.checkCaps)
   }
 
   private togglePasswordVisibility() {
-    this.passwordVisible = !this.passwordVisible;
-    this.schema.typ = this.passwordVisible ? 'text' : 'password';
+    this.passwordVisible = !this.passwordVisible
+    this.schema.typ = this.passwordVisible ? 'text' : 'password'
   }
 }
 </script>

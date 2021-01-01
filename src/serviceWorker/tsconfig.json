@@ -1,0 +1,14 @@
+{
+  "extends": "../../base-tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+      "webworker"
+    ],
+  },
+  "include": [
+    "../shims.d.ts",
+    "./**/*.ts",
+    "../../package.json"
+  ]
+}

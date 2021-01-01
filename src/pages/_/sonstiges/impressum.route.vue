@@ -37,19 +37,19 @@
 
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import Vuetify from 'vuetify';
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import Vuetify from 'vuetify'
 
 @Component({})
 export default class EcRootIndex extends Vue {
-  public static meta = {};
+  public static meta = {}
   private version = {
     vue: Vue.version,
     vuetify: Vuetify.version,
     electron: '4.0.x'
-  };
+  }
   private config = {
     title: 'Impressum'
-  };
+  }
 }
 </script>
