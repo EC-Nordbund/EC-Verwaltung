@@ -94,7 +94,7 @@ __metadata:
     "@types/elementtree": ^0.1.0
     "@types/js-cookie": ^2.2.6
     "@types/json5": ^0.0.30
-    "@types/node": ^14.14.16
+    "@types/node": ^14.14.19
     "@types/pug": ^2.0.4
     "@types/ws": ^7.4.0
     "@typescript-eslint/eslint-plugin": ^4.11.1
@@ -104,7 +104,7 @@ __metadata:
     copy-to-clipboard: ^3.3.1
     cssnano: ^4.1.10
     directory-tree: ^2.2.5
-    esbuild: ^0.8.26
+    esbuild: ^0.8.28
     eslint: ^7.16.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.0
@@ -116,7 +116,7 @@ __metadata:
     json5: ^2.1.3
     material-design-icons-iconfont: ^6.1.0
     node-sass: ^5.0.0
-    postcss: ^8.2.1
+    postcss: ^8.2.2
     postcss-url: ^10.1.1
     prettier: ^2.2.1
     pug: ^3.0.0
@@ -137,7 +137,7 @@ __metadata:
     vue-template-compiler: ^2.6.12
     vuetify: ^1.5.24
     vuetify-dialog: ^0.3.8
-    ws: ^7.4.1
+    ws: ^7.4.2
   languageName: unknown
   linkType: soft
 
@@ -320,10 +320,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^14.14.16":
+"@types/node@npm:*":
   version: 14.14.16
   resolution: "@types/node@npm:14.14.16"
   checksum: 220a7496ec73861ad7fb4ae762618bb46ac9d5d5f92f3a2fcebfd1a81a509ff558eface7bcd1d632598a8a28f856a74b324e7165918e8334a59c221cb06d15e3
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^14.14.19":
+  version: 14.14.19
+  resolution: "@types/node@npm:14.14.19"
+  checksum: 218ff4a93978cf41f4dd3d6aea7555d119873b50905889b1a3f14737f1e135a688672fa1f8e02ed856922fb828703bb064f7733f7e6998173c4714a7a3ec4c4c
   languageName: node
   linkType: hard
 
@@ -1977,12 +1984,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.8.26":
-  version: 0.8.26
-  resolution: "esbuild@npm:0.8.26"
+"esbuild@npm:^0.8.28":
+  version: 0.8.28
+  resolution: "esbuild@npm:0.8.28"
   bin:
     esbuild: bin/esbuild
-  checksum: dd77cde85ab0be203a665f7453c313c116811938ffd69cd967711fafa3d484f7d6cdbaba186ec980a5abb823cddca96db31c7b1e737bd925b82eb07ab3698594
+  checksum: 0872327aaf3eddffff566cb63be4eb42b2fc03010a4a7b19b22ddbd40fcf59628a148523a5eb91cab15440a421f398174e34d2ae802e7c4ef812a93e261e4043
   languageName: node
   linkType: hard
 
@@ -4675,14 +4682,14 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.1":
-  version: 8.2.1
-  resolution: "postcss@npm:8.2.1"
+"postcss@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "postcss@npm:8.2.2"
   dependencies:
     colorette: ^1.2.1
     nanoid: ^3.1.20
     source-map: ^0.6.1
-  checksum: aa7ba3d80a4d8e25bc1a3f61461d7f6b60d361fb1301465d0eb973c5f38b347ad0842b02b8cc8801ede46559391d7c640c7313301a829ef9ca77e34be7230854
+  checksum: c661b093d245ef8e3b0340958f672e3abeb89627afa7064771dafafa49c80742f0b6e05c55ee5ab14aa1da2095aebfd69325778df8a90d4e41fdf685a76993f2
   languageName: node
   linkType: hard
 
@@ -6558,9 +6565,9 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.4.1":
-  version: 7.4.1
-  resolution: "ws@npm:7.4.1"
+"ws@npm:^7.4.2":
+  version: 7.4.2
+  resolution: "ws@npm:7.4.2"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ^5.0.2
@@ -6569,7 +6576,7 @@ typescript@^4.1.3:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 32b4f83bfeeca2b98d31c2d11c87a11c6e83f9285937e4a8267eb0ccaba479952a70c8b2ba39d0304236043c37a9bdf45cf2e5a1c28f19a77838e4e0b7f37593
+  checksum: 832efdf1440706058ac04708aa56da951b6e5d10d956e6d01f7a2a32cd3f67acaabea8feb4b578b041a55289e421fc4c48769cbcf02f4d42915eb918c3f7e496
   languageName: node
   linkType: hard
 
