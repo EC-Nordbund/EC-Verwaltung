@@ -41,6 +41,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/plugin-commonjs", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:17.0.0"],
             ["@rollup/plugin-node-resolve", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:11.0.1"],
             ["@rollup/pluginutils", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.1.0"],
+            ["@surma/rollup-plugin-comlink", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
             ["@types/chokidar", "npm:2.1.3"],
             ["@types/elementtree", "npm:0.1.0"],
             ["@types/js-cookie", "npm:2.2.6"],
@@ -52,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.11.1"],
             ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.1.0"],
             ["chokidar", "npm:3.4.3"],
+            ["comlink", "npm:4.3.0"],
             ["copy-to-clipboard", "npm:3.3.1"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.5"],
@@ -198,6 +201,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/plugin-commonjs", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:17.0.0"],
             ["@rollup/plugin-node-resolve", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:11.0.1"],
             ["@rollup/pluginutils", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.1.0"],
+            ["@surma/rollup-plugin-comlink", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
             ["@types/chokidar", "npm:2.1.3"],
             ["@types/elementtree", "npm:0.1.0"],
             ["@types/js-cookie", "npm:2.2.6"],
@@ -209,6 +214,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.11.1"],
             ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.1.0"],
             ["chokidar", "npm:3.4.3"],
+            ["comlink", "npm:4.3.0"],
             ["copy-to-clipboard", "npm:3.3.1"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.5"],
@@ -437,6 +443,43 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [
             "@types/rollup",
             "rollup"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@surma/rollup-plugin-comlink", [
+        ["npm:0.3.0", {
+          "packageLocation": "./.yarn/cache/@surma-rollup-plugin-comlink-npm-0.3.0-d9cd2e666f-46c836a85a.zip/node_modules/@surma/rollup-plugin-comlink/",
+          "packageDependencies": [
+            ["@surma/rollup-plugin-comlink", "npm:0.3.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0", {
+          "packageLocation": "./.yarn/$$virtual/@surma-rollup-plugin-comlink-virtual-c4c28fb625/0/cache/@surma-rollup-plugin-comlink-npm-0.3.0-d9cd2e666f-46c836a85a.zip/node_modules/@surma/rollup-plugin-comlink/",
+          "packageDependencies": [
+            ["@surma/rollup-plugin-comlink", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
+            ["@types/comlink", null],
+            ["@types/surma__rollup-plugin-off-main-thread", null],
+            ["comlink", "npm:4.3.0"]
+          ],
+          "packagePeers": [
+            "@surma/rollup-plugin-off-main-thread",
+            "@types/comlink",
+            "@types/surma__rollup-plugin-off-main-thread",
+            "comlink"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@surma/rollup-plugin-off-main-thread", [
+        ["npm:1.4.2", {
+          "packageLocation": "./.yarn/cache/@surma-rollup-plugin-off-main-thread-npm-1.4.2-2391260d57-678096f137.zip/node_modules/@surma/rollup-plugin-off-main-thread/",
+          "packageDependencies": [
+            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
+            ["ejs", "npm:2.7.4"],
+            ["magic-string", "npm:0.25.7"]
           ],
           "linkType": "HARD",
         }]
@@ -1709,6 +1752,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["comlink", [
+        ["npm:4.3.0", {
+          "packageLocation": "./.yarn/cache/comlink-npm-4.3.0-fe5d9eaa4f-b42a40f684.zip/node_modules/comlink/",
+          "packageDependencies": [
+            ["comlink", "npm:4.3.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["commander", [
         ["npm:2.20.3", {
           "packageLocation": "./.yarn/cache/commander-npm-2.20.3-d8dcbaa39b-b73428e97d.zip/node_modules/commander/",
@@ -1809,7 +1861,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["core-js", [
         ["npm:2.6.12", {
-          "packageLocation": "./.yarn/cache/core-js-npm-2.6.12-0b93d77d31-b865823ce9.zip/node_modules/core-js/",
+          "packageLocation": "./.yarn/unplugged/core-js-npm-2.6.12-0b93d77d31/node_modules/core-js/",
           "packageDependencies": [
             ["core-js", "npm:2.6.12"]
           ],
@@ -2355,6 +2407,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["ejs", [
+        ["npm:2.7.4", {
+          "packageLocation": "./.yarn/unplugged/ejs-npm-2.7.4-879ed38a4e/node_modules/ejs/",
+          "packageDependencies": [
+            ["ejs", "npm:2.7.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["electron-to-chromium", [
         ["npm:1.3.633", {
           "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.3.633-7d9467177b-986784f90d.zip/node_modules/electron-to-chromium/",
@@ -2497,7 +2558,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["esbuild", [
         ["npm:0.8.29", {
-          "packageLocation": "./.yarn/cache/esbuild-npm-0.8.29-091ce37a95-44600db4dd.zip/node_modules/esbuild/",
+          "packageLocation": "./.yarn/unplugged/esbuild-npm-0.8.29-091ce37a95/node_modules/esbuild/",
           "packageDependencies": [
             ["esbuild", "npm:0.8.29"]
           ],

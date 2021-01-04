@@ -5,6 +5,9 @@ import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
 
+import comlink from "@surma/rollup-plugin-comlink";
+import omt from "@surma/rollup-plugin-off-main-thread";
+
 import url from 'postcss-url'
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
@@ -25,6 +28,8 @@ export default {
     format: 'es'
   },
   plugins: [
+    comlink(),
+    omt(),
     sw({
       path: 'sw.js'
     }),
