@@ -26,13 +26,13 @@ export default () => {
 
             const parts = requiredFile.split(/\\|\//);
 
-            const _ = this.emitFile({
+            const assetId = this.emitFile({
               type: 'asset',
               name: parts[parts.length - 1],
               source: readFileSync(resolvedID.id)
             });
 
-            cssReplacements.push([searchString, _, id]);
+            cssReplacements.push([searchString, assetId]);
           }
         } while (m);
 
