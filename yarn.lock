@@ -103,7 +103,6 @@ __metadata:
     autoprefixer: ^10.1.0
     chokidar: ^3.4.3
     comlink: ^4.3.0
-    copy-to-clipboard: ^3.3.1
     cssnano: ^4.1.10
     directory-tree: ^2.2.5
     esbuild: ^0.8.29
@@ -1403,15 +1402,6 @@ __metadata:
   dependencies:
     is-what: ^3.7.1
   checksum: 1573bc59ed5a0d8ebe21cace8fcc250d1c91d6efeee12f720663286491a9020b37884b47f6e1bc6e2fd3baefff00bc8a983503b496d492854ef715bc5ccf981e
-  languageName: node
-  linkType: hard
-
-"copy-to-clipboard@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "copy-to-clipboard@npm:3.3.1"
-  dependencies:
-    toggle-selection: ^1.0.6
-  checksum: 9707f2e405ca4019de1f4194565568acdf3d1dd8a59f7b8f63d0e7257648132b579461e7aeb6140169cb943cf4b6a243b377cf0437d8c10c6f5e5bb3935dea78
   languageName: node
   linkType: hard
 
@@ -6047,13 +6037,6 @@ fsevents@~2.1.2:
   dependencies:
     is-number: ^7.0.0
   checksum: 2b6001e314e4998a07137c197e333fac2f86d46d0593da90b678ae64e2daa07274b508f83cca09e6b3504cdf222497dcb5b7daceb6dc13a9a8872f58a27db907
-  languageName: node
-  linkType: hard
-
-"toggle-selection@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "toggle-selection@npm:1.0.6"
-  checksum: c47702aad780581f17367c413c4dc55b61a31b0c15c87a08461f4c4618457b11efce8ad9a7bf7b79fb23d17128b1c7da9248647a34dd15ae36c9afbdd2084d9f
   languageName: node
   linkType: hard
 

@@ -76,7 +76,6 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import gql from 'graphql-tag'
-import copy from 'copy-to-clipboard'
 
 @Component({})
 export default class EcNAME extends Vue {
@@ -85,7 +84,7 @@ export default class EcNAME extends Vue {
   private data!: any
   private location = window.location
 
-  private copy = copy
+  private copy = (text) => navigator.clipboard.writeText(text)
 
   public showAdresse(adresse: any) {
     alert('Hier kommt noch eine Karte hin.')

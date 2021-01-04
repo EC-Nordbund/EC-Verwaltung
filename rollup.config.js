@@ -27,6 +27,8 @@ import definePlugin from './rollup-plugins/helper'
 
 const cssReplacements = []
 
+const module = new Set()
+
 export default {
   input: {
     main: './src/main.ts',
@@ -37,6 +39,30 @@ export default {
     format: 'es'
   },
   plugins: [
+    {
+      resolveId(id) {
+        if (id.startsWith('.') || id.replace('D:', '').indexOf(':') !== -1) {
+          return
+        } else {
+          id = id.split('?')[0].replace(/\x00/g, '/')
+
+          if (id.endsWith('.vue')) {
+            return
+          }
+
+          const _ = id.split(/\\|\//)
+
+          if (_[0][0] === '@') {
+            module.add(`${_[0]}/${_[1]}`)
+          } else if (id.indexOf('.yarn') !== -1) {
+            const nID = id.split(/cache/)[1]
+            module.add(nID.split(/\\|\//)[1].split('-npm')[0])
+          } else {
+            module.add(_[0])
+          }
+        }
+      }
+    },
     comlink({
       useModuleWorker: true
     }),
@@ -115,11 +141,7 @@ export default {
         }
       },
       generateBundle(options, bundle) {
-        console.log(cssReplacements)
-        console.log('||')
-        cssReplacements.forEach(f => {
-          console.log(f[0], '||->', this.getFileName(f[1]))
-        })
+        console.log(module)
 
         Object.keys(bundle).filter(v => v.endsWith('.css')).forEach(cssFile => {
           let code = ''

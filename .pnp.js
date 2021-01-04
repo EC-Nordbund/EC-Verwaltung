@@ -54,7 +54,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.1.0"],
             ["chokidar", "npm:3.4.3"],
             ["comlink", "npm:4.3.0"],
-            ["copy-to-clipboard", "npm:3.3.1"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.5"],
             ["esbuild", "npm:0.8.29"],
@@ -211,7 +210,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.1.0"],
             ["chokidar", "npm:3.4.3"],
             ["comlink", "npm:4.3.0"],
-            ["copy-to-clipboard", "npm:3.3.1"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.5"],
             ["esbuild", "npm:0.8.29"],
@@ -1830,16 +1828,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["copy-anything", "npm:2.0.1"],
             ["is-what", "npm:3.12.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["copy-to-clipboard", [
-        ["npm:3.3.1", {
-          "packageLocation": "./.yarn/cache/copy-to-clipboard-npm-3.3.1-18029bce99-9707f2e405.zip/node_modules/copy-to-clipboard/",
-          "packageDependencies": [
-            ["copy-to-clipboard", "npm:3.3.1"],
-            ["toggle-selection", "npm:1.0.6"]
           ],
           "linkType": "HARD",
         }]
@@ -7120,15 +7108,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["to-regex-range", "npm:5.0.1"],
             ["is-number", "npm:7.0.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["toggle-selection", [
-        ["npm:1.0.6", {
-          "packageLocation": "./.yarn/cache/toggle-selection-npm-1.0.6-c506b73005-c47702aad7.zip/node_modules/toggle-selection/",
-          "packageDependencies": [
-            ["toggle-selection", "npm:1.0.6"]
           ],
           "linkType": "HARD",
         }]

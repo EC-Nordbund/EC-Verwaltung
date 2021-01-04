@@ -93,13 +93,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
-import copy from 'copy-to-clipboard'
 
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
   public static meta = {}
 
-  private copy = copy
+  private copy = (text) => navigator.clipboard.writeText(text)
 
   private rollen = [
     'Teilnehmer',
