@@ -73,8 +73,6 @@ export default ({ throwAtMissing } = { throwAtMissing: false }) => {
           this.warn(`Module ${m} wurde eingebunden aber nicht erwartet!`);
         }
       });
-
-      console.log(module);
     }
   })
 }

@@ -23,7 +23,7 @@ import version from './rollup-plugins/version'
 import dependencieCheck from './rollup-plugins/dependencieCheck'
 import cssAssets from './rollup-plugins/cssAssets'
 
-const isProduction = process.env.NODE_ENV !== 'production'
+const isProduction = process.env.NODE_ENV === 'production'
 
 export default {
   input: {
@@ -73,13 +73,13 @@ export default {
       to: 'bundle.css',
       plugins: [
         autoprefixer(),
-        ...(!isProduction ? [] : [cssnano()])
+        ...(isProduction ? [cssnano()] : [])
       ],
       extract: true
     }),
     icons(),
     cssAssets(),
     jsonParse(),
-    ...(!isProduction ? [serve()] : [terser()])
+    ...(isProduction ? [terser()] : [serve()])
   ]
 }
