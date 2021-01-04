@@ -13,15 +13,10 @@ export default ({ path } = { path: 'sw.js' }) => {
     },
     load(id) {
       if (id.startsWith(swProto)) {
-        this.emitFile({
-          type: 'chunk',
-          id: id.slice(swProto.length),
-          fileName: path
-        })
 
         return `export default () => {
         if ('serviceWorker' in navigator) {
-          return navigator.serviceWorker.register(${JSON.stringify(path).replace(/\"/g, "'")})
+          return navigator.serviceWorker.register(${JSON.stringify(path)})
         }
         return null
       }`

@@ -50,7 +50,6 @@ v-app(app, :dark='dark')
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { errorHandler } from '../helpers'
-import * as save from 'js-cookie'
 
 @Component({})
 export default class EcRootLogin extends Vue {
@@ -59,7 +58,7 @@ export default class EcRootLogin extends Vue {
   private valid = false
   private loading = false
   private data = {
-    username: (save.get('username') as string) || '',
+    username: (localStorage.getItem('username') as string) || '',
     password: ''
   }
   private showPasword = false

@@ -157,7 +157,6 @@ v-app(app, :dark='dark')
 import { Component, Vue } from 'vue-property-decorator'
 import pack from '../plugins/package'
 import gql from 'graphql-tag'
-import * as save from 'js-cookie'
 import { subscribe } from '../plugins/sw'
 // ()
 @Component({})
@@ -172,7 +171,7 @@ export default class EcRootIndex extends Vue {
   }
   public static meta = {}
   private password = ''
-  private dark = save.get('dark') === 'x'
+  private dark = localStorage.getItem('dark') === 'x'
   private drawer = null
   private version = pack.version || 'Fehler'
   private breadcrumbs = this.breadMap([
@@ -212,14 +211,7 @@ export default class EcRootIndex extends Vue {
         }
       })
       .then(async (res: any) => {
-        // let path = this.$route.query.next || '/home';
-        // if (this.$route.query.next === '/404?prev=%2F') {
-        //   path = 'home';
-        // }
-        // save.set('username', this.data.username, { expires: 7 });
-        // localStorage.setItem('username', this.data.username);
         await this.$setAuthToken(res.data.logIn)
-        // this.$router.push(path as string);
         this.loading = false
         this.updateAlive()
         this.password = ''
@@ -252,7 +244,7 @@ export default class EcRootIndex extends Vue {
 
   private toggleDark() {
     this.dark = !this.dark
-    save.set('dark', this.dark ? 'x' : '')
+    localStorage.setItem('dark', this.dark ? 'x' : '')
   }
 
   private breadMap(arr: string[]) {

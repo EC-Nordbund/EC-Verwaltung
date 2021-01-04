@@ -1,5 +1,4 @@
 import resourceList from 'resource-list:'
-import icon from '../icons/ec-logo-512.png'
 const VERSION = '4.0.0'
 
 const _self: ServiceWorkerGlobalScope & typeof globalThis = self as any
@@ -65,6 +64,6 @@ _self.addEventListener('push', (ev) => {
 
   _self.registration.showNotification(content.title, {
     body: content.body,
-    icon: icon
+    icon: 'favicon.png'
   })
 })
