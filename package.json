@@ -3,9 +3,9 @@
   "version": "3.3.0",
   "private": true,
   "scripts": {
-    "serve": "yarn version && rollup -cw",
-    "build": "yarn version && NODE_ENV=production rollup -c",
-    "version": "git rev-parse --verify HEAD > .commithash",
+    "serve": "yarn versiongen && rollup -cw",
+    "build": "yarn versiongen && NODE_ENV=production rollup -c",
+    "versiongen": "git rev-parse --verify HEAD > .commithash",
     "types": "tsc --noEmit && cd src/serviceWorker && tsc --noEmit",
     "lint": "eslint --ext .js,.vue,.ts src",
     "build:loading": "cd loading && rollup -c"

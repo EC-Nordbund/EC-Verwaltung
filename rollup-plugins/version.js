@@ -6,17 +6,19 @@ const commitHash = readFileSync('./.commithash', 'utf-8').split('\n')[0]
 
 const modulePrefix = 'version:'
 
-export default () => definePlugin({
-  name: 'version',
+export default () => {
+  return definePlugin({
+    name: 'version',
 
-  resolveId(id, importer) {
-    if (id.startsWith(modulePrefix)) {
-      return id
+    resolveId(id, importer) {
+      if (id.startsWith(modulePrefix)) {
+        return id
+      }
+    },
+    load(id) {
+      if (id.startsWith(modulePrefix)) {
+        return `export default ${JSON.stringify({ version, commitHash })}`
+      }
     }
-  },
-  load(id) {
-    if (id.startsWith(modulePrefix)) {
-      return `export default ${JSON.stringify({ version, commitHash })}`
-    }
-  }
-})
+  })
+}
