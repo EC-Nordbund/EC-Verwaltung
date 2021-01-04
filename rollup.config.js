@@ -4,6 +4,7 @@ import postcss from 'rollup-plugin-postcss'
 import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
+import jsonParse from 'rollup-plugin-json-parse'
 
 import { readFileSync } from "fs";
 
@@ -165,6 +166,7 @@ export default {
         })
       }
     }),
+    jsonParse(),
     ...(process.env.NODE_ENV !== 'production' ? [serve()] : [terser()])
   ]
 }

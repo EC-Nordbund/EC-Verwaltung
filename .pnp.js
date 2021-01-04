@@ -73,6 +73,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["roboto-fontface", "npm:0.10.0"],
             ["rollup", "npm:2.35.1"],
             ["rollup-plugin-esbuild", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.6.1"],
+            ["rollup-plugin-json-parse", "npm:1.1.5"],
             ["rollup-plugin-postcss", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.0.0"],
             ["rollup-plugin-terser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.0.2"],
             ["rollup-plugin-vue", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:5.1.9"],
@@ -229,6 +230,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["roboto-fontface", "npm:0.10.0"],
             ["rollup", "npm:2.35.1"],
             ["rollup-plugin-esbuild", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.6.1"],
+            ["rollup-plugin-json-parse", "npm:1.1.5"],
             ["rollup-plugin-postcss", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.0.0"],
             ["rollup-plugin-terser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.0.2"],
             ["rollup-plugin-vue", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:5.1.9"],
@@ -3977,6 +3979,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["jsesc", [
+        ["npm:2.5.2", {
+          "packageLocation": "./.yarn/cache/jsesc-npm-2.5.2-c5acb78804-ca91ec33d7.zip/node_modules/jsesc/",
+          "packageDependencies": [
+            ["jsesc", "npm:2.5.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["json-parse-better-errors", [
         ["npm:1.0.2", {
           "packageLocation": "./.yarn/cache/json-parse-better-errors-npm-1.0.2-7f37637d19-b4c4f0e43b.zip/node_modules/json-parse-better-errors/",
@@ -6310,6 +6321,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [
             "@types/esbuild",
             "esbuild"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["rollup-plugin-json-parse", [
+        ["npm:1.1.5", {
+          "packageLocation": "./.yarn/cache/rollup-plugin-json-parse-npm-1.1.5-191c9acaed-6d632cf2c8.zip/node_modules/rollup-plugin-json-parse/",
+          "packageDependencies": [
+            ["rollup-plugin-json-parse", "npm:1.1.5"],
+            ["acorn", "npm:7.4.1"],
+            ["jsesc", "npm:2.5.2"],
+            ["magic-string", "npm:0.25.7"]
           ],
           "linkType": "HARD",
         }]
