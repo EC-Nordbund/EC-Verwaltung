@@ -6,24 +6,24 @@ import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
 import jsonParse from 'rollup-plugin-json-parse'
 
-import comlink from '@surma/rollup-plugin-comlink'
-import workers from '@surma/rollup-plugin-off-main-thread'
-
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
+
+import comlink from '@surma/rollup-plugin-comlink'
+import workers from '@surma/rollup-plugin-off-main-thread'
 
 import image from './rollup-plugins/image'
 import serve from './rollup-plugins/serve'
 import routes from './rollup-plugins/routes'
-import serviceWorker from './rollup-plugins/sw'
 import replace from './rollup-plugins/replace'
 import json from './rollup-plugins/json'
 import resourceList from './rollup-plugins/resource-list'
 import icons from './rollup-plugins/icons'
 import version from './rollup-plugins/version'
-
 import dependencieCheck from './rollup-plugins/dependencieCheck'
 import cssAssets from './rollup-plugins/cssAssets'
+
+const isProduction = process.env.NODE_ENV !== 'production'
 
 export default {
   input: {
@@ -36,16 +36,13 @@ export default {
   },
   plugins: [
     dependencieCheck({
-      throwAtMissing: process.env.NODE_ENV === 'production'
+      throwAtMissing: isProduction
     }),
     comlink({
       useModuleWorker: true
     }),
     version(),
     workers(),
-    serviceWorker({
-      path: 'sw.js'
-    }),
     resourceList(),
     json(),
     image(),
@@ -76,13 +73,13 @@ export default {
       to: 'bundle.css',
       plugins: [
         autoprefixer(),
-        ...(process.env.NODE_ENV !== 'production' ? [] : [cssnano()])
+        ...(!isProduction ? [] : [cssnano()])
       ],
       extract: true
     }),
     icons(),
     cssAssets(),
     jsonParse(),
-    ...(process.env.NODE_ENV !== 'production' ? [serve()] : [terser()])
+    ...(!isProduction ? [serve()] : [terser()])
   ]
 }

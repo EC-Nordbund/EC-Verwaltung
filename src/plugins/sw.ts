@@ -1,6 +1,9 @@
 import Vue from 'vue'
-import sw from 'sw:../serviceWorker/serviceWorker'
-sw()
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+}
+
 onUpdate((doUpdate) => {
   if (window.confirm('Eine neue Version ist verfügbar willst du sie laden?')) {
     doUpdate()
