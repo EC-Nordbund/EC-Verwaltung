@@ -4,7 +4,6 @@ import postcss from 'rollup-plugin-postcss'
 import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
-import jsonParse from 'rollup-plugin-json-parse'
 
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
@@ -79,7 +78,6 @@ export default {
     }),
     icons(),
     cssAssets(),
-    jsonParse(),
     ...(isProduction ? [terser()] : [serve()])
   ]
 }

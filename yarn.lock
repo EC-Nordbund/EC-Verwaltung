@@ -122,7 +122,6 @@ __metadata:
     roboto-fontface: "*"
     rollup: ^2.35.1
     rollup-plugin-esbuild: ^2.6.1
-    rollup-plugin-json-parse: ^1.1.5
     rollup-plugin-postcss: ^4.0.0
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-vue: 5.1.9
@@ -617,7 +616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^7.1.0, acorn@npm:^7.1.1, acorn@npm:^7.4.0":
+"acorn@npm:^7.1.1, acorn@npm:^7.4.0":
   version: 7.4.1
   resolution: "acorn@npm:7.4.1"
   bin:
@@ -3225,15 +3224,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"jsesc@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "jsesc@npm:2.5.2"
-  bin:
-    jsesc: bin/jsesc
-  checksum: ca91ec33d74c55959e4b6fdbfee2af5f38be74a752cf0a982702e3a16239f26c2abbe19f5f84b15592570dda01872e929a90738615bd445f7b9b859781cfcf68
-  languageName: node
-  linkType: hard
-
 "json-parse-better-errors@npm:^1.0.1":
   version: 1.0.2
   resolution: "json-parse-better-errors@npm:1.0.2"
@@ -3517,7 +3507,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.25.0, magic-string@npm:^0.25.4, magic-string@npm:^0.25.7":
+"magic-string@npm:^0.25.0, magic-string@npm:^0.25.7":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
   dependencies:
@@ -5317,17 +5307,6 @@ fsevents@~2.1.2:
   peerDependencies:
     esbuild: ">=0.7.0"
   checksum: 90a731a839d3d5db05dbd4ab8ded04b37785063039b6abb1e2162cf77eb05942aa6d400697e91b2284a3940b574f9d1413081b5298b33b353cca1ecca6718413
-  languageName: node
-  linkType: hard
-
-"rollup-plugin-json-parse@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "rollup-plugin-json-parse@npm:1.1.5"
-  dependencies:
-    acorn: ^7.1.0
-    jsesc: ^2.5.2
-    magic-string: ^0.25.4
-  checksum: 6d632cf2c87f911c3d2d6875796db2eb2e47a743760a2b0a38c15c563a785414575d135ee7d4aa3802c428ef166677e234043f590c5153f90b5d4eadeeb86035
   languageName: node
   linkType: hard
 
