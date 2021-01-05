@@ -33,6 +33,8 @@ export default () => {
       const manifest = {
         name: 'EC-Nordbund Verwaltungs-App',
         short_name: 'EC-Verwaltung',
+        lang: 'de-DE',
+        categories: ["verwaltung", "ec-nordbund", "entschieden für christus"],
         start_url: '/',
         display: 'standalone',
         theme_color: '#8fb217',

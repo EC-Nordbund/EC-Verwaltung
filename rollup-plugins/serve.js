@@ -3,9 +3,9 @@ import WebSocket from 'ws'
 import chokidar from 'chokidar'
 import definePlugin from './helper'
 
-let first = true
-
 export default () => {
+  let first = true
+
   return definePlugin({
     name: 'serve',
     generateBundle() {
@@ -15,11 +15,13 @@ export default () => {
         const httpServer = createServer({
           cache: -1
         }).listen(8080)
+
         const wsServer = new WebSocket.Server({
           port: 8081
         })
 
         let sockets = []
+
         wsServer.on('connection', (socket) => {
           sockets.push(socket)
 
@@ -48,7 +50,7 @@ export default () => {
       }
     },
     banner() {
-      return `(new WebSocket('ws://localhost:8081')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};`
+      return `if(!(window||self)._HMR){(new WebSocket('ws://localhost:8081')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};(window||self)._HMR=true;}`
     }
   })
 }

@@ -34,21 +34,29 @@ export default {
     format: 'es'
   },
   plugins: [
+    // only include needed dependencies
     dependencieCheck({
       throwAtMissing: isProduction
     }),
+    // Import Version
+    version(),
+    // Use Workers with comlink
     comlink({
       useModuleWorker: true
     }),
-    version(),
     workers(),
+    // Import list of all assets
     resourceList(),
+    // Import JSON5 docs
     json(),
+    // Use images
     image(),
+    // Transpile TS
     esbuild({
       target: 'es2017',
       tsconfig: './base-tsconfig.json'
     }),
+    // Transpile vue files
     vue({
       css: true,
       compileTemplate: true,
@@ -60,14 +68,18 @@ export default {
         }
       }
     }),
+    // Set Production mode
     replace(),
+    // Use commonJS and Node Modules
     commonjs(),
     resolve({
       jsnext: true,
       main: true,
       browser: true
     }),
+    // Route import
     routes(),
+    // CSS hanndling
     postcss({
       to: 'bundle.css',
       plugins: [
@@ -76,8 +88,11 @@ export default {
       ],
       extract: true
     }),
+    // Assets building
     icons(),
+    // CSS Assets parser and require
     cssAssets(),
+    // Minify or Serve
     ...(isProduction ? [terser()] : [serve()])
   ]
 }

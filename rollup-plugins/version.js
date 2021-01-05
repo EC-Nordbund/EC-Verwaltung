@@ -10,7 +10,7 @@ export default () => {
   return definePlugin({
     name: 'version',
 
-    resolveId(id, importer) {
+    resolveId(id) {
       if (id.startsWith(modulePrefix)) {
         return id
       }

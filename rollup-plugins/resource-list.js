@@ -6,16 +6,14 @@ export default function resourceList() {
   return definePlugin({
     name: "dependencygraph",
     resolveId(id) {
-      if (id !== "resource-list:") {
-        return null;
+      if (id === "resource-list:") {
+        return id;
       }
-      return id;
     },
     load(id) {
-      if (id !== "resource-list:") {
-        return null;
+      if (id === "resource-list:") {
+        return `export default ${resourceListMarker};`;
       }
-      return `export default ${resourceListMarker};`;
     },
     generateBundle(_outputOptions, bundle) {
       const resourceListJSON = JSON.stringify(Object.keys(bundle));
