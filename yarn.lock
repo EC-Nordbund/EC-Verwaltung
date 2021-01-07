@@ -100,16 +100,16 @@ __metadata:
     "@types/ws": ^7.4.0
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
-    autoprefixer: ^10.1.0
-    chokidar: ^3.4.3
+    autoprefixer: ^10.2.0
+    chokidar: ^3.5.0
     comlink: ^4.3.0
     cssnano: ^4.1.10
     directory-tree: ^2.2.5
-    esbuild: ^0.8.29
+    esbuild: ^0.8.31
     eslint: ^7.17.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.1
-    eslint-plugin-vue: ^7.4.0
+    eslint-plugin-vue: ^7.4.1
     graphql: ^15.4.0
     graphql-tag: ^2.11.0
     http-server: ^0.12.3
@@ -120,12 +120,12 @@ __metadata:
     prettier: ^2.2.1
     pug: ^3.0.0
     roboto-fontface: "*"
-    rollup: ^2.35.1
+    rollup: ^2.36.1
     rollup-plugin-esbuild: ^2.6.1
     rollup-plugin-postcss: ^4.0.0
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-vue: 5.1.9
-    tslib: ^2.0.3
+    tslib: ^2.1.0
     typescript: ^4.1.3
     vee-validate: 2.2.15
     vue: ^2.6.12
@@ -841,21 +841,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "autoprefixer@npm:10.1.0"
+"autoprefixer@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "autoprefixer@npm:10.2.0"
   dependencies:
-    browserslist: ^4.15.0
-    caniuse-lite: ^1.0.30001165
+    browserslist: ^4.16.1
+    caniuse-lite: ^1.0.30001173
     colorette: ^1.2.1
-    fraction.js: ^4.0.12
+    fraction.js: ^4.0.13
     normalize-range: ^0.1.2
     postcss-value-parser: ^4.1.0
   peerDependencies:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: a0d9ccd6059f024e5fda4334019c5306b4a15a3fa2067bf5aea8eafe00fc1e79e0bc1d563998abdb3de6131a0718de80e8506534c404b21aefec75d2a56f966f
+  checksum: 0b0c855b10b54613714a62684757053c462f1f6c832b4d18ad8eb26f9bf25b942d8b74e3a1dd4837849da0e7b8cbaf72b1a61db48768efdfb8e1815d43887aae
   languageName: node
   linkType: hard
 
@@ -990,7 +990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.0.0, browserslist@npm:^4.15.0":
+"browserslist@npm:^4.0.0":
   version: 4.16.0
   resolution: "browserslist@npm:4.16.0"
   dependencies:
@@ -1002,6 +1002,21 @@ __metadata:
   bin:
     browserslist: cli.js
   checksum: 5385f3dfb1bd1d321093a88c758a5429b55e5f4c76abd91ce865729cfcaa45dc1a54e934e2a8400aca7200f1b9993b1e147bea9fe0fa6704a968b230abd4f277
+  languageName: node
+  linkType: hard
+
+"browserslist@npm:^4.16.1":
+  version: 4.16.1
+  resolution: "browserslist@npm:4.16.1"
+  dependencies:
+    caniuse-lite: ^1.0.30001173
+    colorette: ^1.2.1
+    electron-to-chromium: ^1.3.634
+    escalade: ^3.1.1
+    node-releases: ^1.1.69
+  bin:
+    browserslist: cli.js
+  checksum: 56f51464c3a3bd9b2aeb75ded1dc3fce5ad91bd6d84187aba812a78ba66b69bc97c2de25a1b7409daac3c0049e979bf0faa6cca4aacce0abcaf3107c250ce3fb
   languageName: node
   linkType: hard
 
@@ -1111,6 +1126,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"caniuse-lite@npm:^1.0.30001173":
+  version: 1.0.30001173
+  resolution: "caniuse-lite@npm:1.0.30001173"
+  checksum: e90b1f29f437708dcb0cab352cb932a3437ae4826dbae3a0f20eaf112b9151aba490cfd8a0f693b08c254c3075baa69a375c235ec5dd002e345283f98981190a
+  languageName: node
+  linkType: hard
+
 "caseless@npm:~0.12.0":
   version: 0.12.0
   resolution: "caseless@npm:0.12.0"
@@ -1171,7 +1193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:*, chokidar@npm:>=2.0.0 <4.0.0, chokidar@npm:^3.4.3":
+"chokidar@npm:*, chokidar@npm:>=2.0.0 <4.0.0":
   version: 3.4.3
   resolution: "chokidar@npm:3.4.3"
   dependencies:
@@ -1187,6 +1209,25 @@ __metadata:
     fsevents:
       optional: true
   checksum: b5a566b31267b1a71c2e7544fbf8c21f597883515d9bfc0356719be6c3b34ee51b0329f3ee5f5d98060ce2930be68f8c33b53f8b3659dc101fd51be265831deb
+  languageName: node
+  linkType: hard
+
+"chokidar@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "chokidar@npm:3.5.0"
+  dependencies:
+    anymatch: ~3.1.1
+    braces: ~3.0.2
+    fsevents: ~2.3.1
+    glob-parent: ~5.1.0
+    is-binary-path: ~2.1.0
+    is-glob: ~4.0.1
+    normalize-path: ~3.0.0
+    readdirp: ~3.5.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 36c67d9d4b5a96006bc023b8c4799b4a5697ac602b3bd1cbcec54f8516c5625382aaee0bc9e2325b7fa288b1d67ecdc308911f7448b55cfe37c384ff1f8cb62a
   languageName: node
   linkType: hard
 
@@ -1873,6 +1914,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"electron-to-chromium@npm:^1.3.634":
+  version: 1.3.634
+  resolution: "electron-to-chromium@npm:1.3.634"
+  checksum: 8bb2b0e053852a6175f86b46b428a95e52cbb24e175bdc7d4ebd5555aabd49baa088aa9aaa80a055bc752581a35cf462843fca3a0f455b5ecd27146fab82d0b9
+  languageName: node
+  linkType: hard
+
 "emoji-regex@npm:^7.0.1":
   version: 7.0.3
   resolution: "emoji-regex@npm:7.0.3"
@@ -1994,12 +2042,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.8.29":
-  version: 0.8.29
-  resolution: "esbuild@npm:0.8.29"
+"esbuild@npm:^0.8.31":
+  version: 0.8.31
+  resolution: "esbuild@npm:0.8.31"
   bin:
     esbuild: bin/esbuild
-  checksum: 44600db4dd589bf49c3cdd390ebc3178f5c01ca8282299fda03e6723e806f2878703cc76488bf7caeeb0ac7183c526c6539d173478dd05a88d3f0a23ff132d11
+  checksum: 0c74f60258705bddce6192fc833b37b00efdb47b4e6754726f6ab225d5ba46356e39bcc08ae9e866338c73e65b1c7b9518a50cf9792fbc7da3631c988f0d22ef
   languageName: node
   linkType: hard
 
@@ -2043,9 +2091,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:^7.4.0":
-  version: 7.4.0
-  resolution: "eslint-plugin-vue@npm:7.4.0"
+"eslint-plugin-vue@npm:^7.4.1":
+  version: 7.4.1
+  resolution: "eslint-plugin-vue@npm:7.4.1"
   dependencies:
     eslint-utils: ^2.1.0
     natural-compare: ^1.4.0
@@ -2053,7 +2101,7 @@ __metadata:
     vue-eslint-parser: ^7.3.0
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0
-  checksum: f62fbf5217d4e91e786a5512db8c88d59d252f983c2688bd7c3c8edb6a7e26ab5196a2e4003b2a307e08bb1d911d267169e0b6b127cc06adb199a079ecd0a949
+  checksum: 5e82c2f6c90786b8d21cc11c938fb88442a3b784222ba1e0d032bef2857b32ab86a80163485a18db128293718662c4b3ffa268768edf22d45af5112fa86b1405
   languageName: node
   linkType: hard
 
@@ -2397,7 +2445,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fraction.js@npm:^4.0.12":
+"fraction.js@npm:^4.0.13":
   version: 4.0.13
   resolution: "fraction.js@npm:4.0.13"
   checksum: 1e9ec132b09f17f3e41aa53508197901277f11896f6adc0b51a4b38511e6236813a471488c319221f4fadf7c854be9566a4924215623b460364591d80e1791c3
@@ -2429,12 +2477,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@patch:fsevents@~2.3.1#builtin<compat/fsevents>":
+  version: 2.3.1
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.1#builtin<compat/fsevents>::version=2.3.1&hash=11e9ea"
+  dependencies:
+    node-gyp: latest
+  checksum: 66b24358e15cdd0f705b456346e58b4613f2bf54206b47874decda4152614fb0632d2d662c92b0ea54810109f646e5233e4cdd64dbb2a1949070ee5dc14dab87
+  languageName: node
+  linkType: hard
+
 fsevents@~2.1.2:
   version: 2.1.3
   resolution: "fsevents@npm:2.1.3"
   dependencies:
     node-gyp: latest
   checksum: 8977781884d06c5bcb97b5f909efdce9683c925f2a0ce7e098d2cdffe2e0a0a50b1868547bb94dca75428c06535a4a70517a7bb3bb5a974d93bf9ffc067291eb
+  languageName: node
+  linkType: hard
+
+fsevents@~2.3.1:
+  version: 2.3.1
+  resolution: "fsevents@npm:2.3.1"
+  dependencies:
+    node-gyp: latest
+  checksum: 32619a121e7f9ac8a5ce4954f5fdf06be68b7b1c16e4ac8fa6e5e13cbf97d83c86cdcdf872ab7b188ebb07b34d2271b7818aebfc305b4a7d5b35f4bc2117f8be
   languageName: node
   linkType: hard
 
@@ -3762,6 +3828,13 @@ fsevents@~2.1.2:
   version: 1.1.67
   resolution: "node-releases@npm:1.1.67"
   checksum: 19a76af9498421b28bbc0123effc870a2ebe68a6364a4eb6547c5f871d6c2d8095fb66cc582a2378af8fbb6124ef8360207ef29d7a5a507e27691c53a85e9df4
+  languageName: node
+  linkType: hard
+
+"node-releases@npm:^1.1.69":
+  version: 1.1.69
+  resolution: "node-releases@npm:1.1.69"
+  checksum: 240b2534f32c8bbdfefb1fb052d2b1c198f3a745141ce245c6c5241a6efefae22d356b66965e5250869013c3c4777050cdca78d39f3b46965166b5f3e02b08d7
   languageName: node
   linkType: hard
 
@@ -5375,9 +5448,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.35.1":
-  version: 2.35.1
-  resolution: "rollup@npm:2.35.1"
+"rollup@npm:^2.36.1":
+  version: 2.36.1
+  resolution: "rollup@npm:2.36.1"
   dependencies:
     fsevents: ~2.1.2
   dependenciesMeta:
@@ -5385,7 +5458,7 @@ fsevents@~2.1.2:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 01e8b621baf3b35e1a28e3679cf9bdd4c22c2e999a895343e0b1e02dfe735f92a9fe439042e1b35c981663e9a8b75c1d707e6c27d786170febbb503b83dfed39
+  checksum: bb48730bf382d6439012a1504a8ca2f676657b472e9fbf72f726701c3091325229e1501c75088f4feebf6c9eb54cfc01353a11b50d3b0b9fa23764aaf5fca38c
   languageName: node
   linkType: hard
 
@@ -6098,10 +6171,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "tslib@npm:2.0.3"
-  checksum: 447bfca5deaa157806c3f77eaba74d05dd0b38b014e47ce79d98b5c77ce7d91b00a687ba13ca1b5a74d35ca1098ac7a072c0a97fad06f0266612f2a03a6c8e8f
+"tslib@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "tslib@npm:2.1.0"
+  checksum: d8f5bdd067611651c6b846c2388f4dc8ba1f5af124e66105f5263d1ad56da17f4b8c6566887ca2f205c5a9758451871ceca87d5d06087af2dca1699c5e33db69
   languageName: node
   linkType: hard
 
