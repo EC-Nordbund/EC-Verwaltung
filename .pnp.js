@@ -51,7 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.12.0"],
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.12.0"],
-            ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.0"],
+            ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.1"],
             ["chokidar", "npm:3.5.0"],
             ["comlink", "npm:4.3.0"],
             ["cssnano", "npm:4.1.10"],
@@ -207,7 +207,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.12.0"],
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.12.0"],
-            ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.0"],
+            ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.1"],
             ["chokidar", "npm:3.5.0"],
             ["comlink", "npm:4.3.0"],
             ["cssnano", "npm:4.1.10"],
@@ -1194,17 +1194,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["autoprefixer", [
-        ["npm:10.2.0", {
-          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/autoprefixer-npm-10.2.0-6531c723e5-0b0c855b10.zip/node_modules/autoprefixer/",
+        ["npm:10.2.1", {
+          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/autoprefixer-npm-10.2.1-c1ecef6619-ede6dec5a5.zip/node_modules/autoprefixer/",
           "packageDependencies": [
-            ["autoprefixer", "npm:10.2.0"]
+            ["autoprefixer", "npm:10.2.1"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.0", {
-          "packageLocation": "./.yarn/$$virtual/autoprefixer-virtual-3cfa67a7b5/6/tmp/renovate-cache/others/yarn/autoprefixer-npm-10.2.0-6531c723e5-0b0c855b10.zip/node_modules/autoprefixer/",
+        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.1", {
+          "packageLocation": "./.yarn/$$virtual/autoprefixer-virtual-cc3ceb7820/6/tmp/renovate-cache/others/yarn/autoprefixer-npm-10.2.1-c1ecef6619-ede6dec5a5.zip/node_modules/autoprefixer/",
           "packageDependencies": [
-            ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.0"],
+            ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.1"],
             ["@types/postcss", null],
             ["browserslist", "npm:4.16.1"],
             ["caniuse-lite", "npm:1.0.30001173"],
