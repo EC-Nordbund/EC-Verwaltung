@@ -37,7 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
-            ["@apollo/client", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.6"],
+            ["@apollo/client", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.7"],
             ["@rollup/plugin-commonjs", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:17.0.0"],
             ["@rollup/plugin-node-resolve", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:11.0.1"],
             ["@rollup/pluginutils", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.1.0"],
@@ -56,7 +56,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["comlink", "npm:4.3.0"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.5"],
-            ["esbuild", "npm:0.8.31"],
+            ["esbuild", "npm:0.8.32"],
             ["eslint", "npm:7.17.0"],
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.1.0"],
             ["eslint-plugin-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.1"],
@@ -93,18 +93,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@apollo/client", [
-        ["npm:3.3.6", {
-          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/@apollo-client-npm-3.3.6-a3b2ca6648-cf04e98317.zip/node_modules/@apollo/client/",
+        ["npm:3.3.7", {
+          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/@apollo-client-npm-3.3.7-55a3f3f675-eb06152f3e.zip/node_modules/@apollo/client/",
           "packageDependencies": [
-            ["@apollo/client", "npm:3.3.6"]
+            ["@apollo/client", "npm:3.3.7"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.6", {
-          "packageLocation": "./.yarn/$$virtual/@apollo-client-virtual-d2dfbd5678/6/tmp/renovate-cache/others/yarn/@apollo-client-npm-3.3.6-a3b2ca6648-cf04e98317.zip/node_modules/@apollo/client/",
+        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.7", {
+          "packageLocation": "./.yarn/$$virtual/@apollo-client-virtual-a8d4b22011/6/tmp/renovate-cache/others/yarn/@apollo-client-npm-3.3.7-55a3f3f675-eb06152f3e.zip/node_modules/@apollo/client/",
           "packageDependencies": [
-            ["@apollo/client", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.6"],
-            ["@graphql-typed-document-node/core", "virtual:d2dfbd5678d97f928ff7f5971bbaf7f5849bafe1ebce212b7bf4b87ee066614ad18b2d685a3593103f6cd95244eeed351d9276c6d7756623b335558aa0643d32#npm:3.1.0"],
+            ["@apollo/client", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.7"],
+            ["@graphql-typed-document-node/core", "virtual:a8d4b2201199de780ba0ab2d7afc43dcc40d6ddbfc1c6477ebee32c6cc1c18ac87df1269a4c74c385d06b303b68ccff94e6f2bad752a1b06122caf1232e5c386#npm:3.1.0"],
             ["@types/graphql", null],
             ["@types/react", null],
             ["@types/subscriptions-transport-ws", null],
@@ -115,7 +115,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graphql", "npm:15.4.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["hoist-non-react-statics", "npm:3.3.2"],
-            ["optimism", "npm:0.13.2"],
+            ["optimism", "npm:0.14.0"],
             ["prop-types", "npm:15.7.2"],
             ["react", null],
             ["subscriptions-transport-ws", null],
@@ -193,7 +193,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@ec/verwaltung", "workspace:."],
-            ["@apollo/client", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.6"],
+            ["@apollo/client", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.7"],
             ["@rollup/plugin-commonjs", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:17.0.0"],
             ["@rollup/plugin-node-resolve", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:11.0.1"],
             ["@rollup/pluginutils", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.1.0"],
@@ -212,7 +212,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["comlink", "npm:4.3.0"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.5"],
-            ["esbuild", "npm:0.8.31"],
+            ["esbuild", "npm:0.8.32"],
             ["eslint", "npm:7.17.0"],
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.1.0"],
             ["eslint-plugin-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.1"],
@@ -275,10 +275,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:d2dfbd5678d97f928ff7f5971bbaf7f5849bafe1ebce212b7bf4b87ee066614ad18b2d685a3593103f6cd95244eeed351d9276c6d7756623b335558aa0643d32#npm:3.1.0", {
-          "packageLocation": "./.yarn/$$virtual/@graphql-typed-document-node-core-virtual-2122a7a175/6/tmp/renovate-cache/others/yarn/@graphql-typed-document-node-core-npm-3.1.0-626997e126-f1c90f749b.zip/node_modules/@graphql-typed-document-node/core/",
+        ["virtual:a8d4b2201199de780ba0ab2d7afc43dcc40d6ddbfc1c6477ebee32c6cc1c18ac87df1269a4c74c385d06b303b68ccff94e6f2bad752a1b06122caf1232e5c386#npm:3.1.0", {
+          "packageLocation": "./.yarn/$$virtual/@graphql-typed-document-node-core-virtual-e25b1f3abe/6/tmp/renovate-cache/others/yarn/@graphql-typed-document-node-core-npm-3.1.0-626997e126-f1c90f749b.zip/node_modules/@graphql-typed-document-node/core/",
           "packageDependencies": [
-            ["@graphql-typed-document-node/core", "virtual:d2dfbd5678d97f928ff7f5971bbaf7f5849bafe1ebce212b7bf4b87ee066614ad18b2d685a3593103f6cd95244eeed351d9276c6d7756623b335558aa0643d32#npm:3.1.0"],
+            ["@graphql-typed-document-node/core", "virtual:a8d4b2201199de780ba0ab2d7afc43dcc40d6ddbfc1c6477ebee32c6cc1c18ac87df1269a4c74c385d06b303b68ccff94e6f2bad752a1b06122caf1232e5c386#npm:3.1.0"],
             ["@types/graphql", null],
             ["graphql", "npm:15.4.0"]
           ],
@@ -876,6 +876,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/@wry-equality-npm-0.3.1-810c1a93a6-50b8ee5376.zip/node_modules/@wry/equality/",
           "packageDependencies": [
             ["@wry/equality", "npm:0.3.1"],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wry/trie", [
+        ["npm:0.2.1", {
+          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/@wry-trie-npm-0.2.1-e7076f9c2c-bca4e43a6e.zip/node_modules/@wry/trie/",
+          "packageDependencies": [
+            ["@wry/trie", "npm:0.2.1"],
             ["tslib", "npm:1.14.1"]
           ],
           "linkType": "HARD",
@@ -2563,10 +2573,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["esbuild", [
-        ["npm:0.8.31", {
-          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/esbuild-npm-0.8.31-d2bc1543e2-0c74f60258.zip/node_modules/esbuild/",
+        ["npm:0.8.32", {
+          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/esbuild-npm-0.8.32-462fba8f7c-fb543146c6.zip/node_modules/esbuild/",
           "packageDependencies": [
-            ["esbuild", "npm:0.8.31"]
+            ["esbuild", "npm:0.8.32"]
           ],
           "linkType": "HARD",
         }]
@@ -4815,11 +4825,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["optimism", [
-        ["npm:0.13.2", {
-          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/optimism-npm-0.13.2-dfc096dbe5-1a37293983.zip/node_modules/optimism/",
+        ["npm:0.14.0", {
+          "packageLocation": "../../../../../tmp/renovate-cache/others/yarn/optimism-npm-0.14.0-be32a10bbf-43223bb26e.zip/node_modules/optimism/",
           "packageDependencies": [
-            ["optimism", "npm:0.13.2"],
-            ["@wry/context", "npm:0.5.3"]
+            ["optimism", "npm:0.14.0"],
+            ["@wry/context", "npm:0.5.3"],
+            ["@wry/trie", "npm:0.2.1"]
           ],
           "linkType": "HARD",
         }]
@@ -6361,7 +6372,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-esbuild", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.6.1"],
             ["@rollup/pluginutils", "virtual:884d896aadbc2e116803fe45e8592dc56a1c8fc6ef9c22e43bd6fa2c8ccfa629e596743bfe2f2314a256ecb529a78793f4bc2e15ced382abe2417462f8f116fd#npm:4.1.0"],
             ["@types/esbuild", null],
-            ["esbuild", "npm:0.8.31"],
+            ["esbuild", "npm:0.8.32"],
             ["joycon", "npm:2.2.5"],
             ["strip-json-comments", "npm:3.1.1"]
           ],

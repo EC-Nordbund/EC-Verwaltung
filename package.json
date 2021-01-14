@@ -11,7 +11,7 @@
     "build:loading": "cd loading && rollup -c"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.6",
+    "@apollo/client": "^3.3.7",
     "comlink": "^4.3.0",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
@@ -44,7 +44,7 @@
     "chokidar": "^3.5.0",
     "cssnano": "^4.1.10",
     "directory-tree": "^2.2.5",
-    "esbuild": "^0.8.31",
+    "esbuild": "^0.8.32",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.1",
