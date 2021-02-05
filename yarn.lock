@@ -88,7 +88,7 @@ __metadata:
   dependencies:
     "@apollo/client": 3.3.7
     "@rollup/plugin-commonjs": 17.0.0
-    "@rollup/plugin-node-resolve": 11.0.1
+    "@rollup/plugin-node-resolve": 11.1.1
     "@rollup/pluginutils": 4.1.0
     "@surma/rollup-plugin-comlink": 0.3.0
     "@surma/rollup-plugin-off-main-thread": 1.4.2
@@ -211,9 +211,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-node-resolve@npm:11.0.1":
-  version: 11.0.1
-  resolution: "@rollup/plugin-node-resolve@npm:11.0.1"
+"@rollup/plugin-node-resolve@npm:11.1.1":
+  version: 11.1.1
+  resolution: "@rollup/plugin-node-resolve@npm:11.1.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     "@types/resolve": 1.17.1
@@ -223,7 +223,7 @@ __metadata:
     resolve: ^1.19.0
   peerDependencies:
     rollup: ^1.20.0||^2.0.0
-  checksum: bbec78fba9faab9e82b8f019d8883f119b2aa59cf90aa86f48767242235e39ca76ac2d130f0404553b2fa89dbd8fef90e32159642618f1e75ced7029f1bcece5
+  checksum: 79161dcdf482812c843ace75fd73b9b8497490d1ee03bbd1e52e8a6d0dac4b0f5c1f773cec447157c77a946eccd2256b8d51f95a42e0a6992b6c2739ad03197a
   languageName: node
   linkType: hard
 
