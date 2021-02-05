@@ -87,7 +87,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vue-template-compiler", "npm:2.6.12"],
             ["vuetify", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.5.24"],
             ["vuetify-dialog", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.8"],
-            ["ws", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.2"]
+            ["ws", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.3"]
           ],
           "linkType": "SOFT",
         }]
@@ -243,7 +243,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vue-template-compiler", "npm:2.6.12"],
             ["vuetify", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.5.24"],
             ["vuetify-dialog", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.8"],
-            ["ws", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.2"]
+            ["ws", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.3"]
           ],
           "linkType": "SOFT",
         }]
@@ -7853,17 +7853,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["ws", [
-        ["npm:7.4.2", {
-          "packageLocation": "./.yarn/cache/ws-npm-7.4.2-4485e6ad6c-832efdf144.zip/node_modules/ws/",
+        ["npm:7.4.3", {
+          "packageLocation": "./.yarn/cache/ws-npm-7.4.3-0b722707c3-493655b7c4.zip/node_modules/ws/",
           "packageDependencies": [
-            ["ws", "npm:7.4.2"]
+            ["ws", "npm:7.4.3"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.2", {
-          "packageLocation": "./.yarn/$$virtual/ws-virtual-2f0793a413/0/cache/ws-npm-7.4.2-4485e6ad6c-832efdf144.zip/node_modules/ws/",
+        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.3", {
+          "packageLocation": "./.yarn/$$virtual/ws-virtual-f23f8d261a/0/cache/ws-npm-7.4.3-0b722707c3-493655b7c4.zip/node_modules/ws/",
           "packageDependencies": [
-            ["ws", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.2"],
+            ["ws", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.3"],
             ["@types/bufferutil", null],
             ["@types/utf-8-validate", null],
             ["bufferutil", null],
