@@ -100,7 +100,7 @@ __metadata:
     "@types/ws": 7.4.0
     "@typescript-eslint/eslint-plugin": 4.14.2
     "@typescript-eslint/parser": 4.14.2
-    autoprefixer: 10.2.1
+    autoprefixer: 10.2.4
     chokidar: 3.5.1
     comlink: 4.3.0
     cssnano: 4.1.10
@@ -852,12 +852,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:10.2.1":
-  version: 10.2.1
-  resolution: "autoprefixer@npm:10.2.1"
+"autoprefixer@npm:10.2.4":
+  version: 10.2.4
+  resolution: "autoprefixer@npm:10.2.4"
   dependencies:
     browserslist: ^4.16.1
-    caniuse-lite: ^1.0.30001173
+    caniuse-lite: ^1.0.30001181
     colorette: ^1.2.1
     fraction.js: ^4.0.13
     normalize-range: ^0.1.2
@@ -866,7 +866,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: ede6dec5a51c1eaa2271e93acb238f840d89c26e9a2b88f5149488684487e23a0532c7d080359e70d52d24b252bd85ab3a7fad8c8051afd76f224a6041123f51
+  checksum: c07fb325ee63e535a2246be4ac0d6afc9e9e43e66386e39c495015bdc8d83547ffdc0797be22d88781d044d3eecbbcb13d8a550ef94eb684091b24a05eb0c83e
   languageName: node
   linkType: hard
 
@@ -1141,6 +1141,13 @@ __metadata:
   version: 1.0.30001173
   resolution: "caniuse-lite@npm:1.0.30001173"
   checksum: e90b1f29f437708dcb0cab352cb932a3437ae4826dbae3a0f20eaf112b9151aba490cfd8a0f693b08c254c3075baa69a375c235ec5dd002e345283f98981190a
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001181":
+  version: 1.0.30001185
+  resolution: "caniuse-lite@npm:1.0.30001185"
+  checksum: 35a6087bfefebe963de5025c8eb7165c3ccb4e8f55e27beb6169391c9ccd7b1cb09c430779e10211d3afd7ead55be8ade13971e85d80fbe614405afb2467d6c2
   languageName: node
   linkType: hard
 
