@@ -109,7 +109,7 @@ __metadata:
     eslint: 7.19.0
     eslint-config-prettier: 7.1.0
     eslint-plugin-prettier: 3.3.1
-    eslint-plugin-vue: 7.4.1
+    eslint-plugin-vue: 7.5.0
     graphql: 15.5.0
     graphql-tag: 2.11.0
     http-server: 0.12.3
@@ -2102,17 +2102,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:7.4.1":
-  version: 7.4.1
-  resolution: "eslint-plugin-vue@npm:7.4.1"
+"eslint-plugin-vue@npm:7.5.0":
+  version: 7.5.0
+  resolution: "eslint-plugin-vue@npm:7.5.0"
   dependencies:
     eslint-utils: ^2.1.0
     natural-compare: ^1.4.0
     semver: ^7.3.2
-    vue-eslint-parser: ^7.3.0
+    vue-eslint-parser: ^7.4.1
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0
-  checksum: 5e82c2f6c90786b8d21cc11c938fb88442a3b784222ba1e0d032bef2857b32ab86a80163485a18db128293718662c4b3ffa268768edf22d45af5112fa86b1405
+  checksum: 555662aac7bd9cd6b677afb4a5f27468a0fb723d7c17566871d35ff96a58146a3371fdfebd3141e1be7e40fed090a945c33b9751db2a1e92643bddb9466f0e1f
   languageName: node
   linkType: hard
 
@@ -6436,7 +6436,7 @@ typescript@4.1.3:
   languageName: node
   linkType: hard
 
-"vue-eslint-parser@npm:7.4.1":
+"vue-eslint-parser@npm:7.4.1, vue-eslint-parser@npm:^7.4.1":
   version: 7.4.1
   resolution: "vue-eslint-parser@npm:7.4.1"
   dependencies:
@@ -6449,22 +6449,6 @@ typescript@4.1.3:
   peerDependencies:
     eslint: ">=5.0.0"
   checksum: 6dc836d39049d88d732f6dfcccc13e6c1fa0ad391fde194c25cbb06ce50b46862ab6877586286fe812697b6f01a9baf941533241ca5bcf756719610616c55b30
-  languageName: node
-  linkType: hard
-
-"vue-eslint-parser@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "vue-eslint-parser@npm:7.3.0"
-  dependencies:
-    debug: ^4.1.1
-    eslint-scope: ^5.0.0
-    eslint-visitor-keys: ^1.1.0
-    espree: ^6.2.1
-    esquery: ^1.0.1
-    lodash: ^4.17.15
-  peerDependencies:
-    eslint: ">=5.0.0"
-  checksum: 1c329ea5d3c701dfa1d70807c4a625d481a0081de427f947eaa138b2885cb72e278ba345e517fe0f9d525ed4840d930d97bf36b4e65f5367e3b6a7556151e8c7
   languageName: node
   linkType: hard
 
