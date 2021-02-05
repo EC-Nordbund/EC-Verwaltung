@@ -27,7 +27,7 @@
     "vuetify-dialog": "0.3.8"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "17.0.0",
+    "@rollup/plugin-commonjs": "17.1.0",
     "@rollup/plugin-node-resolve": "11.1.1",
     "@rollup/pluginutils": "4.1.0",
     "@surma/rollup-plugin-comlink": "0.3.0",
