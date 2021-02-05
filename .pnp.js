@@ -61,7 +61,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.1.0"],
             ["eslint-plugin-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.1"],
             ["eslint-plugin-vue", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.1"],
-            ["graphql", "npm:15.4.0"],
+            ["graphql", "npm:15.5.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["http-server", "npm:0.12.3"],
             ["json5", "npm:2.1.3"],
@@ -112,7 +112,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@wry/context", "npm:0.5.3"],
             ["@wry/equality", "npm:0.3.1"],
             ["fast-json-stable-stringify", "npm:2.1.0"],
-            ["graphql", "npm:15.4.0"],
+            ["graphql", "npm:15.5.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["hoist-non-react-statics", "npm:3.3.2"],
             ["optimism", "npm:0.14.0"],
@@ -217,7 +217,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.1.0"],
             ["eslint-plugin-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.1"],
             ["eslint-plugin-vue", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.1"],
-            ["graphql", "npm:15.4.0"],
+            ["graphql", "npm:15.5.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["http-server", "npm:0.12.3"],
             ["json5", "npm:2.1.3"],
@@ -280,7 +280,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@graphql-typed-document-node/core", "virtual:a8d4b2201199de780ba0ab2d7afc43dcc40d6ddbfc1c6477ebee32c6cc1c18ac87df1269a4c74c385d06b303b68ccff94e6f2bad752a1b06122caf1232e5c386#npm:3.1.0"],
             ["@types/graphql", null],
-            ["graphql", "npm:15.4.0"]
+            ["graphql", "npm:15.5.0"]
           ],
           "packagePeers": [
             "@types/graphql",
@@ -3283,10 +3283,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["graphql", [
-        ["npm:15.4.0", {
-          "packageLocation": "./.yarn/cache/graphql-npm-15.4.0-ffa0f9cd71-1a307dcfe2.zip/node_modules/graphql/",
+        ["npm:15.5.0", {
+          "packageLocation": "./.yarn/cache/graphql-npm-15.5.0-65986c56be-789cdcb069.zip/node_modules/graphql/",
           "packageDependencies": [
-            ["graphql", "npm:15.4.0"]
+            ["graphql", "npm:15.5.0"]
           ],
           "linkType": "HARD",
         }]
@@ -3304,7 +3304,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["@types/graphql", null],
-            ["graphql", "npm:15.4.0"]
+            ["graphql", "npm:15.5.0"]
           ],
           "packagePeers": [
             "@types/graphql",
