@@ -64,7 +64,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graphql", "npm:15.4.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["http-server", "npm:0.12.3"],
-            ["json5", "npm:2.1.3"],
+            ["json5", "npm:2.2.0"],
             ["material-design-icons-iconfont", "npm:6.1.0"],
             ["node-sass", "npm:5.0.0"],
             ["postcss", "npm:8.2.4"],
@@ -220,7 +220,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graphql", "npm:15.4.0"],
             ["graphql-tag", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.11.0"],
             ["http-server", "npm:0.12.3"],
-            ["json5", "npm:2.1.3"],
+            ["json5", "npm:2.2.0"],
             ["material-design-icons-iconfont", "npm:6.1.0"],
             ["node-sass", "npm:5.0.0"],
             ["postcss", "npm:8.2.4"],
@@ -4108,10 +4108,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["npm:2.1.3", {
-          "packageLocation": "./.yarn/cache/json5-npm-2.1.3-b71ec6bcca-957e493710.zip/node_modules/json5/",
+        ["npm:2.2.0", {
+          "packageLocation": "./.yarn/cache/json5-npm-2.2.0-da49dc7cb5-07b1f90c28.zip/node_modules/json5/",
           "packageDependencies": [
-            ["json5", "npm:2.1.3"],
+            ["json5", "npm:2.2.0"],
             ["minimist", "npm:1.2.5"]
           ],
           "linkType": "HARD",
