@@ -42,7 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/plugin-node-resolve", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:11.1.1"],
             ["@rollup/pluginutils", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.1.0"],
             ["@surma/rollup-plugin-comlink", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0"],
-            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:2.0.0"],
             ["@types/chokidar", "npm:2.1.3"],
             ["@types/elementtree", "npm:0.1.0"],
             ["@types/json5", "npm:0.0.30"],
@@ -198,7 +198,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/plugin-node-resolve", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:11.1.1"],
             ["@rollup/pluginutils", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.1.0"],
             ["@surma/rollup-plugin-comlink", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0"],
-            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:2.0.0"],
             ["@types/chokidar", "npm:2.1.3"],
             ["@types/elementtree", "npm:0.1.0"],
             ["@types/json5", "npm:0.0.30"],
@@ -451,7 +451,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/@surma-rollup-plugin-comlink-virtual-c4c28fb625/0/cache/@surma-rollup-plugin-comlink-npm-0.3.0-d9cd2e666f-46c836a85a.zip/node_modules/@surma/rollup-plugin-comlink/",
           "packageDependencies": [
             ["@surma/rollup-plugin-comlink", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:0.3.0"],
-            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:2.0.0"],
             ["@types/comlink", null],
             ["@types/surma__rollup-plugin-off-main-thread", null],
             ["comlink", "npm:4.3.0"]
@@ -466,12 +466,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@surma/rollup-plugin-off-main-thread", [
-        ["npm:1.4.2", {
-          "packageLocation": "./.yarn/cache/@surma-rollup-plugin-off-main-thread-npm-1.4.2-2391260d57-678096f137.zip/node_modules/@surma/rollup-plugin-off-main-thread/",
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/@surma-rollup-plugin-off-main-thread-npm-2.0.0-84267c551c-74e6f4e7e7.zip/node_modules/@surma/rollup-plugin-off-main-thread/",
           "packageDependencies": [
-            ["@surma/rollup-plugin-off-main-thread", "npm:1.4.2"],
+            ["@surma/rollup-plugin-off-main-thread", "npm:2.0.0"],
             ["ejs", "npm:2.7.4"],
-            ["magic-string", "npm:0.25.7"]
+            ["magic-string", "npm:0.25.7"],
+            ["tippex", "npm:3.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -7151,6 +7152,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/timsort-npm-0.3.0-868a28166c-d8300c3ecf.zip/node_modules/timsort/",
           "packageDependencies": [
             ["timsort", "npm:0.3.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["tippex", [
+        ["npm:3.0.0", {
+          "packageLocation": "./.yarn/cache/tippex-npm-3.0.0-b5b7dd6630-4bf6f690e7.zip/node_modules/tippex/",
+          "packageDependencies": [
+            ["tippex", "npm:3.0.0"]
           ],
           "linkType": "HARD",
         }]
