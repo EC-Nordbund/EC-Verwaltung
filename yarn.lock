@@ -101,7 +101,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 4.14.2
     "@typescript-eslint/parser": 4.14.2
     autoprefixer: 10.2.1
-    chokidar: 3.5.0
+    chokidar: 3.5.1
     comlink: 4.3.0
     cssnano: 4.1.10
     directory-tree: 2.2.5
@@ -1223,9 +1223,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:3.5.0":
-  version: 3.5.0
-  resolution: "chokidar@npm:3.5.0"
+"chokidar@npm:3.5.1":
+  version: 3.5.1
+  resolution: "chokidar@npm:3.5.1"
   dependencies:
     anymatch: ~3.1.1
     braces: ~3.0.2
@@ -1238,7 +1238,7 @@ __metadata:
   dependenciesMeta:
     fsevents:
       optional: true
-  checksum: 36c67d9d4b5a96006bc023b8c4799b4a5697ac602b3bd1cbcec54f8516c5625382aaee0bc9e2325b7fa288b1d67ecdc308911f7448b55cfe37c384ff1f8cb62a
+  checksum: 61b3f710f9e7dc69d76f638d8b0d37bad586497444165125ca8062f7192695f35403b5f622cbd7dfdd06805201ceaba40ff90e53ea2974df9a8087861192a99b
   languageName: node
   linkType: hard
 
