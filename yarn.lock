@@ -104,7 +104,7 @@ __metadata:
     chokidar: 3.5.1
     comlink: 4.3.0
     cssnano: 4.1.10
-    directory-tree: 2.2.5
+    directory-tree: 2.2.6
     esbuild: 0.8.42
     eslint: 7.19.0
     eslint-config-prettier: 7.2.0
@@ -1828,10 +1828,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"directory-tree@npm:2.2.5":
-  version: 2.2.5
-  resolution: "directory-tree@npm:2.2.5"
-  checksum: a691348ca37fa6839436c50c56a46fbf8c735bb338d749f5903c3dc21f21f5dc9eadd35be2114efb55c8b486887ba33bffa3ac23a0a5a7d2922f16f500b79856
+"directory-tree@npm:2.2.6":
+  version: 2.2.6
+  resolution: "directory-tree@npm:2.2.6"
+  checksum: 998271427811fd3e8a76f9579e0df36a7d5303a9565efd290e4def6a16f3bec900bf7d05429efdfa07cfa704b0648835c1fe734e2f003d668e85cc61d00fffe9
   languageName: node
   linkType: hard
 
