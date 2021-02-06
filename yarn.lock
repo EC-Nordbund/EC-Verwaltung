@@ -105,7 +105,7 @@ __metadata:
     comlink: 4.3.0
     cssnano: 4.1.10
     directory-tree: 2.2.5
-    esbuild: 0.8.32
+    esbuild: 0.8.42
     eslint: 7.19.0
     eslint-config-prettier: 7.2.0
     eslint-plugin-prettier: 3.3.1
@@ -2060,12 +2060,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:0.8.32":
-  version: 0.8.32
-  resolution: "esbuild@npm:0.8.32"
+"esbuild@npm:0.8.42":
+  version: 0.8.42
+  resolution: "esbuild@npm:0.8.42"
   bin:
     esbuild: bin/esbuild
-  checksum: fb543146c63ca07a3b777a76d107c454eb33757c0696c21a8d8d3bf5f893259df56fad5366f55b5793693716ae2f57a6e2641921b5515807e00f21132a568a2a
+  checksum: 197ffc823f5d5ab8a70b1fa7ae0f4c4187c7cb29633ec1fd9be16e1eb1594a8381daf32b6c004791ce7dd2eeab4d71a30b998e8e8d5297905c3ca6c9bde9944d
   languageName: node
   linkType: hard
 
