@@ -55,7 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chokidar", "npm:3.5.1"],
             ["comlink", "npm:4.3.0"],
             ["cssnano", "npm:4.1.10"],
-            ["directory-tree", "npm:2.2.5"],
+            ["directory-tree", "npm:2.2.6"],
             ["esbuild", "npm:0.8.42"],
             ["eslint", "npm:7.19.0"],
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.2.0"],
@@ -211,7 +211,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chokidar", "npm:3.5.1"],
             ["comlink", "npm:4.3.0"],
             ["cssnano", "npm:4.1.10"],
-            ["directory-tree", "npm:2.2.5"],
+            ["directory-tree", "npm:2.2.6"],
             ["esbuild", "npm:0.8.42"],
             ["eslint", "npm:7.19.0"],
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.2.0"],
@@ -2325,10 +2325,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["directory-tree", [
-        ["npm:2.2.5", {
-          "packageLocation": "./.yarn/cache/directory-tree-npm-2.2.5-a0689b16ca-a691348ca3.zip/node_modules/directory-tree/",
+        ["npm:2.2.6", {
+          "packageLocation": "./.yarn/cache/directory-tree-npm-2.2.6-8783f269af-9982714278.zip/node_modules/directory-tree/",
           "packageDependencies": [
-            ["directory-tree", "npm:2.2.5"]
+            ["directory-tree", "npm:2.2.6"]
           ],
           "linkType": "HARD",
         }]
