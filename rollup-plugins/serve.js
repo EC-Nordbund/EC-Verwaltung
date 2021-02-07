@@ -13,7 +13,8 @@ export default () => {
         first = false
 
         const httpServer = createServer({
-          cache: -1
+          cache: -1,
+          root: './dist'
         }).listen(8080)
 
         const wsServer = new WebSocket.Server({
@@ -46,7 +47,7 @@ export default () => {
           }, 500)
         }
 
-        chokidar.watch('./public').on('all', () => reload())
+        chokidar.watch('./dist').on('all', () => reload())
       }
     },
     banner() {

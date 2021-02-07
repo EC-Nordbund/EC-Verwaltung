@@ -8,9 +8,6 @@ import vue from 'rollup-plugin-vue'
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
 
-import comlink from '@surma/rollup-plugin-comlink'
-import workers from '@surma/rollup-plugin-off-main-thread'
-
 import image from './rollup-plugins/image'
 import serve from './rollup-plugins/serve'
 import routes from './rollup-plugins/routes'
@@ -40,11 +37,11 @@ export default {
     }),
     // Import Version
     version(),
-    // Use Workers with comlink
-    comlink({
-      useModuleWorker: true
-    }),
-    workers(),
+    // // Use Workers with comlink
+    // comlink({
+    //   useModuleWorker: true
+    // }),
+    // workers(),
     // Import list of all assets
     resourceList(),
     // Import JSON5 docs

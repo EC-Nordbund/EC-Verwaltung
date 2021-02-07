@@ -57,8 +57,6 @@ export default () => {
           v !== 'favicon.png'
       )
 
-      // console.log(files)
-
       this.emitFile({
         type: 'asset',
         fileName: 'index.html',

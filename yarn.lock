@@ -105,6 +105,7 @@ __metadata:
     comlink: ^4.3.0
     cssnano: ^4.1.10
     directory-tree: ^2.2.5
+    es-module-shims: ^0.9.0
     esbuild: ^0.8.29
     eslint: ^7.17.0
     eslint-config-prettier: ^7.1.0
@@ -1980,6 +1981,13 @@ __metadata:
     string.prototype.trimend: ^1.0.1
     string.prototype.trimstart: ^1.0.1
   checksum: f1e37567e49a54c09050aa3371cac601a789441f4fa9730f2c2d386aadad547d6c303bb41e7f5cb5286b616104d6c13450f33b712f664939a09729dd5e45c963
+  languageName: node
+  linkType: hard
+
+"es-module-shims@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "es-module-shims@npm:0.9.0"
+  checksum: 2250f5e19143d8d2b4cc86c948c388c04e4a922f66c4ad5c4874ea519516237525aabeefd5256a152308f8ba4bca1f97bb34ff904b6df015ff492f1968d33905
   languageName: node
   linkType: hard
 

@@ -53,7 +53,7 @@ import { errorHandler } from '../helpers'
 
 @Component({})
 export default class EcRootLogin extends Vue {
-  private dark = save.get('dark') === 'x'
+  private dark = localStorage.getItem('dark') === 'x'
   private isCapsOn = false
   private valid = false
   private loading = false
@@ -95,7 +95,6 @@ export default class EcRootLogin extends Vue {
         if (this.$route.query.next === '/404?prev=%2F') {
           path = 'home'
         }
-        save.set('username', this.data.username, { expires: 7 })
         localStorage.setItem('username', this.data.username)
         await this.$setAuthToken(res.authToken)
         this.$router.push(path as string)
