@@ -24,6 +24,7 @@ export default ({ throwAtMissing } = { throwAtMissing: false }) => {
     'zen-observable',
     'symbol-observable',
     '@wry/equality',
+    '@wry/trie',
     '@wry/context',
     'optimism',
     '@ungap/global-this',
