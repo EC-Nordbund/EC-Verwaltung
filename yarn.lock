@@ -5,7 +5,7 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@apollo/client@npm:^3.3.8":
+"@apollo/client@npm:3.3.8":
   version: 3.3.8
   resolution: "@apollo/client@npm:3.3.8"
   dependencies:
@@ -86,7 +86,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ec/verwaltung@workspace:."
   dependencies:
-    "@apollo/client": ^3.3.8
+    "@apollo/client": 3.3.8
     "@rollup/plugin-commonjs": 17.1.0
     "@rollup/plugin-node-resolve": 11.1.1
     "@rollup/pluginutils": 4.1.0
@@ -103,23 +103,23 @@ __metadata:
     "@vue/composition-api": ^1.0.0-rc.1
     autoprefixer: 10.2.4
     chokidar: 3.5.1
-    comlink: ^4.3.0
-    consola: ^2.15.3
+    comlink: 4.3.0
+    consola: 2.15.3
     cssnano: 4.1.10
     directory-tree: 2.2.6
-    es-module-shims: ^0.9.0
+    es-module-shims: 0.9.0
     esbuild: 0.8.42
     eslint: 7.19.0
     eslint-config-prettier: 7.2.0
     eslint-plugin-prettier: 3.3.1
     eslint-plugin-vue: 7.5.0
-    graphql: ^15.4.0
-    graphql-tag: ^2.11.0
+    graphql: 15.5.0
+    graphql-tag: 2.11.0
     http-server: 0.12.3
     json5: 2.2.0
-    material-design-icons-iconfont: ^6.1.0
+    material-design-icons-iconfont: 6.1.0
     node-sass: 5.0.0
-    postcss: 8.2.4
+    postcss: 8.2.5
     prettier: 2.2.1
     pug: 3.0.0
     roboto-fontface: "*"
@@ -1395,7 +1395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"comlink@npm:^4.3.0":
+"comlink@npm:4.3.0":
   version: 4.3.0
   resolution: "comlink@npm:4.3.0"
   checksum: b42a40f6846f90efad1f033c759f1b8aeb9649cad9ea95dc603d237146535d67b4c37d7d4f5cab33dd686b2d7a663704d42b77ae97d9aa16dd55428cc8fcc017
@@ -2071,7 +2071,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-module-shims@npm:^0.9.0":
+"es-module-shims@npm:0.9.0":
   version: 0.9.0
   resolution: "es-module-shims@npm:0.9.0"
   checksum: 2250f5e19143d8d2b4cc86c948c388c04e4a922f66c4ad5c4874ea519516237525aabeefd5256a152308f8ba4bca1f97bb34ff904b6df015ff492f1968d33905
@@ -2706,7 +2706,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"graphql-tag@npm:^2.11.0":
+"graphql-tag@npm:2.11.0, graphql-tag@npm:^2.11.0":
   version: 2.11.0
   resolution: "graphql-tag@npm:2.11.0"
   peerDependencies:
@@ -2715,7 +2715,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"graphql@npm:^15.4.0":
+"graphql@npm:15.5.0":
   version: 15.5.0
   resolution: "graphql@npm:15.5.0"
   checksum: 789cdcb069a3e00592e779002217a6bc5fd09efad63ee8c4190c4b3ea96c89010e74f085fb1cba876a0bb0e324e01df2eddb84d79dca90a28e582bc425fef9ef
@@ -3646,7 +3646,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"material-design-icons-iconfont@npm:^6.1.0":
+"material-design-icons-iconfont@npm:6.1.0":
   version: 6.1.0
   resolution: "material-design-icons-iconfont@npm:6.1.0"
   checksum: b17b8c4f69caaee841202863ab5eb3f684796bd49aeef4976f97ecaa8b8af01c8a8243969598903de1acf8375efb852fe1e3c6b7a0c18c85d847551899fcc9d8
@@ -4740,14 +4740,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.2.4":
-  version: 8.2.4
-  resolution: "postcss@npm:8.2.4"
+"postcss@npm:8.2.5":
+  version: 8.2.5
+  resolution: "postcss@npm:8.2.5"
   dependencies:
     colorette: ^1.2.1
     nanoid: ^3.1.20
     source-map: ^0.6.1
-  checksum: fb06b52d515c6768f5e372b3cec3d902cc0f37dd5128657739ab524ccc155655a6b2adf2f44cf670ad38cbccddae79d72d21093aecd1a7b023609ef548d71d6d
+  checksum: dbd8281a32abdbb68be53a7022f405f25207cfadf86cd603bc47e29579432d6fe970fb4189af6ddbd81170c9f226ae36413970bed5bfcd6d04544c86374547be
   languageName: node
   linkType: hard
 
