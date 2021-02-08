@@ -1,7 +1,7 @@
 <template>
   <component :is="tag || 'div'">
     <component
-      :is="'form_' + field.type"
+      :is="'form-' + field.type"
       v-for="(field, i) in schema"
       :key="`${i}-form`"
       :schema="field"

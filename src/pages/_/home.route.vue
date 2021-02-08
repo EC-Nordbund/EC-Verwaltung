@@ -27,8 +27,9 @@ ec-wrapper(title='Home')
     li Teileweise Offline Support der Seite (gesamte seite wird Lokal gespeichert nur für die Daten wird eine Internetverbindung benötigt)
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { defineComponent } from '@vue/composition-api'
 
-@Component({})
-export default class EcRootIndexHome extends Vue {}
+export default defineComponent({
+  name: 'RootHome'
+})
 </script>

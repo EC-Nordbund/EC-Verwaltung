@@ -7,12 +7,10 @@
       br
       | {{$route.query.prev}}
 </template>
-
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import { defineComponent } from '@vue/composition-api'
 
-@Component({})
-export default class EcRootIndex404 extends Vue {
-  public static meta = {}
-}
+export default defineComponent({
+  name: 'Root404'
+})
 </script>

@@ -100,7 +100,7 @@ __metadata:
     "@types/ws": 7.4.0
     "@typescript-eslint/eslint-plugin": 4.14.2
     "@typescript-eslint/parser": 4.14.2
-    "@vue/composition-api": ^1.0.0-rc.1
+    "@vue/composition-api": 1.0.0-rc.1
     autoprefixer: 10.2.4
     chokidar: 3.5.1
     comlink: 4.3.0
@@ -113,7 +113,7 @@ __metadata:
     eslint-config-prettier: 7.2.0
     eslint-plugin-prettier: 3.3.1
     eslint-plugin-vue: 7.5.0
-    graphql: 15.5.0
+    graphql: 15.4.0
     graphql-tag: 2.11.0
     http-server: 0.12.3
     json5: 2.2.0
@@ -561,7 +561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/composition-api@npm:^1.0.0-rc.1":
+"@vue/composition-api@npm:1.0.0-rc.1":
   version: 1.0.0-rc.1
   resolution: "@vue/composition-api@npm:1.0.0-rc.1"
   dependencies:
@@ -1432,7 +1432,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"consola@npm:^2.15.3":
+"consola@npm:2.15.3":
   version: 2.15.3
   resolution: "consola@npm:2.15.3"
   checksum: 914e2b0b24605a41f1a83ae29a0238558d01a01c40ada5817db81b2dd1543a540d59e38e81e736d05360246379a18013e6930b32231650898dfc4adb52a93523
@@ -2715,10 +2715,10 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"graphql@npm:15.5.0":
-  version: 15.5.0
-  resolution: "graphql@npm:15.5.0"
-  checksum: 789cdcb069a3e00592e779002217a6bc5fd09efad63ee8c4190c4b3ea96c89010e74f085fb1cba876a0bb0e324e01df2eddb84d79dca90a28e582bc425fef9ef
+"graphql@npm:15.4.0":
+  version: 15.4.0
+  resolution: "graphql@npm:15.4.0"
+  checksum: 1a307dcfe2646e1e8323d03e8cd24554ba9f7369863bf0b020f2e4b39bff3504dc7d6dcad19cb96899f0825eda4c688819911f0c270e84f1bb0954fe3ac16a31
   languageName: node
   linkType: hard
 
