@@ -1,92 +1,115 @@
 import Vue from 'vue'
-import gql from 'graphql-tag'
 import VueRouter from 'vue-router'
-export default (router: VueRouter, createVue: () => void): void => {
-  const auth = {
-    authToken: '',
-    logout: -1
-  }
-  Vue.prototype.$authToken = () => {
-    return auth.authToken
-  }
-  Vue.prototype.$setAuthToken = (authToken: string, setTime = true) => {
-    auth.authToken = authToken
-    if (!setTime) {
-      return
+import { useApollo } from '../plugins/apollo'
+
+import { useStorage } from '../storage/index'
+import { errorHandler } from '../helpers'
+
+import { useNow } from 'vue-composable'
+import { createApp, computed } from '@vue/composition-api'
+
+const time = 12 * 60 * 60 * 1e3
+
+let data = null
+
+export function useLogin(app?: ReturnType<typeof createApp>) {
+  if (data === null) {
+    const { authToken, logoutTime, username } = useStorage()
+    const { now } = useNow()
+    const { client, gql } = useApollo()
+
+    Vue.prototype.$authToken = () => {
+      return authToken.value
     }
-    return fetch('https://api.ec-nordbund.de/time')
-      .then((v) => v.json())
-      .then((v) => v.time)
-      .then((v) => v + 12 * 60 * 60 * 1e3)
-      .then((time) => {
-        localStorage.setItem('logoutTime', time.toString())
-        localStorage.setItem('authToken', authToken)
-        auth.logout = time
+
+    const logoutIn = computed(() => logoutTime.value - now.value)
+
+    async function login({
+      username,
+      password
+    }: {
+      username: string
+      password: string
+    }) {
+      const data = await fetch('https://api.ec-nordbund.de/v6/login', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          version: '3.2.0',
+          username,
+          password
+        })
       })
-  }
-  window.addEventListener('storage', (ev) => {
-    if (ev.storageArea !== localStorage) {
-      return
+        .then(errorHandler)
+        .then((res) => res.json())
+
+      authToken.value = data.authToken
+      logoutTime.value = now.value + time
     }
-    if (
-      localStorage.getItem('authToken') !== auth.authToken &&
-      localStorage.getItem('authToken') !== null
-    ) {
-      auth.authToken = localStorage.getItem('authToken')!
-      auth.logout = parseInt(localStorage.getItem('logoutTime')!)
-      if (auth.authToken === '') {
-        router.push('/login')
-      }
+
+    function logout() {
+      authToken.value = ''
+      logoutTime.value = -1
     }
-  })
-  Vue.prototype.$logoutIn = async () => {
-    if (auth.logout === -1) {
-      return null
+
+    async function extendLogin(password: string) {
+      await login({
+        username: username.value,
+        password
+      })
     }
-    const time =
-      auth.logout -
-      (await fetch('https://api.ec-nordbund.de/time')
-        .then((v) => v.json())
-        .then((v) => v.time))
-    if (time < 0) {
-      auth.authToken = ''
-      auth.logout = -1
-      router.push('/login')
+
+    if (!authToken.value) {
+      logoutTime.value = -1
     }
-    return time
-  }
-  Vue.prototype.$logout = () => {
-    auth.authToken = ''
-    auth.logout = -1
-    localStorage.setItem('logoutTime', '-1')
-    localStorage.setItem('authToken', '')
-    router.push('/login')
-  }
-  const at = localStorage.getItem('authToken')
-  if (at) {
-    Vue.prototype.$apolloClient
-      .query({
-        query: gql`
-          query($at: String!) {
-            person(personID: 0, authToken: $at) {
-              personID
+
+    if (logoutTime.value > now.value + 15 * 60000) {
+      client
+        .query({
+          query: gql`
+            query($authToken: String!) {
+              person(personID: 0, authToken: $authToken) {
+                personID
+              }
             }
+          `,
+          variables: {
+            authToken: authToken.value
           }
-        `,
-        variables: {
-          at
-        }
-      })
-      .then(() => {
-        Vue.prototype.$setAuthToken(at)
-        auth.logout = parseInt(localStorage.getItem('logoutTime') ?? '-1')
-        createVue()
-      })
-      .catch(() => {
-        localStorage.removeItem('authToken')
-        createVue()
-      })
-  } else {
-    createVue()
+        })
+        .catch(() => {
+          authToken.value = ''
+          logoutTime.value = -1
+        })
+        .then(() => {
+          // router.push({
+          //   path: '/login',
+          //   query: {
+          //     next: location.hash
+          //   }
+          // })
+          app.mount('#app')
+        })
+    } else {
+      // router.push({
+      //   path: '/login',
+      //   query: {
+      //     next: location.hash
+      //   }
+      // })
+      app.mount('#app')
+    }
+
+    data = {
+      login,
+      authToken,
+      logout,
+      extendLogin,
+      logoutIn
+    }
   }
+
+  return data
 }

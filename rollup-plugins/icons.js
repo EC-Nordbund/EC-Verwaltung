@@ -1,7 +1,6 @@
 import { readdirSync, readFileSync } from 'fs'
 import { join } from 'path'
 import definePlugin from './helper'
-
 import { render } from 'pug'
 
 let fileIDs

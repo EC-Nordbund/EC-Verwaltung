@@ -1,20 +1,38 @@
+import VueCompositionAPI, { createApp } from '@vue/composition-api'
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import VuetifyDialog from 'vuetify-dialog'
-import auth2 from './plugins/auth'
-import router2 from './router'
-import './import'
-import './forms/main'
-import './assets/style.css'
 import './config/form'
+import { useForm, useValidation } from './forms/main'
+import './import'
 import './plugins/apollo'
+import { useLogin } from './plugins/auth'
 import './plugins/notify'
+import { useServiceWorker } from './plugins/sw'
 import './plugins/telefonFilter'
-import './plugins/vuetify'
-import './plugins/sw'
+import { useVuetify } from './plugins/vuetify'
+import router from './router'
+
 import 'vuetify/dist/vuetify.min.css'
-import 'roboto-fontface/css/roboto/roboto-fontface.css'
+import './assets/style.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'roboto-fontface/css/roboto/roboto-fontface.css'
+
+Vue.use(VueCompositionAPI)
+
+const app = createApp({
+  router: router,
+  render: (h) => h('router-view')
+})
+
+useForm(app)
+useValidation(app)
+useServiceWorker('sw.js', (doUpdate) => {
+  if (window.confirm('Eine neue Version ist verfügbar willst du sie laden?')) {
+    doUpdate()
+  }
+})
+useVuetify(app)
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -22,15 +40,9 @@ Component.registerHooks([
   'beforeRouteUpdate'
 ])
 
-Vue.use(VuetifyDialog)
-auth2(router2, createVue)
+app.use(VuetifyDialog)
+
+useLogin(app)
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 Vue.prototype.$empty = () => {}
-
-function createVue() {
-  new Vue({
-    router: router2,
-    render: (h) => h('router-view')
-  }).$mount('#app')
-}

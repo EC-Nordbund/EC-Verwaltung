@@ -2,6 +2,7 @@ import { createServer } from 'http-server'
 import WebSocket from 'ws'
 import chokidar from 'chokidar'
 import definePlugin from './helper'
+import consola from "consola";
 
 export default () => {
   let first = true
@@ -41,7 +42,7 @@ export default () => {
           to = setTimeout(() => {
             to = null
 
-            console.log(`[SERVE] Change Detected - Reload`)
+            consola.info(`[SERVE] Change Detected - Reload`)
 
             sockets.forEach((socket) => socket.send('_'))
           }, 500)
@@ -51,7 +52,7 @@ export default () => {
       }
     },
     banner() {
-      return `if(!(window||self)._HMR){(new WebSocket('ws://localhost:8081')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};(window||self)._HMR=true;}`
+      return `if(!self._HMR){(new WebSocket('ws://localhost:8081')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};self._HMR=true;}`
     }
   })
 }

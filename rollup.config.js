@@ -35,6 +35,15 @@ export default {
     dependencieCheck({
       throwAtMissing: isProduction
     }),
+    {
+      transform(code, id) {
+        if (code.includes('require(\'vue\')') && (id.includes('@vue/comp') || id.includes('@vue\\comp'))) {
+          return `import Vuefaslkj from 'vue'
+          ${code.replace('require(\'vue\')', 'Vuefaslkj')}
+          `
+        }
+      }
+    },
     // Import Version
     version(),
     // // Use Workers with comlink

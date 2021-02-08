@@ -1,7 +1,6 @@
 import { readFileSync } from "fs";
 import definePlugin from './helper';
 
-
 export default () => {
   const cssReplacements = []
   return definePlugin({

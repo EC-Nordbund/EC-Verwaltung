@@ -51,9 +51,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.14.2"],
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.14.2"],
+            ["@vue/composition-api", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-rc.1"],
             ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.4"],
             ["chokidar", "npm:3.5.1"],
             ["comlink", "npm:4.3.0"],
+            ["consola", "npm:2.15.3"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.6"],
             ["es-module-shims", "npm:0.9.0"],
@@ -82,6 +84,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vee-validate", "npm:2.2.15"],
             ["vue", "npm:2.6.12"],
             ["vue-class-component", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.2.6"],
+            ["vue-composable", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-dev.37"],
             ["vue-eslint-parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.1"],
             ["vue-property-decorator", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:9.1.2"],
             ["vue-router", "npm:3.5.1"],
@@ -208,9 +211,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.14.2"],
             ["@typescript-eslint/parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.14.2"],
+            ["@vue/composition-api", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-rc.1"],
             ["autoprefixer", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:10.2.4"],
             ["chokidar", "npm:3.5.1"],
             ["comlink", "npm:4.3.0"],
+            ["consola", "npm:2.15.3"],
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.6"],
             ["es-module-shims", "npm:0.9.0"],
@@ -239,6 +244,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vee-validate", "npm:2.2.15"],
             ["vue", "npm:2.6.12"],
             ["vue-class-component", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.2.6"],
+            ["vue-composable", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-dev.37"],
             ["vue-eslint-parser", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.4.1"],
             ["vue-property-decorator", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:9.1.2"],
             ["vue-router", "npm:3.5.1"],
@@ -860,6 +866,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:1.19.1"],
             ["source-map", "npm:0.6.1"],
             ["vue-template-es2015-compiler", "npm:1.9.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@vue/composition-api", [
+        ["npm:1.0.0-rc.1", {
+          "packageLocation": "./.yarn/cache/@vue-composition-api-npm-1.0.0-rc.1-9122f8acf3-68e3111940.zip/node_modules/@vue/composition-api/",
+          "packageDependencies": [
+            ["@vue/composition-api", "npm:1.0.0-rc.1"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-rc.1", {
+          "packageLocation": "./.yarn/$$virtual/@vue-composition-api-virtual-96f2e1eb40/0/cache/@vue-composition-api-npm-1.0.0-rc.1-9122f8acf3-68e3111940.zip/node_modules/@vue/composition-api/",
+          "packageDependencies": [
+            ["@vue/composition-api", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-rc.1"],
+            ["@types/vue", null],
+            ["tslib", "npm:2.1.0"],
+            ["vue", "npm:2.6.12"]
+          ],
+          "packagePeers": [
+            "@types/vue",
+            "vue"
           ],
           "linkType": "HARD",
         }]
@@ -1832,6 +1861,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["concat-with-sourcemaps", "npm:1.1.0"],
             ["source-map", "npm:0.6.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["consola", [
+        ["npm:2.15.3", {
+          "packageLocation": "./.yarn/cache/consola-npm-2.15.3-7b4cf44fed-914e2b0b24.zip/node_modules/consola/",
+          "packageDependencies": [
+            ["consola", "npm:2.15.3"]
           ],
           "linkType": "HARD",
         }]
@@ -7585,6 +7623,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "packagePeers": [
             "@types/vue",
+            "vue"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["vue-composable", [
+        ["npm:1.0.0-dev.37", {
+          "packageLocation": "./.yarn/cache/vue-composable-npm-1.0.0-dev.37-907c205e70-1e537fa2b0.zip/node_modules/vue-composable/",
+          "packageDependencies": [
+            ["vue-composable", "npm:1.0.0-dev.37"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-dev.37", {
+          "packageLocation": "./.yarn/$$virtual/vue-composable-virtual-e23b5b4b45/0/cache/vue-composable-npm-1.0.0-dev.37-907c205e70-1e537fa2b0.zip/node_modules/vue-composable/",
+          "packageDependencies": [
+            ["vue-composable", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-dev.37"],
+            ["@types/vue", null],
+            ["@types/vue__composition-api", null],
+            ["@vue/composition-api", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:1.0.0-rc.1"],
+            ["vue", "npm:2.6.12"]
+          ],
+          "packagePeers": [
+            "@types/vue",
+            "@types/vue__composition-api",
+            "@vue/composition-api",
             "vue"
           ],
           "linkType": "HARD",

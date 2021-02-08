@@ -30,7 +30,10 @@ export default ({ throwAtMissing } = { throwAtMissing: false }) => {
     '@ungap/global-this',
     // Helpers
     'tslib',
-    'vue-runtime-helpers'
+    'vue-runtime-helpers',
+    // Vue 3
+    '@vue/composition-api',
+    'vue-composable'
   ];
 
 

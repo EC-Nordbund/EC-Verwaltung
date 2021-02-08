@@ -28,8 +28,8 @@ v-app(app, :dark='dark')
               v-model='data.password',
               required,
               :autofocus='data.username !== ""',
-              :color='isCapsOn && !$route.query.error ? "info" : undefined',
-              :append-outer-icon='isCapsOn ? "keyboard_capslock" : undefined',
+              :color='isCaps && !$route.query.error ? "info" : undefined',
+              :append-outer-icon='isCaps ? "keyboard_capslock" : undefined',
               :append-icon='showPasword ? "visibility_off" : "visibility"',
               @click:append='() => (showPasword = !showPasword)',
               :type='showPasword ? "text" : "password"',
@@ -46,81 +46,85 @@ v-app(app, :dark='dark')
             @click='logIn'
           ) LogIn
 </template>
-
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { errorHandler } from '../helpers'
+import { defineComponent, computed, ref, onMounted } from '@vue/composition-api'
+import { useStorage } from '../storage'
+import { useLogin } from '../plugins/auth'
+import { useCaps } from '../plugins/caps'
 
-@Component({})
-export default class EcRootLogin extends Vue {
-  private dark = localStorage.getItem('dark') === 'x'
-  private isCapsOn = false
-  private valid = false
-  private loading = false
-  private data = {
-    username: (localStorage.getItem('username') as string) || '',
-    password: ''
-  }
-  private showPasword = false
+export default defineComponent({
+  name: 'Login',
+  setup(_, ctx) {
+    const password = ref('')
 
-  public checkCaps(ev: KeyboardEvent) {
-    const key = ev.key
-    if (key.length === 1) {
-      this.isCapsOn =
-        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
-    } else {
-      if (key === 'CapsLock') {
-        this.isCapsOn = !this.isCapsOn
-      }
+    const { dark, username } = useStorage()
+
+    console.log(dark, username)
+    console.log(dark.value, username.value, ctx, ctx.root)
+
+    const loading = ref(false)
+
+    const valid = ref(false)
+    const showPasword = ref(false)
+
+    const { login, authToken } = useLogin()
+
+    function logIn() {
+      loading.value = true
+      login(data.value)
+        .then(() => {
+          loading.value = false
+          console.log(ctx.root)
+          let path = ctx.root.$route.query.next || '/home'
+          console.log(ctx.root.$router)
+          if (ctx.root.$route.query.next === '/404?prev=%2F') {
+            path = 'home'
+          }
+          ctx.root.$router.push(path as string)
+          username.value = data.value.username
+        })
+        .catch((err) => {
+          ctx.root.$dialog.error({
+            text: err.message || err,
+            title: 'Anmelden fehlgeschlagen!'
+          })
+          loading.value = false
+        })
     }
-  }
 
-  public logIn() {
-    this.loading = true
+    const { isCaps } = useCaps()
 
-    fetch('https://api.ec-nordbund.de/v6/login', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        version: '3.2.0',
-        ...this.data
-      })
+    function toggleDark() {
+      dark.value = !dark.value
+    }
+
+    const data = ref({
+      username: username.value,
+      password: ''
     })
-      .then(errorHandler)
-      .then((res) => res.json())
-      .then(async (res: any) => {
-        let path = this.$route.query.next || '/home'
-        if (this.$route.query.next === '/404?prev=%2F') {
+
+    onMounted(() => {
+      if (authToken.value) {
+        console.log(ctx.root)
+        let path = ctx.root.$route.query.next || '/home'
+        if (ctx.root.$route.query.next === '/404?prev=%2F') {
           path = 'home'
         }
-        localStorage.setItem('username', this.data.username)
-        await this.$setAuthToken(res.authToken)
-        this.$router.push(path as string)
-        this.loading = false
-      })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Anmelden fehlgeschlagen!'
-        })
-        this.loading = false
-      })
-  }
-
-  public created() {
-    window.addEventListener('keyup', this.checkCaps)
-    if (this.$authToken()) {
-      let path = this.$route.query.next || '/home'
-      if (this.$route.query.next === '/404?prev=%2F') {
-        path = 'home'
+        ctx.root.$router.push(path as string)
       }
-      this.$router.push(path as string)
+    })
+
+    return {
+      logIn,
+      data,
+      toggleDark,
+      dark,
+      isCaps,
+      showPasword,
+      valid,
+      password,
+      loading
     }
   }
-  public destroyed() {
-    window.removeEventListener('keyup', this.checkCaps)
-  }
-}
+})
 </script>
