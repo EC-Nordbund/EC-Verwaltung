@@ -59,7 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.6"],
             ["es-module-shims", "npm:0.9.0"],
-            ["esbuild", "npm:0.8.42"],
+            ["esbuild", "npm:0.8.43"],
             ["eslint", "npm:7.19.0"],
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.2.0"],
             ["eslint-plugin-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.1"],
@@ -219,7 +219,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cssnano", "npm:4.1.10"],
             ["directory-tree", "npm:2.2.6"],
             ["es-module-shims", "npm:0.9.0"],
-            ["esbuild", "npm:0.8.42"],
+            ["esbuild", "npm:0.8.43"],
             ["eslint", "npm:7.19.0"],
             ["eslint-config-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:7.2.0"],
             ["eslint-plugin-prettier", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:3.3.1"],
@@ -2628,10 +2628,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["esbuild", [
-        ["npm:0.8.42", {
-          "packageLocation": "./.yarn/cache/esbuild-npm-0.8.42-c349b8902a-197ffc823f.zip/node_modules/esbuild/",
+        ["npm:0.8.43", {
+          "packageLocation": "./.yarn/cache/esbuild-npm-0.8.43-576216926c-67c5fa711e.zip/node_modules/esbuild/",
           "packageDependencies": [
-            ["esbuild", "npm:0.8.42"]
+            ["esbuild", "npm:0.8.43"]
           ],
           "linkType": "HARD",
         }]
@@ -6427,7 +6427,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-esbuild", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:2.6.1"],
             ["@rollup/pluginutils", "virtual:884d896aadbc2e116803fe45e8592dc56a1c8fc6ef9c22e43bd6fa2c8ccfa629e596743bfe2f2314a256ecb529a78793f4bc2e15ced382abe2417462f8f116fd#npm:4.1.0"],
             ["@types/esbuild", null],
-            ["esbuild", "npm:0.8.42"],
+            ["esbuild", "npm:0.8.43"],
             ["joycon", "npm:2.2.5"],
             ["strip-json-comments", "npm:3.1.1"]
           ],
