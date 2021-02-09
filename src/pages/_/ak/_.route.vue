@@ -14,7 +14,7 @@ ec-wrapper(
     v-list-tile(
       v-for='item in data.filter($util.filter(suche))',
       :key='item.akID',
-      @click='$router.push({ path: `/ak/${item.akID}`, query: { prev: $route.fullPath } })'
+      @click='navigate(`/ak/${item.akID}`)'
     )
       v-list-tile-action
         v-icon group
@@ -22,141 +22,103 @@ ec-wrapper(
         v-list-tile-title {{ item.bezeichnung }}
         v-list-tile-sub-title ID: {{ item.akID }}
   template(#dialogs)
-    //- ec-add-ak(ref="addAK")
     formular-selector(name='addAK', ref='addAK')
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
-import gql from 'graphql-tag'
+import { ref, defineComponent } from '@vue/composition-api'
+import { useApollo } from '../../../plugins/apollo'
+import { useLogin } from '../../../plugins/auth'
+import { useNotification } from '../../../plugins/notify'
+import { useRouter } from '../../../plugins/router'
+import { useDialog } from '../../../plugins/dialog'
 
-@Component({})
-export default class EcRootIndexAKIndex extends Vue {
-  public static meta = {}
+export default defineComponent({
+  name: 'RootIndexAkIndex',
+  setup() {
+    const suche = ref('')
+    const data = ref([])
 
-  private suche = ''
-  private data: any = []
+    const { client, gql } = useApollo()
+    const { authToken } = useLogin()
+    const { createNotification } = useNotification()
+    const { navigate } = useRouter()
+    const { error } = useDialog()
 
-  private config = {
-    sheet: [
-      {
-        icon: this.$util.icon.report,
-        label: 'Aktuelle AK Mitglieder Report',
-        click: () => {
-          this.gen('ak_all_current', 'ak-alle-current.docx')
-        }
-      },
-      {
-        icon: this.$util.icon.report,
-        label: 'Alle AK Mitglieder Report',
-        click: () => {
-          this.gen('ak_all_all', 'ak-alle-vollstaendig.docx')
-        }
-      },
-      {
-        icon: 'group_add',
-        label: 'AK-Hinzufügen',
-        click: () => {
-          ;(this.$refs.addAK as any)
-            .show()
-            .then((data: { bezeichnung: string }) => {
-              this.$apolloClient
-                .mutate({
-                  mutation: gql`
-                    mutation($authToken: String!, $bezeichnung: String!) {
-                      addAK(bezeichnung: $bezeichnung, authToken: $authToken)
-                    }
-                  `,
-                  variables: {
-                    bezeichnung: data.bezeichnung,
-                    authToken: this.$authToken()
+    const addAK = ref(null)
+
+    const config = {
+      sheet: [
+        {
+          icon: 'group_add',
+          label: 'AK-Hinzufügen',
+          async click() {
+            const { bezeichnung } = await addAK.value.show()
+            try {
+              const res = await client.mutate({
+                mutation: gql`
+                  mutation($authToken: String!, $bezeichnung: String!) {
+                    addAK(bezeichnung: $bezeichnung, authToken: $authToken)
                   }
-                })
-                .then((res: any) => {
-                  this.$notifikation(
-                    'Neuer AK',
-                    `Du hast erfolgreich einen AK mit dem Namen "${data.bezeichnung}" angelegt`
-                  )
-                  this.$router.push({
-                    path: `/ak/${res.data.addAK}`,
-                    query: { prev: this.$route.fullPath }
-                  })
-                })
-                .catch((err: any) => {
-                  this.$dialog.error({
-                    text: err.message,
-                    title: 'Speichern fehlgeschlagen!'
-                  })
-                })
-            })
-        }
-      }
-    ],
-    title: 'Arbeitskreise'
-  }
+                `,
+                variables: {
+                  bezeichnung,
+                  authToken: authToken.value
+                }
+              })
 
-  private gen(name: string, save: string) {
-    this.$util.report.loadData(
-      this,
-      gql`
-        query($authToken: String!) {
-          aks(authToken: $authToken) {
-            akID
-            bezeichnung
-            personen {
-              currentStatus
-              allUpdates {
-                akPersonID
-                neuerStatus
-                date {
-                  german
-                }
-              }
-              person {
-                personID
-                vorname
-                nachname
-                gebDat {
-                  german
-                }
-              }
+              createNotification({
+                title: 'Neuer AK',
+                body: `Du hast erfolgreich einen AK mit dem Namen "${bezeichnung}" angelegt`
+              })
+              navigate(`/ak/${res.data.addAK}`)
+            } catch (err) {
+              error({
+                text: err.message || err,
+                title: 'Speichern fehlgeschlagen!'
+              })
             }
           }
         }
-      `,
-      name,
-      save
-    )
-  }
+      ],
+      title: 'Arbeitskreise'
+    }
 
-  private loadData() {
-    this.$apolloClient
-      .query({
-        query: gql`
-          query($authToken: String!) {
-            aks(authToken: $authToken) {
-              akID
-              bezeichnung
+    async function loadData() {
+      try {
+        const res = await client.query({
+          query: gql`
+            query($authToken: String!) {
+              aks(authToken: $authToken) {
+                akID
+                bezeichnung
+              }
             }
-          }
-        `,
-        variables: {
-          authToken: this.$authToken()
-        },
-        fetchPolicy: 'no-cache'
-      })
-      .then((res: any) => {
-        this.data = res.data.aks
-      })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
+          `,
+          variables: {
+            authToken: authToken.value
+          },
+          fetchPolicy: 'no-cache'
+        })
+
+        data.value = res.data.aks
+      } catch (err) {
+        error({
+          text: err.message || err,
           title: 'Laden fehlgeschlagen!'
         })
-      })
-  }
+      }
+    }
 
-  private created() {
-    this.loadData()
+    loadData()
+
+    return {
+      config,
+      suche,
+      data,
+      navigate,
+      loadData,
+      addAK
+    }
   }
-}
+})
 </script>

@@ -29,6 +29,7 @@ export function useForm(app: ReturnType<typeof createApp>) {
   app.component('FormAdresse', adresse2)
   app.component('FormAlert', alert2)
   app.component('FormAutocomplete', autocomplete2)
+  app.component('FormSelect', autocomplete2)
   app.component('FormCheckbox', checkbox2)
   app.component('FormDate', date2)
   app.component('FormInput', input2)

@@ -1,17 +1,14 @@
 <template lang="pug">
-  v-checkbox(
-    v-validate="schema.rule"
-    
-    :value="value"
-    @input="changeValue"
-    
-    :data-vv-name="schema.name"
-    :data-vv-as="schema.label"
-    :error-messages="errors.collect(schema.name)"
-
-    v-bind="schema"
-    v-on="schema.on ||{}"
-  )
+v-checkbox(
+  v-validate='schema.rule',
+  :value='value',
+  @input='changeValue',
+  :data-vv-name='schema.name',
+  :data-vv-as='schema.label',
+  :error-messages='errors.collect(schema.name)',
+  v-bind='schema',
+  v-on='schema.on || {}'
+)
 </template>
 
 <script lang="ts">

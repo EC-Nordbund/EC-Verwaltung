@@ -1,7 +1,6 @@
 import VueCompositionAPI, { createApp } from '@vue/composition-api'
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import VuetifyDialog from 'vuetify-dialog'
 import './config/form'
 import { useForm, useValidation } from './forms/main'
 import './import'
@@ -11,7 +10,8 @@ import './plugins/notify'
 import { useServiceWorker } from './plugins/sw'
 import './plugins/telefonFilter'
 import { useVuetify } from './plugins/vuetify'
-import router from './router'
+import { installRouter } from './plugins/router'
+import { installDialog } from './plugins/dialog'
 
 import 'vuetify/dist/vuetify.min.css'
 import './assets/style.css'
@@ -20,8 +20,11 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 
 Vue.use(VueCompositionAPI)
 
-const app = createApp({
-  router: router,
+export const app = createApp({
+  router: installRouter(),
+  setup(prop, ctx) {
+    useLogin()
+  },
   render: (h) => h('router-view')
 })
 
@@ -33,6 +36,7 @@ useServiceWorker('sw.js', (doUpdate) => {
   }
 })
 useVuetify(app)
+installDialog(app)
 
 Component.registerHooks([
   'beforeRouteEnter',
@@ -40,9 +44,7 @@ Component.registerHooks([
   'beforeRouteUpdate'
 ])
 
-app.use(VuetifyDialog)
-
-useLogin(app)
-
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 Vue.prototype.$empty = () => {}
+
+app.mount('#app')

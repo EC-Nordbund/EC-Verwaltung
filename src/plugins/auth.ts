@@ -6,14 +6,22 @@ import { useStorage } from '../storage/index'
 import { errorHandler } from '../helpers'
 
 import { useNow } from 'vue-composable'
-import { createApp, computed } from '@vue/composition-api'
+import { createApp, computed, Ref, ComputedRef } from '@vue/composition-api'
 
 const time = 12 * 60 * 60 * 1e3
 
 let data = null
 
-export function useLogin(app?: ReturnType<typeof createApp>) {
+export function useLogin(): {
+  login: (data: { username: string; password: string }) => Promise<void>
+  authToken: Ref<string>
+  logout: () => void
+  extendLogin: (pwd: string) => Promise<void>
+  logoutIn: ComputedRef<number>
+} {
+  console.log('useLogin')
   if (data === null) {
+    console.log('useLogin - init')
     const { authToken, logoutTime, username } = useStorage()
     const { now } = useNow()
     const { client, gql } = useApollo()
@@ -83,23 +91,6 @@ export function useLogin(app?: ReturnType<typeof createApp>) {
           authToken.value = ''
           logoutTime.value = -1
         })
-        .then(() => {
-          // router.push({
-          //   path: '/login',
-          //   query: {
-          //     next: location.hash
-          //   }
-          // })
-          app.mount('#app')
-        })
-    } else {
-      // router.push({
-      //   path: '/login',
-      //   query: {
-      //     next: location.hash
-      //   }
-      // })
-      app.mount('#app')
     }
 
     data = {

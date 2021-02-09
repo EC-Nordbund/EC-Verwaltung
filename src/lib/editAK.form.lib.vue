@@ -31,6 +31,8 @@ v-dialog(v-model='visible', max-width='400px', persistend)
             required: true
           }
         ]`
+        :save="()=>{}"
+        :cancel="()=>{}"
         )
     v-card-actions
       v-spacer
