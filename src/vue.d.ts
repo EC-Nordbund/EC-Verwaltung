@@ -1,6 +1,5 @@
 import { ApolloClient } from '@apollo/client/core'
 import filterUtil from './util/filter.util'
-import iconUtil from './util/icon.util'
 declare module 'vue/types/vue' {
   interface Vue {
     $authToken: () => string
@@ -8,7 +7,6 @@ declare module 'vue/types/vue' {
     $login: (username: string, password: string) => Promise<never>
     $util: {
       filter: typeof filterUtil
-      icon: typeof iconUtil
     }
     $setAuthToken: (authToken: string) => void
     $notifikation: (title: string, body: string) => Notification

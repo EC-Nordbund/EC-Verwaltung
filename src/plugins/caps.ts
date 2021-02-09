@@ -1,23 +1,22 @@
-import { ref, Ref } from '@vue/composition-api'
+import { ref } from '@vue/composition-api'
+import { defineUseFunction } from './base'
 
-let data: Ref<boolean> | null = null
+export const useCaps = defineUseFunction(() => {
+  const isCaps = ref(false)
 
-export function useCaps() {
-  if (!data) {
-    data = ref(false)
-
-    window.addEventListener('keydown', (ev: KeyboardEvent) => {
-      const key = ev.key
-      if (key.length === 1) {
-        data.value =
-          key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
-      } else {
-        if (key === 'CapsLock') {
-          data.value = !data.value
-        }
+  window.addEventListener('keydown', (ev: KeyboardEvent) => {
+    const key = ev.key
+    if (key.length === 1) {
+      isCaps.value =
+        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
+    } else {
+      if (key === 'CapsLock') {
+        isCaps.value = !isCaps.value
       }
-    })
-  }
+    }
+  })
 
-  return { isCaps: data! }
-}
+  return {
+    isCaps
+  }
+})

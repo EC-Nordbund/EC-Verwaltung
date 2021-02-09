@@ -51,48 +51,42 @@ import { defineComponent, computed, ref, onMounted } from '@vue/composition-api'
 import { useStorage } from '../storage'
 import { useLogin } from '../plugins/auth'
 import { useCaps } from '../plugins/caps'
+import { useRouter } from '../plugins/router'
+import { useDialog } from '../plugins/dialog'
 
 export default defineComponent({
   name: 'Login',
-  setup(_, ctx) {
+  setup() {
     const password = ref('')
-
     const { dark, username } = useStorage()
-
-    console.log(dark, username)
-    console.log(dark.value, username.value, ctx, ctx.root)
-
+    const { route, router } = useRouter()
     const loading = ref(false)
-
     const valid = ref(false)
     const showPasword = ref(false)
-
     const { login, authToken } = useLogin()
+    const { error } = useDialog()
+    const { isCaps } = useCaps()
 
     function logIn() {
       loading.value = true
       login(data.value)
         .then(() => {
           loading.value = false
-          console.log(ctx.root)
-          let path = ctx.root.$route.query.next || '/home'
-          console.log(ctx.root.$router)
-          if (ctx.root.$route.query.next === '/404?prev=%2F') {
+          let path = route.value.query.next || '/home'
+          if (route.value.query.next === '/404?prev=%2F') {
             path = 'home'
           }
-          ctx.root.$router.push(path as string)
+          router.push(path as string)
           username.value = data.value.username
         })
         .catch((err) => {
-          ctx.root.$dialog.error({
+          error({
             text: err.message || err,
             title: 'Anmelden fehlgeschlagen!'
           })
           loading.value = false
         })
     }
-
-    const { isCaps } = useCaps()
 
     function toggleDark() {
       dark.value = !dark.value
@@ -105,12 +99,11 @@ export default defineComponent({
 
     onMounted(() => {
       if (authToken.value) {
-        console.log(ctx.root)
-        let path = ctx.root.$route.query.next || '/home'
-        if (ctx.root.$route.query.next === '/404?prev=%2F') {
+        let path = route.value.query.next || '/home'
+        if (route.value.query.next === '/404?prev=%2F') {
           path = 'home'
         }
-        ctx.root.$router.push(path as string)
+        router.push(path as string)
       }
     })
 

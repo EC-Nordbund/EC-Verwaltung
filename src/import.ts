@@ -1,8 +1,6 @@
-import * as cookie from './util/cookie.util'
 import * as filter from './util/filter.util'
-import * as icon from './util/icon.util'
 
-const m = [cookie, filter, icon]
+const m = [filter]
 import Vue from 'vue'
 import './lib/import'
 const tmpUtil: any = {}

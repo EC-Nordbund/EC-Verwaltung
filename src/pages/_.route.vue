@@ -162,23 +162,13 @@ import { useStorage } from '../storage'
 import { useLogin } from '../plugins/auth'
 import { useCaps } from '../plugins/caps'
 import { useApollo } from '../plugins/apollo'
+import { useRouter } from '../plugins/router'
+import { useDialog } from '../plugins/dialog'
 
 export default defineComponent({
   name: 'Root',
-  setup(_, ctx) {
-    function breadMap(arr: string[]) {
-      return arr.map((el) => ({ text: el, disabled: true }))
-    }
-
-    const route = computed(() =>
-      breadMap(
-        ctx.root.$route.path
-          .split('/')
-          .slice(1)
-          .map((v) => v[0].toUpperCase() + v.slice(1))
-      )
-    )
-
+  setup() {
+    const { router, route } = useRouter()
     const breadcrumbs = breadMap([
       `© 2017 - ${new Date().getFullYear()}`,
       'EC-Nordbund',
@@ -194,13 +184,28 @@ export default defineComponent({
     const loading = ref(false)
     const alive = ref(-1)
 
-    let timer: null | number = null
+    let timer: null | NodeJS.Timeout = null
     const valid = ref(false)
     const showPasword = ref(false)
 
     const { logout, extendLogin, authToken, logoutIn } = useLogin()
 
     const { client, gql } = useApollo()
+    const { error } = useDialog()
+    const { isCaps } = useCaps()
+
+    function breadMap(arr: string[]) {
+      return arr.map((el) => ({ text: el, disabled: true }))
+    }
+
+    const routeBread = computed(() =>
+      breadMap(
+        route.value.path
+          .split('/')
+          .slice(1)
+          .map((v) => v[0].toUpperCase() + v.slice(1))
+      )
+    )
 
     function logIn() {
       loading.value = true
@@ -212,15 +217,13 @@ export default defineComponent({
           loginDialog.value = false
         })
         .catch((err) => {
-          ctx.root.$dialog.error({
+          error({
             text: err.message || err,
             title: 'Anmelden fehlgeschlagen!'
           })
           loginDialog.value = false
         })
     }
-
-    const { isCaps } = useCaps()
 
     function toggleDark() {
       dark.value = !dark.value
@@ -252,9 +255,9 @@ export default defineComponent({
 
     onMounted(() => {
       if (!authToken.value) {
-        ctx.root.$router.push({
+        router.push({
           path: '/login',
-          query: { next: ctx.root.$route.fullPath }
+          query: { next: route.value.fullPath }
         })
       } else {
         client
@@ -300,7 +303,7 @@ export default defineComponent({
       password,
       version,
       breadcrumbs,
-      route,
+      route: routeBread,
       loading
     }
   }
