@@ -4,34 +4,40 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import { defineComponent, ref } from '@vue/composition-api'
+import { useRouter } from '../plugins/router'
+import { useLesezeichen } from '../plugins/lesezeichen'
 
-@Component({})
-export default class EcLesezeichenAdd extends Vue {
-  @Prop({ type: String, required: true })
-  public title!: string
-
-  @Prop({ type: String, required: false })
-  public subTitle!: string
-
-  public isLesezeichen = false
-
-  public toggleLesezeichen() {
-    if (this.isLesezeichen) {
-      this.$util.lesezeichen.remove(this.$route.path)
-    } else {
-      this.$util.lesezeichen.add(
-        this.title,
-        this.subTitle,
-        this.$route.fullPath,
-        this.$route.path
-      )
+export default defineComponent({
+  name: 'LesezeichenAdd',
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    subTitle: {
+      type: String,
+      required: true
     }
-    this.isLesezeichen = !this.isLesezeichen
-  }
+  },
+  setup(props, ctx) {
+    const { route } = useRouter()
+    const { check, add, remove } = useLesezeichen()
+    const isLesezeichen = ref(check(route.value.path))
 
-  public created() {
-    this.isLesezeichen = this.$util.lesezeichen.check(this.$route.path)
+    function toggleLesezeichen() {
+      if (isLesezeichen.value) {
+        remove(route.value.path)
+      } else {
+        add(route.value.path, {
+          title: props.title,
+          subTitle: props.subTitle,
+          fullPath: route.value.fullPath
+        })
+      }
+    }
+
+    return { isLesezeichen, toggleLesezeichen }
   }
-}
+})
 </script>

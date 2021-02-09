@@ -21,14 +21,17 @@ v-menu(open-on-hover)
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+import { defineComponent } from '@vue/composition-api'
+import { useLesezeichen } from '../plugins/lesezeichen'
 
-@Component({})
-export default class EcLesezeichenShow extends Vue {
-  public liste = {}
+export default defineComponent({
+  name: 'LesezeichenShow',
+  setup() {
+    const { lesezeichen } = useLesezeichen()
 
-  public created() {
-    this.liste = this.$util.lesezeichen.lesezeichen
+    return {
+      liste: lesezeichen
+    }
   }
-}
+})
 </script>

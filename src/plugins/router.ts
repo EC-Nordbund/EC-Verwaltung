@@ -24,12 +24,12 @@ export function installRouter() {
     route.value = to
   })
 
-  route = ref(router.currentRoute)
+  route = ref(router.currentRoute) as Ref<Route>
 
   return router
 }
 
-function stringQueryRef(name: string) {
+function stringQueryRef(name: string): Ref<string> {
   const r = ref(route.value?.query?.[name])
 
   watch(r, () => {
@@ -42,7 +42,7 @@ function stringQueryRef(name: string) {
     })
   })
 
-  return r
+  return r as any
 }
 
 function booleanQueryRef(name: string) {
@@ -51,6 +51,21 @@ function booleanQueryRef(name: string) {
   const boolRef = computed({
     get: () => {
       return r.value && r.value !== 'false'
+    },
+    set: (val) => {
+      r.value = val.toString()
+    }
+  })
+
+  return boolRef
+}
+
+function numberQueryRef(name: string) {
+  const r = stringQueryRef(name)
+
+  const boolRef = computed({
+    get: () => {
+      return r.value ? parseInt(r.value) : 0
     },
     set: (val) => {
       r.value = val.toString()
@@ -86,6 +101,7 @@ export function useRouter() {
     route,
     navigate: pushWithPrev,
     stringQueryRef,
-    booleanQueryRef
+    booleanQueryRef,
+    numberQueryRef
   }
 }
