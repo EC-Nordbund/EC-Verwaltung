@@ -16,7 +16,7 @@
     "comlink": "4.3.0",
     "consola": "2.15.3",
     "es-module-shims": "0.9.0",
-    "graphql": "15.4.0",
+    "graphql": "15.5.0",
     "graphql-tag": "2.11.0",
     "material-design-icons-iconfont": "6.1.0",
     "roboto-fontface": "*",
