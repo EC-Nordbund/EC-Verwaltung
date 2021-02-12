@@ -4,6 +4,7 @@ import postcss from 'rollup-plugin-postcss'
 import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
 import vue from 'rollup-plugin-vue'
+import visualizer from 'rollup-plugin-visualizer';
 
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
@@ -98,6 +99,10 @@ export default {
     icons(),
     // CSS Assets parser and require
     cssAssets(),
+    visualizer({
+      brotliSize: true,
+      gzipSize: true
+    }),
     // Minify or Serve
     ...(isProduction ? [terser()] : [serve()])
   ]

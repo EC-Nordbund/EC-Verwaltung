@@ -1,6 +1,7 @@
 import vorwahlen from '../data/vorwahl'
 import Vue from 'vue'
-Vue.filter('telefon', (value) => {
+
+export const telefonFormater = (value: string) => {
   let numOnly = value.replace(/\D/g, '')
   let ret = ''
   let found = false
@@ -11,20 +12,22 @@ Vue.filter('telefon', (value) => {
   if (numOnly.substr(0, 2) === '00') {
     return numOnly
   } else {
-    numOnly.split('').forEach((c, id) => {
+    numOnly.split('').forEach((char, id) => {
       if (id === 0) {
-        ret = ret + c
+        ret = ret + char
         return
       }
       if (!found) {
-        find = find[c]
+        find = find[char]
         if (find === void 0) {
           found = true
           ret = ret + ' '
         }
       }
-      ret = ret + c
+      ret = ret + char
     })
     return ret
   }
-})
+}
+
+Vue.filter('telefon', telefonFormater)

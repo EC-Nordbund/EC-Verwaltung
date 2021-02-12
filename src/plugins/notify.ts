@@ -21,3 +21,7 @@ Vue.prototype.$notifikation = (title, body) => {
     })
   }
 }
+
+if (Notification.permission === 'default') {
+  Notification.requestPermission()
+}
