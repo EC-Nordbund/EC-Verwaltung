@@ -108,7 +108,7 @@ __metadata:
     cssnano: 4.1.10
     directory-tree: 2.2.6
     es-module-shims: 0.9.0
-    esbuild: 0.8.43
+    esbuild: 0.8.44
     eslint: 7.19.0
     eslint-config-prettier: 7.2.0
     eslint-plugin-prettier: 3.3.1
@@ -2088,12 +2088,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:0.8.43":
-  version: 0.8.43
-  resolution: "esbuild@npm:0.8.43"
+"esbuild@npm:0.8.44":
+  version: 0.8.44
+  resolution: "esbuild@npm:0.8.44"
   bin:
     esbuild: bin/esbuild
-  checksum: 67c5fa711eaf83f763101477b11eb9ab07f6c9a6081ad99ad81d3c8ea4d28ad13f78b533617fdbd0426eeea87fcf8f844adf4d1d21399f96f6e7dbccb029d27c
+  checksum: 959a42dfd62c16f487ced32f971e09ecf9cce6a92e47f78d2a9551e95d84b99ef9871cadc6d74c19c121458c20904f0a6135e10ab95b57e5f1bf546a760d2d96
   languageName: node
   linkType: hard
 
