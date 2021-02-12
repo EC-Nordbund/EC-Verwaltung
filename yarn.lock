@@ -5,16 +5,16 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@apollo/client@npm:3.3.8":
-  version: 3.3.8
-  resolution: "@apollo/client@npm:3.3.8"
+"@apollo/client@npm:3.3.9":
+  version: 3.3.9
+  resolution: "@apollo/client@npm:3.3.9"
   dependencies:
     "@graphql-typed-document-node/core": ^3.0.0
     "@types/zen-observable": ^0.8.0
     "@wry/context": ^0.5.2
     "@wry/equality": ^0.3.0
     fast-json-stable-stringify: ^2.0.0
-    graphql-tag: ^2.11.0
+    graphql-tag: ^2.12.0
     hoist-non-react-statics: ^3.3.2
     optimism: ^0.14.0
     prop-types: ^15.7.2
@@ -31,7 +31,7 @@ __metadata:
       optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: 316c325d042909440c5afe1354e9fc27ae69bd130e3290feea16929e9664219243736b09a092720df5a86c616f9518c2d28ed0304bb0fbbf694929757c0835d7
+  checksum: 8b0662d70e6ef203d7e3df6e013205c891967f42f3b639cafb56d87e7cdf56c1c150358e6fd69cdc5fb9e894ed352785cdf26d7d15b76921ed028f8247fdb6a2
   languageName: node
   linkType: hard
 
@@ -86,7 +86,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ec/verwaltung@workspace:."
   dependencies:
-    "@apollo/client": 3.3.8
+    "@apollo/client": 3.3.9
     "@rollup/plugin-commonjs": 17.1.0
     "@rollup/plugin-node-resolve": 11.1.1
     "@rollup/pluginutils": 4.1.0
@@ -95,7 +95,7 @@ __metadata:
     "@types/chokidar": 2.1.3
     "@types/elementtree": 0.1.0
     "@types/json5": 0.0.30
-    "@types/node": 14.14.25
+    "@types/node": 14.14.27
     "@types/pug": 2.0.4
     "@types/ws": 7.4.0
     "@typescript-eslint/eslint-plugin": 4.15.0
@@ -108,7 +108,7 @@ __metadata:
     cssnano: 4.1.10
     directory-tree: 2.2.6
     es-module-shims: 0.9.0
-    esbuild: 0.8.43
+    esbuild: 0.8.44
     eslint: 7.19.0
     eslint-config-prettier: 7.2.0
     eslint-plugin-prettier: 3.3.1
@@ -119,7 +119,7 @@ __metadata:
     json5: 2.2.0
     material-design-icons-iconfont: 6.1.0
     node-sass: 5.0.0
-    postcss: 8.2.5
+    postcss: 8.2.6
     prettier: 2.2.1
     pug: 3.0.0
     roboto-fontface: "*"
@@ -130,7 +130,7 @@ __metadata:
     rollup-plugin-visualizer: ^4.2.0
     rollup-plugin-vue: 5.1.9
     tslib: 2.1.0
-    typescript: 4.1.3
+    typescript: 4.1.5
     vee-validate: 2.2.15
     vue: 2.6.12
     vue-class-component: 7.2.6
@@ -345,10 +345,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.14.25":
-  version: 14.14.25
-  resolution: "@types/node@npm:14.14.25"
-  checksum: 64c42730f4169e49ec378870622ef06c5d820b31340e224cc1b45bf06c8b0cfa28daa587b4ae2b8ea1f712ef049bae4d9c92925b157ba9ba7cde3b22ff552513
+"@types/node@npm:14.14.27":
+  version: 14.14.27
+  resolution: "@types/node@npm:14.14.27"
+  checksum: efc78cf6e698e09925a2542bbea932dfe092408f4ce39b8f260b71df502221d76c925fd3227bc1f7427edd9cfb6f8c81c68a56b9ab690f08425e7e6e177e61e0
   languageName: node
   linkType: hard
 
@@ -2100,12 +2100,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:0.8.43":
-  version: 0.8.43
-  resolution: "esbuild@npm:0.8.43"
+"esbuild@npm:0.8.44":
+  version: 0.8.44
+  resolution: "esbuild@npm:0.8.44"
   bin:
     esbuild: bin/esbuild
-  checksum: 67c5fa711eaf83f763101477b11eb9ab07f6c9a6081ad99ad81d3c8ea4d28ad13f78b533617fdbd0426eeea87fcf8f844adf4d1d21399f96f6e7dbccb029d27c
+  checksum: 959a42dfd62c16f487ced32f971e09ecf9cce6a92e47f78d2a9551e95d84b99ef9871cadc6d74c19c121458c20904f0a6135e10ab95b57e5f1bf546a760d2d96
   languageName: node
   linkType: hard
 
@@ -2717,12 +2717,23 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"graphql-tag@npm:2.11.0, graphql-tag@npm:^2.11.0":
+"graphql-tag@npm:2.11.0":
   version: 2.11.0
   resolution: "graphql-tag@npm:2.11.0"
   peerDependencies:
     graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
   checksum: 400355590180cce2f39df5c599cad20ee982bb7e4a63ad70857aa0fe2e82e3ef6233a4db2b80a03e6dfa84bf3ecb13dc2947936eaf31753c94876e22be45ea78
+  languageName: node
+  linkType: hard
+
+"graphql-tag@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "graphql-tag@npm:2.12.0"
+  dependencies:
+    tslib: ^1.14.1
+  peerDependencies:
+    graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+  checksum: 5589000ba86013023076842192bd569f579a647fbc3bfd86831e6ddc6c275cf430b532476717adba45c514ca90650fc5cb3329bc45e38a9b849f6fcb047444c9
   languageName: node
   linkType: hard
 
@@ -4779,14 +4790,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.2.5":
-  version: 8.2.5
-  resolution: "postcss@npm:8.2.5"
+"postcss@npm:8.2.6":
+  version: 8.2.6
+  resolution: "postcss@npm:8.2.6"
   dependencies:
     colorette: ^1.2.1
     nanoid: ^3.1.20
     source-map: ^0.6.1
-  checksum: dbd8281a32abdbb68be53a7022f405f25207cfadf86cd603bc47e29579432d6fe970fb4189af6ddbd81170c9f226ae36413970bed5bfcd6d04544c86374547be
+  checksum: 31dcc6632589e5b0d06ae3854122073a38952f3a25280511fa4bd8c2bc254c05d1d1db0913848ed3171c84d41b233ec3fe5d7349de4700f624a16fa93553ccac
   languageName: node
   linkType: hard
 
@@ -6331,23 +6342,23 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-typescript@4.1.3:
-  version: 4.1.3
-  resolution: "typescript@npm:4.1.3"
+typescript@4.1.5:
+  version: 4.1.5
+  resolution: "typescript@npm:4.1.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 4f7ab1506ea22c7a1c313ec5b4285e93ce08d709ad6086d02d3096adb399ca339972ee56d1e578213c51dd0fb7b0fad50283c2d3c39642405644458ae29774f8
+  checksum: 29157c84426ac94ce97aac836264f303a26bd9fb30865650229e3406a36ca2e89735ef4b8878075ba1b95fa4d3ff9810057b64888700c28e20b4034a6db4da83
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.1.3#builtin<compat/typescript>":
-  version: 4.1.3
-  resolution: "typescript@patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"
+"typescript@patch:typescript@4.1.5#builtin<compat/typescript>":
+  version: 4.1.5
+  resolution: "typescript@patch:typescript@npm%3A4.1.5#builtin<compat/typescript>::version=4.1.5&hash=cc6730"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 017af992148346e671d5b83b041773825888e9c94db8d2b9472cdbb6d6f0ee85927817473121524d319f8be6ffe5a6904d27ff6ef21356d2274fcadd52e17938
+  checksum: 58cc7786be0f8485c124944883b1384287532e4867ec37f1fb5cb2811dbc10f7a9decccad89097f924043285f3515bfd8223c61dbb4f88af00b2d8dc2ef73207
   languageName: node
   linkType: hard
 
