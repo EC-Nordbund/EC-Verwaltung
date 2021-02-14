@@ -135,7 +135,7 @@ __metadata:
     vue: 2.6.12
     vue-class-component: 7.2.6
     vue-composable: 1.0.0-dev.37
-    vue-eslint-parser: 7.4.1
+    vue-eslint-parser: 7.5.0
     vue-property-decorator: 9.1.2
     vue-router: 3.5.1
     vue-template-compiler: 2.6.12
@@ -6557,7 +6557,23 @@ typescript@4.1.5:
   languageName: node
   linkType: hard
 
-"vue-eslint-parser@npm:7.4.1, vue-eslint-parser@npm:^7.4.1":
+"vue-eslint-parser@npm:7.5.0":
+  version: 7.5.0
+  resolution: "vue-eslint-parser@npm:7.5.0"
+  dependencies:
+    debug: ^4.1.1
+    eslint-scope: ^5.0.0
+    eslint-visitor-keys: ^1.1.0
+    espree: ^6.2.1
+    esquery: ^1.4.0
+    lodash: ^4.17.15
+  peerDependencies:
+    eslint: ">=5.0.0"
+  checksum: d6da2a29295325c0fbe2f973662e9b5fdb6477e913e436a20e49025f6e1736c41cdaf73f8273ea5536154685b2a096cf1cf1c77dd121ae4ff86841fb0fb8004b
+  languageName: node
+  linkType: hard
+
+"vue-eslint-parser@npm:^7.4.1":
   version: 7.4.1
   resolution: "vue-eslint-parser@npm:7.4.1"
   dependencies:
