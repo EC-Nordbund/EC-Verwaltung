@@ -5,9 +5,9 @@ __metadata:
   version: 4
   cacheKey: 7
 
-"@apollo/client@npm:3.3.9":
-  version: 3.3.9
-  resolution: "@apollo/client@npm:3.3.9"
+"@apollo/client@npm:3.3.10":
+  version: 3.3.10
+  resolution: "@apollo/client@npm:3.3.10"
   dependencies:
     "@graphql-typed-document-node/core": ^3.0.0
     "@types/zen-observable": ^0.8.0
@@ -31,7 +31,7 @@ __metadata:
       optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: 8b0662d70e6ef203d7e3df6e013205c891967f42f3b639cafb56d87e7cdf56c1c150358e6fd69cdc5fb9e894ed352785cdf26d7d15b76921ed028f8247fdb6a2
+  checksum: 76e671272186add72b0701a5d0384217eb31e80ea5bc7113481cd031bc5566e2b6a0b079583d1871c79106c85b8f7140e4d497294ced71e87f61637c0d97cc92
   languageName: node
   linkType: hard
 
@@ -86,7 +86,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ec/verwaltung@workspace:."
   dependencies:
-    "@apollo/client": 3.3.9
+    "@apollo/client": 3.3.10
     "@rollup/plugin-commonjs": 17.1.0
     "@rollup/plugin-node-resolve": 11.1.1
     "@rollup/pluginutils": 4.1.0

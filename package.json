@@ -11,7 +11,7 @@
     "build:loading": "cd loading && rollup -c"
   },
   "dependencies": {
-    "@apollo/client": "3.3.9",
+    "@apollo/client": "3.3.10",
     "@vue/composition-api": "1.0.0-rc.1",
     "comlink": "4.3.0",
     "consola": "2.15.3",
