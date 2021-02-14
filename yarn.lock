@@ -127,7 +127,7 @@ __metadata:
     rollup-plugin-esbuild: 2.6.1
     rollup-plugin-postcss: 4.0.0
     rollup-plugin-terser: 7.0.2
-    rollup-plugin-visualizer: ^4.2.0
+    rollup-plugin-visualizer: 4.2.0
     rollup-plugin-vue: 5.1.9
     tslib: 2.1.0
     typescript: 4.1.5
@@ -5518,7 +5518,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rollup-plugin-visualizer@npm:^4.2.0":
+"rollup-plugin-visualizer@npm:4.2.0":
   version: 4.2.0
   resolution: "rollup-plugin-visualizer@npm:4.2.0"
   dependencies:
