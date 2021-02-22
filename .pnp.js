@@ -46,7 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/chokidar", "npm:2.1.3"],
             ["@types/elementtree", "npm:0.1.0"],
             ["@types/json5", "npm:0.0.30"],
-            ["@types/node", "npm:14.14.28"],
+            ["@types/node", "npm:14.14.31"],
             ["@types/pug", "npm:2.0.4"],
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.15.1"],
@@ -207,7 +207,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/chokidar", "npm:2.1.3"],
             ["@types/elementtree", "npm:0.1.0"],
             ["@types/json5", "npm:0.0.30"],
-            ["@types/node", "npm:14.14.28"],
+            ["@types/node", "npm:14.14.31"],
             ["@types/pug", "npm:2.0.4"],
             ["@types/ws", "npm:7.4.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:ccb48b8dc881df4cd5c697767581267d1d84bd1da61dee05ba6c7c7c3b952fe9fcd346b74a5ede77e41ec529dbf6db6aa3ab5f44ec8e7302756ba2473daeaf08#npm:4.15.1"],
@@ -567,10 +567,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["npm:14.14.28", {
-          "packageLocation": "./.yarn/cache/@types-node-npm-14.14.28-f643c75c74-e750df4d5e.zip/node_modules/@types/node/",
+        ["npm:14.14.31", {
+          "packageLocation": "./.yarn/cache/@types-node-npm-14.14.31-4f1a9dff64-635dc8a089.zip/node_modules/@types/node/",
           "packageDependencies": [
-            ["@types/node", "npm:14.14.28"]
+            ["@types/node", "npm:14.14.31"]
           ],
           "linkType": "HARD",
         }]
