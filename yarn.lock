@@ -106,7 +106,7 @@ __metadata:
     comlink: 4.3.0
     consola: 2.15.3
     cssnano: 4.1.10
-    directory-tree: 2.2.6
+    directory-tree: 2.2.7
     es-module-shims: 0.9.0
     esbuild: 0.8.46
     eslint: 7.20.0
@@ -1861,10 +1861,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"directory-tree@npm:2.2.6":
-  version: 2.2.6
-  resolution: "directory-tree@npm:2.2.6"
-  checksum: 998271427811fd3e8a76f9579e0df36a7d5303a9565efd290e4def6a16f3bec900bf7d05429efdfa07cfa704b0648835c1fe734e2f003d668e85cc61d00fffe9
+"directory-tree@npm:2.2.7":
+  version: 2.2.7
+  resolution: "directory-tree@npm:2.2.7"
+  checksum: b4fa4902ae84d5d9750dcf1980ab3e6f10c015d89b2886ba4277467119a3f1ecddb954cdb4c69c02cc320e11b5104e6185526c5582a6d5822812d6b3d8f9c676
   languageName: node
   linkType: hard
 

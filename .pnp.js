@@ -57,7 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["comlink", "npm:4.3.0"],
             ["consola", "npm:2.15.3"],
             ["cssnano", "npm:4.1.10"],
-            ["directory-tree", "npm:2.2.6"],
+            ["directory-tree", "npm:2.2.7"],
             ["es-module-shims", "npm:0.9.0"],
             ["esbuild", "npm:0.8.46"],
             ["eslint", "npm:7.20.0"],
@@ -218,7 +218,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["comlink", "npm:4.3.0"],
             ["consola", "npm:2.15.3"],
             ["cssnano", "npm:4.1.10"],
-            ["directory-tree", "npm:2.2.6"],
+            ["directory-tree", "npm:2.2.7"],
             ["es-module-shims", "npm:0.9.0"],
             ["esbuild", "npm:0.8.46"],
             ["eslint", "npm:7.20.0"],
@@ -2375,10 +2375,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["directory-tree", [
-        ["npm:2.2.6", {
-          "packageLocation": "./.yarn/cache/directory-tree-npm-2.2.6-8783f269af-9982714278.zip/node_modules/directory-tree/",
+        ["npm:2.2.7", {
+          "packageLocation": "./.yarn/cache/directory-tree-npm-2.2.7-70426aa145-b4fa4902ae.zip/node_modules/directory-tree/",
           "packageDependencies": [
-            ["directory-tree", "npm:2.2.6"]
+            ["directory-tree", "npm:2.2.7"]
           ],
           "linkType": "HARD",
         }]
