@@ -106,7 +106,8 @@ export async function generate(
               day
               month
               year
-            }
+            },
+            extra_json
           }
         }
       }
