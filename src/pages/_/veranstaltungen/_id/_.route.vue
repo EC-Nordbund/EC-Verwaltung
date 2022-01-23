@@ -44,73 +44,83 @@ export default class EcRootIndex extends Vue {
     return {
       sheet: [
         {
-          icon: 'mail',
-          id: 'veranstaltung_create_tokens',
-          label: 'Mitarbeiteranmeldungstoken erzeugen',
-          click: async () => {
-            const res = await fetch(
-              'https://api.ec-nordbund.de/api-v4/anmeldetoken',
-              {
-                method: 'POST',
-                headers: {
-                  'authorization': this.$authToken(),
-                  'content-type': 'application/json'
-                },
-                body: JSON.stringify({ id: parseInt(this.$route.params.id) })
-              }
-            );
-
-            const d = (await res.json()).data;
-
-            const createMailText = (code: string) => `Moin,
-Damit du im EC System für die Veranstaltung eingtragen bist, möchte ich dich bitten dich unter dem folgenden Link anzumelden:
-
-https://www.ec-nordbund.de/anmeldung/mitarbeiter/${code}
-
-Oder gehe auf https://www.ec-nordbund.de/anmeldung/mitarbeiter und füge den Code
-
-${code}
-
-ein.
-
-
-Solltest du ein (neues) erweitertes Führungszeugnis benötigen erhältst den benötigten Antrag direkt nach der Anmeldung per Mail.
-
-Gruß
-Thomas Seeger
-`;
-
-            window.navigator.clipboard.writeText(`Moin,
-Du bist Freizeitleiter.
-
-Hinweis: die Links funktionieren nur bis zu begin der Veranstaltung oder 100 Tage
-
-Bitte melde dich selber über diesen Link an:
-${d[4]}
-(über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
-
-Alle anderen Veranstaltungsleiter bitte über diesen Link:
-${d[3]}
-
-Desweiteren sende folgende E-Mail weiter an deine Mitarbeiter (bitte sende nur den Link an die Personen die ihn auch benötigen):
-
-Normale Mitarbeiter:
-
-${createMailText(d[0])}
-
-Küchen Mitarbeiter:
-
-${createMailText(d[1])}
-
-Küchenleitung:
-
-${createMailText(d[2])}
-
-
-            `);
-            alert('Mail-Text in Zwischenablage kopiert.');
+          id: 'ver_rep_bestbrief',
+          icon: 'markunread_mailbox',
+          label: 'Bestätigungsbrief generieren und versenden!',
+          disabled: false,
+          click: () => {
+            if (!confirm('Wurde für eine einzelne Anmeldung als test der Brief generiert?')) return
+            fetch(new URL('/v6/best-brief/veranstaltung/' + this.$route.params.id, 'https://api.ec-nordbund.de').href)
           }
         }
+        //         {
+        //           icon: 'mail',
+        //           id: 'veranstaltung_create_tokens',
+        //           label: 'Mitarbeiteranmeldungstoken erzeugen',
+        //           click: async () => {
+        //             const res = await fetch(
+        //               'https://api.ec-nordbund.de/api-v4/anmeldetoken',
+        //               {
+        //                 method: 'POST',
+        //                 headers: {
+        //                   'authorization': this.$authToken(),
+        //                   'content-type': 'application/json'
+        //                 },
+        //                 body: JSON.stringify({ id: parseInt(this.$route.params.id) })
+        //               }
+        //             );
+
+        //             const d = (await res.json()).data;
+
+        //             const createMailText = (code: string) => `Moin,
+        // Damit du im EC System für die Veranstaltung eingtragen bist, möchte ich dich bitten dich unter dem folgenden Link anzumelden:
+
+        // https://www.ec-nordbund.de/anmeldung/mitarbeiter/${code}
+
+        // Oder gehe auf https://www.ec-nordbund.de/anmeldung/mitarbeiter und füge den Code
+
+        // ${code}
+
+        // ein.
+
+
+        // Solltest du ein (neues) erweitertes Führungszeugnis benötigen erhältst den benötigten Antrag direkt nach der Anmeldung per Mail.
+
+        // Gruß
+        // Thomas Seeger
+        // `;
+
+        //             window.navigator.clipboard.writeText(`Moin,
+        // Du bist Freizeitleiter.
+
+        // Hinweis: die Links funktionieren nur bis zu begin der Veranstaltung oder 100 Tage
+
+        // Bitte melde dich selber über diesen Link an:
+        // ${d[4]}
+        // (über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
+
+        // Alle anderen Veranstaltungsleiter bitte über diesen Link:
+        // ${d[3]}
+
+        // Desweiteren sende folgende E-Mail weiter an deine Mitarbeiter (bitte sende nur den Link an die Personen die ihn auch benötigen):
+
+        // Normale Mitarbeiter:
+
+        // ${createMailText(d[0])}
+
+        // Küchen Mitarbeiter:
+
+        // ${createMailText(d[1])}
+
+        // Küchenleitung:
+
+        // ${createMailText(d[2])}
+
+
+        //             `);
+        //             alert('Mail-Text in Zwischenablage kopiert.');
+        //           }
+        //         }
       ],
       nav: [
         {
@@ -208,9 +218,6 @@ ${createMailText(d[2])}
                 german
                 input
               }
-              preisAnzahlungNormal
-              preisAnzahlungLastMinute
-              preisAnzahlungFruehbucher
               kannVorortBezahltWerden
               hatGWarteliste
               veranstaltungsort {

@@ -55,9 +55,6 @@ export async function generate(
           lastMinuteAb {
             german
           }
-          preisAnzahlungNormal
-          preisAnzahlungLastMinute
-          preisAnzahlungFruehbucher
           kannVorortBezahltWerden
           hatGWarteliste
           veranstaltungsort {

@@ -2,13 +2,12 @@ import Vue from 'vue';
 import gql from 'graphql-tag';
 import VueRouter from 'vue-router';
 
+export const auth = {
+  authToken: '',
+  logout: -1
+};
 
 export default (router: VueRouter, createVue: any) => {
-  const auth = {
-    authToken: '',
-    logout: -1
-  };
-
   Vue.prototype.$authToken = () => {
     return auth.authToken;
   };

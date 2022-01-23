@@ -11,14 +11,14 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import gql from 'graphql-tag';
 
 import { genReport, existsReport } from '@/report';
-
+import { fetch } from '@/fetchWrapper'
 @Component({})
 export default class EcRootIndexAnmeldungenIdIndex extends Vue {
   public static meta = {};
 
   private data: any = {
-    person: {gebDat: {}},
-    veranstaltung: {begin: {}, ende: {}},
+    person: { gebDat: {} },
+    veranstaltung: { begin: {}, ende: {} },
     adresse: {},
     email: {},
     telefon: {},
@@ -34,35 +34,36 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
         {
           id: 'anmel_rep_bestbrief',
           icon: 'markunread_mailbox',
-          label: 'Bestätigungsbrief generieren und Drucken',
-          disabled: !this.best || this.data.abmeldeZeitpunkt !== null || this.data.wartelistenPlatz !== 0,
+          label: 'Bestätigungsbrief generieren und versenden',
+          disabled: this.data.abmeldeZeitpunkt !== null || this.data.wartelistenPlatz !== 0,
           click: () => {
             if (this.data.bestaetigungsBrief !== null) {
               if (
-                !confirm(`Brief wurde ${
-                  this.data.bestaetigungsBrief.german
-                } bereits generiert. Erneut generieren?`)
+                !confirm(`Brief wurde ${this.data.bestaetigungsBrief.german
+                  } bereits generiert. Erneut generieren?`)
               ) {
                 return;
               }
             }
-            genReport(
-              `best-brief-${this.data.veranstaltung.veranstaltungsID}`,
-              this.data,
-              `bestaetigungsbrief-${this.$route.params.id}.docx`
-            ).then((r) => {
-              this.$apolloClient.mutate({
-                mutation: gql`
-                  mutation($anmeldeID: String!, $authToken: String!) {
-                    anmeldungBestaetigungsbrief(anmeldeID: $anmeldeID, authToken: $authToken)
-                  }
-                `,
-                variables: {
-                  authToken: this.$authToken(),
-                  anmeldeID: this.$route.params.id
-                }
-              });
-            });
+            console.log('fetch!')
+            fetch(new URL('/v6/best-brief/anmeldung/' + this.$route.params.id, 'https://api.ec-nordbund.de').href).then(console.log)
+            // genReport(
+            //   `best-brief-${this.data.veranstaltung.veranstaltungsID}`,
+            //   this.data,
+            //   `bestaetigungsbrief-${this.$route.params.id}.docx`
+            // ).then((r) => {
+            //   this.$apolloClient.mutate({
+            //     mutation: gql`
+            //       mutation($anmeldeID: String!, $authToken: String!) {
+            //         anmeldungBestaetigungsbrief(anmeldeID: $anmeldeID, authToken: $authToken)
+            //       }
+            //     `,
+            //     variables: {
+            //       authToken: this.$authToken(),
+            //       anmeldeID: this.$route.params.id
+            //     }
+            //   });
+            // });
           }
         },
         {
@@ -104,7 +105,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
             const self = this;
             (this.$refs.abmelden as any)
               .show()
-              .then((data: {weg: string, kommentar: string, gebuehr: string}) => {
+              .then((data: { weg: string, kommentar: string, gebuehr: string }) => {
                 this.$apolloClient.mutate({
                   mutation: gql`
                     mutation(
@@ -171,7 +172,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                       )
                     }
                   `,
-                  variables: {...data,  anmeldeID: this.$route.params.id, authToken: this.$authToken()}
+                  variables: { ...data, anmeldeID: this.$route.params.id, authToken: this.$authToken() }
                 })
                   .then(() => {
                     this.$notifikation('Bemerkungen editieren', `Du hast erfolgreich die Bemerkungen geändert.`);
@@ -244,13 +245,10 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
           to: `/anmeldungen/${this.$route.params.id}/sonstiges`
         }
       ],
-      title: `${
-        (this.data.person || {}).vorname
-      } ${
-        (this.data.person || {}).nachname
-      } - ${
-        (this.data.veranstaltung || {}).bezeichnung
-      }`,
+      title: `${(this.data.person || {}).vorname
+        } ${(this.data.person || {}).nachname
+        } - ${(this.data.veranstaltung || {}).bezeichnung
+        }`,
       subTitle: 'Anmeldung'
     };
   }
@@ -344,7 +342,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
     }).then(async (res: any) => {
       this.data = res.data.anmeldung;
 
-      this.best = await existsReport(`best-brief-${this.data.veranstaltung.veranstaltungsID}`);
+      // this.best = await existsReport(`best-brief-${this.data.veranstaltung.veranstaltungsID}`);
       this.info = await existsReport(`info-brief-${this.data.veranstaltung.veranstaltungsID}`);
     }).catch((err: any) => {
       this.$dialog.error({
