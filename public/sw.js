@@ -1,5 +1,5 @@
 const VERSION = "<VERSION>"
-const ASSETS = []
+const ASSETS = "<ASSETS>"
 
 
 /**
