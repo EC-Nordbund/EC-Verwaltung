@@ -229,6 +229,10 @@ ${createMailText(d[2])}
                   gebDat {
                     german
                   }
+                  datumDesLetztenFZ {
+                    german,
+                    input
+                  }
                 }
                 wartelistenPlatz
                 anmeldeZeitpunkt {
