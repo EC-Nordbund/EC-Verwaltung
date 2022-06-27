@@ -32,13 +32,13 @@ v-card-text(style='overflow: auto')
     v-list-tile(
       @click='$router.push({ path: `/anmeldungen/${anmeldung.anmeldeID}/home`, query: { prev: $route.fullPath } })',
       v-for='(anmeldung, c) in data.anmeldungen.filter((a) => a.wartelistenPlatz === 0 && a.position > 1)',
-      :class='`wlist-${anmeldung.wartelistenPlatz} wlist`'
+      :class='`wlist-${(anmeldung.person.datumDesLetztenFZ && (anmeldung.person.datumDesLetztenFZ.input >= this.data.begin.german)) ? 0 : -1 } wlist`'
     )
       v-list-tile-action
         | {{ c + 1 }}
       v-list-tile-content
         v-list-tile-title {{ anmeldung.person.vorname }} {{ anmeldung.person.nachname }} ({{ anmeldung.person.gebDat.german }}) | {{ getTitle(anmeldung.wartelistenPlatz) }}
-        v-list-tile-sub-title Rolle: {{ rollen[anmeldung.position - 1] }}
+        v-list-tile-sub-title Rolle: {{ rollen[anmeldung.position - 1] + ((anmeldung.person.datumDesLetztenFZ && (anmeldung.person.datumDesLetztenFZ.input >= this.data.begin.german)) ? '' : ' - HAT KEIN FZ!') }}
     v-list-tile(
       @click='$router.push({ path: `/anmeldungen/${anmeldung.anmeldeID}/home`, query: { prev: $route.fullPath } })',
       v-for='(anmeldung, c) in data.anmeldungen.filter((a) => a.wartelistenPlatz < 0)',
