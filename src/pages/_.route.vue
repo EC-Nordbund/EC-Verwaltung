@@ -51,6 +51,10 @@ v-app(app, :dark='dark')
         v-list-tile-action
           v-icon person
         v-list-tile-title Personen
+      v-list-tile(to='/fz')
+        v-list-tile-action
+          v-icon home
+        v-list-tile-title FZ
       v-list-tile(to='/ak')
         v-list-tile-action
           v-icon group

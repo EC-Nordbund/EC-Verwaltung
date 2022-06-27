@@ -32,13 +32,13 @@ v-card-text(style='overflow: auto')
     v-list-tile(
       @click='$router.push({ path: `/anmeldungen/${anmeldung.anmeldeID}/home`, query: { prev: $route.fullPath } })',
       v-for='(anmeldung, c) in data.anmeldungen.filter((a) => a.wartelistenPlatz === 0 && a.position > 1)',
-      :class='`wlist-${anmeldung.wartelistenPlatz} wlist`'
+      :class='`wlist-${(anmeldung.person.datumDesLetztenFZ && (anmeldung.person.datumDesLetztenFZ.input >= data.begin.german)) ? 0 : -2 } wlist`'
     )
       v-list-tile-action
         | {{ c + 1 }}
       v-list-tile-content
         v-list-tile-title {{ anmeldung.person.vorname }} {{ anmeldung.person.nachname }} ({{ anmeldung.person.gebDat.german }}) | {{ getTitle(anmeldung.wartelistenPlatz) }}
-        v-list-tile-sub-title Rolle: {{ rollen[anmeldung.position - 1] }}
+        v-list-tile-sub-title Rolle: {{ rollen[anmeldung.position - 1] + ((anmeldung.person.datumDesLetztenFZ && (anmeldung.person.datumDesLetztenFZ.input >= data.begin.german)) ? '' : ' - HAT KEIN FZ!') }}
     v-list-tile(
       @click='$router.push({ path: `/anmeldungen/${anmeldung.anmeldeID}/home`, query: { prev: $route.fullPath } })',
       v-for='(anmeldung, c) in data.anmeldungen.filter((a) => a.wartelistenPlatz < 0)',
@@ -81,7 +81,7 @@ export default class EcNAME extends Vue {
 }
 </script>
 <style scoped>
-.wlist:not(.wlist--1):not(.wlist-0) {
+.wlist:not(.wlist--1):not(.wlist-0):not(.wlist--2) {
   background-color: yellow;
 }
 .wlist-0 {
@@ -89,5 +89,8 @@ export default class EcNAME extends Vue {
 }
 .wlist--1 {
   background-color: red;
+}
+.wlist--2 {
+  background-color: gray;
 }
 </style>

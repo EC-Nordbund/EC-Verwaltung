@@ -237,6 +237,10 @@ export default class EcRootIndex extends Vue {
                   gebDat {
                     german
                   }
+                  datumDesLetztenFZ {
+                    german
+                    input
+                  }
                 }
                 wartelistenPlatz
                 anmeldeZeitpunkt {
