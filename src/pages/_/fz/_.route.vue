@@ -133,6 +133,11 @@ export default class EcRootIndexHome extends Vue {
 
   state(p: Person) {
     const now = new Date().getTime()
+    // @ts-ignore
+    const newest = p.fzAntraege.reduce((acc, c) => acc === null ? c : (acc.erzeugt.input > c.erzeugt.input ? acc : c), null)
+
+    const newTime = newest ? new Date(newest.erzeugt.input).getTime() : 0;
+    
 
     if(p.datumDesLetztenFZ) {
       const last = new Date(p.datumDesLetztenFZ.input).getTime()
@@ -141,6 +146,10 @@ export default class EcRootIndexHome extends Vue {
       const newFrom = last + 1000 * 60 * 60 * 24 * 365.25 * 4.5
       
       if(now > validUntil) {
+        if(newest !== null) {
+          return 'background: red'
+        }
+
         return 'color: red'
       }
 
@@ -152,11 +161,7 @@ export default class EcRootIndexHome extends Vue {
       return 'color: orange'
     }
 
-    // @ts-ignore
-    const newest = p.fzAntraege.reduce((acc, c) => acc === null ? c : (acc.erzeugt.input > c.erzeugt.input ? acc : c), null)
 
-    const newTime = new Date(newest.erzeugt.input).getTime();
-    
     if((now - newTime ) / 1000 / 60 / 60 / 24 > 28) {
       return 'background: red'
     }
