@@ -50,7 +50,12 @@ export default class EcRootIndex extends Vue {
           disabled: false,
           click: () => {
             if (!confirm('Wurde für eine einzelne Anmeldung als test der Brief generiert?')) return
-            fetch(new URL('/v6/best-brief/veranstaltung/' + this.$route.params.id, 'https://api.ec-nordbund.de').href)
+            fetch('https://api.ec-nordbund.de/v6/best-brief/veranstaltung/' + this.$route.params.id', {
+              headers: {
+               'authorization': this.$authToken(),
+               'content-type': 'application/json'
+             }
+            })
           }
         }
         //         {
