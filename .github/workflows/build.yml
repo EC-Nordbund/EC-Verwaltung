@@ -19,13 +19,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: Install dependencies
-        run: yarn
+        run: npm ci
 
       - name: Build
-        run: yarn build
+        run: npm run build
       
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Types
-        run: yarn types
+        run: npm run types

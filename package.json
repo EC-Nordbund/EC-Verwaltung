@@ -3,8 +3,8 @@
   "version": "3.3.0",
   "private": true,
   "scripts": {
-    "serve": "yarn versiongen && rollup -cw",
-    "build": "yarn versiongen && NODE_ENV=production rollup -c",
+    "serve": "npm run versiongen && rollup -cw",
+    "build": "npm run versiongen && NODE_ENV=production rollup -c",
     "versiongen": "git rev-parse --verify HEAD > .commithash",
     "types": "tsc --noEmit && cd src/serviceWorker && tsc --noEmit",
     "lint": "eslint --ext .js,.vue,.ts src",
