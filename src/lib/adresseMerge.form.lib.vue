@@ -53,7 +53,7 @@ export default class EcRootIndex extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($authToken: String!, $richtig: Int!, $falsch: Int!) {
+          mutation ($authToken: String!, $richtig: Int!, $falsch: Int!) {
             mergeAdresse(
               authToken: $authToken
               adressID_richtig: $richtig

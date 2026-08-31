@@ -263,7 +263,7 @@ export default defineComponent({
         client
           .query({
             query: gql`
-              query($authToken: String!) {
+              query ($authToken: String!) {
                 getMyUserData(authToken: $authToken) {
                   userName
                   person {

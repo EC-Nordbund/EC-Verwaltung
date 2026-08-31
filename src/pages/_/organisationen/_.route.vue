@@ -41,7 +41,7 @@ export default class EcRootIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             orgas(authToken: $authToken) {
               organisationsID
               bezeichnung

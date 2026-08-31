@@ -65,7 +65,7 @@ export const useLogin = defineUseFunction(() => {
     client
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             person(personID: 0, authToken: $authToken) {
               personID
             }

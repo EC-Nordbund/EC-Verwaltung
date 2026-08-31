@@ -55,7 +55,7 @@ export default class EcRootIndexAnmeldungenIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             anmeldungen(authToken: $authToken) {
               anmeldeID
               person {

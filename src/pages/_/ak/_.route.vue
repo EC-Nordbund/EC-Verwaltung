@@ -56,7 +56,7 @@ export default defineComponent({
             try {
               const res = await client.mutate({
                 mutation: gql`
-                  mutation($authToken: String!, $bezeichnung: String!) {
+                  mutation ($authToken: String!, $bezeichnung: String!) {
                     addAK(bezeichnung: $bezeichnung, authToken: $authToken)
                   }
                 `,
@@ -87,7 +87,7 @@ export default defineComponent({
       try {
         const res = await client.query({
           query: gql`
-            query($authToken: String!) {
+            query ($authToken: String!) {
               aks(authToken: $authToken) {
                 akID
                 bezeichnung

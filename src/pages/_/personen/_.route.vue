@@ -72,7 +72,7 @@ export default class EcRootIndex extends Vue {
                 this.$apolloClient
                   .mutate({
                     mutation: gql`
-                      mutation(
+                      mutation (
                         $vorname: String!
                         $nachname: String!
                         $gebDat: String!

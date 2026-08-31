@@ -41,7 +41,7 @@ export default class EcRootIndexVeranstaltungsortIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             vorte(authToken: $authToken) {
               vOrtID
               bezeichnung

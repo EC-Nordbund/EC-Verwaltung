@@ -131,7 +131,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                   this.$apolloClient
                     .mutate({
                       mutation: gql`
-                        mutation(
+                        mutation (
                           $anmeldeID: String!
                           $weg: String!
                           $gebuehr: Int!
@@ -183,7 +183,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
                 this.$apolloClient
                   .mutate({
                     mutation: gql`
-                      mutation(
+                      mutation (
                         $authToken: String!
                         $anmeldeID: String!
                         $vegetarisch: Boolean!
@@ -245,7 +245,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
             ) {
               this.$apolloClient.mutate({
                 mutation: gql`
-                  mutation($anmeldeID: String!, $authToken: String!) {
+                  mutation ($anmeldeID: String!, $authToken: String!) {
                     nachruecken(anmeldeID: $anmeldeID, authToken: $authToken)
                   }
                 `,
@@ -286,7 +286,7 @@ export default class EcRootIndexAnmeldungenIdIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!, $anmeldeID: String!) {
+          query ($authToken: String!, $anmeldeID: String!) {
             anmeldung(authToken: $authToken, anmeldeID: $anmeldeID) {
               anmeldeID
               person {
