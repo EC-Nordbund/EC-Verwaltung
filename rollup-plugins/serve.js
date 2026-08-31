@@ -4,6 +4,9 @@ import chokidar from 'chokidar'
 import definePlugin from './helper'
 import consola from "consola";
 
+const PORT = parseInt(process.env.DEV_PORT || '8080')
+const WS_PORT = PORT + 1
+
 export default () => {
   let first = true
 
@@ -16,10 +19,10 @@ export default () => {
         const httpServer = createServer({
           cache: -1,
           root: './dist'
-        }).listen(8080)
+        }).listen(PORT)
 
         const wsServer = new WebSocket.Server({
-          port: 8081
+          port: WS_PORT
         })
 
         let sockets = []
@@ -52,7 +55,7 @@ export default () => {
       }
     },
     banner() {
-      return `if(!self._HMR){(new WebSocket('ws://localhost:8081')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};self._HMR=true;}`
+      return `if(typeof window!=='undefined'&&!self._HMR){(new WebSocket('ws://localhost:${WS_PORT}')).onmessage=()=>{console.log("[SERVE] Change Detected - Reload");location.reload();};self._HMR=true;}`
     }
   })
 }

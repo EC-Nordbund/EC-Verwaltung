@@ -4,9 +4,23 @@ export async function useServiceWorker(
   path: string,
   cb: (update: () => void) => void
 ) {
+  // Im Dev-Modus keinen Service Worker registrieren (cache-first würde jeden
+  // neuen Build verstecken) und Altlasten aus früheren Sessions entfernen.
+  if (process.env.NODE_ENV !== 'production') {
+    const registrations = await navigator.serviceWorker.getRegistrations()
+    registrations.forEach((r) => r.unregister())
+    if (typeof caches !== 'undefined') {
+      const keys = await caches.keys()
+      keys.forEach((k) => caches.delete(k))
+    }
+    return
+  }
+
   navigator.serviceWorker.register(path)
 
-  navigator.serviceWorker.addEventListener('controllerchange', location.reload)
+  navigator.serviceWorker.addEventListener('controllerchange', () =>
+    location.reload()
+  )
 
   const registration = await navigator.serviceWorker.getRegistration()
 

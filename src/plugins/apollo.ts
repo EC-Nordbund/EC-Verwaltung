@@ -5,10 +5,11 @@ import {
 } from '@apollo/client/core'
 import gql from 'graphql-tag'
 import Vue from 'vue'
+import { API_BASE } from './apiBase'
 
 const cache = new InMemoryCache()
 const link = createHttpLink({
-  uri: 'https://api.ec-nordbund.de/graphql'
+  uri: `${API_BASE}/graphql`
 })
 const client = new ApolloClient({
   cache,

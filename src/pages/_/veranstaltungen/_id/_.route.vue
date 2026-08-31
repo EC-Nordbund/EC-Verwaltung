@@ -36,6 +36,7 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import gql from 'graphql-tag'
+import { API_BASE } from '../../../../plugins/apiBase'
 
 @Component({})
 export default class EcRootIndex extends Vue {
@@ -48,7 +49,7 @@ export default class EcRootIndex extends Vue {
           label: 'Mitarbeiteranmeldungstoken erzeugen',
           click: async () => {
             const res = await fetch(
-              'https://api.ec-nordbund.de/api-v4/anmeldetoken',
+              `${API_BASE}/api-v4/anmeldetoken`,
               {
                 method: 'POST',
                 headers: {

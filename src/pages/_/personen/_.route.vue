@@ -42,6 +42,7 @@ ec-wrapper(
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import gql from 'graphql-tag'
+import { API_BASE } from '../../../plugins/apiBase'
 
 @Component({})
 export default class EcRootIndex extends Vue {
@@ -120,7 +121,7 @@ export default class EcRootIndex extends Vue {
   }
 
   private loadData() {
-    fetch('https://api.ec-nordbund.de/v6/personen', {
+    fetch(`${API_BASE}/v6/personen`, {
       headers: { authorization: this.$authToken() }
     })
       .then((res) => res.json())

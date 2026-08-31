@@ -5,6 +5,20 @@ import definePlugin from './helper'
 const routeProto = 'routes:'
 
 function handleFolder(folder) {
+  // readdir liefert keine stabile Reihenfolge -> deterministisch sortieren:
+  // statische Routen zuerst, :param-Routen danach, das '_'-Layout (path '')
+  // zuletzt, damit dessen innerer '*'-Catch-all keine Geschwister-Routen
+  // (z. B. /login) verschluckt.
+  const rank = (v) => {
+    const p = v.name.split('.')[0]
+    if (p === '_') return 2
+    if (p[0] === '_') return 1
+    return 0
+  }
+  folder = [...folder].sort(
+    (a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name)
+  )
+
   let ret = folder.map(v => {
     if (v.type === 'file') {
       let path = v.name.split('.')[0];
