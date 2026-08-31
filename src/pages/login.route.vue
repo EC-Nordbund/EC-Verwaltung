@@ -86,7 +86,11 @@ function logIn() {
     .then(() => {
       loading.value = false
       let path = route.value.query.next || '/home'
-      if (['/404?prev=%2F', '/404?prev=/'].includes(route.value.query.next as string)) {
+      if (
+        ['/404?prev=%2F', '/404?prev=/'].includes(
+          route.value.query.next as string
+        )
+      ) {
         path = 'home'
       }
       router.push(path as string)
@@ -104,7 +108,11 @@ function logIn() {
 onMounted(() => {
   if (authToken.value) {
     let path = route.value.query.next || '/home'
-    if (['/404?prev=%2F', '/404?prev=/'].includes(route.value.query.next as string)) {
+    if (
+      ['/404?prev=%2F', '/404?prev=/'].includes(
+        route.value.query.next as string
+      )
+    ) {
       path = 'home'
     }
     router.push(path as string)

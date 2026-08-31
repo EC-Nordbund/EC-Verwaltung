@@ -40,8 +40,9 @@ const { createNotification } = useNotification()
 const { route } = useRouter()
 
 const abmelden = useTemplateRef<{ show: () => Promise<any> }>('abmelden')
-const editBemerkungen =
-  useTemplateRef<{ show: () => Promise<any> }>('editBemerkungen')
+const editBemerkungen = useTemplateRef<{ show: () => Promise<any> }>(
+  'editBemerkungen'
+)
 const formKontakt = useTemplateRef<{ show: () => void }>('formKontakt')
 
 const data = ref<any>({
@@ -140,47 +141,49 @@ const config = computed(() => ({
       click: () => {
         abmelden
           .value!.show()
-          .then((formData: { weg: string; kommentar: string; gebuehr: string }) => {
-            client
-              .mutate({
-                mutation: gql`
-                  mutation (
-                    $anmeldeID: String!
-                    $weg: String!
-                    $gebuehr: Int!
-                    $kommentar: String!
-                    $authToken: String!
-                  ) {
-                    abmelden(
-                      anmeldeID: $anmeldeID
-                      weg: $weg
-                      gebuehr: $gebuehr
-                      kommentar: $kommentar
-                      authToken: $authToken
-                    )
+          .then(
+            (formData: { weg: string; kommentar: string; gebuehr: string }) => {
+              client
+                .mutate({
+                  mutation: gql`
+                    mutation (
+                      $anmeldeID: String!
+                      $weg: String!
+                      $gebuehr: Int!
+                      $kommentar: String!
+                      $authToken: String!
+                    ) {
+                      abmelden(
+                        anmeldeID: $anmeldeID
+                        weg: $weg
+                        gebuehr: $gebuehr
+                        kommentar: $kommentar
+                        authToken: $authToken
+                      )
+                    }
+                  `,
+                  variables: {
+                    ...formData,
+                    gebuehr: parseInt(formData.gebuehr),
+                    anmeldeID: route.value.params.id,
+                    authToken: authToken.value
                   }
-                `,
-                variables: {
-                  ...formData,
-                  gebuehr: parseInt(formData.gebuehr),
-                  anmeldeID: route.value.params.id,
-                  authToken: authToken.value
-                }
-              })
-              .then(() => {
-                createNotification({
-                  title: 'Erfolgreich Abgemeldet',
-                  body: `Du hast erfolgreich die Person abgemeldet.`
                 })
-                getData()
-              })
-              .catch((err) => {
-                error({
-                  text: err.message,
-                  title: 'Speichern fehlgeschlagen!'
+                .then(() => {
+                  createNotification({
+                    title: 'Erfolgreich Abgemeldet',
+                    body: `Du hast erfolgreich die Person abgemeldet.`
+                  })
+                  getData()
                 })
-              })
-          })
+                .catch((err) => {
+                  error({
+                    text: err.message,
+                    title: 'Speichern fehlgeschlagen!'
+                  })
+                })
+            }
+          )
           .catch(empty)
       }
     },

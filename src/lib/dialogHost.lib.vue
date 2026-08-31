@@ -7,7 +7,7 @@ div
       v-card-actions
         v-spacer
         v-btn(color="primary", variant="text", @click="errorOpen = false") OK
-  v-snackbar(v-model="snackbarOpen") {{ dialogState.snackbar }}
+  v-snackbar(v-model="snackbarOpen", :key="dialogState.snackbarKey") {{ dialogState.snackbar }}
 </template>
 
 <script setup lang="ts">

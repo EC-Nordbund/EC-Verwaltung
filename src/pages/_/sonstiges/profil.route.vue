@@ -29,10 +29,7 @@ const config = {
       icon: 'vpn_key',
       label: 'Password ändern',
       click: () => {
-        changePasswordDialog
-          .value!.show()
-          .then(changePassword)
-          .catch(empty)
+        changePasswordDialog.value!.show().then(changePassword).catch(empty)
       }
     }
   ]

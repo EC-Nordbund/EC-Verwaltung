@@ -1,5 +1,5 @@
 import { createVuetify } from 'vuetify'
-import { md } from 'vuetify/iconsets/md'
+import { md, aliases } from 'vuetify/iconsets/md'
 import { de } from 'vuetify/locale'
 import type { App } from 'vue'
 import { theme as theme2 } from '../config/theme'
@@ -21,8 +21,11 @@ export function useVuetify(app: App) {
         }
       },
       icons: {
-        // Material-Icons-Font wie bisher (Icon-Namen bleiben erhalten)
+        // Material-Icons-Font wie bisher (Icon-Namen bleiben erhalten).
+        // WICHTIG: aliases des md-Sets mitgeben, sonst rendern Vuetifys
+        // interne Icons ($radioOn, $checkboxOn, ...) als mdi-Textnamen.
         defaultSet: 'md',
+        aliases,
         sets: { md }
       },
       locale: {

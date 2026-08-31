@@ -9,7 +9,10 @@ import { reactive } from 'vue'
  */
 export const dialogState = reactive({
   error: null as null | { text: string; title: string },
-  snackbar: ''
+  snackbar: '',
+  // Zähler, damit wiederholte notifyInfo-Aufrufe (auch mit gleichem Text)
+  // die Snackbar samt Timeout neu starten (Alt-Verhalten: ein Toast pro Aufruf)
+  snackbarKey: 0
 })
 
 export function useDialog() {
@@ -19,6 +22,7 @@ export function useDialog() {
     },
     notifyInfo(text: string) {
       dialogState.snackbar = text
+      dialogState.snackbarKey++
     }
   }
 }

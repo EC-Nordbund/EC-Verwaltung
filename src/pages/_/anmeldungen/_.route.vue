@@ -57,9 +57,7 @@ const headers = [
   }
 ]
 
-const filtered = computed(() =>
-  data.value.filter(filterGenerator(suche.value))
-)
+const filtered = computed(() => data.value.filter(filterGenerator(suche.value)))
 
 const config = {
   sheet: [

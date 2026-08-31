@@ -58,9 +58,8 @@ const { error } = useDialog()
 const { booleanQueryRef, route, navigate } = useRouter()
 
 const showAll = booleanQueryRef('all')
-const formEditAk = useTemplateRef<InstanceType<typeof EcFormEditAk>>(
-  'formEditAk'
-)
+const formEditAk =
+  useTemplateRef<InstanceType<typeof EcFormEditAk>>('formEditAk')
 
 const data: Ref<any> = ref({
   personen: []

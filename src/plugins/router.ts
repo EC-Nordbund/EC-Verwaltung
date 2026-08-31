@@ -1,10 +1,6 @@
 import { h, ref, watch, computed } from 'vue'
 import type { Ref } from 'vue'
-import {
-  createRouter,
-  createWebHashHistory,
-  RouterView
-} from 'vue-router'
+import { createRouter, createWebHashHistory, RouterView } from 'vue-router'
 import type {
   Router,
   RouteLocationRaw,

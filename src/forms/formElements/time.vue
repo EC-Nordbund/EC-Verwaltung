@@ -47,7 +47,7 @@ const pickerTime = ref<string | null>(null)
 
 watch(modal, (open) => {
   if (open) {
-    pickerTime.value = props.value || null
+    pickerTime.value = (props.value as string) || null
   }
 })
 

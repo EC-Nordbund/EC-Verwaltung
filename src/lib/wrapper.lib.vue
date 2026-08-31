@@ -39,15 +39,21 @@ v-card(
   v-card-text(style='overflow-y: auto', v-if='!hasRouterView')
     slot
   slot(v-if='hasRouterView')
+  //- Bewusst KEINE v-bottom-navigation: die ist in Vuetify 4 ein Layout-Item
+  //- (fixiert am App-Rand + verschiebt v-main-Padding bei jedem Toggle).
+  //- Stattdessen In-Card-Leiste wie in Vuetify 1.5.
   v-card-actions(@mouseover='openNav', v-if='hasNav')
-    v-bottom-navigation.elevation-0(:active='showNav')
+    .d-flex.justify-center.flex-grow-1(v-show='showNav')
       v-btn(
         v-for='item in nav',
         :key='item.label',
+        variant='text',
+        stacked,
+        size='small',
         :to='{ path: item.to, query: { prev: route.query.prev } }'
       )
-        span {{ item.label }}
         v-icon {{ item.icon }}
+        span {{ item.label }}
   slot(name='dialogs')
 </template>
 <script setup lang="ts">

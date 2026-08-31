@@ -19,10 +19,9 @@ import type { RouteRecordRaw } from 'vue-router'
 
 // eager: true reproduziert das alte Verhalten (alle Seiten im Hauptbundle,
 // kein Code-Splitting).
-const pages: Record<string, any> = import.meta.glob(
-  '../pages/**/*.route.vue',
-  { eager: true }
-)
+const pages: Record<string, any> = import.meta.glob('../pages/**/*.route.vue', {
+  eager: true
+})
 
 const passThrough = { render: () => h(RouterView) }
 

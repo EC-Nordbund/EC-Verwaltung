@@ -44,9 +44,7 @@ const config = {
 // gefilterte + umgedrehte Liste als computed (statt filter().reverse()
 // direkt im Template — Vue-3-Regel: keine mutierenden Array-Methoden in
 // Template-Ausdrücken)
-const filteredData = computed(() =>
-  data.value.filter(filterData).reverse()
-)
+const filteredData = computed(() => data.value.filter(filterData).reverse())
 
 function loadData() {
   client

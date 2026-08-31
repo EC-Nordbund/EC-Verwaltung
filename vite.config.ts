@@ -52,7 +52,8 @@ export default defineConfig({
   ],
   define: {
     __API_BASE__: JSON.stringify(
-      process.env.API_BASE ?? 'https://api.ec-nordbund.de'
+      // '||' wie im alten replace-Plugin: auch LEERER String fällt auf Default
+      process.env.API_BASE || 'https://api.ec-nordbund.de'
     )
   },
   optimizeDeps: {

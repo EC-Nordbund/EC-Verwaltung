@@ -4,7 +4,8 @@ v-autocomplete(
   @update:model-value='changeValue',
   v-bind='bind',
   v-on='schema.on || {}',
-  :rules='rules'
+  :rules='rules',
+  item-title='text'
 )
 </template>
 

@@ -46,7 +46,10 @@ const pickerDate = ref<Date | null>(null)
 
 // Anzeige wie bisher: ISO → deutsches Format
 const displayDate = computed(() =>
-  (props.value || '').split('-').reverse().join('.')
+  String(props.value || '')
+    .split('-')
+    .reverse()
+    .join('.')
 )
 
 function parseIso(v: string | undefined | null): Date | null {
@@ -63,7 +66,7 @@ function toIso(d: Date): string {
 
 watch(modal, (open) => {
   if (open) {
-    pickerDate.value = parseIso(props.value)
+    pickerDate.value = parseIso(props.value as string)
   }
 })
 
