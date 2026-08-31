@@ -1,5 +1,5 @@
 <template lang="pug">
-v-btn(icon, @click='toggleLesezeichen')
+v-btn(icon, variant='text', @click='toggleLesezeichen')
   v-icon {{ isLesezeichen ? 'star' : 'star_border' }}
 </template>
 <script setup lang="ts">

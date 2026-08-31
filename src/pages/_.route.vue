@@ -21,7 +21,7 @@ v-app
     //-   v-icon add_alert
     v-btn(icon, v-white, @click='toggleDark')
       v-icon invert_colors
-    v-btn(icon, v-white, @click='loginDialog = true')
+    v-btn.mr-2(icon, v-white, @click='loginDialog = true')
       span {{ alive }} min
     //- v-btn(icon v-white @click="logout")
     //-   v-icon exit_to_app
@@ -106,8 +106,10 @@ v-app
         style='margin: 5px; width: calc(100% - 10px)'
       )
 
-  v-footer(app, style='padding: 0 10px', color='secondary')
-    v-breadcrumbs(:items='routeBread')
+  //- height fest + kompakte Breadcrumbs: Vuetify-4-Defaults (Breadcrumb-
+  //- Padding) blähten den Footer sonst auf ~90px auf (alt: ~36px)
+  v-footer(app, height='36', style='padding: 0 10px', color='secondary')
+    v-breadcrumbs.pa-0(:items='routeBread', density='compact')
       template(#divider)
         v-icon(v-white) keyboard_arrow_right
       template(#item='{ item }')
@@ -115,7 +117,7 @@ v-app
     v-spacer
     span(v-white) Version: {{ version }}
     v-spacer
-    v-breadcrumbs(:items='breadcrumbs')
+    v-breadcrumbs.pa-0(:items='breadcrumbs', density='compact')
       template(#divider)
         v-icon(v-white) keyboard_arrow_right
       template(#item='{ item }')

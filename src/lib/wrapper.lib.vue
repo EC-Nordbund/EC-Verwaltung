@@ -2,9 +2,12 @@
 v-card(
   :style='{ height: h, display: "grid", gridTemplateRows: "auto " + (hasHeader ? "auto " : "") + "1fr " + (hasNav ? (showNav ? "auto" : "20px") : "") }'
 )
-  v-card-title
+  //- v-card-title ist in Vuetify 4 kein Flex-Container mehr -> explizit,
+  //- sonst stapeln X-Button/Titel/Aktionen untereinander statt in einer Zeile
+  v-card-title.d-flex.align-center
     v-btn(
       icon,
+      variant='text',
       v-if='hasXBtn',
       @click='goPrev',
       :disabled='!route.query.prev'
@@ -17,7 +20,7 @@ v-card(
     template(v-if='hasDial')
       v-bottom-sheet(v-if='hasSheet', v-model='sheetOpen')
         template(#activator='{ props: activatorProps }')
-          v-btn(icon, v-bind='activatorProps')
+          v-btn(icon, variant='text', v-bind='activatorProps')
             v-icon apps
         v-list
           slot(name='sheet')
@@ -31,14 +34,18 @@ v-card(
               v-icon {{ item.icon }}
             v-list-item-title {{ item.label }}
       ec-lesezeichen-add(:title='title', :subTitle='subTitle')
-      v-btn(icon, v-if='hasReload', @click='emit("reload")')
+      v-btn(icon, variant='text', v-if='hasReload', @click='emit("reload")')
         v-icon replay
       slot(name='menu')
   div(v-if='hasHeader')
     slot(name='header')
   v-card-text(style='overflow-y: auto', v-if='!hasRouterView')
     slot
-  slot(v-if='hasRouterView')
+  //- Ein einzelner Container: der Slot kann mehrere Wurzelknoten liefern
+  //- (router-view + Menü-Button) — als direkte Grid-Kinder würden sie auf
+  //- volle Breite gestreckt und belegten eigene Grid-Zeilen.
+  div(v-if='hasRouterView', style='min-height: 0; overflow-y: auto')
+    slot
   //- Bewusst KEINE v-bottom-navigation: die ist in Vuetify 4 ein Layout-Item
   //- (fixiert am App-Rand + verschiebt v-main-Padding bei jedem Toggle).
   //- Stattdessen In-Card-Leiste wie in Vuetify 1.5.
