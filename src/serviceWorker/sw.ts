@@ -1,15 +1,15 @@
 const VERSION = '4.0.0'
 
-const _self: ServiceWorkerGlobalScope &
-  typeof globalThis & {
-    // Injection-Point von vite-plugin-pwa (injectManifest): Liste aller
-    // Build-Artefakte — Ersatz für das alte virtuelle Modul 'resource-list:'.
-    __WB_MANIFEST: Array<string | { url: string; revision: string | null }>
-  } = self as any
+// Injection-Point von vite-plugin-pwa (injectManifest): workbox sucht wörtlich
+// nach "self.__WB_MANIFEST" im gebauten Code — daher der direkte self-Zugriff
+// hier (eine Zwischenvariable würde vom Minifier umbenannt).
+type WBEntry = string | { url: string; revision: string | null }
 
-const resourceList = _self.__WB_MANIFEST.map((entry) =>
+const resourceList = ((self as any).__WB_MANIFEST as WBEntry[]).map((entry) =>
   typeof entry === 'string' ? entry : entry.url
 )
+
+const _self = self as unknown as ServiceWorkerGlobalScope
 
 const CACHE_NAME = `CACHE_${VERSION}`
 
@@ -17,7 +17,9 @@ _self.addEventListener('install', (ev) => {
   const resourcesToCache = resourceList.filter(
     (item) => item !== 'sw.js' && !item.includes('manifest')
   )
-  const toCache = ['/', ...resourcesToCache]
+  // Deduplizieren: vite-plugin-pwa kann Einträge doppelt listen (z. B. Icons
+  // aus public/ + Manifest) und Cache.addAll lehnt Duplikate hart ab.
+  const toCache = [...new Set(['/', ...resourcesToCache])]
 
   ev.waitUntil(
     (async () => {

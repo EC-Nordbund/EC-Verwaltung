@@ -81,7 +81,20 @@ function handleFolder(node: TreeNode): RouteRecordRaw[] {
           ret.push({
             path: '',
             component,
-            children: handleFolder(layoutDir)
+            children: [
+              // Alt-Semantik: der Layout-Pfad selbst (z. B. '/') hatte kein
+              // eigenes Kind und lief in den '*'-Catch-all → 404-Redirect.
+              // vue-router 4 matcht das Layout sonst auch ohne Kind (leerer
+              // Inhalt), daher explizites Default-Kind mit Redirect.
+              {
+                path: '',
+                redirect: (to) => ({
+                  path: '/404',
+                  query: { prev: to.fullPath }
+                })
+              } as RouteRecordRaw,
+              ...handleFolder(layoutDir)
+            ]
           })
         } else {
           ret.push({ path: '', component })

@@ -55,6 +55,11 @@ export default defineConfig({
       process.env.API_BASE ?? 'https://api.ec-nordbund.de'
     )
   },
+  optimizeDeps: {
+    // Empfehlung von vite-plugin-vuetify: verhindert wiederholte
+    // Dep-Re-Optimierung (504 Outdated Optimize Dep) durch autoImport
+    exclude: ['vuetify']
+  },
   server: {
     port: Number(process.env.DEV_PORT ?? 8080)
   }

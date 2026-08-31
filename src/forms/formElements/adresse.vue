@@ -50,13 +50,13 @@ function plzChange($event: string) {
     changeValue({
       ort: map[$event][0],
       plz: $event,
-      strasse: props.value.strasse
+      strasse: (props.value as any)?.strasse
     })
   } else {
     changeValue({
       ort: undefined,
       plz: $event,
-      strasse: props.value.strasse
+      strasse: (props.value as any)?.strasse
     })
   }
 }

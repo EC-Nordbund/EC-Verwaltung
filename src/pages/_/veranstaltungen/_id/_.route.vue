@@ -221,9 +221,9 @@ function loadData() {
               german
               input
             }
-            preisAnzahlungNormal
-            preisAnzahlungLastMinute
-            preisAnzahlungFruehbucher
+            # preisAnzahlung* existieren im API-Schema nicht (Alt-Bug:
+            # die Query wurde deshalb komplett mit 400 abgelehnt und die
+            # Seite hat nie Daten geladen) -- Felder entfernt.
             kannVorortBezahltWerden
             hatGWarteliste
             veranstaltungsort {

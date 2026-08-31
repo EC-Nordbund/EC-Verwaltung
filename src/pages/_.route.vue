@@ -7,7 +7,7 @@ v-app
     //- v-btn(v-white icon @click="router.forward()")
     //-   v-icon redo
     v-spacer
-    v-avatar(size='60px', style='margin-right: 10px')
+    v-avatar(size='60px', style='margin-right: 10px', color='transparent')
       img(src='../assets/ec-logo-without-bg-64.png')
     span(
       v-white,
@@ -215,6 +215,8 @@ const routeBread = computed(() =>
     route.value.path
       .split('/')
       .slice(1)
+      // leere Segmente (Pfad '/') abfangen, sonst wirft v[0].toUpperCase()
+      .filter((v) => v.length > 0)
       .map((v) => v[0].toUpperCase() + v.slice(1))
   )
 )

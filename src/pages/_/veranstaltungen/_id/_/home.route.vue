@@ -22,7 +22,7 @@ v-card-text(style='overflow: auto')
     v-list-item(link)
       template(#prepend)
         v-icon person
-      v-list-item-title {{ data.begin.german }} - {{ data.ende.german }}
+      v-list-item-title {{ data?.begin?.german }} - {{ data?.ende?.german }}
       v-list-item-subtitle Zeitraum
     v-list-item(
       @click='navigate({ path: `/veranstaltungsort/${data.veranstaltungsort.vOrtID}/home` })'

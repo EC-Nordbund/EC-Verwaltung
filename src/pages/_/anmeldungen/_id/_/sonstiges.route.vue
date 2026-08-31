@@ -63,13 +63,13 @@ v-card-text(style='overflow: auto')
             v-icon search
         v-list-item-title {{ data.wegDerAbmeldung || "N/A" }}
         v-list-item-subtitle Weg der Abmeldung
-    template(v-if='data.extra_json.length > 2')
+    template(v-if='data.extra_json && data.extra_json.length > 2')
       v-divider
       p Extra Daten:
       v-treeview(
         :items='extraJsonTree',
         item-title='name',
-        v-if='data.extra_json.length > 2'
+        v-if='data.extra_json && data.extra_json.length > 2'
       )
       //-   v-list-item-title {{data.extra_json}}
       //-   v-list-item-subtitle Sonstige Felder
