@@ -1,10 +1,4 @@
-import * as filter from './util/filter.util'
-
-const m = [filter]
-import Vue from 'vue'
-import './lib/import'
-const tmpUtil: any = {}
-m.forEach((util: any) => {
-  tmpUtil[util.name || util.default.name] = util.default || {}
-})
-Vue.prototype.$util = tmpUtil
+// Das frühere $util-Global ist entfallen — Konsumenten importieren
+// filterGenerator direkt aus './util/filter.util'. Die globalen
+// Lib-Komponenten werden über registerLibComponents(app) registriert.
+export { registerLibComponents } from './lib/import'

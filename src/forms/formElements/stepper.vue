@@ -1,75 +1,96 @@
 <template lang="pug">
-  v-stepper(v-bind="schema" v-model="currStep")
-    template(v-for="(step, stepID) in schema.steps")
-      v-stepper-step(:step="stepID+1" :complete="stepID+1 < currStep" :key="stepID+'step'" :rules="[()=>!error[stepID+1]]") {{step.label}}
-        small(v-if="step.summerize&&!error[stepID+1]") {{step.summerize}}
-        small(v-if="error[stepID+1]") Es wurden nicht alle Felder korrekt ausgefüllt!
-      v-stepper-content(:step="stepID+1" :key="stepID+'content'")
-        v-form(v-model="valid[stepID+1]")
-          formular(:value="value[step.name]" @input="onValueChange({...value, [step.name]: $event})" :schema="step.schema")
-          div(style="display:flex;")
-            v-spacer
-            v-btn(v-for="(btn, btnID) in step.btns" :key="stepID+'_'+btnID" v-html="btn.content" @click="clickBtn(btn.click)" color="primary")
+//- Toter Code: form-stepper wird aktuell von keinem Formular genutzt.
+//- Minimal auf die Vuetify-4-Stepper-Struktur migriert
+//- (v-stepper-item/v-stepper-window statt v-stepper-step/v-stepper-content).
+v-stepper(v-bind='bind', v-model='currStep')
+  v-stepper-header
+    v-stepper-item(
+      v-for='(step, stepID) in schema.steps',
+      :key='stepID + "step"',
+      :value='stepID + 1',
+      :complete='stepID + 1 < currStep',
+      :rules='[() => !error[stepID + 1]]',
+      :title='step.label',
+      :subtitle='error[stepID + 1] ? "Es wurden nicht alle Felder korrekt ausgefüllt!" : step.summerize'
+    )
+  v-stepper-window
+    v-stepper-window-item(
+      v-for='(step, stepID) in schema.steps',
+      :key='stepID + "content"',
+      :value='stepID + 1'
+    )
+      v-form(v-model='valid[stepID + 1]')
+        formular(
+          :value='value[step.name]',
+          @input='changeValue({ ...value, [step.name]: $event })',
+          :schema='step.schema',
+          :cancel='cancel',
+          :save='save'
+        )
+        div(style='display:flex;')
+          v-spacer
+          v-btn(
+            v-for='(btn, btnID) in step.btns',
+            :key='stepID + "_" + btnID',
+            v-html='btn.content',
+            @click='clickBtn(btn.click)',
+            color='primary'
+          )
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import { fieldProps, useField } from '../field'
 
-// // @ts-ignore
-// import { VForm, VStepper, VStepperStep, VBtn } from 'vuetify/lib';
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-@Component({
-  // components: {
-  //   VForm,
-  //   VStepper,
-  //   VStepperStep,
-  //   VBtn,
-  // },
+const { changeValue, bind } = useField(props, emit)
+
+const currStep = ref(0)
+const valid = reactive<any>({})
+
+const error = reactive<any>({
+  0: false,
+  1: false,
+  2: false,
+  3: false,
+  4: false,
+  5: false,
+  6: false,
+  7: false,
+  8: false,
+  9: false,
+  10: false
 })
-export default class FormStepper extends Mixins(abstractField) {
-  public currStep = 0
-  public valid: any = {}
 
-  public error: any = {
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false,
-    9: false,
-    10: false
-  }
-
-  public clickBtn(
-    cb:
-      | undefined
-      | ((
-          currStep: number,
-          valid: boolean,
-          cancel: () => void,
-          save: () => void,
-          self: this,
-          set: any
-        ) => void | number)
-  ) {
-    // await this.$validator.validateAll()
-    if (cb) {
-      const val = cb(
-        this.currStep,
-        this.valid[this.currStep],
-        this.cancel,
-        this.save,
-        this,
-        Vue.set
-      )
-      if (val) {
-        this.currStep = val
+function clickBtn(
+  cb:
+    | undefined
+    | ((
+        currStep: number,
+        valid: boolean,
+        cancel: () => void,
+        save: () => void,
+        self: any,
+        set: any
+      ) => void | number)
+) {
+  if (cb) {
+    const val = cb(
+      currStep.value,
+      valid[currStep.value],
+      props.cancel as () => void,
+      props.save as () => void,
+      // Früher: die Komponenten-Instanz (`this`) + Vue.set — beides gibt es
+      // in Vue 3 / script setup nicht mehr (toter Code, nie fertig gebaut).
+      null,
+      (obj: any, key: string | number, value: any) => {
+        obj[key] = value
       }
+    )
+    if (val) {
+      currStep.value = val
     }
   }
 }

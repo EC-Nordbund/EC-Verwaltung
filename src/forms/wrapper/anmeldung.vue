@@ -1,56 +1,49 @@
 <template lang="pug">
-  v-app
-    v-toolbar(app color="primary") 
-      v-spacer
-      h1(style="color: #fff") {{title}}
-      v-spacer
-      v-btn(icon @click="$emit('cancel')" style="color: #fff;")
-        v-icon close
-    v-content(app)
-      v-form(v-model="valid")
-        formular(v-model="value" :schema="schema" :cancel="$emit('cancel')" :save="save")
+//- Toter Code: EcFormAnmeldung wird von keiner Seite referenziert.
+//- Minimal auf Vue 3 / Vuetify 4 migriert (v-toolbar(app) → v-app-bar,
+//- v-content → v-main).
+v-app
+  v-app-bar(color='primary')
+    v-spacer
+    h1(style='color: #fff') {{ title }}
+    v-spacer
+    v-btn(icon, style='color: #fff;', @click='$emit("cancel")')
+      v-icon close
+  v-main
+    v-form(v-model='valid')
+      formular(:value='value', :schema='schema', :cancel='onCancel', :save='save')
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import Formular from '../formular.vue'
 
-// // @ts-ignore
-// import { VToolbar, VSpacer, VBtn, VIcon, VDialog, VApp, VCard, VCardTitle, VCardText, VCardActions } from 'vuetify/lib';
+defineOptions({ name: 'EcFormAnmeldung' })
 
-@Component({
-  // components: {
-  //   VSpacer,
-  //   VBtn,
-  //   VDialog,
-  //   VToolbar,
-  //   VApp,
-  //   VCard,
-  //   VCardTitle,
-  //   VCardText,
-  //   VCardActions,
-  // },
+const props = defineProps({
+  title: {},
+  schema: {},
+  initval: {}
 })
-export default class EcRootIndexAKIndex extends Vue {
-  @Prop()
-  private title!: string
 
-  @Prop()
-  private schema!: any
+const emit = defineEmits(['cancel', 'save'])
 
-  @Prop()
-  private initval!: any
+const valid = ref(false)
+const value = ref<any>({})
 
-  private valid = false
-  private visible = false
-  private value: any = {}
+watch(
+  () => props.initval,
+  () => {
+    value.value = props.initval
+  },
+  { immediate: true }
+)
 
-  @Watch('initVal', { immediate: true })
-  public onInitValChange() {
-    this.value = this.initval
-  }
+// Früher wurde `$emit('cancel')` schon beim Rendern als :cancel-Prop
+// AUFGERUFEN (Bug im toten Code) — jetzt korrekt als Funktion übergeben.
+const onCancel = () => emit('cancel')
 
-  private save() {
-    this.$emit('save', this.value)
-  }
+function save() {
+  emit('save', value.value)
 }
 </script>

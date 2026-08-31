@@ -1,34 +1,30 @@
 <template lang="pug">
-  ec-wrapper(hasSheet hasDial hasNav hasXBtn hasRouterView v-bind="config")
-    router-view
+ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
+  router-view
 </template>
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script setup lang="ts">
+const config = {
+  sheet: [],
+  nav: [
+    {
+      icon: 'home',
+      label: 'Allgemein',
+      to: 'home'
+    },
+    {
+      icon: 'event',
+      label: 'Veranstaltungen',
+      to: 'veranstaltungen'
+    }
+  ],
+  // Platzhalter-Titel wie bisher — die Seite lädt (noch) keine Daten.
+  title: 'VERANSTALTUNGSORTNAME',
+  subTitle: 'Veranstaltungsort'
+}
 
-@Component({})
-export default class EcRootIndexVeranstaltungsortIdIndex extends Vue {
-  public static meta = {}
-
-  private config = {
-    sheet: [],
-    nav: [
-      {
-        icon: 'home',
-        label: 'Allgemein',
-        to: 'home'
-      },
-      {
-        icon: 'event',
-        label: 'Veranstaltungen',
-        to: 'veranstaltungen'
-      }
-    ],
-    title: 'VERANSTALTUNGSORTNAME',
-    subTitle: 'Veranstaltungsort'
-  }
-
-  private sheetClick(item: { id: string }) {
-    alert(item.id)
-  }
+// Toter Alt-Code, 1:1 übernommen (sheet ist leer, wird nie aufgerufen)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function sheetClick(item: { id: string }) {
+  alert(item.id)
 }
 </script>

@@ -1,41 +1,32 @@
 <template lang="pug">
 v-text-field(
-  :append-outer-icon="filter?'more_vert':''" 
-  @click:append-outer="doFilter", 
-  v-model="value", 
-  prepend-icon="search", 
-  :append-icon="value?'close':undefined", 
-  @click:append="value=''" 
-  v-bind="$attrs")
+  :append-icon="filter ? 'more_vert' : ''",
+  @click:append='doFilter',
+  v-model='value',
+  prepend-icon='search',
+  :append-inner-icon="value ? 'close' : undefined",
+  @click:append-inner="value = ''",
+  v-bind='$attrs'
+)
 </template>
-<script lang="ts">
-import { defineComponent, watch } from '@vue/composition-api'
+<script setup lang="ts">
+import { watch } from 'vue'
 import { useRouter } from '../plugins/router'
 
-export default defineComponent({
-  name: 'Search',
-  props: {
-    filter: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup(_, ctx) {
-    const { stringQueryRef } = useRouter()
-    const value = stringQueryRef('suche')
+defineOptions({ inheritAttrs: false })
 
-    watch(value, () => {
-      ctx.emit('suche', value.value)
-    })
+defineProps<{ filter?: boolean }>()
 
-    function doFilter() {
-      ctx.emit('filter')
-    }
+const emit = defineEmits(['suche', 'filter'])
 
-    return {
-      value,
-      doFilter
-    }
-  }
+const { stringQueryRef } = useRouter()
+const value = stringQueryRef('suche')
+
+watch(value, () => {
+  emit('suche', value.value)
 })
+
+function doFilter() {
+  emit('filter')
+}
 </script>

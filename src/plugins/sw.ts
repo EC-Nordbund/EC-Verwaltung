@@ -6,7 +6,7 @@ export async function useServiceWorker(
 ) {
   // Im Dev-Modus keinen Service Worker registrieren (cache-first würde jeden
   // neuen Build verstecken) und Altlasten aus früheren Sessions entfernen.
-  if (process.env.NODE_ENV !== 'production') {
+  if (!import.meta.env.PROD) {
     const registrations = await navigator.serviceWorker.getRegistrations()
     registrations.forEach((r) => r.unregister())
     if (typeof caches !== 'undefined') {

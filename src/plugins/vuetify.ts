@@ -1,29 +1,53 @@
-import Vuetify from 'vuetify'
+import { createVuetify } from 'vuetify'
+import { md } from 'vuetify/iconsets/md'
+import { de } from 'vuetify/locale'
+import type { App } from 'vue'
 import { theme as theme2 } from '../config/theme'
 
-import { createApp } from '@vue/composition-api'
+export function useVuetify(app: App) {
+  app.use(
+    createVuetify({
+      theme: {
+        // expliziter Default (kein 'system'!)
+        defaultTheme: 'light',
+        themes: {
+          light: {
+            colors: { ...theme2 }
+          },
+          dark: {
+            dark: true,
+            colors: { ...theme2 }
+          }
+        }
+      },
+      icons: {
+        // Material-Icons-Font wie bisher (Icon-Namen bleiben erhalten)
+        defaultSet: 'md',
+        sets: { md }
+      },
+      locale: {
+        locale: 'de',
+        messages: { de }
+      }
+    })
+  )
 
-export function useVuetify(app: ReturnType<typeof createApp>) {
-  app.use(Vuetify, {
-    theme: theme2,
-    iconfont: 'md'
-  })
   app.directive('font', {
-    bind: (el) => {
+    mounted: (el) => {
       el.style.fontFamily = 'ec-font'
     }
   })
 
   for (const key in theme2) {
-    if (theme2.hasOwnProperty(key)) {
-      const element = theme2[key]
+    if (Object.prototype.hasOwnProperty.call(theme2, key)) {
+      const element = (theme2 as Record<string, string>)[key]
       app.directive(key, {
-        bind: (el) => {
+        mounted: (el) => {
           el.style.color = element
         }
       })
       app.directive(`${key}-bg`, {
-        bind: (el) => {
+        mounted: (el) => {
           el.style.backgroundColor = element
         }
       })

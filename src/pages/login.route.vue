@@ -1,6 +1,6 @@
 <template lang="pug">
-v-app(app, :dark='dark')
-  v-content
+v-app
+  v-main
     .ec-alignCenter
       v-card(min-width='300px')
         v-card-title
@@ -17,21 +17,20 @@ v-app(app, :dark='dark')
               :rules='[(v) => (!!v ? true : "Ein Benutzername muss angegeben werden!")]'
             )
             //- v-tooltip(
-            //-   :value='isCapsOn',
+            //-   :model-value='isCapsOn',
             //-   :disabled='!isCapsOn',
-            //-   bottom,
+            //-   location='bottom',
             //-   color='info'
             //- )
             v-text-field(
-              #activator,
               label='Passwort',
               v-model='data.password',
               required,
               :autofocus='data.username !== ""',
-              :color='isCaps && !$route.query.error ? "info" : undefined',
-              :append-outer-icon='isCaps ? "keyboard_capslock" : undefined',
-              :append-icon='showPasword ? "visibility_off" : "visibility"',
-              @click:append='() => (showPasword = !showPasword)',
+              :color='isCaps && !route.query.error ? "info" : undefined',
+              :append-icon='isCaps ? "keyboard_capslock" : undefined',
+              :append-inner-icon='showPasword ? "visibility_off" : "visibility"',
+              @click:append-inner='() => (showPasword = !showPasword)',
               :type='showPasword ? "text" : "password"',
               @keyup.enter='logIn',
               :rules='[(v) => (!!v ? true : "Ein Password muss angegeben werden!")]'
@@ -45,79 +44,70 @@ v-app(app, :dark='dark')
             :disabled='!valid || loading',
             @click='logIn'
           ) LogIn
+  ec-dialog-host
 </template>
-<script lang="ts">
-import { defineComponent, computed, ref, onMounted } from '@vue/composition-api'
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue'
+import { useTheme } from 'vuetify'
 import { useStorage } from '../storage'
 import { useLogin } from '../plugins/auth'
 import { useCaps } from '../plugins/caps'
 import { useRouter } from '../plugins/router'
 import { useDialog } from '../plugins/dialog'
 
-export default defineComponent({
-  name: 'Login',
-  setup() {
-    const password = ref('')
-    const { dark, username } = useStorage()
-    const { route, router } = useRouter()
-    const loading = ref(false)
-    const valid = ref(false)
-    const showPasword = ref(false)
-    const { login, authToken } = useLogin()
-    const { error } = useDialog()
-    const { isCaps } = useCaps()
+const { dark, username } = useStorage()
+const { route, router } = useRouter()
+const loading = ref(false)
+const valid = ref(false)
+const showPasword = ref(false)
+const { login, authToken } = useLogin()
+const { error } = useDialog()
+const { isCaps } = useCaps()
 
-    function logIn() {
-      loading.value = true
-      login(data.value)
-        .then(() => {
-          loading.value = false
-          let path = route.value.query.next || '/home'
-          if (route.value.query.next === '/404?prev=%2F') {
-            path = 'home'
-          }
-          router.push(path as string)
-          username.value = data.value.username
-        })
-        .catch((err) => {
-          error({
-            text: err.message || err,
-            title: 'Anmelden fehlgeschlagen!'
-          })
-          loading.value = false
-        })
-    }
+// Login-Seite liegt außerhalb des Haupt-Layouts -> Dark-Mode hier ebenfalls
+// auf das globale Vuetify-Theme anwenden (ersetzt v-app(:dark))
+const theme = useTheme()
+watch(
+  dark,
+  (v) => {
+    theme.global.name.value = v ? 'dark' : 'light'
+  },
+  { immediate: true }
+)
 
-    function toggleDark() {
-      dark.value = !dark.value
-    }
+const data = ref({
+  username: username.value,
+  password: ''
+})
 
-    const data = ref({
-      username: username.value,
-      password: ''
-    })
-
-    onMounted(() => {
-      if (authToken.value) {
-        let path = route.value.query.next || '/home'
-        if (route.value.query.next === '/404?prev=%2F') {
-          path = 'home'
-        }
-        router.push(path as string)
+function logIn() {
+  loading.value = true
+  login(data.value)
+    .then(() => {
+      loading.value = false
+      let path = route.value.query.next || '/home'
+      if (route.value.query.next === '/404?prev=%2F') {
+        path = 'home'
       }
+      router.push(path as string)
+      username.value = data.value.username
     })
+    .catch((err) => {
+      error({
+        text: err.message || err,
+        title: 'Anmelden fehlgeschlagen!'
+      })
+      loading.value = false
+    })
+}
 
-    return {
-      logIn,
-      data,
-      toggleDark,
-      dark,
-      isCaps,
-      showPasword,
-      valid,
-      password,
-      loading
+onMounted(() => {
+  if (authToken.value) {
+    let path = route.value.query.next || '/home'
+    if (route.value.query.next === '/404?prev=%2F') {
+      path = 'home'
     }
+    router.push(path as string)
   }
 })
 </script>

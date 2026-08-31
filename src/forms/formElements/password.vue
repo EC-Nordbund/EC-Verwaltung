@@ -1,58 +1,53 @@
 <template lang="pug">
-  v-text-field(
-    v-validate="schema.rule"
-    :data-vv-name="schema.name"
-    :data-vv-as="schema.label"
-    :error-messages="errors.collect(schema.name)"
-
-    :value="value"
-    @input="changeValue"
-
-    :color="isCapsOn ? 'warning' : undefined"
-    :messages="isCapsOn ? 'Hinweis: Feststelltaste ist aktiv' : ''"
-
-    v-on="schema.on||{}"
-    v-bind="schema"
-
-    :append-icon="passwordVisible ? 'visibility_off' : 'visibility'"
-    @click:append="togglePasswordVisibility"
-
-    :type="schema.typ||'password'"
-  )
+v-text-field(
+  :model-value='value',
+  @update:model-value='changeValue',
+  :color='isCapsOn ? "warning" : undefined',
+  :messages='isCapsOn ? "Hinweis: Feststelltaste ist aktiv" : ""',
+  v-on='schema.on || {}',
+  v-bind='bind',
+  :append-inner-icon='passwordVisible ? "visibility_off" : "visibility"',
+  @click:append-inner='togglePasswordVisibility',
+  :type='type',
+  :rules='rules'
+)
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { computed, onUnmounted, ref } from 'vue'
+import { fieldProps, useField } from '../field'
 
-@Component({})
-export default class FormInput extends Mixins(abstractField) {
-  private passwordVisible = false
-  private isCapsOn = false
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-  public checkCaps(ev: KeyboardEvent) {
-    const key = ev.key
-    if (key.length === 1) {
-      this.isCapsOn =
-        key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
-    } else {
-      if (key === 'CapsLock') {
-        this.isCapsOn = !this.isCapsOn
-      }
+const { changeValue, rules, bind } = useField(props, emit)
+
+const passwordVisible = ref(false)
+const isCapsOn = ref(false)
+
+// Früher wurde schema.typ mutiert — jetzt lokaler State (gleiches Verhalten).
+const type = computed(() =>
+  passwordVisible.value ? 'text' : props.schema.typ || 'password'
+)
+
+function checkCaps(ev: KeyboardEvent) {
+  const key = ev.key
+  if (key.length === 1) {
+    isCapsOn.value =
+      key.toUpperCase() === key && key.toLowerCase() !== key && !ev.shiftKey
+  } else {
+    if (key === 'CapsLock') {
+      isCapsOn.value = !isCapsOn.value
     }
   }
+}
 
-  public created() {
-    window.addEventListener('keyup', this.checkCaps)
-  }
+window.addEventListener('keyup', checkCaps)
+onUnmounted(() => {
+  window.removeEventListener('keyup', checkCaps)
+})
 
-  public destroyed() {
-    window.removeEventListener('keyup', this.checkCaps)
-  }
-
-  private togglePasswordVisibility() {
-    this.passwordVisible = !this.passwordVisible
-    this.schema.typ = this.passwordVisible ? 'text' : 'password'
-  }
+function togglePasswordVisibility() {
+  passwordVisible.value = !passwordVisible.value
 }
 </script>

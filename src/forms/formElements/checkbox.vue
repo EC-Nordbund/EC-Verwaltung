@@ -1,26 +1,18 @@
 <template lang="pug">
 v-checkbox(
-  v-validate='schema.rule',
-  :value='value',
-  @input='changeValue',
-  :data-vv-name='schema.name',
-  :data-vv-as='schema.label',
-  :error-messages='errors.collect(schema.name)',
-  v-bind='schema',
-  v-on='schema.on || {}'
+  :model-value='value',
+  @update:model-value='changeValue',
+  v-bind='bind',
+  v-on='schema.on || {}',
+  :rules='rules'
 )
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
-// // @ts-ignore
-// import { VCheckbox } from 'vuetify/lib';
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-@Component({
-  // components: {
-  //   VCheckbox,
-  // },
-})
-export default class FormCheckbox extends Mixins(abstractField) {}
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
+
+const { changeValue, rules, bind } = useField(props, emit)
 </script>

@@ -1,15 +1,15 @@
 <template lang="pug">
-  v-alert(
-    v-bind="schema"
-    :type="schema.color"
-    :value="true"
-  ) {{schema.text}}
+v-alert(
+  v-bind='bind',
+  :type='schema.color'
+) {{ schema.text }}
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-@Component({})
-export default class FormTextarea extends Mixins(abstractField) {}
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
+
+const { bind } = useField(props, emit)
 </script>

@@ -1,30 +1,38 @@
-import Vue from 'vue'
-import Router, { RawLocation, Route } from 'vue-router'
-import routes from 'routes:../pages'
-import { ref, Ref, watch, computed } from '@vue/composition-api'
+import { h, ref, watch, computed } from 'vue'
+import type { Ref } from 'vue'
+import {
+  createRouter,
+  createWebHashHistory,
+  RouterView
+} from 'vue-router'
+import type {
+  Router,
+  RouteLocationRaw,
+  RouteLocationNormalizedLoaded
+} from 'vue-router'
+import { routes } from './routes'
 
 let router: Router | null = null
+let route: Ref<RouteLocationNormalizedLoaded> = null as any
 
 export function installRouter() {
-  Vue.use(Router)
-
-  router = new Router({
+  router = createRouter({
+    // Hash-Modus ('#/...') wie bisher (vue-router-3-Default ohne mode-Option)
+    history: createWebHashHistory(),
     routes: [
       {
         path: '/',
         children: routes,
         component: {
-          render: (h) => h('router-view')
+          render: () => h(RouterView)
         }
       }
     ]
   })
 
-  router.afterEach((to) => {
-    route.value = to
-  })
-
-  route = ref(router.currentRoute) as Ref<Route>
+  // currentRoute ist in vue-router 4/5 bereits ein reaktiver Ref —
+  // direkt durchreichen (ersetzt das alte afterEach-Konstrukt).
+  route = router.currentRoute
 
   return router
 }
@@ -33,13 +41,18 @@ function stringQueryRef(name: string): Ref<string> {
   const r = ref(route.value?.query?.[name])
 
   watch(r, () => {
-    router.replace({
-      ...route.value,
-      query: {
-        ...route.value.query,
-        [name]: r.value
-      } as any
-    })
+    router!
+      .replace({
+        path: route.value.path,
+        hash: route.value.hash,
+        query: {
+          ...route.value.query,
+          [name]: r.value
+        } as any
+      })
+      // redundante Navigationen (z. B. Tastendruck ohne effektive Änderung)
+      // still schlucken
+      .catch(() => {})
   })
 
   return r as any
@@ -75,25 +88,23 @@ function numberQueryRef(name: string) {
   return boolRef
 }
 
-function pushWithPrev(loc: RawLocation) {
+function pushWithPrev(loc: RouteLocationRaw) {
   if (typeof loc === 'string') {
     loc = {
       path: loc
     }
   }
 
-  if (!loc.query) {
-    loc.query = {}
+  if (!(loc as any).query) {
+    ;(loc as any).query = {}
   }
 
-  if (!loc.query.prev) {
-    loc.query.prev = route.value.fullPath
+  if (!(loc as any).query.prev) {
+    ;(loc as any).query.prev = route.value.fullPath
   }
 
-  return router.push(loc)
+  return router!.push(loc)
 }
-
-let route: Ref<Route> = null
 
 export function useRouter() {
   return {

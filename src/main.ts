@@ -1,50 +1,38 @@
-import VueCompositionAPI, { createApp } from '@vue/composition-api'
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-import './config/form'
-import { useForm, useValidation } from './forms/main'
-import './import'
-import './plugins/apollo'
-import { useLogin } from './plugins/auth'
-import './plugins/notify'
-import { useServiceWorker } from './plugins/sw'
-import './plugins/telefonFilter'
-import { useVuetify } from './plugins/vuetify'
-import { installRouter } from './plugins/router'
-import { installDialog } from './plugins/dialog'
+import { createApp, h } from 'vue'
+import { RouterView } from 'vue-router'
 
-import 'vuetify/dist/vuetify.min.css'
-import './assets/style.css'
+// CSS: Vuetify-Komponenten-Styles kommen über vite-plugin-vuetify (autoImport),
+// die Basis-Styles (Reset, v-app-Layout) über 'vuetify/styles'; zusätzlich:
+import 'vuetify/styles'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
+import './assets/style.css'
 
-Vue.use(VueCompositionAPI)
+import { installRouter } from './plugins/router'
+import { useLogin } from './plugins/auth'
+import { useVuetify } from './plugins/vuetify'
+import { useForm } from './forms/main'
+import { registerLibComponents } from './lib/import'
+import { setupNotifications } from './plugins/notify'
+import { useServiceWorker } from './plugins/sw'
 
 export const app = createApp({
-  router: installRouter(),
-  setup(prop, ctx) {
+  setup() {
     useLogin()
   },
-  render: (h) => h('router-view')
+  render: () => h(RouterView)
 })
 
+app.use(installRouter())
+useVuetify(app)
 useForm(app)
-useValidation(app)
+registerLibComponents(app)
+
+setupNotifications()
 useServiceWorker('sw.js', (doUpdate) => {
   if (window.confirm('Eine neue Version ist verfügbar willst du sie laden?')) {
     doUpdate()
   }
 })
-useVuetify(app)
-installDialog(app)
-
-Component.registerHooks([
-  'beforeRouteEnter',
-  'beforeRouteLeave',
-  'beforeRouteUpdate'
-])
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-Vue.prototype.$empty = () => {}
 
 app.mount('#app')

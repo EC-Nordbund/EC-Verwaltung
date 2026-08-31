@@ -1,9 +1,8 @@
-import Vue from 'vue'
+import { computed } from 'vue'
+import { useNow } from '@vueuse/core'
 import { useApollo } from '../plugins/apollo'
 import { useStorage } from '../storage/index'
 import { errorHandler } from '../helpers'
-import { useNow } from 'vue-composable'
-import { computed } from '@vue/composition-api'
 import { defineUseFunction } from './base'
 import { API_BASE } from './apiBase'
 
@@ -11,12 +10,11 @@ const time = 12 * 60 * 60 * 1e3
 
 export const useLogin = defineUseFunction(() => {
   const { authToken, logoutTime, username } = useStorage()
-  const { now } = useNow()
+  // @vueuse useNow liefert ein Date — vue-composable lieferte einen
+  // Timestamp (ms); für die Arithmetik hier auf ms abbilden.
+  const nowDate = useNow({ interval: 1000 })
+  const now = computed(() => nowDate.value.getTime())
   const { client, gql } = useApollo()
-
-  Vue.prototype.$authToken = () => {
-    return authToken.value
-  }
 
   const logoutIn = computed(() => logoutTime.value - now.value)
 

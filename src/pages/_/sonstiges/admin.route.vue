@@ -1,27 +1,21 @@
 <template lang="pug">
-  ec-wrapper(hasSheet hasDial v-bind="config")
-    | Content
+ec-wrapper(hasSheet, hasDial, v-bind='config')
+  | Content
 </template>
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
+function sheetClick(item: { id: string }) {
+  alert(item.id)
+}
 
-@Component({})
-export default class EcRootIndex extends Vue {
-  public static meta = {}
-  private config = {
-    sheet: [
-      {
-        id: 'user_add',
-        icon: 'person_add',
-        label: 'Benutzer hinzufügen',
-        click: this.sheetClick
-      }
-    ],
-    title: 'Admin'
-  }
-
-  private sheetClick(item: { id: string }) {
-    alert(item.id)
-  }
+const config = {
+  sheet: [
+    {
+      id: 'user_add',
+      icon: 'person_add',
+      label: 'Benutzer hinzufügen',
+      click: sheetClick
+    }
+  ],
+  title: 'Admin'
 }
 </script>

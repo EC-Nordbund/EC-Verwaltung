@@ -1,33 +1,31 @@
 <template lang="pug">
-  v-card-text
-    v-list(two-line)
-      template(v-for="(anmeldung, id) in data.anmeldungen")
-        v-divider(v-if="id!==0")
-        v-list-tile(@click="$router.push({path: `/anmeldungen/${anmeldung.anmeldeID}/home`, query: {prev: $route.fullPath}})")
-          v-list-tile-action
-            v-icon event
-          v-list-tile-content
-            v-list-tile-title {{anmeldung.veranstaltung.bezeichnung}} | ({{anmeldung.veranstaltung.begin.german}} - {{anmeldung.veranstaltung.ende.german}})
-            v-list-tile-sub-title Rolle: {{rollen[anmeldung.position-1]}} | AnmeldeID: {{anmeldung.anmeldeID}}
-        
+v-card-text
+  v-list(lines='two')
+    template(v-for='(anmeldung, id) in data.anmeldungen')
+      v-divider(v-if='id !== 0')
+      v-list-item(
+        @click='navigate({ path: `/anmeldungen/${anmeldung.anmeldeID}/home` })'
+      )
+        template(#prepend)
+          v-icon event
+        v-list-item-title {{ anmeldung.veranstaltung.bezeichnung }} | ({{ anmeldung.veranstaltung.begin.german }} - {{ anmeldung.veranstaltung.ende.german }})
+        v-list-item-subtitle Rolle: {{ rollen[anmeldung.position - 1] }} | AnmeldeID: {{ anmeldung.anmeldeID }}
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+<script setup lang="ts">
+import { useRouter } from '../../../../../plugins/router'
 
-@Component({})
-export default class EcNAME extends Vue {
-  public static meta = {}
-  @Prop()
-  private data!: any
+defineProps<{ data?: any }>()
 
-  private rollen = [
-    'Teilnehmer',
-    'Mitarbeiter',
-    'Küchenmitarbeiter',
-    'Küchenleitung',
-    'Leitung',
-    'Hauptleitung'
-  ]
-}
+// navigate = push mit query.prev = aktuelle fullPath (wie bisher)
+const { navigate } = useRouter()
+
+const rollen = [
+  'Teilnehmer',
+  'Mitarbeiter',
+  'Küchenmitarbeiter',
+  'Küchenleitung',
+  'Leitung',
+  'Hauptleitung'
+]
 </script>

@@ -1,12 +1,14 @@
 <template lang="pug">
-v-dialog(v-model='visible', max-width='400px', persistend)
+//- Das frühere Attribut `persistend` (Tippfehler) war wirkungslos und
+//- wurde entfernt — der Dialog war nie persistent (Verhalten 1:1).
+v-dialog(v-model='visible', max-width='400px')
   v-card
     v-card-title
       h1(v-font, v-primary) {{ type === "add" ? "Neues Mitglied hinzufügen" : "Mitglied bearbeiten" }}
     v-card-text
-      v-form(v-model='valid', @submit.prevent='')
+      v-form(v-model='valid', @submit.prevent='empty')
         formular(
-          v-model='value',
+          :value='value',
           :schema=`[
           {
             name: 'personID',
@@ -30,125 +32,137 @@ v-dialog(v-model='visible', max-width='400px', persistend)
             rule: 'required',
             required: true
           }
-        ]`
-        :save="()=>{}"
-        :cancel="()=>{}"
+        ]`,
+          :save='empty',
+          :cancel='empty'
         )
     v-card-actions
       v-spacer
-      v-btn(flat, @click='visible = false') Abbrechen
+      v-btn(variant='text', @click='visible = false') Abbrechen
       v-btn(color='primary', :disabled='!valid', @click='addPersonSave') Speichern
 </template>
-<script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
-import gql from 'graphql-tag'
-// import { genReport } from '../report';
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useApollo } from '../plugins/apollo'
+import { useLogin } from '../plugins/auth'
+import { useNotification } from '../plugins/notify'
+import { useRouter } from '../plugins/router'
+import { useDialog } from '../plugins/dialog'
+import { empty } from '../helpers'
 
-@Component({})
-export default class EcRootIndex extends Vue {
-  @Prop({ default: [] })
-  private data!: any
+defineProps({
+  // Array-Default als Factory (Vue-3-Pflicht); effektiv wird immer ein
+  // Objekt ({ personen: [...] }) von der AK-Detailseite hereingereicht.
+  data: { default: () => [] as any }
+})
 
-  private personenData = []
+const emit = defineEmits(['reload'])
 
-  private visible = false
-  private valid = false
-  private value: any = {}
-  private type: 'add' | 'edit' | 'delete' | '' = ''
+const { client, gql } = useApollo()
+const { authToken } = useLogin()
+const { createNotification } = useNotification()
+const { error } = useDialog()
+const { route } = useRouter()
 
-  private allPersonen: any = []
+const visible = ref(false)
+const valid = ref(false)
+const value = ref<any>({})
+const type = ref<'add' | 'edit' | 'delete' | ''>('')
 
-  private stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter']
+const allPersonen = ref<any>([])
 
-  public edit(type: 'add' | 'edit' | 'delete') {
-    this.type = type
-    this.value = {}
+const stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter']
 
-    if (type === 'delete') {
-      this.value = {
-        status: 0
-      }
+function edit(editType: 'add' | 'edit' | 'delete') {
+  type.value = editType
+  value.value = {}
+
+  if (editType === 'delete') {
+    value.value = {
+      status: 0
     }
-
-    if (type === 'add' && this.allPersonen) {
-      this.getPersonen()
-    }
-
-    this.visible = true
   }
 
-  private addPersonSave() {
-    this.visible = false
+  if (editType === 'add' && allPersonen.value) {
+    getPersonen()
+  }
 
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation (
-            $personID: Int!
-            $akID: Int!
-            $date: String!
-            $status: Int!
-            $authToken: String!
-          ) {
-            updateAKStatus(
-              personID: $personID
-              akID: $akID
-              date: $date
-              status: $status
-              authToken: $authToken
-            )
-          }
-        `,
-        variables: {
-          ...this.value,
-          akID: parseInt(this.$route.params.id),
-          authToken: this.$authToken()
+  visible.value = true
+}
+
+function addPersonSave() {
+  visible.value = false
+
+  client
+    .mutate({
+      mutation: gql`
+        mutation (
+          $personID: Int!
+          $akID: Int!
+          $date: String!
+          $status: Int!
+          $authToken: String!
+        ) {
+          updateAKStatus(
+            personID: $personID
+            akID: $akID
+            date: $date
+            status: $status
+            authToken: $authToken
+          )
         }
+      `,
+      variables: {
+        ...value.value,
+        akID: parseInt(route.value.params.id as string),
+        authToken: authToken.value
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Neuer Eintrag im AK',
+        body: `Du hast erfolgreich einen neuen Eintrag im AK angelegt`
       })
-      .then(() => {
-        this.$notifikation(
-          'Neuer Eintrag im AK',
-          `Du hast erfolgreich einen neuen Eintrag im AK angelegt`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
+    })
+}
 
-  private getPersonen() {
-    this.$apolloClient
-      .query({
-        query: gql`
-          query ($authToken: String!) {
-            personen(authToken: $authToken) {
-              personID
-              vorname
-              nachname
-              gebDat {
-                german
-                input
-              }
+function getPersonen() {
+  client
+    .query({
+      query: gql`
+        query ($authToken: String!) {
+          personen(authToken: $authToken) {
+            personID
+            vorname
+            nachname
+            gebDat {
+              german
+              input
             }
           }
-        `,
-        variables: {
-          authToken: this.$authToken()
         }
+      `,
+      variables: {
+        authToken: authToken.value
+      }
+    })
+    .then((res) => {
+      allPersonen.value = res.data.personen
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Laden fehlgeschlagen!'
       })
-      .then((res) => {
-        this.allPersonen = res.data.personen
-      })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Laden fehlgeschlagen!'
-        })
-      })
-  }
+    })
 }
+
+defineExpose({ edit })
 </script>

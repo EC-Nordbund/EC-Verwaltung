@@ -1,4 +1,10 @@
-export default (self: any) => {
+export default ({
+  allePersonen,
+  routeParamsId
+}: {
+  allePersonen: any[]
+  routeParamsId: string
+}) => {
   return {
     title: 'Person mergen',
     initval: {
@@ -10,10 +16,8 @@ export default (self: any) => {
         type: 'autocomplete',
         rule: 'required',
         'prepend-icon': 'person',
-        items: self.allePersonen
-          .filter(
-            (pers: any) => pers.personID !== parseInt(self.$route.params.id)
-          )
+        items: allePersonen
+          .filter((pers: any) => pers.personID !== parseInt(routeParamsId))
           .map((pers: any) => ({
             value: pers.personID,
             text:

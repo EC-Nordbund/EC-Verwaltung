@@ -1,115 +1,105 @@
 <template lang="pug">
-  v-card-text(style="overflow: auto;")
-    v-list(two-line)
-      v-list-tile(@click="copy(data.anmeldeID)")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.anmeldeID}}
-          v-list-tile-sub-title AnmeldeID (Wird dem TN/MA mitgeteilt)
-      v-list-tile(@click="$router.push({path: `/personen/${data.person.personID}/home`, query: {prev: $route.fullPath}})")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.person.vorname}} {{data.person.nachname}}
-          v-list-tile-sub-title GebDat: {{data.person.gebDat.german}}
-      v-list-tile(@click="$router.push({path: `/veranstaltungen/${data.veranstaltung.veranstaltungsID}/home`, query: {prev: $route.fullPath}})")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.veranstaltung.bezeichnung}}
-          v-list-tile-sub-title {{data.veranstaltung.begin.german}} - {{data.veranstaltung.ende.german}}
-      v-list-tile
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{rollen[data.position - 1]}}
-          v-list-tile-sub-title Rolle
-      v-list-tile(v-if="data.wartelistenPlatz>0")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title Platz: {{data.wartelistenPlatz}}
-          v-list-tile-sub-title Warteliste
-      v-list-tile(v-if="data.wartelistenPlatz===0")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title Angemeldet
-      v-list-tile(v-if="data.wartelistenPlatz<0")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title Abgemeldet
-      v-divider
-      v-list-tile(@click="alert('Hier erscheint irgendwann eine Karte...')")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.adresse.strasse}}
-          v-list-tile-sub-title {{data.adresse.plz}} {{data.adresse.ort}}
-      v-list-tile(@click='location.href=`mailto:${data.email.eMail}`')
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.email.eMail}}
-      v-list-tile(@click='location.href=`tel:${data.telefon.telefon}`')
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.telefon.telefon  | telefon}}
-      v-divider
-      v-list-tile
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.anmeldeZeitpunkt.german}}
-          v-list-tile-sub-title AnmeldeDatum
-      v-list-tile
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.DSGVO_einverstaendnis.german}}
-          v-list-tile-sub-title DSGVO-Zustimmung
-      v-list-tile(v-if="data.bestaetigungsBrief")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.bestaetigungsBrief.german}}
-          v-list-tile-sub-title Bestätigungsbrief
-      v-list-tile(v-if="data.infoBrief")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.infoBrief.german}}
-          v-list-tile-sub-title Infobrief
-      v-list-tile(v-if="data.abmeldeZeitpunkt")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.abmeldeZeitpunkt.german}}
-          v-list-tile-sub-title Abmeldezeitpunkt      
+v-card-text(style='overflow: auto')
+  v-list(lines='two')
+    v-list-item(@click='copy(data.anmeldeID)')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.anmeldeID }}
+      v-list-item-subtitle AnmeldeID (Wird dem TN/MA mitgeteilt)
+    v-list-item(@click='navigate(`/personen/${data.person.personID}/home`)')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.person.vorname }} {{ data.person.nachname }}
+      v-list-item-subtitle GebDat: {{ data.person.gebDat.german }}
+    v-list-item(
+      @click='navigate(`/veranstaltungen/${data.veranstaltung.veranstaltungsID}/home`)'
+    )
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.veranstaltung.bezeichnung }}
+      v-list-item-subtitle {{ data.veranstaltung.begin.german }} - {{ data.veranstaltung.ende.german }}
+    v-list-item
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ rollen[data.position - 1] }}
+      v-list-item-subtitle Rolle
+    v-list-item(v-if='data.wartelistenPlatz > 0')
+      template(#prepend)
+        v-icon person
+      v-list-item-title Platz: {{ data.wartelistenPlatz }}
+      v-list-item-subtitle Warteliste
+    v-list-item(v-if='data.wartelistenPlatz === 0')
+      template(#prepend)
+        v-icon person
+      v-list-item-title Angemeldet
+    v-list-item(v-if='data.wartelistenPlatz < 0')
+      template(#prepend)
+        v-icon person
+      v-list-item-title Abgemeldet
+    v-divider
+    v-list-item(@click='alert("Hier erscheint irgendwann eine Karte...")')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.adresse.strasse }}
+      v-list-item-subtitle {{ data.adresse.plz }} {{ data.adresse.ort }}
+    v-list-item(@click='location.href = `mailto:${data.email.eMail}`')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.email.eMail }}
+    v-list-item(@click='location.href = `tel:${data.telefon.telefon}`')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ telefonFormater(data.telefon.telefon) }}
+    v-divider
+    v-list-item
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.anmeldeZeitpunkt.german }}
+      v-list-item-subtitle AnmeldeDatum
+    v-list-item
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.DSGVO_einverstaendnis.german }}
+      v-list-item-subtitle DSGVO-Zustimmung
+    v-list-item(v-if='data.bestaetigungsBrief')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.bestaetigungsBrief.german }}
+      v-list-item-subtitle Bestätigungsbrief
+    v-list-item(v-if='data.infoBrief')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.infoBrief.german }}
+      v-list-item-subtitle Infobrief
+    v-list-item(v-if='data.abmeldeZeitpunkt')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.abmeldeZeitpunkt.german }}
+      v-list-item-subtitle Abmeldezeitpunkt
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+<script setup lang="ts">
+import { useRouter } from '../../../../../plugins/router'
+import { telefonFormater } from '../../../../../plugins/telefonFilter'
 
-@Component({})
-export default class EcRootIndexAnmeldungenIdIndexHome extends Vue {
-  public static meta = {}
+withDefaults(defineProps<{ data?: any }>(), {
+  data: () => ({ person: {} })
+})
 
-  private copy = (text) => navigator.clipboard.writeText(text)
+const { navigate } = useRouter()
 
-  private rollen = [
-    'Teilnehmer',
-    'Mitarbeiter',
-    'Küchenmitarbeiter',
-    'Küchenleitung',
-    'Leitung',
-    'Hauptleitung'
-  ]
+// Template-Globals (Vue 2 `with(this)`-Fallthrough) — in Vue 3 explizit:
+const location = window.location
+const alert = (text: string) => window.alert(text)
 
-  @Prop({ default: { person: {} } })
-  private data!: any
-}
+const copy = (text: string) => navigator.clipboard.writeText(text)
+
+const rollen = [
+  'Teilnehmer',
+  'Mitarbeiter',
+  'Küchenmitarbeiter',
+  'Küchenleitung',
+  'Leitung',
+  'Hauptleitung'
+]
 </script>

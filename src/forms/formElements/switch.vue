@@ -1,27 +1,18 @@
 <template lang="pug">
-  v-switch(
-    v-validate="schema.rule"
-    :value="value"
-    @input="changeValue"
-    :data-vv-name="schema.name"
-    :data-vv-as="schema.label"
-    :error-messages="errors.collect(schema.name)"
-    v-bind="schema"
-    v-on="schema.on || {}"
-  )
+v-switch(
+  :model-value='value',
+  @update:model-value='changeValue',
+  v-bind='bind',
+  v-on='schema.on || {}',
+  :rules='rules'
+)
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-// // @ts-ignore
-// import { VSwitch } from 'vuetify/lib';
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-@Component({
-  // components: {
-  //   VSwitch,
-  // },
-})
-export default class FormSwitch extends Mixins(abstractField) {}
+const { changeValue, rules, bind } = useField(props, emit)
 </script>

@@ -1,16 +1,17 @@
 <template lang="pug">
-  component(
-    :is="schema.tag || 'p'"
-    v-text="schema.label"
-    v-on="schema.on||{}"
-    v-bind="schema"
-  )
+component(
+  :is='schema.tag || "p"',
+  v-text='schema.label',
+  v-on='schema.on || {}',
+  v-bind='bind'
+)
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-@Component({})
-export default class FormInput extends Mixins(abstractField) {}
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
+
+const { bind } = useField(props, emit)
 </script>

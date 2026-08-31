@@ -1,258 +1,305 @@
 <template lang="pug">
-  v-card-text(style="overflow: auto;")
-    //- ec-adresse-merge(ref="mergeAdresse" :data="data" @reload="$emit('reload')")
-    v-list(two-line)
-      v-list-tile(@click="")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.personID}}
-          v-list-tile-sub-title PersonID
-      v-list-tile(@click="")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.vorname}} {{data.nachname}}
-          v-list-tile-sub-title {{data.gebDat.german}}
-      v-list-tile(@click="")
-        v-list-tile-action
-          v-icon person
-        v-list-tile-content
-          v-list-tile-title {{data.alter}}
-          v-list-tile-sub-title Aktuelles Alter
-      v-divider
-      v-list-tile(v-for="adresse in data.adressen" :key="adresse.adressID" :class="adresse.isOld?'isOld':''" @click="showAdresse(adresse)")
-        v-list-tile-action
-          v-icon home
-        v-list-tile-content
-          v-list-tile-title {{adresse.strasse}}
-          v-list-tile-sub-title {{adresse.plz}} {{adresse.ort}} | Letzte Nutzung: {{adresse.lastUsed.german}}
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();mergeAdresse(adresse.adressID)" icon)
-            v-icon merge_type
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();deleteAdresse(adresse.adressID)" icon)
-            v-icon delete
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();useAdresse(adresse.adressID)" icon)
-            v-icon mouse
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();copy(`${adresse.strasse}\n${adresse.plz} ${adresse.ort}`)" icon)
-            v-icon file_copy
-      v-divider
-      v-list-tile(v-for="email in data.emails" :key="email.eMailID" :class="email.isOld?'isOld':''" @click="location.href='mailto:' + email.eMail")
-        v-list-tile-action
-          v-icon mail
-        v-list-tile-content
-          v-list-tile-title {{email.eMail}}
-          v-list-tile-sub-title E-Mail  | Letzte Nutzung: {{email.lastUsed.german}}
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();deleteEmail(email.eMailID)" icon)
-            v-icon delete
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();useEmail(email.eMailID)" icon)
-            v-icon mouse
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();copy(email.eMail)" icon)
-            v-icon file_copy
-      v-divider
-      v-list-tile(v-for="telefon in data.telefone" :key="telefon.telefonID" :class="telefon.isOld?'isOld':''" @click="location.href = 'tel:' + telefon.telefon")
-        v-list-tile-action
-          v-icon phone
-        v-list-tile-content
-          v-list-tile-title {{telefon.telefon | telefon}}
-          v-list-tile-sub-title Telefon | Letzte Nutzung: {{telefon.lastUsed.german}}
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();deleteTelefon(telefon.telefonID)" icon)
-            v-icon delete
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();useTelefon(telefon.telefonID)" icon)
-            v-icon mouse
-        v-list-tile-action
-          v-btn(@click="$event.stopPropagation();copy(telefon.telefon)" icon)
-            v-icon file_copy
+v-card-text(style='overflow: auto')
+  //- Bugfix (dokumentiert): war auskommentiert, der Merge-Button warf
+  //- deshalb einen Laufzeitfehler — jetzt wieder eingehängt.
+  ec-adresse-merge(
+    ref='mergeAdresseDialog',
+    :data='data',
+    @reload='emit("reload")'
+  )
+  v-list(lines='two')
+    v-list-item(@click='() => {}')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.personID }}
+      v-list-item-subtitle PersonID
+    v-list-item(@click='() => {}')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.vorname }} {{ data.nachname }}
+      v-list-item-subtitle {{ data.gebDat.german }}
+    v-list-item(@click='() => {}')
+      template(#prepend)
+        v-icon person
+      v-list-item-title {{ data.alter }}
+      v-list-item-subtitle Aktuelles Alter
+    v-divider
+    v-list-item(
+      v-for='adresse in data.adressen',
+      :key='adresse.adressID',
+      :class='adresse.isOld ? "isOld" : ""',
+      @click='showAdresse(adresse)'
+    )
+      template(#prepend)
+        v-icon home
+      v-list-item-title {{ adresse.strasse }}
+      v-list-item-subtitle {{ adresse.plz }} {{ adresse.ort }} | Letzte Nutzung: {{ adresse.lastUsed.german }}
+      template(#append)
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); mergeAdresse(adresse.adressID)'
+        )
+          v-icon merge_type
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); deleteAdresse(adresse.adressID)'
+        )
+          v-icon delete
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); useAdresse(adresse.adressID)'
+        )
+          v-icon mouse
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); copy(`${adresse.strasse}\n${adresse.plz} ${adresse.ort}`)'
+        )
+          v-icon file_copy
+    v-divider
+    v-list-item(
+      v-for='email in data.emails',
+      :key='email.eMailID',
+      :class='email.isOld ? "isOld" : ""',
+      @click='location.href = "mailto:" + email.eMail'
+    )
+      template(#prepend)
+        v-icon mail
+      v-list-item-title {{ email.eMail }}
+      v-list-item-subtitle E-Mail  | Letzte Nutzung: {{ email.lastUsed.german }}
+      template(#append)
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); deleteEmail(email.eMailID)'
+        )
+          v-icon delete
+        v-btn(icon, @click='$event.stopPropagation(); useEmail(email.eMailID)')
+          v-icon mouse
+        v-btn(icon, @click='$event.stopPropagation(); copy(email.eMail)')
+          v-icon file_copy
+    v-divider
+    v-list-item(
+      v-for='telefon in data.telefone',
+      :key='telefon.telefonID',
+      :class='telefon.isOld ? "isOld" : ""',
+      @click='location.href = "tel:" + telefon.telefon'
+    )
+      template(#prepend)
+        v-icon phone
+      v-list-item-title {{ telefonFormater(telefon.telefon) }}
+      v-list-item-subtitle Telefon | Letzte Nutzung: {{ telefon.lastUsed.german }}
+      template(#append)
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); deleteTelefon(telefon.telefonID)'
+        )
+          v-icon delete
+        v-btn(
+          icon,
+          @click='$event.stopPropagation(); useTelefon(telefon.telefonID)'
+        )
+          v-icon mouse
+        v-btn(icon, @click='$event.stopPropagation(); copy(telefon.telefon)')
+          v-icon file_copy
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
-import gql from 'graphql-tag'
+<script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import { useApollo } from '../../../../../plugins/apollo'
+import { useLogin } from '../../../../../plugins/auth'
+import { useDialog } from '../../../../../plugins/dialog'
+import { useNotification } from '../../../../../plugins/notify'
+import { telefonFormater } from '../../../../../plugins/telefonFilter'
 
-@Component({})
-export default class EcNAME extends Vue {
-  public static meta = {}
-  @Prop()
-  private data!: any
-  private location = window.location
+defineProps<{ data?: any }>()
 
-  private copy = (text) => navigator.clipboard.writeText(text)
+const emit = defineEmits(['reload'])
 
-  public showAdresse(adresse: any) {
-    alert('Hier kommt noch eine Karte hin.')
-  }
-  public mergeAdresse(adressID: number) {
-    ;(this.$refs.mergeAdresse as any).show(adressID)
-  }
-  public deleteAdresse(adressID: number) {
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation ($adressID: Int!, $authToken: String!) {
-            markAdressAsOld(adressID: $adressID, authToken: $authToken)
-          }
-        `,
-        variables: {
-          authToken: this.$authToken(),
-          adressID
+const { client, gql } = useApollo()
+const { authToken } = useLogin()
+const { error } = useDialog()
+const { createNotification } = useNotification()
+
+const location = window.location
+
+const copy = (text: string) => navigator.clipboard.writeText(text)
+
+// ec-adresse-merge ist global registriert (lib/import.ts) und stellt
+// show(falsch) per defineExpose bereit.
+const mergeAdresseDialog = useTemplateRef<any>('mergeAdresseDialog')
+
+function showAdresse(adresse: any) {
+  alert('Hier kommt noch eine Karte hin.')
+}
+
+function mergeAdresse(adressID: number) {
+  mergeAdresseDialog.value.show(adressID)
+}
+
+function deleteAdresse(adressID: number) {
+  client
+    .mutate({
+      mutation: gql`
+        mutation ($adressID: Int!, $authToken: String!) {
+          markAdressAsOld(adressID: $adressID, authToken: $authToken)
         }
+      `,
+      variables: {
+        authToken: authToken.value,
+        adressID
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Als Alt makiert',
+        body: `Erfolgreich als veraltet makiert`
       })
-      .then((res: any) => {
-        this.$notifikation(
-          'Als Alt makiert',
-          `Erfolgreich als veraltet makiert`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
-  public deleteEmail(emailID: number) {
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation ($emailID: Int!, $authToken: String!) {
-            markEmailAsOld(emailID: $emailID, authToken: $authToken)
-          }
-        `,
-        variables: {
-          authToken: this.$authToken(),
-          emailID
+    })
+}
+
+function deleteEmail(emailID: number) {
+  client
+    .mutate({
+      mutation: gql`
+        mutation ($emailID: Int!, $authToken: String!) {
+          markEmailAsOld(emailID: $emailID, authToken: $authToken)
         }
+      `,
+      variables: {
+        authToken: authToken.value,
+        emailID
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Als Alt makiert',
+        body: `Erfolgreich als veraltet makiert`
       })
-      .then((res: any) => {
-        this.$notifikation(
-          'Als Alt makiert',
-          `Erfolgreich als veraltet makiert`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
-  public deleteTelefon(telefonID: number) {
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation ($telefonID: Int!, $authToken: String!) {
-            markTelefonAsOld(telefonID: $telefonID, authToken: $authToken)
-          }
-        `,
-        variables: {
-          authToken: this.$authToken(),
-          telefonID
+    })
+}
+
+function deleteTelefon(telefonID: number) {
+  client
+    .mutate({
+      mutation: gql`
+        mutation ($telefonID: Int!, $authToken: String!) {
+          markTelefonAsOld(telefonID: $telefonID, authToken: $authToken)
         }
+      `,
+      variables: {
+        authToken: authToken.value,
+        telefonID
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Als Alt makiert',
+        body: `Erfolgreich als veraltet makiert`
       })
-      .then((res: any) => {
-        this.$notifikation(
-          'Als Alt makiert',
-          `Erfolgreich als veraltet makiert`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
-  public useAdresse(adressID: number) {
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation ($adressID: Int!, $authToken: String!) {
-            useAdresse(adressID: $adressID, authToken: $authToken)
-          }
-        `,
-        variables: {
-          authToken: this.$authToken(),
-          adressID
+    })
+}
+
+function useAdresse(adressID: number) {
+  client
+    .mutate({
+      mutation: gql`
+        mutation ($adressID: Int!, $authToken: String!) {
+          useAdresse(adressID: $adressID, authToken: $authToken)
         }
+      `,
+      variables: {
+        authToken: authToken.value,
+        adressID
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Als Aktuell Makiert',
+        body: `Erfolgreich als aktuell makiert`
       })
-      .then((res: any) => {
-        this.$notifikation(
-          'Als Aktuell Makiert',
-          `Erfolgreich als aktuell makiert`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
-  public useEmail(emailID: number) {
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation ($emailID: Int!, $authToken: String!) {
-            useEmail(emailID: $emailID, authToken: $authToken)
-          }
-        `,
-        variables: {
-          authToken: this.$authToken(),
-          emailID
+    })
+}
+
+function useEmail(emailID: number) {
+  client
+    .mutate({
+      mutation: gql`
+        mutation ($emailID: Int!, $authToken: String!) {
+          useEmail(emailID: $emailID, authToken: $authToken)
         }
+      `,
+      variables: {
+        authToken: authToken.value,
+        emailID
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Als Aktuell Makiert',
+        body: `Erfolgreich als aktuell makiert`
       })
-      .then((res: any) => {
-        this.$notifikation(
-          'Als Aktuell Makiert',
-          `Erfolgreich als aktuell makiert`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
-  public useTelefon(telefonID: number) {
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation ($telefonID: Int!, $authToken: String!) {
-            useTelefon(telefonID: $telefonID, authToken: $authToken)
-          }
-        `,
-        variables: {
-          authToken: this.$authToken(),
-          telefonID
+    })
+}
+
+function useTelefon(telefonID: number) {
+  client
+    .mutate({
+      mutation: gql`
+        mutation ($telefonID: Int!, $authToken: String!) {
+          useTelefon(telefonID: $telefonID, authToken: $authToken)
         }
+      `,
+      variables: {
+        authToken: authToken.value,
+        telefonID
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Als Aktuell Makiert',
+        body: `Erfolgreich als aktuell makiert`
       })
-      .then((res: any) => {
-        this.$notifikation(
-          'Als Aktuell Makiert',
-          `Erfolgreich als aktuell makiert`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
+    })
 }
 </script>

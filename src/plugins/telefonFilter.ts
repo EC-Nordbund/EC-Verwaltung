@@ -1,6 +1,7 @@
 import vorwahlen from '../data/vorwahl'
-import Vue from 'vue'
 
+// Vue-3: Filter existieren nicht mehr — die Funktion wird direkt
+// importiert und im Template aufgerufen: {{ telefonFormater(x) }}
 export const telefonFormater = (value: string) => {
   let numOnly = value.replace(/\D/g, '')
   let ret = ''
@@ -29,5 +30,3 @@ export const telefonFormater = (value: string) => {
     return ret
   }
 }
-
-Vue.filter('telefon', telefonFormater)

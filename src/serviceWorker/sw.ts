@@ -1,7 +1,15 @@
-import resourceList from 'resource-list:'
 const VERSION = '4.0.0'
 
-const _self: ServiceWorkerGlobalScope & typeof globalThis = self as any
+const _self: ServiceWorkerGlobalScope &
+  typeof globalThis & {
+    // Injection-Point von vite-plugin-pwa (injectManifest): Liste aller
+    // Build-Artefakte — Ersatz für das alte virtuelle Modul 'resource-list:'.
+    __WB_MANIFEST: Array<string | { url: string; revision: string | null }>
+  } = self as any
+
+const resourceList = _self.__WB_MANIFEST.map((entry) =>
+  typeof entry === 'string' ? entry : entry.url
+)
 
 const CACHE_NAME = `CACHE_${VERSION}`
 
