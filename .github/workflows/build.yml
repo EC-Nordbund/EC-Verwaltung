@@ -42,9 +42,13 @@ jobs:
           echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
           chmod 600 ./deploy_key
 
+      - name: Ensure Folder
+        if: github.ref_name == 'main'
+        run: ssh -i ./deploy_key -o StrictHostKeyChecking=no deployer@ec-nordbund.de "/bin/mkdir -p /ec/setup/data/vhosts/verwaltung.ec-nordbund.de"
+
       - name: Deploy to verwaltung.ec-nordbund.de
         if: github.ref_name == 'main'
         run: |
           rsync -chrvz --stats --delete \
             -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
-            ./dist/ root@sk01.ec-nordbund.de:/ec/setup/data/vhosts/verwaltung.ec-nordbund.de/
+            ./dist/ deployer@ec-nordbund.de:/ec/setup/data/vhosts/verwaltung.ec-nordbund.de/
