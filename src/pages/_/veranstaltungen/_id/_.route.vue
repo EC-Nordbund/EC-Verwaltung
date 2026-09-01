@@ -68,7 +68,10 @@ const config = computed(() => {
         id: 'veranstaltung_create_tokens',
         label: 'Mitarbeiteranmeldungstoken erzeugen',
         click: async () => {
-          const res = await fetch(`${API_BASE}/api-v4/anmeldetoken`, {
+          // Erzeugt pro Rolle (rollenID >= 2, dynamisch aus der DB) einen
+          // Anmeldelink über POST /v6/anmeldetoken und kopiert die Liste
+          // "Rolle: Link" in die Zwischenablage.
+          const res = await fetch(`${API_BASE}/v6/anmeldetoken`, {
             method: 'POST',
             headers: {
               authorization: authToken.value,
@@ -79,55 +82,26 @@ const config = computed(() => {
             })
           })
 
-          const d = (await res.json()).data
+          if (!res.ok) {
+            alert(`Token-Erzeugung fehlgeschlagen (HTTP ${res.status}).`)
+            return
+          }
 
-          const createMailText = (code: string) => `Moin,
-Damit du im EC System für die Veranstaltung eingtragen bist, möchte ich dich bitten dich unter dem folgenden Link anzumelden:
+          const { gueltigTage, data } = (await res.json()) as {
+            gueltigTage: number
+            data: Array<{
+              position: number
+              bezeichnung: string
+              url: string
+            }>
+          }
 
-https://www.ec-nordbund.de/anmeldung/mitarbeiter/${code}
+          const liste = data.map((d) => `${d.bezeichnung}: ${d.url}`).join('\n')
 
-Oder gehe auf https://www.ec-nordbund.de/anmeldung/mitarbeiter und füge den Code
-
-${code}
-
-ein.
-
-
-Solltest du ein (neues) erweitertes Führungszeugnis benötigen erhältst den benötigten Antrag direkt nach der Anmeldung per Mail.
-
-Gruß
-Thomas Seeger
-`
-
-          window.navigator.clipboard.writeText(`Moin,
-Du bist Freizeitleiter.
-
-Hinweis: die Links funktionieren nur bis zu begin der Veranstaltung oder 100 Tage
-
-Bitte melde dich selber über diesen Link an:
-${d[4]}
-(über diesen Link darf sich genau EINE PERSON anmelden. Diese Person ist dann z.B. auf der TN-Liste der Leiter)
-
-Alle anderen Veranstaltungsleiter bitte über diesen Link:
-${d[3]}
-
-Desweiteren sende folgende E-Mail weiter an deine Mitarbeiter (bitte sende nur den Link an die Personen die ihn auch benötigen):
-
-Normale Mitarbeiter:
-
-${createMailText(d[0])}
-
-Küchen Mitarbeiter:
-
-${createMailText(d[1])}
-
-Küchenleitung:
-
-${createMailText(d[2])}
-
-
-            `)
-          alert('Mail-Text in Zwischenablage kopiert.')
+          window.navigator.clipboard.writeText(liste)
+          alert(
+            `Anmeldelinks in Zwischenablage kopiert (gültig ${gueltigTage} Tage):\n\n${liste}`
+          )
         }
       }
     ],
