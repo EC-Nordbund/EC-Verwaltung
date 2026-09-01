@@ -91,7 +91,7 @@ export default defineComponent({
       try {
         const res = await client.query({
           query: gql`
-            query($authToken: String!, $akID: Int!) {
+            query ($authToken: String!, $akID: Int!) {
               ak(akID: $akID, authToken: $authToken) {
                 akID
                 bezeichnung

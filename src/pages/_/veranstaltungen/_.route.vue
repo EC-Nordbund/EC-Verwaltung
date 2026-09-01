@@ -39,7 +39,7 @@ export default class EcRootIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             veranstaltungen(authToken: $authToken) {
               veranstaltungsID
               bezeichnung

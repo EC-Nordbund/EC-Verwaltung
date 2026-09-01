@@ -263,7 +263,7 @@ export default defineComponent({
         client
           .query({
             query: gql`
-              query($authToken: String!) {
+              query ($authToken: String!) {
                 getMyUserData(authToken: $authToken) {
                   userName
                   person {
@@ -282,6 +282,14 @@ export default defineComponent({
           })
           .then((res) => {
             data.value = res.data.getMyUserData
+          })
+          .catch(() => {
+            // Token ist ungültig (z. B. Altlast im localStorage) -> zurück zum Login
+            logout()
+            router.push({
+              path: '/login',
+              query: { next: route.value.fullPath }
+            })
           })
         timer = setInterval(updateAlive, 30 * 1000)
         updateAlive()

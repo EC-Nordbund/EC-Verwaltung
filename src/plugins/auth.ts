@@ -5,6 +5,7 @@ import { errorHandler } from '../helpers'
 import { useNow } from 'vue-composable'
 import { computed } from '@vue/composition-api'
 import { defineUseFunction } from './base'
+import { API_BASE } from './apiBase'
 
 const time = 12 * 60 * 60 * 1e3
 
@@ -26,7 +27,7 @@ export const useLogin = defineUseFunction(() => {
     username: string
     password: string
   }) {
-    const data = await fetch('https://api.ec-nordbund.de/v6/login', {
+    const data = await fetch(`${API_BASE}/v6/login`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -64,7 +65,7 @@ export const useLogin = defineUseFunction(() => {
     client
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             person(personID: 0, authToken: $authToken) {
               personID
             }

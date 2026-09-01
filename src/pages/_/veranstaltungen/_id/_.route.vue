@@ -36,6 +36,7 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import gql from 'graphql-tag'
+import { API_BASE } from '../../../../plugins/apiBase'
 
 @Component({})
 export default class EcRootIndex extends Vue {
@@ -47,17 +48,14 @@ export default class EcRootIndex extends Vue {
           id: 'veranstaltung_create_tokens',
           label: 'Mitarbeiteranmeldungstoken erzeugen',
           click: async () => {
-            const res = await fetch(
-              'https://api.ec-nordbund.de/api-v4/anmeldetoken',
-              {
-                method: 'POST',
-                headers: {
-                  authorization: this.$authToken(),
-                  'content-type': 'application/json'
-                },
-                body: JSON.stringify({ id: parseInt(this.$route.params.id) })
-              }
-            )
+            const res = await fetch(`${API_BASE}/api-v4/anmeldetoken`, {
+              method: 'POST',
+              headers: {
+                authorization: this.$authToken(),
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify({ id: parseInt(this.$route.params.id) })
+            })
 
             const d = (await res.json()).data
 
@@ -169,7 +167,7 @@ ${createMailText(d[2])}
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!, $veranstaltungsID: Int!) {
+          query ($authToken: String!, $veranstaltungsID: Int!) {
             veranstaltung(
               authToken: $authToken
               veranstaltungsID: $veranstaltungsID
@@ -230,7 +228,7 @@ ${createMailText(d[2])}
                     german
                   }
                   datumDesLetztenFZ {
-                    german,
+                    german
                     input
                   }
                 }

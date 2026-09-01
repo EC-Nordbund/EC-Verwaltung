@@ -54,7 +54,7 @@ export default class EcRootIndex extends Vue {
                   this.$apolloClient
                     .mutate({
                       mutation: gql`
-                        mutation(
+                        mutation (
                           $authToken: String!
                           $personID: Int!
                           $strasse: String!
@@ -105,7 +105,7 @@ export default class EcRootIndex extends Vue {
                 this.$apolloClient
                   .mutate({
                     mutation: gql`
-                      mutation(
+                      mutation (
                         $authToken: String!
                         $personID: Int!
                         $email: String!
@@ -151,7 +151,7 @@ export default class EcRootIndex extends Vue {
                 this.$apolloClient
                   .mutate({
                     mutation: gql`
-                      mutation(
+                      mutation (
                         $authToken: String!
                         $personID: Int!
                         $telefon: String!
@@ -198,7 +198,7 @@ export default class EcRootIndex extends Vue {
                 this.$apolloClient
                   .mutate({
                     mutation: gql`
-                      mutation(
+                      mutation (
                         $authToken: String!
                         $richtig: Int!
                         $falsch: Int!
@@ -242,7 +242,7 @@ export default class EcRootIndex extends Vue {
               this.$apolloClient
                 .mutate({
                   mutation: gql`
-                    mutation(
+                    mutation (
                       $personID: Int!
                       $authToken: String!
                       $email: String!
@@ -308,7 +308,7 @@ export default class EcRootIndex extends Vue {
                   this.$apolloClient
                     .mutate({
                       mutation: gql`
-                        mutation(
+                        mutation (
                           $personID: Int!
                           $authToken: String!
                           $gesehenAm: String!
@@ -372,7 +372,7 @@ export default class EcRootIndex extends Vue {
                   this.$apolloClient
                     .mutate({
                       mutation: gql`
-                        mutation(
+                        mutation (
                           $vorname: String!
                           $nachname: String!
                           $gebDat: String!
@@ -480,7 +480,7 @@ export default class EcRootIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!) {
+          query ($authToken: String!) {
             personen(authToken: $authToken) {
               personID
               vorname
@@ -511,7 +511,7 @@ export default class EcRootIndex extends Vue {
     this.$apolloClient
       .query({
         query: gql`
-          query($authToken: String!, $personID: Int!) {
+          query ($authToken: String!, $personID: Int!) {
             person(personID: $personID, authToken: $authToken) {
               personID
               vorname

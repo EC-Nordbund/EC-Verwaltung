@@ -37,7 +37,7 @@ export default class EcRootIndex extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation(
+          mutation (
             $authToken: String!
             $oldPassword: String!
             $newPassword: String!

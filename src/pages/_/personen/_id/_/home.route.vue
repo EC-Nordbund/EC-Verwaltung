@@ -96,7 +96,7 @@ export default class EcNAME extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($adressID: Int!, $authToken: String!) {
+          mutation ($adressID: Int!, $authToken: String!) {
             markAdressAsOld(adressID: $adressID, authToken: $authToken)
           }
         `,
@@ -123,7 +123,7 @@ export default class EcNAME extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($emailID: Int!, $authToken: String!) {
+          mutation ($emailID: Int!, $authToken: String!) {
             markEmailAsOld(emailID: $emailID, authToken: $authToken)
           }
         `,
@@ -150,7 +150,7 @@ export default class EcNAME extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($telefonID: Int!, $authToken: String!) {
+          mutation ($telefonID: Int!, $authToken: String!) {
             markTelefonAsOld(telefonID: $telefonID, authToken: $authToken)
           }
         `,
@@ -177,7 +177,7 @@ export default class EcNAME extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($adressID: Int!, $authToken: String!) {
+          mutation ($adressID: Int!, $authToken: String!) {
             useAdresse(adressID: $adressID, authToken: $authToken)
           }
         `,
@@ -204,7 +204,7 @@ export default class EcNAME extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($emailID: Int!, $authToken: String!) {
+          mutation ($emailID: Int!, $authToken: String!) {
             useEmail(emailID: $emailID, authToken: $authToken)
           }
         `,
@@ -231,7 +231,7 @@ export default class EcNAME extends Vue {
     this.$apolloClient
       .mutate({
         mutation: gql`
-          mutation($telefonID: Int!, $authToken: String!) {
+          mutation ($telefonID: Int!, $authToken: String!) {
             useTelefon(telefonID: $telefonID, authToken: $authToken)
           }
         `,
