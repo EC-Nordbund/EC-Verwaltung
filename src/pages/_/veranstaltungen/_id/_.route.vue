@@ -64,6 +64,50 @@ const config = computed(() => {
   return {
     sheet: [
       {
+        icon: 'markunread_mailbox',
+        id: 'veranstaltung_best_briefe',
+        label: 'Bestätigungsbriefe verschicken (alle offenen)',
+        click: async () => {
+          if (
+            !confirm(
+              'Bestätigungsbriefe an ALLE offenen Anmeldungen dieser Veranstaltung verschicken (fester Platz, Teilnehmer, noch kein Brief)? Das kann einige Minuten dauern.'
+            )
+          ) {
+            return
+          }
+          const res = await fetch(
+            `${API_BASE}/v6/best-brief/veranstaltung/${parseInt(
+              route.value.params.id as string
+            )}`,
+            { headers: { authorization: authToken.value } }
+          )
+          if (!res.ok) {
+            alert(
+              res.status === 409
+                ? 'Für diese Veranstaltung läuft bereits ein Serienversand.'
+                : `Versand fehlgeschlagen (HTTP ${res.status}).`
+            )
+            return
+          }
+          const report = (await res.json()) as {
+            gesendet: string[]
+            fehler: { anmeldeID: string; grund: string }[]
+          }
+          alert(
+            `Verschickt: ${report.gesendet.length}` +
+              (report.gesendet.length
+                ? `\n${report.gesendet.join(', ')}`
+                : '') +
+              (report.fehler.length
+                ? `\n\nFEHLER (${report.fehler.length}):\n` +
+                  report.fehler
+                    .map((f) => `${f.anmeldeID}: ${f.grund}`)
+                    .join('\n')
+                : '')
+          )
+        }
+      },
+      {
         icon: 'mail',
         id: 'veranstaltung_create_tokens',
         label: 'Mitarbeiteranmeldungstoken erzeugen',
