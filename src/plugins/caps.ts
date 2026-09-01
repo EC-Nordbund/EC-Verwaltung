@@ -1,4 +1,4 @@
-import { ref } from '@vue/composition-api'
+import { ref } from 'vue'
 import { defineUseFunction } from './base'
 
 export const useCaps = defineUseFunction(() => {

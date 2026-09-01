@@ -1,70 +1,58 @@
 <template lang="pug">
-  v-dialog(
-    ref="dialog"
-    v-model="modal"
-    :return-value.sync="date"
-    persistent
-    lazy
-    full-width
-    width="290px"
-  )
+//- Vuetify-4-Pattern statt :return-value.sync/lazy/$refs.dialog.save():
+//- schlichter v-dialog mit eigenem Abbrechen/Speichern-Flow.
+//- Der Wert bleibt nach außen wie bisher ein 'HH:mm'-String.
+v-dialog(v-model='modal', persistent, width='290px')
+  template(#activator='{ props: activatorProps }')
     v-text-field(
-      v-validate="schema.rule"
-      slot="activator"
-      :value="date"
-      :label="schema.label"
-      prepend-icon="access_time"
-      readonly
-      v-bind="schema.textfield || {}"
+      :model-value='value',
+      :label='schema.label',
+      prepend-icon='access_time',
+      readonly,
+      :rules='rules',
+      v-bind='{ ...activatorProps, ...(schema.textfield || {}) }'
     )
+  v-card
     v-time-picker(
-      v-model="date"
-      full-width
-      Format="24hr"
-      v-bind="schema"
-      v-on="schema.on||{}"
+      v-model='pickerTime',
+      format='24hr',
+      v-bind='bind',
+      v-on='schema.on || {}'
     )
+    v-card-actions
       v-spacer
       v-btn(
-        flat
-        color="primary"
-        @click="modal = false"
+        variant='text',
+        color='primary',
+        @click='modal = false'
       ) Abbrechen
       v-btn(
-        flat
-        color="primary"
-        @click="$refs.dialog.save(date)"
+        variant='text',
+        color='primary',
+        @click='saveTime'
       ) Speichern
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins, Watch } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { fieldProps, useField } from '../field'
 
-// // @ts-ignore
-// import { VSpacer, VBtn, VDialog, VTimePicker, VTextField } from 'vuetify/lib';
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-@Component({
-  // components: {
-  //   VSpacer,
-  //   VBtn,
-  //   VDialog,
-  //   VTimePicker,
-  //   VTextField,
-  // },
+const { changeValue, rules, bind } = useField(props, emit)
+
+const modal = ref(false)
+const pickerTime = ref<string | null>(null)
+
+watch(modal, (open) => {
+  if (open) {
+    pickerTime.value = (props.value as string) || null
+  }
 })
-export default class FormInput extends Mixins(abstractField) {
-  public modal = false
-  public date = ''
 
-  @Watch('value')
-  public onValueChange() {
-    this.date = this.value
-  }
-
-  @Watch('date')
-  public onDateChange() {
-    this.changeValue(this.date)
-  }
+function saveTime() {
+  changeValue(pickerTime.value || '')
+  modal.value = false
 }
 </script>

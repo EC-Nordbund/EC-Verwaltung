@@ -6,7 +6,7 @@ export async function useServiceWorker(
 ) {
   // Im Dev-Modus keinen Service Worker registrieren (cache-first würde jeden
   // neuen Build verstecken) und Altlasten aus früheren Sessions entfernen.
-  if (process.env.NODE_ENV !== 'production') {
+  if (!import.meta.env.PROD) {
     const registrations = await navigator.serviceWorker.getRegistrations()
     registrations.forEach((r) => r.unregister())
     if (typeof caches !== 'undefined') {
@@ -16,13 +16,13 @@ export async function useServiceWorker(
     return
   }
 
-  navigator.serviceWorker.register(path)
+  // Alt-Bug: register() wurde nicht awaited — getRegistration() lieferte dann
+  // je nach Timing undefined und registration.waiting warf.
+  const registration = await navigator.serviceWorker.register(path)
 
   navigator.serviceWorker.addEventListener('controllerchange', () =>
     location.reload()
   )
-
-  const registration = await navigator.serviceWorker.getRegistration()
 
   function handleServiceWorker(sw: ServiceWorker) {
     if (!sw || handled.has(sw)) {

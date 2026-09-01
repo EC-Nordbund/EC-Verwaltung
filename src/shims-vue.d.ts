@@ -1,10 +1,10 @@
 declare module '*.vue' {
-  import Vue from 'vue'
-  export default Vue
-}
-
-declare module 'routes:*' {
-  import { Route } from 'vue-router'
-  const routes: Route[]
-  export default routes
+  import type { DefineComponent } from 'vue'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const component: DefineComponent<
+    Record<string, never>,
+    Record<string, never>,
+    any
+  >
+  export default component
 }

@@ -1,35 +1,44 @@
 <template lang="pug">
-  formular-dialog(v-bind="config" ref="form")
+formular-dialog(v-bind='config', ref='form')
 </template>
-<script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
-@Component({})
-export default class formularSelector extends Vue {
-  @Prop()
-  private name!: string
+<script setup lang="ts">
+import { ref, useTemplateRef, watch } from 'vue'
+import { ecForm } from '../../config/form'
+import FormularDialog from './wrapperDialog.vue'
 
-  @Prop()
-  private self!: any
+defineOptions({ name: 'FormularSelector' })
 
-  private config = {
-    title: '',
-    initVal: {},
-    schema: []
-  }
+const props = defineProps({
+  name: { type: String, required: true },
+  // Ersetzt die frühere `self`-Prop: Kontext-Objekt für Factory-Configs
+  // (ecForm.addFZ/generateFZAntrag/personMerge erwarten jetzt ein explizites
+  // Parameter-Objekt statt der Komponenten-Instanz). Aktuell nutzt keine
+  // Aufrufstelle den Selector mit einer Factory-Config — die Seiten bauen
+  // solche Configs selbst und binden sie direkt an formular-dialog.
+  context: { default: undefined }
+})
 
-  @Watch('name', { immediate: true })
-  public onNameChange() {
-    const c = this.$ecForm[this.name]
-    if (typeof c === 'function') {
-      this.config = c(this.self)
-    } else {
-      this.config = c
-    }
-  }
+const config = ref<any>({
+  title: '',
+  initval: {},
+  schema: []
+})
 
-  public show(...args: any[]) {
-    return (this.$refs.form as any).show(...args)
-  }
+watch(
+  () => props.name,
+  (name) => {
+    const c = (ecForm as any)[name]
+    config.value = typeof c === 'function' ? c(props.context) : c
+  },
+  { immediate: true }
+)
+
+const form = useTemplateRef<InstanceType<typeof FormularDialog>>('form')
+
+function show(...args: any[]) {
+  return (form.value as any).show(...args)
 }
+
+defineExpose({ show })
 </script>

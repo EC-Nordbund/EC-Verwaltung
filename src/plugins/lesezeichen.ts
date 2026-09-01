@@ -1,5 +1,4 @@
 import { useStorage, Lesezeichen } from '../storage'
-import { set, del, Ref } from '@vue/composition-api'
 
 import { defineUseFunction } from './base'
 
@@ -7,7 +6,8 @@ export const useLesezeichen = defineUseFunction(() => {
   const { lesezeichen } = useStorage()
 
   function remove(path: string) {
-    del(lesezeichen.value, path)
+    // Vue 3: native delete statt del() aus @vue/composition-api
+    delete lesezeichen.value[path]
   }
 
   function add(
@@ -18,7 +18,8 @@ export const useLesezeichen = defineUseFunction(() => {
       fullPath: string
     }
   ) {
-    set(lesezeichen.value, path, item)
+    // Vue 3: native Zuweisung statt set() aus @vue/composition-api
+    lesezeichen.value[path] = item
   }
 
   function check(path: string): boolean {

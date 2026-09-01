@@ -1,43 +1,34 @@
 <template lang="pug">
-  v-btn(icon @click="toggleLesezeichen")
-    v-icon {{isLesezeichen?'star':'star_border'}}
+v-btn(icon, variant='text', @click='toggleLesezeichen')
+  v-icon {{ isLesezeichen ? 'star' : 'star_border' }}
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { useRouter } from '../plugins/router'
 import { useLesezeichen } from '../plugins/lesezeichen'
 
-export default defineComponent({
-  name: 'LesezeichenAdd',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    subTitle: {
-      type: String,
-      required: true
-    }
-  },
-  setup(props, ctx) {
-    const { route } = useRouter()
-    const { check, add, remove } = useLesezeichen()
-    const isLesezeichen = ref(check(route.value.path))
+const props = defineProps<{
+  title: string
+  subTitle: string
+}>()
 
-    function toggleLesezeichen() {
-      if (isLesezeichen.value) {
-        remove(route.value.path)
-      } else {
-        add(route.value.path, {
-          title: props.title,
-          subTitle: props.subTitle,
-          fullPath: route.value.fullPath
-        })
-      }
-    }
+const { route } = useRouter()
+const { check, add, remove } = useLesezeichen()
 
-    return { isLesezeichen, toggleLesezeichen }
+// Bugfix (Alt-Bug 5): früher einmalig `ref(check(...))` beim Setup — der
+// Stern aktualisierte sich nach einem Toggle nicht. Jetzt computed auf den
+// Storage, damit die Anzeige immer stimmt.
+const isLesezeichen = computed(() => check(route.value.path))
+
+function toggleLesezeichen() {
+  if (isLesezeichen.value) {
+    remove(route.value.path)
+  } else {
+    add(route.value.path, {
+      title: props.title,
+      subTitle: props.subTitle,
+      fullPath: route.value.fullPath
+    })
   }
-})
+}
 </script>

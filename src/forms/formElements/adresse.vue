@@ -1,67 +1,67 @@
 <template lang="pug">
-  .adresse
-    v-text-field.strasse(
-      label="Straße"
-      counter="50"
-      required
-      :value="(value || {}).strasse"
-      @input="changeValue({ort: value.ort, plz: value.plz, strasse: $event})"
-      :data-vv-name="schema.name + '_strasse'"
-      data-vv-as="Straße"
-      :error-messages="errors.collect(schema.name + '_strasse')"
-      v-validate="'required|max:50'"
-    )
-    v-autocomplete.plz(
-      v-validate="'required'"
-      :value="(value || {}).plz"
-      label="PLZ"
-      @change="plzChange"
-      required
-      :data-vv-name="schema.name + '_plz'"
-      data-vv-as="PLZ"
-      :items="plz"
-      :error-messages="errors.collect(schema.name + '_plz')"
-    )
-    v-autocomplete.ort(
-      v-validat.initial="'required'"
-      :value="(value || {}).ort"
-      label="Ort"
-      @change="changeValue({plz: value.plz, ort: $event, strasse: value.strasse})"
-      :data-vv-name="schema.name + '_ort'"
-      :error-messages="errors.collect(schema.name + '_ort')"
-      :items="map[value.plz]"
-      :disabled="!value.plz"
-      data-vv-as="Ort"
-    )
+.adresse
+  v-text-field.strasse(
+    label='Straße',
+    counter='50',
+    required,
+    :model-value='(value || {}).strasse',
+    @update:model-value='changeValue({ ort: value.ort, plz: value.plz, strasse: $event })',
+    :rules='strasseRules'
+  )
+  v-autocomplete.plz(
+    :model-value='(value || {}).plz',
+    label='PLZ',
+    @update:model-value='plzChange',
+    required,
+    :items='plz',
+    :rules='plzRules'
+  )
+  //- Der frühere Tippfehler `v-validat.initial` sorgte dafür, dass der Ort
+  //- nie validiert wurde — jetzt (dokumentierter Bugfix) required.
+  v-autocomplete.ort(
+    :model-value='(value || {}).ort',
+    label='Ort',
+    @update:model-value='changeValue({ plz: value.plz, ort: $event, strasse: value.strasse })',
+    :items='map[(value || {}).plz]',
+    :disabled='!(value || {}).plz',
+    :rules='ortRules'
+  )
 </template>
 
-<script lang="ts">
-import { Component, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
+import { compileRules } from '../rules'
 import plzs from '../../data/plzs'
 
-@Component({})
-export default class FormInput extends Mixins(abstractField) {
-  public map: any = plzs
-  public plz = Object.keys(plzs)
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-  public plzChange($event: string) {
-    if (this.map[$event].length === 1) {
-      this.changeValue({
-        ort: this.map[$event][0],
-        plz: $event,
-        strasse: this.value.strasse
-      })
-    } else {
-      this.changeValue({
-        ort: undefined,
-        plz: $event,
-        strasse: this.value.strasse
-      })
-    }
+const { changeValue } = useField(props, emit)
+
+const map: any = plzs
+const plz = Object.keys(plzs)
+
+const strasseRules = compileRules('required|max:50', 'Straße')
+const plzRules = compileRules('required', 'PLZ')
+const ortRules = compileRules('required', 'Ort')
+
+function plzChange($event: string) {
+  if (map[$event].length === 1) {
+    changeValue({
+      ort: map[$event][0],
+      plz: $event,
+      strasse: (props.value as any)?.strasse
+    })
+  } else {
+    changeValue({
+      ort: undefined,
+      plz: $event,
+      strasse: (props.value as any)?.strasse
+    })
   }
 }
 </script>
+
 <style scoped>
 .strasse {
   grid-area: s;

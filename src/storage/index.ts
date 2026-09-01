@@ -1,10 +1,14 @@
-import { useLocalStorage } from 'vue-composable'
-import { Ref } from '@vue/composition-api'
+import { useLocalStorage } from '@vueuse/core'
+import type { Ref } from 'vue'
 
 export interface Lesezeichen {
   [path: string]: { title: string; subTitle: string; fullPath: string }
 }
 
+// @vueuse/core useLocalStorage serialisiert wie vue-composable früher:
+// Strings roh, boolean/number/Objekte als JSON — bestehende Werte unter
+// denselben Keys bleiben lesbar. Cross-Tab-Sync (früher drittes Argument
+// `true`) ist bei @vueuse Default.
 let data: {
   authToken: Ref<string>
   dark: Ref<boolean>
@@ -15,22 +19,12 @@ let data: {
 
 export function useStorage() {
   if (data === null) {
-    const { storage: authToken } = useLocalStorage('authToken', '', true)
-    const { storage: dark } = useLocalStorage('dark', false, true)
-    const { storage: username } = useLocalStorage('username', '', true)
-    const { storage: logoutTime } = useLocalStorage('logoutTime', -1, true)
-    const { storage: lesezeichen } = useLocalStorage(
-      'lesezeichenV2',
-      {} as Lesezeichen,
-      true
-    )
-
     data = {
-      authToken,
-      dark,
-      username,
-      logoutTime,
-      lesezeichen
+      authToken: useLocalStorage('authToken', ''),
+      dark: useLocalStorage('dark', false),
+      username: useLocalStorage('username', ''),
+      logoutTime: useLocalStorage('logoutTime', -1),
+      lesezeichen: useLocalStorage('lesezeichenV2', {} as Lesezeichen)
     }
   }
 

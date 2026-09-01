@@ -1,73 +1,77 @@
 <template lang="pug">
-v-dialog(v-model="visible", max-width="400px", v-bind="$attrs")
+v-dialog(v-model='visible', max-width='400px', v-bind='$attrs')
   v-card
     v-card-title
-      h1(color="primary") {{ title }}
+      h1(color='primary') {{ title }}
     v-card-text
-      v-form(v-model="valid")
+      v-form(ref='formRef')
         formular(
-          v-model="value",
-          :schema="schema",
-          :cancel="cancel",
-          :save="save"
+          :value='value',
+          :schema='schema',
+          :cancel='cancel',
+          :save='save'
         )
     v-card-actions
       v-spacer
-      v-btn(flat, @click="cancel", v-if="!$attrs.noCancel") Abbrechen
-      v-btn(color="primary", :disabled="!valid", @click="save") {{ $attrs.saveName || 'Speichern' }}
+      v-btn(variant='text', @click='cancel', v-if='!$attrs.noCancel') Abbrechen
+      v-btn(color='primary', @click='save') {{ $attrs.saveName || "Speichern" }}
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
+import { ref, useTemplateRef } from 'vue'
+import Formular from '../formular.vue'
 
-@Component({})
-export default class EcRootIndexAKIndex extends Vue {
-  @Prop()
-  private title!: string
+// $attrs (noCancel, saveName, unbekannte Config-Keys) wird wie bisher
+// explizit an v-dialog durchgereicht — nicht zusätzlich automatisch vererben.
+defineOptions({ name: 'FormularDialog', inheritAttrs: false })
 
-  @Prop()
-  private schema!: any
+const props = defineProps({
+  title: {},
+  schema: {},
+  initval: {}
+})
 
-  @Prop()
-  private initval!: any
+const visible = ref(false)
+const value = ref<any>({})
+const formRef = useTemplateRef<any>('formRef')
 
-  private valid = false
-  private visible = false
-  private value: any = {}
+let res: (val: any) => void = () => {}
+let rej: () => void = () => {}
 
-  public show(initval = this.initval, addToSchemaTop = []) {
-    addToSchemaTop.forEach((field) => {
-      // only add if not exist
-      if (
-        this.schema.every(
-          (f: any) => JSON.stringify(f) !== JSON.stringify(field)
-        )
-      ) {
-        this.schema.unshift(field)
-      }
-    })
+function show(initval = props.initval, addToSchemaTop: any[] = []) {
+  addToSchemaTop.forEach((field) => {
+    // only add if not exist
+    if (
+      (props.schema as any[]).every(
+        (f: any) => JSON.stringify(f) !== JSON.stringify(field)
+      )
+    ) {
+      ;(props.schema as any[]).unshift(field)
+    }
+  })
 
-    return new Promise((res, rej) => {
-      this.res = res
-      this.rej = rej
-      this.value = initval
-      this.visible = true
-    })
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private res = (val: any) => {}
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private rej = () => {}
-
-  private save() {
-    this.visible = false
-    this.res(this.value)
-  }
-
-  private cancel() {
-    this.visible = false
-    this.rej()
-  }
+  return new Promise((resolve, reject) => {
+    res = resolve
+    rej = reject
+    value.value = initval
+    visible.value = true
+  })
 }
+
+async function save() {
+  // Vuetify-4-API: validate() ist async und liefert { valid }.
+  // Ersetzt das frühere :disabled='!valid' — leere Pflichtformulare sind
+  // damit nicht mehr speicherbar (dokumentierter Bugfix).
+  const { valid } = await formRef.value.validate()
+  if (!valid) return
+  visible.value = false
+  res(value.value)
+}
+
+function cancel() {
+  visible.value = false
+  rej()
+}
+
+defineExpose({ show })
 </script>

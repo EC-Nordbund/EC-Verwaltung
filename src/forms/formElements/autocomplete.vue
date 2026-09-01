@@ -1,25 +1,19 @@
 <template lang="pug">
-  v-autocomplete(
-    v-validate="schema.rule"
-    :value="value"
-    @change="changeValue"
-    :data-vv-name="schema.label"
-    :error-messages="errors.collect(schema.name)"
-    v-bind="schema"
-    v-on="schema.on || {}"
-  )
+v-autocomplete(
+  :model-value='value',
+  @update:model-value='changeValue',
+  v-bind='bind',
+  v-on='schema.on || {}',
+  :rules='rules',
+  item-title='text'
+)
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
-// // @ts-ignore
-// import { VAutocomplete } from 'vuetify/lib';
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-@Component({
-  // components: {
-  //   VAutocomplete,
-  // },
-})
-export default class FormInput extends Mixins(abstractField) {}
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
+
+const { changeValue, rules, bind } = useField(props, emit)
 </script>

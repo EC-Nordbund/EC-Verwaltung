@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import type { App } from 'vue'
 
 import editAK from './editAK.form.lib.vue'
 import anmeldungKontakt from './anmeldungKontakt.form.lib.vue'
@@ -8,12 +8,17 @@ import wrapper from './wrapper.lib.vue'
 import search from './search.lib.vue'
 import add from './lesezeichen.add.lib.vue'
 import show from './lesezeichen.show.lib.vue'
+import dialogHost from './dialogHost.lib.vue'
 
-Vue.component('EcWrapper', wrapper)
-Vue.component('EcSearch', search)
-Vue.component('EcLesezeichenAdd', add)
-Vue.component('EcLesezeichenShow', show)
+export function registerLibComponents(app: App) {
+  app.component('EcWrapper', wrapper)
+  app.component('EcSearch', search)
+  app.component('EcLesezeichenAdd', add)
+  app.component('EcLesezeichenShow', show)
 
-Vue.component('EcFormEditAk', editAK)
-Vue.component('EcAnmeldungKontakt', anmeldungKontakt)
-Vue.component('EcAdresseMerge', mergeAdresse)
+  app.component('EcFormEditAk', editAK)
+  app.component('EcAnmeldungKontakt', anmeldungKontakt)
+  app.component('EcAdresseMerge', mergeAdresse)
+
+  app.component('EcDialogHost', dialogHost)
+}

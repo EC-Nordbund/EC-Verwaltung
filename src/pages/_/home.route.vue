@@ -26,10 +26,3 @@ ec-wrapper(title='Home')
     li Neues Login System
     li Teileweise Offline Support der Seite (gesamte seite wird Lokal gespeichert nur für die Daten wird eine Internetverbindung benötigt)
 </template>
-<script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-
-export default defineComponent({
-  name: 'RootHome'
-})
-</script>

@@ -1,26 +1,18 @@
 <template lang="pug">
-  v-textarea(
-    v-validate="schema.rule"
-    :value="value"
-    @input="changeValue"
-    :data-vv-name="schema.name"
-    :error-messages="errors.collect(schema.name)"
-    v-bind="schema"
-    v-on="schema.on || {}"
-  )
+v-textarea(
+  :model-value='value',
+  @update:model-value='changeValue',
+  v-bind='bind',
+  v-on='schema.on || {}',
+  :rules='rules'
+)
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-// // @ts-ignore
-// import { VTextarea } from 'vuetify/lib';
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-@Component({
-  // components: {
-  //   VTextarea,
-  // },
-})
-export default class FormTextarea extends Mixins(abstractField) {}
+const { changeValue, rules, bind } = useField(props, emit)
 </script>

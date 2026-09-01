@@ -1,31 +1,34 @@
-import Vue from 'vue'
-import abmelden2 from './forms/abmelden.form'
-import addAdresse2 from './forms/addAdresse.form'
-import addAK2 from './forms/addAK.form'
-import addFZ2 from './forms/addFZ.form'
-import addMail2 from './forms/addMail.form'
-import addPerson2 from './forms/addPerson.form'
-import addTelefon2 from './forms/addTelefon.form'
-import changePassword2 from './forms/changePassword.form'
-import editBemerkungen2 from './forms/editBemerkungen.form'
-import generateFZAntrag2 from './forms/generateFZAntrag.form'
-import inactive2 from './forms/inactive.form'
-import personBase2 from './forms/personBase'
-import personMerge2 from './forms/personMerge.form'
-import personStamm2 from './forms/personStamm.form'
-Vue.prototype.$ecForm = {
-  abmelden: abmelden2,
-  addAdresse: addAdresse2,
-  addAK: addAK2,
-  addFZ: addFZ2,
-  addMail: addMail2,
-  addPerson: addPerson2,
-  addTelefon: addTelefon2,
-  changePassword: changePassword2,
-  editBemerkungen: editBemerkungen2,
-  generateFZAntrag: generateFZAntrag2,
-  inactive: inactive2,
-  personBase: personBase2,
-  personMerge: personMerge2,
-  personStamm: personStamm2
+import abmelden from './forms/abmelden.form'
+import addAdresse from './forms/addAdresse.form'
+import addAK from './forms/addAK.form'
+import addFZ from './forms/addFZ.form'
+import addMail from './forms/addMail.form'
+import addPerson from './forms/addPerson.form'
+import addTelefon from './forms/addTelefon.form'
+import changePassword from './forms/changePassword.form'
+import editBemerkungen from './forms/editBemerkungen.form'
+import generateFZAntrag from './forms/generateFZAntrag.form'
+import inactive from './forms/inactive.form'
+import personBase from './forms/personBase'
+import personMerge from './forms/personMerge.form'
+import personStamm from './forms/personStamm.form'
+
+// Früher als Vue.prototype.$ecForm global — jetzt benannter Export.
+// Die Factory-Formulare (addFZ, generateFZAntrag, personMerge) bekommen
+// statt `this` ein explizites Parameter-Objekt (siehe jeweilige Datei).
+export const ecForm = {
+  abmelden,
+  addAdresse,
+  addAK,
+  addFZ,
+  addMail,
+  addPerson,
+  addTelefon,
+  changePassword,
+  editBemerkungen,
+  generateFZAntrag,
+  inactive,
+  personBase,
+  personMerge,
+  personStamm
 }

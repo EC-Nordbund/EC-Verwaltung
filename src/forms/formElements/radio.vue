@@ -1,36 +1,24 @@
 <template lang="pug">
-  v-radio-group(
-    v-validate="schema.rule"
-    :data-vv-name="schema.name"
-    :data-vv-as="schema.label"
-    :error-messages="errors.collect(schema.name)"
-    
-    :value="value"
-    @change="changeValue"
-
-    v-bind="schema"
-    v-on="schema.on||{}"
+v-radio-group(
+  :model-value='value',
+  @update:model-value='changeValue',
+  v-bind='bind',
+  v-on='schema.on || {}',
+  :rules='rules'
+)
+  v-radio(
+    v-for='radio in schema.radios',
+    :key='radio.value',
+    v-bind='radio',
+    v-on='radio.on || {}'
   )
-    v-radio(
-      v-for="radio in schema.radios" 
-      v-bind="radio" 
-      v-on="radio.on||{}"
-      :key="radio.value"
-    )
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-// // @ts-ignore
-// import { VRadioGroup, VRadio } from 'vuetify/lib';
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-@Component({
-  // components: {
-  //   VRadioGroup,
-  //   VRadio,
-  // },
-})
-export default class FormRadio extends Mixins(abstractField) {}
+const { changeValue, rules, bind } = useField(props, emit)
 </script>

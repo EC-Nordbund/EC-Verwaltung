@@ -1,31 +1,19 @@
 <template lang="pug">
-  v-text-field(
-    v-validate="schema.rule"
-    :data-vv-name="schema.name"
-    :data-vv-as="schema.label"
-    :error-messages="errors.collect(schema.name)"
-
-    :value="value"
-    @input="changeValue"
-
-    v-on="schema.on||{}"
-    v-bind="schema"
-
-    :type="schema.typ"
-  )
+v-text-field(
+  :model-value='value',
+  @update:model-value='changeValue',
+  v-on='schema.on || {}',
+  v-bind='bind',
+  :type='schema.typ',
+  :rules='rules'
+)
 </template>
 
-<script lang="ts">
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import abstractField from '../abstract'
+<script setup lang="ts">
+import { fieldProps, useField } from '../field'
 
-// // @ts-ignore
-// import { VTextField } from 'vuetify/lib';
+const props = defineProps(fieldProps)
+const emit = defineEmits(['input'])
 
-@Component({
-  // components: {
-  //   VTextField,
-  // },
-})
-export default class FormInput extends Mixins(abstractField) {}
+const { changeValue, rules, bind } = useField(props, emit)
 </script>

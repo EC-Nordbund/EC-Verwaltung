@@ -1,11 +1,15 @@
 <template lang="pug">
-  v-dialog(v-model="visible" max-width="400px")
-    v-card
-      v-card-title
-        h1(v-font v-primary) Person abmelden
-      v-card-text
-        v-form(v-model="valid")
-          formular(v-model="value" :schema=`[
+v-dialog(v-model='visible', max-width='400px')
+  v-card
+    v-card-title
+      h1(v-font, v-primary) Person abmelden
+    v-card-text
+      v-form(ref='formRef')
+        formular(
+          :value='value',
+          :save='abmeldenSave',
+          :cancel='close',
+          :schema=`[
             {
               name: 'adresse',
               type: 'autocomplete',
@@ -45,48 +49,68 @@
                 }
               })
             }
-          ]`)
-      v-card-actions
-        v-spacer
-        v-btn(flat @click="visible=false") Abbrechen
-        v-btn(color="primary" :disabled="!valid" @click="abmeldenSave") Speichern
+          ]`
+        )
+    v-card-actions
+      v-spacer
+      v-btn(variant='text', @click='close') Abbrechen
+      v-btn(color='primary', @click='abmeldenSave') Speichern
 </template>
-<script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
-import gql from 'graphql-tag'
-// import { genReport } from '../report';
+<script setup lang="ts">
+import { ref, watch, useTemplateRef } from 'vue'
+import { useApollo } from '../plugins/apollo'
+import { useLogin } from '../plugins/auth'
+import { useDialog } from '../plugins/dialog'
+import { useNotification } from '../plugins/notify'
+import { useRouter } from '../plugins/router'
+import Formular from '../forms/formular.vue'
 
-@Component({})
-export default class EcRootIndex extends Vue {
-  @Prop({ default: {} })
-  private data!: any
+const props = defineProps({
+  data: { default: () => ({}) }
+})
 
-  private myData = {
-    adressen: [],
-    emails: [],
-    telefone: []
+const emit = defineEmits(['reload'])
+
+const { client, gql } = useApollo()
+const { authToken } = useLogin()
+const { error } = useDialog()
+const { createNotification } = useNotification()
+const { route } = useRouter()
+
+const myData = ref<any>({
+  adressen: [],
+  emails: [],
+  telefone: []
+})
+
+const visible = ref(false)
+const value = ref<any>({
+  adresse: 0,
+  email: 0,
+  telefon: 0
+})
+
+const formRef = useTemplateRef<any>('formRef')
+
+function show() {
+  value.value = {
+    adresse: (props.data as any).adresse.adressID,
+    email: (props.data as any).email.eMailID,
+    telefon: (props.data as any).telefon.telefonID
   }
+  visible.value = true
+}
 
-  private visible = false
-  private valid = false
-  private value = {
-    adresse: 0,
-    email: 0,
-    telefon: 0
-  }
+defineExpose({ show })
 
-  public show() {
-    this.value = {
-      adresse: this.data.adresse.adressID,
-      email: this.data.email.eMailID,
-      telefon: this.data.telefon.telefonID
-    }
-    this.visible = true
-  }
+function close() {
+  visible.value = false
+}
 
-  @Watch('data')
-  public onDataChange() {
-    this.$apolloClient
+watch(
+  () => props.data,
+  () => {
+    client
       .query({
         query: gql`
           query ($authToken: String!, $personID: Int!) {
@@ -121,55 +145,62 @@ export default class EcRootIndex extends Vue {
           }
         `,
         variables: {
-          authToken: this.$authToken(),
-          personID: this.data.person.personID
+          authToken: authToken.value,
+          personID: (props.data as any).person.personID
         }
       })
       .then((res) => {
-        this.myData = res.data.person
+        myData.value = res.data.person
       })
   }
-  private abmeldenSave() {
-    this.visible = false
+)
 
-    this.$apolloClient
-      .mutate({
-        mutation: gql`
-          mutation (
-            $authToken: String!
-            $anmeldeID: String!
-            $adresse: Int!
-            $email: Int!
-            $telefon: Int!
-          ) {
-            anmeldungKontakt(
-              anmeldeID: $anmeldeID
-              authToken: $authToken
-              adressID: $adresse
-              emailID: $email
-              telefonID: $telefon
-            )
-          }
-        `,
-        variables: {
-          anmeldeID: this.$route.params.id,
-          authToken: this.$authToken(),
-          ...this.value
+async function abmeldenSave() {
+  // Vuetify-4-API: validate() ist async und liefert { valid }.
+  // Ersetzt das frühere :disabled='!valid' (vee-validate/v-form v-model) —
+  // leere Pflichtformulare sind damit nicht mehr speicherbar
+  // (dokumentierter Bugfix Nr. 7).
+  const { valid } = await formRef.value.validate()
+  if (!valid) return
+  visible.value = false
+
+  client
+    .mutate({
+      mutation: gql`
+        mutation (
+          $authToken: String!
+          $anmeldeID: String!
+          $adresse: Int!
+          $email: Int!
+          $telefon: Int!
+        ) {
+          anmeldungKontakt(
+            anmeldeID: $anmeldeID
+            authToken: $authToken
+            adressID: $adresse
+            emailID: $email
+            telefonID: $telefon
+          )
         }
+      `,
+      variables: {
+        anmeldeID: route.value.params.id,
+        authToken: authToken.value,
+        ...value.value
+      }
+    })
+    .then(() => {
+      createNotification({
+        title: 'Erfolgreich editiert',
+        body: `Du hast erfolgreich die Kontaktdaten erfolgreich angepasst.`
       })
-      .then(() => {
-        this.$notifikation(
-          'Erfolgreich editiert',
-          `Du hast erfolgreich die Kontaktdaten erfolgreich angepasst.`
-        )
-        this.$emit('reload')
+      emit('reload')
+    })
+    .catch((err) => {
+      error({
+        text: err.message,
+        title: 'Speichern fehlgeschlagen!'
       })
-      .catch((err) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Speichern fehlgeschlagen!'
-        })
-      })
-  }
+    })
 }
 </script>

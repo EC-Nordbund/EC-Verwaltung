@@ -1,19 +1,18 @@
 {
-  "extends": "./base-tsconfig.json",
   "compilerOptions": {
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable"
-    ]
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+    "strict": false,
+    "jsx": "preserve",
+    "noEmit": true,
+    "allowJs": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"]
   },
-  "include": [
-    "./src/**/*.ts",
-    "./src/shims.d.ts",
-    "./src/vue.d.ts",
-    "./src/shim-vue.d.ts"
-  ],
-  "exclude": [
-    "./src/serviceWorker/**/*.ts"
-  ]
+  "include": ["src"]
 }

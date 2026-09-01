@@ -1,87 +1,88 @@
 <template lang="pug">
 v-card-text
-  v-list(two-line)
-    v-list-tile(
+  v-list(lines='two')
+    v-list-item(
       v-for='a in data.ak',
-      @click='$router.push({ path: `/ak/${a.ak.akID}`, query: { prev: $route.fullPath } })'
+      @click='navigate({ path: `/ak/${a.ak.akID}` })'
     )
-      v-list-tile-action
+      template(#prepend)
         v-icon group
-      v-list-tile-content
-        v-list-tile-title AK: {{ a.ak.bezeichnung }}
-        v-list-tile-sub-title {{ stadien[a.currentStatus] }}
+      v-list-item-title AK: {{ a.ak.bezeichnung }}
+      v-list-item-subtitle {{ stadien[a.currentStatus] }}
     v-divider(v-if='data.fzs.length > 0')
-    v-list-tile(v-for='fz in data.fzs', @click='showAll(fz.kommentar)')
-      v-list-tile-action
+    v-list-item(v-for='fz in data.fzs', @click='showAll(fz.kommentar)')
+      template(#prepend)
         v-icon assignment
-      v-list-tile-content
-        v-list-tile-title FZ vom {{ fz.fzVon.german }} | {{ fz.kommentar }}
-        v-list-tile-sub-title gesehen von: {{ fz.gesehenVon.vorname }} {{ fz.gesehenVon.nachname }} gesehen am {{ fz.gesehenAm.german }}
+      v-list-item-title FZ vom {{ fz.fzVon.german }} | {{ fz.kommentar }}
+      v-list-item-subtitle gesehen von: {{ fz.gesehenVon.vorname }} {{ fz.gesehenVon.nachname }} gesehen am {{ fz.gesehenAm.german }}
     v-divider(v-if='data.fzAntraege.length > 0')
-    v-list-tile(v-for='fz in data.fzAntraege')
-      v-list-tile-action
+    v-list-item(v-for='fz in data.fzAntraege')
+      template(#prepend)
         v-icon mail
-      v-list-tile-content
-        v-list-tile-title {{ fz.erzeugt.german }} ({{ fz.erzeugt_durch }})
-        v-list-tile-sub-title FZ-Antrag
+      v-list-item-title {{ fz.erzeugt.german }} ({{ fz.erzeugt_durch }})
+      v-list-item-subtitle FZ-Antrag
     v-divider(v-if='data.Notizen')
-    v-list-tile(v-if='data.Notizen', @click='')
-      v-list-tile-action
+    v-list-item(v-if='data.Notizen', @click='() => {}')
+      template(#prepend)
         v-icon notes
-      v-list-tile-content
-        v-list-tile-title {{ data.Notizen }}
-        v-list-tile-sub-title Notizen
-      v-list-tile-action
+      v-list-item-title {{ data.Notizen }}
+      v-list-item-subtitle Notizen
+      template(#append)
         v-btn(icon, @click='showAll(data.Notizen)')
           v-icon search
     v-divider(v-if='data.juleica')
     template(v-for='juleica in data.juleica')
-      v-list-tile(
-        @click='',
-        :class='new Date() > new Date(juleica.gueltig_bis.input) ? "isOld" : ""'
+      v-list-item(
+        @click='() => {}',
+        :class='isJuleicaOld(juleica) ? "isOld" : ""'
       )
-        v-list-tile-action
+        template(#prepend)
           v-icon credit_card
-        v-list-tile-content
-          v-list-tile-title {{ juleica.juleicanummer }}
-          v-list-tile-sub-title(v-if='juleica.gueltig_bis') JuLeiCa gültig bis {{ juleica.gueltig_bis.german }}
-          v-list-tile-sub-title(v-else) JuLeiCa (Kein Gültigkeitsdatum hinterlegt)
+        v-list-item-title {{ juleica.juleicanummer }}
+        v-list-item-subtitle(v-if='juleica.gueltig_bis') JuLeiCa gültig bis {{ juleica.gueltig_bis.german }}
+        v-list-item-subtitle(v-else) JuLeiCa (Kein Gültigkeitsdatum hinterlegt)
     v-divider(v-if='data.tags')
     template(v-for='tag in data.tags')
-      v-list-tile(@click='')
-        v-list-tile-action
+      v-list-item(@click='() => {}')
+        template(#prepend)
           v-icon label
-        v-list-tile-content(v-if='tag.notiz')
-          v-list-tile-title {{ tag.notiz }}
-          v-list-tile-sub-title {{ tag.tag.bezeichnung }}
-        v-list-tile-content(v-else)
-          v-list-tile-title {{ tag.tag.bezeichnung }}
-        v-list-tile-action(v-if='tag.notiz')
+        template(v-if='tag.notiz')
+          v-list-item-title {{ tag.notiz }}
+          v-list-item-subtitle {{ tag.tag.bezeichnung }}
+        v-list-item-title(v-else) {{ tag.tag.bezeichnung }}
+        template(#append, v-if='tag.notiz')
           v-btn(icon, @click='showAll(tag.notiz)')
             v-icon search
     v-divider(v-if='data.ecKreis')
-    v-list-tile(v-if='data.ecKreis', @click='')
-      v-list-tile-action
+    v-list-item(v-if='data.ecKreis', @click='() => {}')
+      template(#prepend)
         v-icon supervised_user_circle
-      v-list-tile-content
-        v-list-tile-title {{ data.ecKreis.bezeichnung }}
-        v-list-tile-sub-title EC-Kreis
+      v-list-item-title {{ data.ecKreis.bezeichnung }}
+      v-list-item-subtitle EC-Kreis
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop, Watch, Emit } from 'vue-property-decorator'
+<script setup lang="ts">
+import { useDialog } from '../../../../../plugins/dialog'
+import { useRouter } from '../../../../../plugins/router'
 
-@Component({})
-export default class EcNAME extends Vue {
-  public static meta = {}
+withDefaults(defineProps<{ data?: any }>(), {
+  // Vue 3: Objekt-Default als Factory
+  data: () => ({ person: {} })
+})
 
-  @Prop({ default: { person: {} } })
-  private data!: any
+const { notifyInfo } = useDialog()
+// navigate = push mit query.prev = aktuelle fullPath (wie bisher)
+const { navigate } = useRouter()
 
-  private stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter']
+const stadien = ['Ausgetreten', 'Mitglied', 'Vertreter', 'Leiter']
 
-  public showAll(value: string) {
-    this.$dialog.notify.info(value)
-  }
+function showAll(value: string) {
+  notifyInfo(value)
+}
+
+// Template-Global `new Date()` ist in Vue 3 nicht mehr verfügbar —
+// Vergleich in eine Methode verlagert (Verhalten unverändert).
+function isJuleicaOld(juleica: any) {
+  return new Date() > new Date(juleica.gueltig_bis.input)
 }
 </script>

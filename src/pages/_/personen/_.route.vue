@@ -6,147 +6,158 @@ ec-wrapper(
   v-bind='config',
   hasReload,
   @reload='loadData'
-) 
+)
   template(#header)
     div(style='padding: 2px 10px')
       ec-search(label='Person suchen', @suche='suche = $event')
   v-data-table(
     :headers=`[
     {
-      text: 'Vorname',
-      value: 'vorname'
+      title: 'Vorname',
+      key: 'vorname'
     },
     {
-      text: 'Nachname',
-      value: 'nachname'
+      title: 'Nachname',
+      key: 'nachname'
     },
     {
-      text: 'GebDat',
-      value: 'gebDat'
+      title: 'GebDat',
+      key: 'gebDat'
     }
   ]`,
-    :items='data.filter($util.filter(suche))',
-    :rows-per-page-items='[rowCount]'
+    :items='filteredData',
+    :items-per-page='rowCount'
   )
-    template(#items='props')
+    template(#item='{ item }')
       tr(
-        @click='$router.push({ path: `/personen/${props.item.personID}/home`, query: { prev: $route.fullPath } })',
-        :class='"geschlecht-" + props.item.geschlecht'
+        @click='navigate(`/personen/${item.personID}/home`)',
+        :class='"geschlecht-" + item.geschlecht'
       )
-        td {{ props.item.vorname }}
-        td {{ props.item.nachname }}
-        td {{ props.item.gebDat.split("-").reverse().join(".") }}
+        td {{ item.vorname }}
+        td {{ item.nachname }}
+        td {{ formatGebDat(item.gebDat) }}
   template(#dialogs)
     formular-selector(name='addPerson', ref='addPerson')
 </template>
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+<script setup lang="ts">
+import { computed, ref, useTemplateRef } from 'vue'
 import gql from 'graphql-tag'
 import { API_BASE } from '../../../plugins/apiBase'
+import { useApollo } from '../../../plugins/apollo'
+import { useLogin } from '../../../plugins/auth'
+import { useDialog } from '../../../plugins/dialog'
+import { useNotification } from '../../../plugins/notify'
+import { useRouter } from '../../../plugins/router'
+import { empty } from '../../../helpers'
+import filterGenerator from '../../../util/filter.util'
 
-@Component({})
-export default class EcRootIndex extends Vue {
-  public static meta = {}
+const { client } = useApollo()
+const { authToken } = useLogin()
+const { error } = useDialog()
+const { createNotification } = useNotification()
+const { route, navigate } = useRouter()
 
-  public suche = ''
+const suche = ref('')
+const rowCount = ref(0)
+const data = ref<any[]>([])
 
-  public rowCount = 0
-  private data: any = []
+const addPerson = useTemplateRef<any>('addPerson')
 
-  private config = {
-    sheet: [
-      {
-        id: 'pers_add',
-        icon: 'person_add',
-        label: 'Person hinzufügen',
-        click: () => {
-          ;(this.$refs.addPerson as any)
-            .show()
-            .then(
-              (data: {
-                vorname: string
-                nachname: string
-                gebDat: string
-                geschlecht: string
-              }) => {
-                this.$apolloClient
-                  .mutate({
-                    mutation: gql`
-                      mutation (
-                        $vorname: String!
-                        $nachname: String!
-                        $gebDat: String!
-                        $geschlecht: String!
-                        $authToken: String!
-                      ) {
-                        addPerson(
-                          vorname: $vorname
-                          nachname: $nachname
-                          gebDat: $gebDat
-                          geschlecht: $geschlecht
-                          authToken: $authToken
-                        )
-                      }
-                    `,
-                    variables: {
-                      ...data,
-                      anmeldeID: this.$route.params.id,
-                      authToken: this.$authToken()
-                    }
-                  })
-                  .then((res: any) => {
-                    this.$notifikation(
-                      'Neue Person',
-                      `Du hast erfolgreich eine neue Person angelegt`
-                    )
-                    this.$router.push({
-                      path: `/personen/${res.data.addPerson}/home`,
-                      query: { prev: this.$route.fullPath }
-                    })
-                  })
-                  .catch((err: any) => {
-                    this.$dialog.error({
-                      text: err.message,
-                      title: 'Speichern fehlgeschlagen!'
-                    })
-                  })
-              }
-            )
-            .catch(this.$empty)
-        }
-      }
-    ],
-    title: 'Personen',
-    subTitle: 'Liste'
-  }
+const filteredData = computed(() =>
+  data.value.filter(filterGenerator(suche.value))
+)
 
-  private loadData() {
-    fetch(`${API_BASE}/v6/personen`, {
-      headers: { authorization: this.$authToken() }
-    })
-      .then((res) => res.json())
-      .then((data: any) => {
-        this.data = data.personen
-      })
-      .catch((err: any) => {
-        this.$dialog.error({
-          text: err.message,
-          title: 'Laden fehlgeschlagen!'
-        })
-      })
-  }
-
-  private created() {
-    this.loadData()
-    this.getCount()
-  }
-
-  private getCount() {
-    const tableHeight =
-      window.innerHeight - 64 - 80 - 72 - 32 - 56 - 36 - 50 - 5
-    this.rowCount = Math.floor(tableHeight / 50)
-  }
+function formatGebDat(gebDat: string) {
+  return gebDat.split('-').reverse().join('.')
 }
+
+const config = {
+  sheet: [
+    {
+      id: 'pers_add',
+      icon: 'person_add',
+      label: 'Person hinzufügen',
+      click: () => {
+        addPerson
+          .value!.show()
+          .then(
+            (data: {
+              vorname: string
+              nachname: string
+              gebDat: string
+              geschlecht: string
+            }) => {
+              client
+                .mutate({
+                  mutation: gql`
+                    mutation (
+                      $vorname: String!
+                      $nachname: String!
+                      $gebDat: String!
+                      $geschlecht: String!
+                      $authToken: String!
+                    ) {
+                      addPerson(
+                        vorname: $vorname
+                        nachname: $nachname
+                        gebDat: $gebDat
+                        geschlecht: $geschlecht
+                        authToken: $authToken
+                      )
+                    }
+                  `,
+                  variables: {
+                    ...data,
+                    anmeldeID: route.value.params.id,
+                    authToken: authToken.value
+                  }
+                })
+                .then((res: any) => {
+                  createNotification({
+                    title: 'Neue Person',
+                    body: `Du hast erfolgreich eine neue Person angelegt`
+                  })
+                  navigate(`/personen/${res.data.addPerson}/home`)
+                })
+                .catch((err: any) => {
+                  error({
+                    text: err.message,
+                    title: 'Speichern fehlgeschlagen!'
+                  })
+                })
+            }
+          )
+          .catch(empty)
+      }
+    }
+  ],
+  title: 'Personen',
+  subTitle: 'Liste'
+}
+
+function loadData() {
+  fetch(`${API_BASE}/v6/personen`, {
+    headers: { authorization: authToken.value }
+  })
+    .then((res) => res.json())
+    .then((resData: any) => {
+      data.value = resData.personen
+    })
+    .catch((err: any) => {
+      error({
+        text: err.message,
+        title: 'Laden fehlgeschlagen!'
+      })
+    })
+}
+
+function getCount() {
+  const tableHeight = window.innerHeight - 64 - 80 - 72 - 32 - 56 - 36 - 50 - 5
+  rowCount.value = Math.floor(tableHeight / 50)
+}
+
+loadData()
+getCount()
 </script>
 <style>
 .geschlecht-w {
