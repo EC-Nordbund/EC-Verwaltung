@@ -24,6 +24,7 @@ ec-wrapper(
 import { computed, ref, useTemplateRef } from 'vue'
 import { useApollo } from '../../../../plugins/apollo'
 import { useLogin } from '../../../../plugins/auth'
+import { API_BASE } from '../../../../plugins/apiBase'
 import { useDialog } from '../../../../plugins/dialog'
 import { useNotification } from '../../../../plugins/notify'
 import { useRouter } from '../../../../plugins/router'
@@ -62,38 +63,29 @@ const config = computed(() => ({
     {
       id: 'anmel_rep_bestbrief',
       icon: 'markunread_mailbox',
-      label: 'Bestätigungsbrief generieren und Drucken',
+      label: 'Bestätigungsbrief per Mail verschicken',
       disabled:
-        !best.value ||
         data.value.abmeldeZeitpunkt !== null ||
         data.value.wartelistenPlatz !== 0,
-      click: () => {
+      click: async () => {
         if (data.value.bestaetigungsBrief !== null) {
           if (
             !confirm(
-              `Brief wurde ${data.value.bestaetigungsBrief.german} bereits generiert. Erneut generieren?`
+              `Brief wurde ${data.value.bestaetigungsBrief.german} bereits verschickt. Erneut verschicken?`
             )
           ) {
             return
           }
         }
-        // genReport(
-        //   `best-brief-${this.data.veranstaltung.veranstaltungsID}`,
-        //   this.data,
-        //   `bestaetigungsbrief-${this.$route.params.id}.docx`
-        // ).then((r) => {
-        //   this.$apolloClient.mutate({
-        //     mutation: gql`
-        //       mutation($anmeldeID: String!, $authToken: String!) {
-        //         anmeldungBestaetigungsbrief(anmeldeID: $anmeldeID, authToken: $authToken)
-        //       }
-        //     `,
-        //     variables: {
-        //       authToken: this.$authToken(),
-        //       anmeldeID: this.$route.params.id
-        //     }
-        //   });
-        // });
+        const res = await fetch(
+          `${API_BASE}/v6/best-brief/anmeldung/${route.value.params.id}`,
+          { headers: { authorization: authToken.value } }
+        )
+        if (res.ok) {
+          alert('Bestätigungsbrief wurde verschickt.')
+        } else {
+          alert(`Versand fehlgeschlagen (HTTP ${res.status}).`)
+        }
       }
     },
     {
