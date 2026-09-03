@@ -32,7 +32,7 @@ v-card-text(style='overflow: auto')
     v-list-item(
       v-for='(anmeldung, c) in mitarbeiter',
       :key='anmeldung.anmeldeID',
-      :class='`wlist-${hatFZ(anmeldung) ? 0 : -1} wlist`',
+      :class='`wlist-${hatFZ(anmeldung) ? 0 : -2} wlist`',
       @click='navigate({ path: `/anmeldungen/${anmeldung.anmeldeID}/home` })'
     )
       template(#prepend)
@@ -97,14 +97,31 @@ const abgemeldete = computed(() =>
   props.data.anmeldungen.filter((a: any) => a.wartelistenPlatz < 0)
 )
 
-// FZ-Prüfung 1:1 aus dem alten Template übernommen (inkl. des dort schon
-// vorhandenen Format-Vergleichs input vs. german — nicht in der
-// Bugfix-Liste, daher unverändert).
+/**
+ * Stichtag der FZ-Prüfung: ein Führungszeugnis gilt fünf Jahre und muss am
+ * Ende der Veranstaltung noch gültig sein.
+ *
+ * Nachgezogen aus ef447dd (Branch old-version, 2022-07-11) — main hatte nur
+ * die ältere Fassung von eaccfe8, die `datumDesLetztenFZ.input` (ISO) gegen
+ * `begin.german` (DD.MM.YYYY) verglich. Als String war das für jedes
+ * vorhandene FZ wahr ("2015-…" > "10.07.…"), die Warnung erschien also nie.
+ * Gegenüber ef447dd zusätzlich zweistellig aufgefüllt: dessen
+ * `${m + 1}` erzeugte "2022-7-10" und verglich sich falsch gegen "2022-11-…".
+ */
+function subtractYears(years: number, isoDate: string) {
+  const d = new Date(isoDate)
+  d.setFullYear(d.getFullYear() - years)
+  const month = `${d.getMonth() + 1}`.padStart(2, '0')
+  const day = `${d.getDate()}`.padStart(2, '0')
+  return `${d.getFullYear()}-${month}-${day}`
+}
+
 function hatFZ(anmeldung: any) {
-  return !!(
-    anmeldung.person.datumDesLetztenFZ &&
-    anmeldung.person.datumDesLetztenFZ.input >= props.data.begin.german
-  )
+  const fz = anmeldung.person.datumDesLetztenFZ
+  // ende ist bei Eintagesveranstaltungen NULL -> auf begin zurückfallen
+  const stichtag = props.data.ende?.input ?? props.data.begin?.input
+  if (!fz || !stichtag) return false
+  return fz.input >= subtractYears(5, stichtag)
 }
 
 function getTitle(wplatz: number) {
@@ -119,7 +136,7 @@ function getTitle(wplatz: number) {
 </script>
 
 <style scoped>
-.wlist:not(.wlist--1):not(.wlist-0) {
+.wlist:not(.wlist--1):not(.wlist-0):not(.wlist--2) {
   background-color: yellow;
 }
 .wlist-0 {
@@ -127,5 +144,9 @@ function getTitle(wplatz: number) {
 }
 .wlist--1 {
   background-color: red;
+}
+/* Mitarbeiter ohne (gueltiges) Fuehrungszeugnis */
+.wlist--2 {
+  background-color: gray;
 }
 </style>

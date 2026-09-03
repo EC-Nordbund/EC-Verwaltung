@@ -51,6 +51,10 @@ v-app
         template(#prepend)
           v-icon person
         v-list-item-title Personen
+      v-list-item(to='/fz')
+        template(#prepend)
+          v-icon verified_user
+        v-list-item-title Führungszeugnisse
       v-list-item(to='/ak')
         template(#prepend)
           v-icon group
