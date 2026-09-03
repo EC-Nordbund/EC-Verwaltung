@@ -12,15 +12,18 @@
   },
   "dependencies": {
     "@apollo/client": "3.14.1",
+    "@types/path-browserify": "^1.0.3",
     "@vueuse/core": "14.4.0",
     "graphql": "16.14.2",
     "graphql-tag": "2.12.7",
     "material-design-icons-iconfont": "6.7.0",
+    "path-browserify": "^1.0.1",
     "roboto-fontface": "0.10.0",
     "tslib": "2.8.1",
     "vue": "3.5.42",
     "vue-router": "5.3.0",
-    "vuetify": "4.1.12"
+    "vuetify": "4.1.12",
+    "xlsx-template": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "22.20.1",

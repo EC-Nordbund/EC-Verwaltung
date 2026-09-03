@@ -4,36 +4,36 @@ ec-wrapper(hasSheet, hasDial, hasNav, hasXBtn, hasRouterView, v-bind='config')
     component(:is='Component', :data='data')
   v-menu(location='bottom left')
     template(#activator='{ props: menuProps }')
-      v-btn(v-bind='menuProps') TN-Liste gnerieren
+      v-btn(v-bind='menuProps') TN-Liste generieren
     v-list
-      v-list-item(@click='all')
+      v-list-item(:disabled='tnListen.length === 0', @click='all')
         v-list-item-title Alle (jeweils mit und ohne Warteliste)
       v-divider
       v-list-item(
         v-for='item in tnListen',
         :key='item.name',
-        @click='g(item.name, (v) => v == 0)'
+        @click='g(item.name, "ohne-warteliste")'
       )
         v-list-item-title {{ item.label }}
       v-divider
       v-list-item(
         v-for='item in tnListen',
-        :key='item.name',
-        @click='g(item.name, (v) => v >= 0)'
+        :key='`wl-${item.name}`',
+        @click='g(item.name, "mit-warteliste")'
       )
         v-list-item-title {{ item.label }} mit Warteliste
       v-divider
       v-list-item(
         v-for='item in tnListen',
-        :key='item.name',
-        @click='g(item.name, (v) => v > 0)'
+        :key='`nurwl-${item.name}`',
+        @click='g(item.name, "nur-warteliste")'
       )
         v-list-item-title {{ item.label }} nur Warteliste
       v-divider
       v-list-item(
         v-for='item in tnListen',
-        :key='item.name',
-        @click='g(item.name, (v) => v < 0)'
+        :key='`ab-${item.name}`',
+        @click='g(item.name, "nur-abgemeldete")'
       )
         v-list-item-title {{ item.label }} nur Abgemeldete
 </template>
@@ -44,6 +44,8 @@ import { useApollo } from '../../../../plugins/apollo'
 import { useLogin } from '../../../../plugins/auth'
 import { useDialog } from '../../../../plugins/dialog'
 import { useRouter } from '../../../../plugins/router'
+import { generate, getTemplates } from '../../../../tnList'
+import type { TnListTemplate } from '../../../../tnList'
 
 const { client, gql } = useApollo()
 const { authToken } = useLogin()
@@ -57,8 +59,7 @@ const data = ref<any>({
   veranstaltungsort: {}
 })
 
-const tnListen = ref<any>([])
-// const genList = generate
+const tnListen = ref<TnListTemplate[]>([])
 
 const config = computed(() => {
   return {
@@ -127,26 +128,40 @@ const config = computed(() => {
   }
 })
 
-// Tote TN-Listen-Generierung (war schon vor der Migration auskommentiert):
-// Stubs bleiben Stubs. `all` war komplett auskommentiert, wird aber vom
-// Menü referenziert — hier als No-op definiert, damit das Template in
-// Vue 3 keinen Zugriff auf eine undefinierte Property macht.
-// function all() {
-//   tnListen.value.forEach((el: { name: string; label: string }) => {
-//     g(el.name, (v) => v === 0)
-//     g(el.name, (v) => v >= 0)
-//   })
-// }
-function all() {}
+// Wartelisten-Varianten einer TN-Liste. Als benannte Filter statt als
+// Inline-Lambdas im Template, damit der Name auch im Dateinamen landet.
+const wListFilter = {
+  'ohne-warteliste': (v: number) => v === 0,
+  'mit-warteliste': (v: number) => v >= 0,
+  'nur-warteliste': (v: number) => v > 0,
+  'nur-abgemeldete': (v: number) => v < 0
+}
+type WListVariante = keyof typeof wListFilter
 
-function g(name: string, wList: (v: number) => boolean) {
-  // genList(
-  //   parseInt(route.value.params.id, 10),
-  //   name,
-  //   authToken.value,
-  //   client,
-  //   wList
-  // )
+async function g(name: string, variante: WListVariante) {
+  try {
+    await generate(
+      parseInt(route.value.params.id as string, 10),
+      name,
+      authToken.value,
+      client,
+      wListFilter[variante],
+      variante
+    )
+  } catch (err: any) {
+    error({
+      text: err?.message ?? String(err),
+      title: 'TN-Liste konnte nicht erzeugt werden!'
+    })
+  }
+}
+
+async function all() {
+  // Sequenziell: parallele Downloads blockieren Browser reihenweise
+  for (const el of tnListen.value) {
+    await g(el.name, 'ohne-warteliste')
+    await g(el.name, 'mit-warteliste')
+  }
 }
 
 function sheetClick(item: { id: string }) {
@@ -251,7 +266,15 @@ function loadData() {
 }
 
 loadData()
-// getTemplates().then((res) => {
-//   tnListen.value = res
-// })
+
+getTemplates()
+  .then((res) => {
+    tnListen.value = res
+  })
+  .catch((err: any) => {
+    error({
+      text: err?.message ?? String(err),
+      title: 'Vorlagen für die TN-Listen konnten nicht geladen werden!'
+    })
+  })
 </script>

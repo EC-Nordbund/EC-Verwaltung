@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
@@ -55,6 +56,20 @@ export default defineConfig({
       // '||' wie im alten replace-Plugin: auch LEERER String fällt auf Default
       process.env.API_BASE || 'https://api.ec-nordbund.de'
     )
+  },
+  resolve: {
+    alias: {
+      // xlsx-template (TN-Listen) und sein elementtree sind CJS-Node-
+      // Bibliotheken und importieren 'path' bzw. 'util'. Ohne Alias macht
+      // Vite daraus "externalized for browser compatibility"-Stubs, die
+      // erst zur Laufzeit knallen ("util.inherits is not a function").
+      // Gebraucht werden nur path.basename/dirname und util.inherits.
+      path: 'path-browserify',
+      util: fileURLToPath(new URL('./src/shims/node-util.ts', import.meta.url)),
+      stream: fileURLToPath(
+        new URL('./src/shims/node-stream.ts', import.meta.url)
+      )
+    }
   },
   optimizeDeps: {
     // Empfehlung von vite-plugin-vuetify: verhindert wiederholte
