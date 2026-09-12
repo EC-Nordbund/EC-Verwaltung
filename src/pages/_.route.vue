@@ -59,6 +59,10 @@ v-app
         template(#prepend)
           v-icon group
         v-list-item-title Arbeitskreise
+      v-list-item(to='/eckreise')
+        template(#prepend)
+          v-icon place
+        v-list-item-title EC-Kreise
       v-divider
       v-list-subheader Veranstaltungen
       v-list-item(to='/anmeldungen')
@@ -93,6 +97,10 @@ v-app
         template(#prepend)
           v-icon settings
         v-list-item-title Administration
+      v-list-item(to='/sonstiges/portal')
+        template(#prepend)
+          v-icon vpn_key
+        v-list-item-title Portal-Zugänge
       v-list-item(to='/sonstiges/datenschutz')
         template(#prepend)
           v-icon security
