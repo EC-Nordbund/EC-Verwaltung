@@ -31,6 +31,7 @@ const TN_LIST_QUERY = gql`
       }
       ende {
         german
+        input
       }
       hauptleiter {
         person {
@@ -178,8 +179,11 @@ export async function generate(
           empty: '',
           m: h.person.geschlecht === 'm' ? 'X' : '',
           w: h.person.geschlecht === 'w' ? 'X' : '',
+          // Stichtag ist das ENDE der Veranstaltung. ende ist nullable
+          // (Eintagesveranstaltungen) -> dann gilt begin.
           older27:
-            dateDiffInYears(h.person.gebDat.input, v.begin.input) > 27
+            dateDiffInYears(h.person.gebDat.input, (v.ende ?? v.begin).input) >
+            27
               ? 'X'
               : '',
           betreuer: h.position > 1 ? 'X' : ''
