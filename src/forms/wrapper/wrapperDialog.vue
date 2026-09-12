@@ -1,7 +1,10 @@
 <template lang="pug">
 v-dialog(v-model='visible', max-width='400px', v-bind='$attrs')
   v-card
-    v-card-title
+    //- v-card-title hat in Vuetify 4 white-space: nowrap und schneidet
+    //- laengere Titel per Ellipse ab. Bei "FZ Eintragen" faellt das nicht auf,
+    //- bei "Ortsverantwortliche/r - EC Neumuenster" schon.
+    v-card-title(style='white-space: normal')
       h1(color='primary') {{ title }}
     v-card-text
       v-form(ref='formRef')
