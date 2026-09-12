@@ -1,28 +1,37 @@
 /**
- * Auswahl der/des Ortsverantwortlichen eines EC-Kreises.
+ * Auswahl einer/eines Verantwortlichen für einen EC-Kreis.
  *
- * Die gewählte Person kann sich anschließend im Portal anmelden und die
- * FZ-Liste dieses Kreises einsehen — vorausgesetzt, sie hat auch einen
- * Portal-Zugang (Sonstiges → Portal-Zugänge). Darauf weist der Hinweistext
- * hin, weil die Zuordnung allein noch keinen Zugriff gibt.
+ * Ein Kreis hat zwei getrennte Aufgaben, jede mit eigener Person:
+ *
+ *   fz  — Führungszeugnisse einsehen und eintragen
+ *   ort — Mitgliederliste des Kreises pflegen (Status, neue Personen)
+ *
+ * Die Trennung ist gewollt; wer beides macht, wird in beiden Feldern
+ * eingetragen. Die Auswahl allein gibt noch keinen Zugang — dafür braucht die
+ * Person zusätzlich einen Portal-Zugang (Sonstiges → Portal-Zugänge).
  */
 export default ({
   allePersonen,
   bezeichnung,
+  rolle,
   initval
 }: {
   allePersonen: any[]
   bezeichnung: string
+  rolle: 'fz' | 'ort'
   initval: { personID: number | null }
 }) => ({
-  title: `Ortsverantwortliche/r – ${bezeichnung}`,
+  title:
+    rolle === 'fz'
+      ? `Führungszeugnisse – ${bezeichnung}`
+      : `Mitgliederliste – ${bezeichnung}`,
   initval,
   schema: [
     {
       name: 'personID',
       type: 'autocomplete',
       'prepend-icon': 'person',
-      label: 'Ortsverantwortliche/r',
+      label: rolle === 'fz' ? 'FZ-Verantwortliche/r' : 'Ortsverantwortliche/r',
       clearable: true,
       items: allePersonen.map((p: any) => ({
         value: p.personID,
@@ -31,8 +40,10 @@ export default ({
     },
     {
       type: 'alert',
-      // 'text', nicht 'label': formElements/alert.vue rendert schema.text.
-      text: 'Diese Person sieht im Portal die Führungszeugnis-Liste dieses EC-Kreises und kann dort Zeugnisse eintragen. Dafür braucht sie zusätzlich einen Portal-Zugang. Der Name wird auch als Anrede der monatlichen Übersichts-Mail übernommen.'
+      text:
+        rolle === 'fz'
+          ? 'Diese Person sieht im Portal die Führungszeugnis-Liste dieses EC-Kreises und kann dort Zeugnisse eintragen. Der Name wird auch als Anrede der monatlichen Übersichts-Mail übernommen. Zusätzlich braucht sie einen Portal-Zugang.'
+          : 'Diese Person pflegt im Portal die Mitgliederliste dieses EC-Kreises: Mitgliedsstatus ändern und neue Personen hinzufügen. Führungszeugnisse sieht sie dabei nicht. Zusätzlich braucht sie einen Portal-Zugang.'
     }
   ]
 })

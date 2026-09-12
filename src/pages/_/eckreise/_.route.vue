@@ -9,25 +9,35 @@ ec-wrapper(
     div(style='padding: 2px 10px')
       ec-search(label='EC-Kreis suchen', @suche='suche = $event')
 
-  v-list(lines='three')
-    v-list-item(
-      v-for='k in filtered',
-      :key='k.ecKreisID',
-      @click='setzeVerantwortlichen(k)'
-    )
+  v-list(lines='two')
+    v-list-item(v-for='k in filtered', :key='k.ecKreisID')
       template(#prepend)
         v-icon place
       v-list-item-title {{ k.bezeichnung }} (ID: {{ k.ecKreisID }})
       v-list-item-subtitle
         div
-          strong Portal-Zugriff:&nbsp;
-          span(v-if='k.verantwortlich') {{ k.verantwortlich.vorname }} {{ k.verantwortlich.nachname }}
-          span.text-medium-emphasis(v-else) niemand hinterlegt
-        div
-          | Anrede der Monats-Mail: {{ k.fzVerantwortlicherText || '—' }} · {{ k.email || 'keine Mailadresse' }}
+          | Monats-Mail an {{ k.email || 'keine Adresse' }}, Anrede
+          | „{{ k.fzVerantwortlicherText || '—' }}"
       template(#append)
-        v-icon(:color='k.verantwortlich ? "success" : undefined')
-          | {{ k.verantwortlich ? 'verified_user' : 'person_off' }}
+        .d-flex.ga-2.flex-wrap.py-2
+          v-btn(
+            size='small',
+            variant='outlined',
+            prepend-icon='verified_user',
+            @click='setzeVerantwortlichen(k, "fz")'
+          )
+            | Führungszeugnisse:&nbsp;
+            strong(v-if='k.fzVerantwortlich') {{ k.fzVerantwortlich.vorname }} {{ k.fzVerantwortlich.nachname }}
+            em(v-else) offen
+          v-btn(
+            size='small',
+            variant='outlined',
+            prepend-icon='groups',
+            @click='setzeVerantwortlichen(k, "ort")'
+          )
+            | Mitglieder:&nbsp;
+            strong(v-if='k.ortsverantwortlich') {{ k.ortsverantwortlich.vorname }} {{ k.ortsverantwortlich.nachname }}
+            em(v-else) offen
 
   template(#dialogs)
     formular-dialog(
@@ -99,15 +109,18 @@ function ladePersonen() {
 loadData()
 ladePersonen().catch(() => undefined)
 
-async function setzeVerantwortlichen(k: any) {
+async function setzeVerantwortlichen(k: any, rolle: 'fz' | 'ort') {
   if (!personen.value.length) {
     await ladePersonen().catch(() => undefined)
   }
 
+  const aktuell = rolle === 'fz' ? k.fzVerantwortlich : k.ortsverantwortlich
+
   formConfig.value = ecKreisVerantwortlich({
     allePersonen: personen.value,
     bezeichnung: k.bezeichnung,
-    initval: { personID: k.verantwortlich?.personID ?? null }
+    rolle,
+    initval: { personID: aktuell?.personID ?? null }
   })
 
   // Warten, bis der Dialog mit der neuen Konfiguration gerendert ist.
@@ -116,7 +129,7 @@ async function setzeVerantwortlichen(k: any) {
   dlg.value
     ?.show()
     .then((form: { personID: number | null }) =>
-      fetch(`${API_BASE}/v6/eckreis/${k.ecKreisID}/verantwortlicher`, {
+      fetch(`${API_BASE}/v6/eckreis/${k.ecKreisID}/verantwortlicher/${rolle}`, {
         method: 'PUT',
         headers: {
           authorization: authToken.value,
