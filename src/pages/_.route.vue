@@ -101,7 +101,7 @@ v-app
         template(#prepend)
           v-icon vpn_key
         v-list-item-title Portal-Zugänge
-      v-list-item(to='/sonstiges/fz-mails')
+      v-list-item(to='/sonstiges/fz-mailtexte')
         template(#prepend)
           v-icon mail
         v-list-item-title FZ-Mailtexte

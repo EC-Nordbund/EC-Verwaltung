@@ -28,7 +28,10 @@ ec-wrapper(
         div {{ v.beschreibung }}
         div.text-caption
           | Betreff: {{ v.betreff }}
-          span(v-if='v.geaendertAm')  · zuletzt geändert am {{ datum(v.geaendertAm) }}
+          //- Nur nach einer echten Bearbeitung: beim Ausliefern setzt die
+          //- Datenbank den Zeitstempel selbst, "zuletzt geändert" waere dann
+          //- eine Falschaussage.
+          span(v-if='v.geaendertVon')  · zuletzt geändert am {{ datum(v.geaendertAm) }}
       template(#append)
         v-icon edit
 
