@@ -41,8 +41,7 @@ export default ({ allePersonen }: { allePersonen: any[] }) => ({
     {
       type: 'alert',
       // 'text', nicht 'label': formElements/alert.vue rendert schema.text.
-      text:
-        'Die Person erhält eine Einladung an diese Adresse und setzt ihr Passwort selbst. Der Zugang gilt nur für das Portal, nicht für die Verwaltung.'
+      text: 'Die Person erhält eine Einladung an diese Adresse und setzt ihr Passwort selbst. Der Zugang gilt nur für das Portal, nicht für die Verwaltung.'
     }
   ]
 })

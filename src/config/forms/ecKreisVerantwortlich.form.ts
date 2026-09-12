@@ -32,8 +32,7 @@ export default ({
     {
       type: 'alert',
       // 'text', nicht 'label': formElements/alert.vue rendert schema.text.
-      text:
-        'Diese Person sieht im Portal die Führungszeugnis-Liste dieses EC-Kreises und kann dort Zeugnisse eintragen. Dafür braucht sie zusätzlich einen Portal-Zugang. Der Name wird auch als Anrede der monatlichen Übersichts-Mail übernommen.'
+      text: 'Diese Person sieht im Portal die Führungszeugnis-Liste dieses EC-Kreises und kann dort Zeugnisse eintragen. Dafür braucht sie zusätzlich einen Portal-Zugang. Der Name wird auch als Anrede der monatlichen Übersichts-Mail übernommen.'
     }
   ]
 })
