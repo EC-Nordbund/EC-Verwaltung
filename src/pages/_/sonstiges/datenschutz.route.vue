@@ -12,7 +12,7 @@ ec-wrapper(title='Datenschutzerklärung')
     | Einige von den folgenden Punkten werden nicht auf dich zutreffen. Wir haben verschiedene Nutzergruppen die Verschiedene Dinge machen können.
     | Es gibt folgende Nutzergruppen:
   ul
-    li Admin (Thomas Seeger + Entwickler)
+    li Admin (Referenten-Team + Entwickler)
     li Anmeldeverwaltung
     li Kasse
     li Vorstand
