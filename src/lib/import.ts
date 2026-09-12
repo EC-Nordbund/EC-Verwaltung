@@ -3,6 +3,7 @@ import type { App } from 'vue'
 import editAK from './editAK.form.lib.vue'
 import anmeldungKontakt from './anmeldungKontakt.form.lib.vue'
 import mergeAdresse from './adresseMerge.form.lib.vue'
+import dubletteMerge from './dubletteMerge.lib.vue'
 
 import wrapper from './wrapper.lib.vue'
 import search from './search.lib.vue'
@@ -19,6 +20,7 @@ export function registerLibComponents(app: App) {
   app.component('EcFormEditAk', editAK)
   app.component('EcAnmeldungKontakt', anmeldungKontakt)
   app.component('EcAdresseMerge', mergeAdresse)
+  app.component('EcDubletteMerge', dubletteMerge)
 
   app.component('EcDialogHost', dialogHost)
 }
