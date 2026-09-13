@@ -119,28 +119,28 @@ ec-wrapper(
             | {{ regelInfo(g.code).label }}
             v-tooltip(activator='parent', location='top') {{ g.text }}
         td.text-right(style='white-space: nowrap')
+          //- Der empfohlene Knopf traegt neben der Farbe ein Haekchen-Icon:
+          //- Farbe allein waere fuer Rot-Gruen-Schwaeche kein Signal, und sie
+          //- erklaert auch nicht, WARUM empfohlen wird -- das steht im Tooltip.
           v-btn.mr-1(
+            v-for='seite in [1, 2]',
+            :key='seite',
             size='small',
             variant='tonal',
-            :color='item.vorschlagBehalten === item.person_1.personID ? "primary" : undefined',
+            :color='empfohlen(item, seite) ? "primary" : undefined',
+            :prepend-icon='empfohlen(item, seite) ? "recommend" : undefined',
             :disabled='!!busy',
-            :loading='busy === key(item) + ":1"',
-            @click='mergen(item, item.person_1, item.person_2)'
+            :loading='busy === key(item) + ":" + seite',
+            @click='mergen(item, personVon(item, seite), personVon(item, 3 - seite))'
           )
-            | {{ item.person_1.personID }} behalten
+            | {{ personVon(item, seite).personID }} behalten
             v-tooltip(activator='parent', location='top')
-              | {{ item.person_2.personID }} wird gelöscht
-          v-btn.mr-1(
-            size='small',
-            variant='tonal',
-            :color='item.vorschlagBehalten === item.person_2.personID ? "primary" : undefined',
-            :disabled='!!busy',
-            :loading='busy === key(item) + ":2"',
-            @click='mergen(item, item.person_2, item.person_1)'
-          )
-            | {{ item.person_2.personID }} behalten
-            v-tooltip(activator='parent', location='top')
-              | {{ item.person_1.personID }} wird gelöscht
+              div
+                | {{ personVon(item, 3 - seite).personID }}
+                |  ({{ personVon(item, 3 - seite).vorname }}
+                |  {{ personVon(item, 3 - seite).nachname }}) wird gelöscht
+              .text-caption(v-if='empfohlen(item, seite)')
+                | Empfohlen: {{ item.begruendungBehalten }}
           v-btn.mr-1(
             icon,
             variant='text',
@@ -282,6 +282,23 @@ const gefiltert = computed(
 
 function key(p: DublettenPaar) {
   return paarKey(p.personID_1, p.personID_2)
+}
+
+/** Seite 1 oder 2 eines Paares — spart zwei fast gleiche Knopf-Bloecke. */
+function personVon(p: DublettenPaar, seite: number): DublettenPerson {
+  return seite === 1 ? p.person_1 : p.person_2
+}
+
+/**
+ * Empfiehlt der Server, diese Seite zu behalten?
+ *
+ * Der Vorschlag kommt aus der API: ein Satz mit Verwaltungs- oder Portal-Zugang
+ * gewinnt (sonst zeigt ein Login nach dem Merge auf eine geloeschte Person),
+ * sonst der mit mehr verknuepften Daten, sonst der aeltere. Es bleibt ein
+ * Vorschlag — beide Richtungen sind klickbar.
+ */
+function empfohlen(p: DublettenPaar, seite: number): boolean {
+  return p.vorschlagBehalten === personVon(p, seite).personID
 }
 
 function kopf() {
