@@ -101,6 +101,10 @@ v-app
         template(#prepend)
           v-icon vpn_key
         v-list-item-title Portal-Zugänge
+      v-list-item(to='/sonstiges/portal-downloads')
+        template(#prepend)
+          v-icon folder_shared
+        v-list-item-title Portal-Downloads
       v-list-item(to='/sonstiges/datenschutz')
         template(#prepend)
           v-icon security
