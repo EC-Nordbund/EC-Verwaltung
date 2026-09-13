@@ -72,9 +72,14 @@ ec-wrapper(
             span(:class='"g-" + p.geschlecht') {{ p.vorname }} {{ p.nachname }}
             v-spacer
             v-chip(size='small') ID {{ p.personID }}
-          v-card-subtitle(v-if='daten.vorschlagBehalten === p.personID')
+          //- Nicht nur DASS empfohlen wird, sondern warum -- sonst ist die
+          //- Hervorhebung ein Signal, das man erst erfragen muss.
+          v-card-subtitle.text-wrap(
+            v-if='daten.vorschlagBehalten === p.personID',
+            style='white-space: normal'
+          )
             v-icon(size='x-small') recommend
-            |  Vorschlag: diesen Satz behalten
+            |  Empfohlen: {{ daten.begruendungBehalten }}
 
           v-table(density='compact')
             tbody

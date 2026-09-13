@@ -3,7 +3,10 @@
 //- schlichter v-dialog mit eigenem Abbrechen/Speichern-Flow.
 //- Nach außen (Formular-Value) bleibt der Wert ein ISO-String YYYY-MM-DD,
 //- nur der Picker selbst arbeitet mit einem Date-Objekt.
-v-dialog(v-model='modal', persistent, width='290px')
+//- max-width statt width='290px': das war die Breite des Vuetify-2-Pickers.
+//- Der von Vuetify 4 ist 328px breit, und bei 290px schnitt der Dialog die
+//- letzte Spalte ab -- im Kalender fehlte sichtbar der Sonntag.
+v-dialog(v-model='modal', persistent, max-width='360px')
   template(#activator='{ props: activatorProps }')
     v-text-field(
       :model-value='displayDate',
