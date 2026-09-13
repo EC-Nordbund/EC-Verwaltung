@@ -25,6 +25,7 @@ ec-wrapper(
       v-list-item-title
         | {{ a.vorname }} {{ a.nachname }}
         v-chip.ml-2(v-if='a.superuser', size='x-small', color='warning') Vollzugriff
+        v-chip.ml-2(v-if='a.schutzkonzeptVerwalter', size='x-small', color='info') Schutzkonzept-Verwaltung
         v-chip.ml-2(v-if='!a.aktiv', size='x-small', variant='outlined') deaktiviert
       v-list-item-subtitle
         div {{ a.email }}
@@ -50,6 +51,11 @@ ec-wrapper(
               :title='a.superuser ? "Vollzugriff entziehen" : "Vollzugriff geben"',
               prepend-icon='admin_panel_settings',
               @click='patch(a, { superuser: !a.superuser })'
+            )
+            v-list-item(
+              :title='a.schutzkonzeptVerwalter ? "Schutzkonzept-Verwaltung entziehen" : "Schutzkonzept-Verwaltung geben"',
+              prepend-icon='shield',
+              @click='patch(a, { schutzkonzeptVerwalter: !a.schutzkonzeptVerwalter })'
             )
             v-list-item(
               :title='a.aktiv ? "Zugang deaktivieren" : "Zugang aktivieren"',
@@ -80,6 +86,10 @@ import portalAccount from '../../../config/forms/portalAccount.form'
  * Passwörter werden hier nie vergeben — die Person bekommt einen Einmal-Link
  * per Mail und setzt es selbst. Deshalb gibt es hier auch kein
  * "Passwort zurücksetzen", sondern nur "Einladung erneut senden".
+ *
+ * "Schutzkonzept-Verwaltung" ist eine globale Verantwortung: die Person baut
+ * im Portal das Schutzkonzept-Formular (Versionen, DOCX-Vorlagen) und sieht
+ * die Stände aller EC-Kreise. Vollzugriff schließt das mit ein.
  */
 const { authToken } = useLogin()
 const { error, notifyInfo } = useDialog()
