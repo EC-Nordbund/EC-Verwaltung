@@ -38,6 +38,47 @@ ec-wrapper(
             | Mitglieder:&nbsp;
             strong(v-if='k.ortsverantwortlich') {{ k.ortsverantwortlich.vorname }} {{ k.ortsverantwortlich.nachname }}
             em(v-else) offen
+          v-btn(
+            size='small',
+            variant='outlined',
+            prepend-icon='shield',
+            @click='oeffneSchutzkonzept(k)'
+          ) Schutzkonzept-E-Mails
+
+  v-dialog(v-model='skOffen', max-width='560px')
+    v-card(v-if='skKreis')
+      v-card-title Schutzkonzept-E-Mails
+      v-card-subtitle {{ skKreis.bezeichnung }}
+      v-card-text
+        v-alert.mb-4(type='info', variant='tonal', density='compact')
+          | Wer hier eingetragen ist, kann sich auf schutzkonzept.ec-nordbund.de
+          | mit einem Anmeldecode per Mail anmelden und das Schutzkonzept dieses
+          | EC-Kreises bearbeiten und veröffentlichen.
+        v-progress-linear.mb-2(v-if='skLaedt', indeterminate)
+        .mb-4
+          v-chip.mr-2.mb-2(
+            v-for='e in skEmails',
+            :key='e.skKreisEmailID',
+            closable,
+            @click:close='entferneSkEmail(e)'
+          ) {{ e.email }}
+          em(v-if='!skLaedt && !skEmails.length') Noch keine Adresse eingetragen.
+        v-form.d-flex.ga-2.align-start(@submit.prevent='fuegeSkEmailHinzu')
+          v-text-field(
+            v-model='skNeu',
+            label='E-Mail-Adresse',
+            type='email',
+            density='compact',
+            hide-details='auto'
+          )
+          v-btn(
+            type='submit',
+            color='primary',
+            :disabled='!skNeu.trim() || skLaedt'
+          ) Hinzufügen
+      v-card-actions
+        v-spacer
+        v-btn(variant='text', @click='skOffen = false') Schließen
 
   template(#dialogs)
     formular-dialog(
@@ -150,6 +191,109 @@ async function setzeVerantwortlichen(k: any, rolle: 'fz' | 'ort') {
         )
     )
     .catch(empty)
+}
+
+/*
+ * Schutzkonzept-E-Mails: bewusst erst beim Öffnen des Dialogs geladen, nicht
+ * für alle Kreise auf einmal -- das Limit auf /v6 würde eine Salve von
+ * Einzelabfragen ausbremsen.
+ */
+const skOffen = ref(false)
+const skKreis = ref<any>(null)
+const skEmails = ref<{ skKreisEmailID: number; email: string }[]>([])
+const skNeu = ref('')
+const skLaedt = ref(false)
+/*
+ * Laufende Nummer der letzten Ladeanfrage. Wird der Dialog schnell für einen
+ * anderen Kreis geöffnet, kann die ältere Antwort später eintreffen -- ohne
+ * diesen Abgleich stünden dann die Adressen des ersten Kreises unter dem Titel
+ * des zweiten, und Entfernen liefe mit fremden IDs ins 404.
+ */
+let skAnfrage = 0
+
+function ladeSkEmails() {
+  const anfrage = ++skAnfrage
+  skLaedt.value = true
+  return fetch(
+    `${API_BASE}/v6/eckreis/${skKreis.value.ecKreisID}/schutzkonzept-email`,
+    { headers: { authorization: authToken.value } }
+  )
+    .then(errorHandler)
+    .then((res) => res.json())
+    .then((res: any) => {
+      if (anfrage === skAnfrage) skEmails.value = res.emails
+    })
+    .catch((err: any) => {
+      if (anfrage === skAnfrage) {
+        error({ text: err.message || err, title: 'Laden fehlgeschlagen!' })
+      }
+    })
+    .finally(() => {
+      // Nur die jüngste Anfrage beendet die Ladeanzeige, sonst gäbe eine
+      // überholte Antwort den Knopf frei, während die aktuelle noch lädt.
+      if (anfrage === skAnfrage) skLaedt.value = false
+    })
+}
+
+function oeffneSchutzkonzept(k: any) {
+  skKreis.value = k
+  skEmails.value = []
+  skNeu.value = ''
+  skOffen.value = true
+  ladeSkEmails()
+}
+
+function fuegeSkEmailHinzu() {
+  const email = skNeu.value.trim()
+  if (!email) return
+  const kreis = skKreis.value
+  skLaedt.value = true
+  fetch(`${API_BASE}/v6/eckreis/${kreis.ecKreisID}/schutzkonzept-email`, {
+    method: 'POST',
+    headers: {
+      authorization: authToken.value,
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ email })
+  })
+    .then(errorHandler)
+    .then(() => {
+      notifyInfo('E-Mail-Adresse eingetragen.')
+      // Inzwischen anderer Kreis im Dialog: dessen Liste und Eingabe nicht anfassen.
+      if (skKreis.value !== kreis) return
+      skNeu.value = ''
+      return ladeSkEmails()
+    })
+    .catch((err: any) => {
+      if (skKreis.value === kreis) skLaedt.value = false
+      error({ text: err.message || err, title: 'Speichern fehlgeschlagen!' })
+    })
+}
+
+function entferneSkEmail(e: { skKreisEmailID: number; email: string }) {
+  if (
+    !window.confirm(
+      `${e.email} wirklich entfernen? Die Adresse verliert sofort den Zugang.`
+    )
+  ) {
+    return
+  }
+  const kreis = skKreis.value
+  skLaedt.value = true
+  fetch(
+    `${API_BASE}/v6/eckreis/${kreis.ecKreisID}/schutzkonzept-email/${e.skKreisEmailID}`,
+    { method: 'DELETE', headers: { authorization: authToken.value } }
+  )
+    .then(errorHandler)
+    .then(() => {
+      notifyInfo('E-Mail-Adresse entfernt.')
+      if (skKreis.value !== kreis) return
+      return ladeSkEmails()
+    })
+    .catch((err: any) => {
+      if (skKreis.value === kreis) skLaedt.value = false
+      error({ text: err.message || err, title: 'Entfernen fehlgeschlagen!' })
+    })
 }
 
 function filterData(item: any): boolean {
