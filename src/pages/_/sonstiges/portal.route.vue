@@ -26,6 +26,7 @@ ec-wrapper(
         | {{ a.vorname }} {{ a.nachname }}
         v-chip.ml-2(v-if='a.superuser', size='x-small', color='warning') Vollzugriff
         v-chip.ml-2(v-if='a.schutzkonzeptVerwalter', size='x-small', color='info') Schutzkonzept-Verwaltung
+        v-chip.ml-2(v-if='a.materialVerwalter', size='x-small', color='success') Materialverwaltung
         v-chip.ml-2(v-if='!a.aktiv', size='x-small', variant='outlined') deaktiviert
       v-list-item-subtitle
         div {{ a.email }}
@@ -56,6 +57,11 @@ ec-wrapper(
               :title='a.schutzkonzeptVerwalter ? "Schutzkonzept-Verwaltung entziehen" : "Schutzkonzept-Verwaltung geben"',
               prepend-icon='shield',
               @click='patch(a, { schutzkonzeptVerwalter: !a.schutzkonzeptVerwalter })'
+            )
+            v-list-item(
+              :title='a.materialVerwalter ? "Materialverwaltung entziehen" : "Materialverwaltung geben"',
+              prepend-icon='inventory_2',
+              @click='patch(a, { materialVerwalter: !a.materialVerwalter })'
             )
             v-list-item(
               :title='a.aktiv ? "Zugang deaktivieren" : "Zugang aktivieren"',
@@ -90,6 +96,11 @@ import portalAccount from '../../../config/forms/portalAccount.form'
  * "Schutzkonzept-Verwaltung" ist eine globale Verantwortung: die Person baut
  * im Portal das Schutzkonzept-Formular (Versionen, DOCX-Vorlagen) und sieht
  * die Stände aller EC-Kreise. Vollzugriff schließt das mit ein.
+ *
+ * "Materialverwaltung" ebenso: die Person pflegt im Portal den Materialbestand
+ * (Ausleihmaterial des Nordbunds), bearbeitet Ausleih-Anträge und sieht den
+ * Belegungsplan. Es gibt bewusst nur diese eine Rolle, keinen getrennten
+ * Admin; Vollzugriff schließt sie mit ein.
  */
 const { authToken } = useLogin()
 const { error, notifyInfo } = useDialog()
