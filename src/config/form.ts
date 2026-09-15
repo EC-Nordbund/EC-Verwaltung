@@ -1,10 +1,12 @@
 import abmelden from './forms/abmelden.form'
+import abmeldungRuecknahme from './forms/abmeldungRuecknahme.form'
 import addAdresse from './forms/addAdresse.form'
 import addAK from './forms/addAK.form'
 import addFZ from './forms/addFZ.form'
 import addMail from './forms/addMail.form'
 import addPerson from './forms/addPerson.form'
 import addTelefon from './forms/addTelefon.form'
+import anmeldungLoeschen from './forms/anmeldungLoeschen.form'
 import changePassword from './forms/changePassword.form'
 import editBemerkungen from './forms/editBemerkungen.form'
 import generateFZAntrag from './forms/generateFZAntrag.form'
@@ -18,12 +20,14 @@ import personStamm from './forms/personStamm.form'
 // statt `this` ein explizites Parameter-Objekt (siehe jeweilige Datei).
 export const ecForm = {
   abmelden,
+  abmeldungRuecknahme,
   addAdresse,
   addAK,
   addFZ,
   addMail,
   addPerson,
   addTelefon,
+  anmeldungLoeschen,
   changePassword,
   editBemerkungen,
   generateFZAntrag,

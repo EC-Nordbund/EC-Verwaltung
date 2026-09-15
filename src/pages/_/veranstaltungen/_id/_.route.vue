@@ -165,6 +165,11 @@ const config = computed(() => {
         icon: 'group',
         label: 'Anmeldungen',
         to: 'anmeldungen'
+      },
+      {
+        icon: 'history',
+        label: 'Protokoll',
+        to: 'protokoll'
       }
     ],
     title: `${data.value.bezeichnung} (${data.value.begin.german} - ${data.value.ende.german})`,
