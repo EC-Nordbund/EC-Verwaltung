@@ -42,8 +42,8 @@ export default ({
       type: 'alert',
       text:
         rolle === 'fz'
-          ? 'Diese Person sieht im Portal die Führungszeugnis-Liste dieses EC-Kreises und kann dort Zeugnisse eintragen. Der Name wird auch als Anrede der monatlichen Übersichts-Mail übernommen. Zusätzlich braucht sie einen Portal-Zugang.'
-          : 'Diese Person pflegt im Portal die Mitgliederliste dieses EC-Kreises: Mitgliedsstatus ändern und neue Personen hinzufügen. Führungszeugnisse sieht sie dabei nicht. Zusätzlich braucht sie einen Portal-Zugang.'
+          ? 'Diese Person sieht im Portal die Mitarbeiter- und Führungszeugnis-Liste dieses EC-Kreises, pflegt, wer dort mitarbeitet, und kann Zeugnisse eintragen. Die Mitgliederliste sieht sie dabei nicht. Der Name wird auch als Anrede der monatlichen Übersichts-Mail übernommen. Zusätzlich braucht sie einen Portal-Zugang.'
+          : 'Diese Person pflegt im Portal die Mitgliederliste dieses EC-Kreises: Mitgliedsstatus ändern und neue Personen hinzufügen. Führungszeugnisse und die Mitarbeiterliste sieht sie dabei nicht. Zusätzlich braucht sie einen Portal-Zugang.'
     }
   ]
 })
