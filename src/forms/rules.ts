@@ -4,7 +4,7 @@ export type Rule = (value: any) => true | string
  * Ersatz für vee-validate 2: übersetzt die Regel-Strings aus den
  * Formular-Definitionen (schema.rule, z. B. 'required|max:50') in
  * Vuetify-:rules-Arrays. Es kommen nur die Regeln required, max:N,
- * min:N, has_upper, has_lower, has_digit und has_special vor
+ * min:N, has_upper, has_lower, has_digit, has_special und accepted vor
  * (siehe Inventur); unbekannte Regeln validieren zu true.
  * Meldungstexte sinngemäß wie vee-validate/dist/locale/de bzw. wie die
  * früheren Custom-Regeln in forms/main.ts (useValidation).
@@ -38,6 +38,10 @@ export function compileRules(rule?: string, label = 'Feld'): Rule[] {
         return (v) =>
           /[!@#$%^&*+=._\-?]/.test(v || '') ||
           'Enthält kein Sonderzeichen (!@#$^&*+=._-?)'
+      // Für Bestätigungs-Checkboxen: `required` lässt `false` durch, weil
+      // false weder undefined noch leer ist — ein Häkchen wäre damit nie Pflicht.
+      case 'accepted':
+        return (v) => v === true || `${label} muss bestätigt werden.`
       default:
         return () => true
     }
