@@ -316,7 +316,7 @@ function loadData() {
 
 loadData()
 
-getTemplates()
+getTemplates(authToken.value)
   .then((res) => {
     tnListen.value = res
   })

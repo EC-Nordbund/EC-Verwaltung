@@ -109,6 +109,10 @@ v-app
         template(#prepend)
           v-icon mail
         v-list-item-title FZ-Mailtexte
+      v-list-item(to='/sonstiges/dateivorlagen')
+        template(#prepend)
+          v-icon description
+        v-list-item-title Dateivorlagen
       v-list-item(to='/sonstiges/datenschutz')
         template(#prepend)
           v-icon security
