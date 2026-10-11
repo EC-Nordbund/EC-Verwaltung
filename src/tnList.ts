@@ -1,9 +1,17 @@
 import type { ApolloClient } from '@apollo/client/core'
 import gql from 'graphql-tag'
+import { API_BASE } from './plugins/apiBase'
+import { errorHandler } from './helpers'
 
 /**
  * Generierung der TN-Listen (Küche/Leiter/Mitarbeiter/Zuschüsse/Spezial-MA)
- * aus den xlsx-Vorlagen in `public/templates`.
+ * aus den xlsx-Vorlagen.
+ *
+ * Die Vorlagen kommen seit 09/2026 aus der API (`/v6/dateivorlage`, Gruppe
+ * `tnliste`) und liegen dort in der Datenbank — bis dahin lagen sie doppelt,
+ * in `public/templates` hier und in `EC-Api/templates` fürs Portal, und die
+ * zweite Kopie veraltete unbemerkt. Jetzt gibt es genau eine Fassung, die in
+ * der Verwaltung unter Sonstiges → Dateivorlagen gepflegt wird.
  *
  * Die Funktion stammt aus dem alten Verwaltungs-Stand (Branch `old-version`,
  * ehemals `src/tnList.ts`) und wurde beim Umbau auf Rollup/Vite nie
@@ -15,9 +23,7 @@ export interface TnListTemplate {
   label: string
 }
 
-// Relativ statt absolut (früher fest auf verwaltung.ec-nordbund.de): so
-// funktionieren die Listen auch im Dev-Server und in Preview-Deployments.
-const TEMPLATE_BASE = `${import.meta.env.BASE_URL}templates`
+const TEMPLATE_BASE = `${API_BASE}/v6/dateivorlage`
 
 const TN_LIST_QUERY = gql`
   query ($authToken: String!, $veranstaltungsID: Int!) {
@@ -134,12 +140,23 @@ async function loadXlsxTemplate() {
   return (mod as any).default ?? mod
 }
 
-export async function getTemplates(): Promise<TnListTemplate[]> {
-  const res = await fetch(`${TEMPLATE_BASE}/list.json`)
-  if (!res.ok) {
-    throw new Error(`Vorlagenliste nicht gefunden (HTTP ${res.status}).`)
+/**
+ * Die verfügbaren TN-Listen-Vorlagen: alle Katalogeinträge der Gruppe
+ * `tnliste`. Der Schlüssel heißt `tnliste.<name>`, der Anzeigename kommt aus
+ * dem Katalog der API.
+ */
+export async function getTemplates(
+  authToken: string
+): Promise<TnListTemplate[]> {
+  const res = await fetch(TEMPLATE_BASE, {
+    headers: { authorization: authToken }
+  }).then(errorHandler)
+  const liste = (await res.json()) as {
+    vorlagen: { schluessel: string; gruppe: string; name: string }[]
   }
-  return res.json()
+  return liste.vorlagen
+    .filter((v) => v.gruppe === 'tnliste')
+    .map((v) => ({ name: v.schluessel.split('.')[1], label: v.name }))
 }
 
 export async function generate(
@@ -150,12 +167,10 @@ export async function generate(
   wlistFilter: (wlist: number) => boolean,
   variante = ''
 ) {
-  const res = await fetch(`${TEMPLATE_BASE}/${template}.xlsx`)
-  if (!res.ok) {
-    throw new Error(
-      `Vorlage "${template}" nicht gefunden (HTTP ${res.status}).`
-    )
-  }
+  // Mit Anmeldung: die Vorlage liegt hinter /v6, ein nackter fetch bekäme 401.
+  const res = await fetch(`${TEMPLATE_BASE}/tnliste.${template}/datei`, {
+    headers: { authorization: authToken }
+  }).then(errorHandler)
   const templateData = await res.arrayBuffer()
 
   const XlsxTemplate = await loadXlsxTemplate()
