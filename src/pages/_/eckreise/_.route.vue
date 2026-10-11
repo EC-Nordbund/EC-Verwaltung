@@ -54,6 +54,10 @@ ec-wrapper(
           | Wer hier eingetragen ist, kann sich auf schutzkonzept.ec-nordbund.de
           | mit einem Anmeldecode per Mail anmelden und das Schutzkonzept dieses
           | EC-Kreises bearbeiten und veröffentlichen.
+          .mt-2
+            | Dieselbe Adresse darf bei mehreren EC-Kreisen eingetragen sein –
+            | die Person wählt dann nach der Anmeldung aus, welchen Kreis sie
+            | bearbeitet.
         v-progress-linear.mb-2(v-if='skLaedt', indeterminate)
         .mb-4
           v-chip.mr-2.mb-2(
